@@ -9,9 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>메인페이지</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 부트스트랩 + 수정 : css파일 / 일부쓸거다 : cdn / 직접 만들겠다 : css따로 만들기 -->
-<link rel="stylesheet" href="./resources/css/reset.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 	안녕하세요 반갑습니다.<br><br>
