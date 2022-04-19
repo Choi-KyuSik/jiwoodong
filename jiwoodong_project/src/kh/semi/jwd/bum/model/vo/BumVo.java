@@ -11,6 +11,7 @@ public class BumVo {
 	private String buEmail;
 	private String flGno;
 	
+	//우진
 	public int getBuNo() {
 		return buNo;
 	}
