@@ -899,3 +899,42 @@ FROM B_MENU;
 --SELECT 
 --FROM B_MENU BM;
 
+-----------------------------------------------------------------------------
+--전승희 
+--사용자 회원가입 insert
+insert into u_member(um_id, um_pwd, um_name, um_gender, um_birth, um_tel, um_postcode, um_address, um_detail_address, um_email)
+    VALUES ('dog1','dog1','김뽀삐','M','2000-01-01','010-1004-1004','11111','제주특별시', '귤마을', 'cathater@aaa.com');    
+insert into u_member(um_id, um_pwd, um_name, um_gender, um_birth, um_tel, um_postcode, um_address, um_detail_address, um_email)
+    VALUES ('cat1','cat1','최나비','F','2000-01-11','010-1114-1004','11112','서울특별시', '마니산', 'doghater@aaa.com'); 
+--사업자 회원가입 nsert
+
+INSERT INTO B_MEMBER VALUES (B_MEMBER_SEQ.NEXTVAL, '333-33-33333', 'BUSER3', 'BUSER3', 
+                            '카페인중독', '1990/10/20', 'F', 'COFFEE@naver.com', '010-3333-3333', 
+                            DEFAULT, DEFAULT, NULL, NULL, NULL);
+INSERT INTO B_MEMBER VALUES (B_MEMBER_SEQ.NEXTVAL, '444-44-44446', 'BUSER4', 'BUSER4', 
+                            '통금있는애숙이', '1980/12/23', 'M', 'loveinside@naver.com', '010-1221-1221', 
+                            DEFAULT, DEFAULT, NULL, NULL, NULL);
+--업체 등록 insert
+insert into company(cp_no,bu_no,cp_category,cp_name,cp_explain,cp_classify,cp_postcode,cp_address,cp_dtaddress) 
+values (company_seq.nextval,7,'카페','카페인금단현상','카페인중독 마셔서 이겨내자 아자아자','A','1119-11119','파주','영어마을');
+insert into company(cp_no,bu_no,cp_category,cp_name,cp_explain,cp_classify,cp_postcode,cp_address,cp_dtaddress) 
+values (company_seq.nextval,8,'호텔','애숙이는통금있어요','애숙아해가졌잖니어디니','A','8282-82828','부산','땅끝마을');
+--예약 insert
+insert into booking(BK_NO,CP_NO,BK_NAME,UM_ID,BK_PHONE,BK_DATE,BK_TIME,BK_STATUS,BK_PRICE,BK_PAY)
+    values (booking_seq.nextval,3,'김뽀삐','dog1','010-1004-1004','2022-04-16','00:00:00','R','12000','Y');
+insert into booking(BK_NO,CP_NO,BK_NAME,UM_ID,BK_PHONE,BK_DATE,BK_TIME,BK_STATUS,BK_PRICE,BK_PAY)
+    values (booking_seq.nextval,4,'김뽀삐','dog1','010-1004-1004','2022-04-16','00:00:00','R','12000','Y');
+--리뷰 insert
+insert into review(rv_no,bk_no,rv_score,rv_content,rv_write_date) 
+    values (review_seq.nextval,10,4,'여기 커피를 마시고 편두통이 사라졌어요 근데 강아지커피똥은 없나요','2022-04-20');
+insert into review(rv_no,bk_no,rv_score,rv_content,rv_write_date) 
+    values (review_seq.nextval,11,5,'애숙이2호점이란 소리듣고 왔는데 역시 5성급호텔 맞네요 오줌패드가 아주 푹식푹신해요','2022-04-22');
+    
+--약관 insert
+
+INSERT INTO CLAUSE VALUES (01,'이용약관','이용약관에 동의합니다.','Y');
+INSERT INTO CLAUSE VALUES (02,'개인정보수집및이용','개인정보수집 및 이용에 동의합니다.','Y');
+INSERT INTO CLAUSE VALUES (03,'위치정보서비스','위치 정보 제공 서비스에 동의합니다.','N');
+INSERT INTO CLAUSE VALUES (04,'환불약관','환불약관 서비스에 동의합니다.','Y');
+
+------------------------------------------------------------------
