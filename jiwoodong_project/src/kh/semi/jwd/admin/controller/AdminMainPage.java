@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AdminMyPage
  */
-@WebServlet("/AdminMyPage")
+@WebServlet("/AdminMainPage")
 public class AdminMainPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

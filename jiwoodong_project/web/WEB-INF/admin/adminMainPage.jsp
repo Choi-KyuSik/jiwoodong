@@ -8,6 +8,9 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
 <title>관리자 메인페이지</title>
 </head>
 <body>
@@ -32,7 +35,7 @@
             list-style-type: none;
         }
     </style>
-        <!--header-->
+    <!--header-->
     <style>
         .navbar-nav {
             margin-left: 30px;
@@ -131,6 +134,12 @@
             background: #f1f7ff;
         }
     </style>
+    <!-- 테이블 -->
+    <style>
+        .s_tr_modal:hover {
+           cursor: pointer; 
+        }
+    </style>
 </head>
 
 <body>
@@ -138,7 +147,8 @@
         <div id="p_main_top" style="width: 1200px; margin: 0 auto; border-bottom: 2px solid silver;">
             <div style="float: right;">
                 <p style="font-size: 10px; margin: 25px 30px 0 10px;">환영합니다 손은진님</p>
-                <a href="" style="font-size: 14px; margin: 0 0 0 30px; color: red; font-weight: bold;">로그아웃</a>
+                <a href=""
+                    style="font-size: 14px; margin: 0 0 0 30px; color: red; font-weight: bold; text-decoration: none;">로그아웃</a>
             </div>
             <div id="p_top_logo" style="float: left; margin: 0 0 0 30px;">
                 <a href=""><img
@@ -210,34 +220,34 @@
                     <div>
                         <table class="table table table-hover">
                             <thead>
-                              <tr>
-                                <th scope="col">NO</th>
-                                <th scope="col">업체명</th>
-                                <th scope="col">전화번호</th>
-                                <th scope="col">신청일자</th>
-                              </tr>
+                                <tr>
+                                    <th scope="col">NO</th>
+                                    <th scope="col">업체명</th>
+                                    <th scope="col">전화번호</th>
+                                    <th scope="col">신청일자</th>
+                                </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>빡빡미러</td>
-                                <td>010-5678-1234</td>
-                                <td>22/04/19</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>카페인충전소</td>
-                                <td>010-5678-5324</td>
-                                <td>22/04/19</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>야놀래말래</td>
-                                <td>010-1234-1234</td>
-                                <td>22/04/19</td>
-                              </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>빡빡미러</td>
+                                    <td>010-5678-1234</td>
+                                    <td>22/04/19</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>카페인충전소</td>
+                                    <td>010-5678-5324</td>
+                                    <td>22/04/19</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>야놀래말래</td>
+                                    <td>010-1234-1234</td>
+                                    <td>22/04/19</td>
+                                </tr>
                             </tbody>
-                          </table>
+                        </table>
                     </div>
                 </div>
                 <div id="s_bu_statistics">
@@ -258,46 +268,46 @@
                     <div>
                         <table class="table table table-hover" style="clear: both;">
                             <thead>
-                              <tr>
-                                <th scope="col">글번호</th>
-                                <th scope="col">제목</th>
-                                <th scope="col">작성자</th>
-                                <th scope="col">작성일</th>
-                              </tr>
+                                <tr>
+                                    <th scope="col">글번호</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">작성자</th>
+                                    <th scope="col">작성일</th>
+                                </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>서비스 점검 예정(4/20)</td>
-                                <td>관리자</td>
-                                <td>22/04/19</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>지우동 주문 POS 위젯 장애 안내</td>
-                                <td>관리자</td>
-                                <td>22/04/19</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>잘 되는 매장의 전략 교육 OPEN!</td>
-                                <td>관리자</td>
-                                <td>22/04/19</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">4</th>
-                                <td>서비스 점검 예정(4/20)</td>
-                                <td>관리자</td>
-                                <td>22/04/19</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">5</th>
-                                <td>서비스 점검 예정(4/20)</td>
-                                <td>관리자</td>
-                                <td>22/04/19</td>
-                              </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>서비스 점검 예정(4/20)</td>
+                                    <td>관리자</td>
+                                    <td>22/04/19</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>지우동 주문 POS 위젯 장애 안내</td>
+                                    <td>관리자</td>
+                                    <td>22/04/19</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>잘 되는 매장의 전략 교육 OPEN!</td>
+                                    <td>관리자</td>
+                                    <td>22/04/19</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>서비스 점검 예정(4/20)</td>
+                                    <td>관리자</td>
+                                    <td>22/04/19</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>서비스 점검 예정(4/20)</td>
+                                    <td>관리자</td>
+                                    <td>22/04/19</td>
+                                </tr>
                             </tbody>
-                          </table>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -308,6 +318,7 @@
             <div id="s_notice_content"
                 style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
                 <p style="text-align: center; font-weight: bold; padding-top: 20px; font-size: large;">공지사항 조회</p>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">글 등록</button>
                 <!-- 검색 -->
                 <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
                     <div class="container-fluid">
@@ -317,48 +328,72 @@
                         </form>
                     </div>
                 </nav>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">서비스 점검 예정(4/20)</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>서버 안정화를 위해 서비스 점검이 진행됩니다.</p> 
+                                <p>서버 안정화를 위해 서비스 점검이 진행됩니다.</p> 
+                                <p>서버 안정화를 위해 서비스 점검이 진행됩니다.</p> 
+                                <p>서버 안정화를 위해 서비스 점검이 진행됩니다.</p> 
+                                <p>서버 안정화를 위해 서비스 점검이 진행됩니다.</p> 
+                                <p>다들 나가주세요.</p>
+                                <p>혼자있고 싶어요</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정</button>
+                                <button type="button" class="btn btn-secondary">삭제</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table class="table table table-hover" style="clear: both;">
                     <thead>
-                      <tr>
-                        <th scope="col">글번호</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">작성자</th>
-                        <th scope="col">작성일</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">글번호</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성일</th>
+                        </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>서비스 점검 예정(4/20)</td>
-                        <td>관리자</td>
-                        <td>22/04/19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>지우동 주문 POS 위젯 장애 안내</td>
-                        <td>관리자</td>
-                        <td>22/04/19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>잘 되는 매장의 전략 교육 OPEN!</td>
-                        <td>관리자</td>
-                        <td>22/04/19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td>서비스 점검 예정(4/20)</td>
-                        <td>관리자</td>
-                        <td>22/04/19</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">5</th>
-                        <td>서비스 점검 예정(4/20)</td>
-                        <td>관리자</td>
-                        <td>22/04/19</td>
-                      </tr>
+                        <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <th scope="row">1</th>
+                            <td>서비스 점검 예정(4/20)</td>
+                            <td>관리자</td>
+                            <td>22/04/19</td>
+                        </tr>
+                        <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <th scope="row">2</th>
+                            <td>지우동 주문 POS 위젯 장애 안내</td>
+                            <td>관리자</td>
+                            <td>22/04/19</td>
+                        </tr>
+                        <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <th scope="row">3</th>
+                            <td>잘 되는 매장의 전략 교육 OPEN!</td>
+                            <td>관리자</td>
+                            <td>22/04/19</td>
+                        </tr>
+                        <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <th scope="row">4</th>
+                            <td>서비스 점검 예정(4/20)</td>
+                            <td>관리자</td>
+                            <td>22/04/19</td>
+                        </tr>
+                        <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <th scope="row">5</th>
+                            <td>서비스 점검 예정(4/20)</td>
+                            <td>관리자</td>
+                            <td>22/04/19</td>
+                        </tr>
                     </tbody>
-                  </table>
+                </table>
             </div>
         </article>
         <article>
@@ -528,9 +563,5 @@
         });
 
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-</body>
 </body>
 </html>
