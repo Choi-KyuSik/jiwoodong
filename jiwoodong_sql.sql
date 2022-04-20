@@ -929,7 +929,7 @@ insert into review(rv_no,bk_no,rv_score,rv_content,rv_write_date)
     values (review_seq.nextval,10,4,'여기 커피를 마시고 편두통이 사라졌어요 근데 강아지커피똥은 없나요','2022-04-20');
 insert into review(rv_no,bk_no,rv_score,rv_content,rv_write_date) 
     values (review_seq.nextval,11,5,'애숙이2호점이란 소리듣고 왔는데 역시 5성급호텔 맞네요 오줌패드가 아주 푹식푹신해요','2022-04-22');
-    
+
 --약관 insert
 
 INSERT INTO CLAUSE VALUES (01,'이용약관','이용약관에 동의합니다.','Y');
@@ -937,8 +937,6 @@ INSERT INTO CLAUSE VALUES (02,'개인정보수집및이용','개인정보수집 
 INSERT INTO CLAUSE VALUES (03,'위치정보서비스','위치 정보 제공 서비스에 동의합니다.','N');
 INSERT INTO CLAUSE VALUES (04,'환불약관','환불약관 서비스에 동의합니다.','Y');
 
-------------------------------------------------------------------
---최규식--
 
 --사용자--
 INSERT INTO U_MEMBER(UM_ID, UM_PWD, UM_NAME, UM_GENDER, UM_BIRTH, UM_TEL,UM_POSTCODE, UM_ADDRESS, UM_DETAIL_ADDRESS, UM_EMAIL)
@@ -957,3 +955,4 @@ VALUES('GOODBYEWORLD', '5678', '사람2', 'F', '2020-01-01', '010-1565-4564', '5
 --예약 메뉴--
 --INSERT INTO B_MENU(BK_NO, MENU_NO, BKM_NAME, BKM_PAY)
 --VALUES('00001', '001', '아아', '카드');
+
