@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <title>사용자 메인페이지</title>
+  <!--기본 set-->
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    a :hover() {
+      color: blue;
+    }
+
+    ;
+
+    li {
+      list-style-type: none;
+    }
+  </style>
+
+  <!--header-->
+  <style>
+    header {
+      margin-top: 10px;
+    }
+
+    #p_main_top {
+      width: 1200px;
+      margin: 0 auto;
+      border-bottom: 2px solid silver;
+    }
+
+    #p_top_logo {
+      float: left;
+      margin-left: 30px;
+    }
+
+    #p_top_menu {
+      float: left;
+      margin: 15px 0 0 10px;
+    }
+
+    #p_top_profile {
+      float: left;
+    }
+
+    .navbar-nav {
+      margin-right: 20px;
+    }
+
+    .dropdown-toggle,
+    .dropdown {
+      font-weight: bold;
+    }
+
+    #dropdownUser1 {
+      padding-right: 10px;
+    }
+  </style>
+
+  <!--section공용-->
+  <style>
+    #main_box {
+      width: 1200px;
+      margin: 15px auto 0;
+    }
+
+    #booking,
+    #review {
+      text-align: center;
+      /* display: flex;
+      justify-content: center; */
+      /* float: left; */
+      width: 550px;
+      height: 450px;
+      background-color: white;
+      border-radius: 30px;
+      margin: 30px 15px;
+      padding: 15px;
+    }
+
+    #statistics_visit,
+    #statistics_review {
+      text-align: center;
+      /* display: flex;
+      justify-content: center; */
+      /* float: left; */
+      width: 550px;
+      height: 450px;
+      background-color: white;
+      border-radius: 30px;
+      margin: 0 15px 30px;
+      overflow: hidden;
+    }
+
+    .box_font {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .c_company_info {
+      background-color: white;
+      width: 900px;
+      margin: 10px auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      
+    }
+
+    .statiscics_font {
+      font-weight: bold;
+      margin-top: 22px;
+    }
+  </style>
+  <!--content-->
+  <style>
+    /* 컨텐트 */
+    content>article>div {
+      width: 1200px;
+      height: 1000px;
+      padding: 30px;
+      display: none;
+      margin: 20px auto 0;
+      background-color: rgb(241, 241, 241);
+    }
+
+    /* 컨텐트안 제목 */
+    article>div>p {
+      text-align: center;
+      font-weight: bold;
+      padding-top: 20px;
+      font-size: large;
+    }
+
+    /* 검색바 위치*/
+    .navbar-light {
+      float: right;
+      margin-bottom: 20px;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <div id="p_main_top">
+      <div id="p_top_logo">
+        <a href="" id="k_logo"><img
+            src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png" width="80px"
+            alt="logo"></a>
+      </div>
+      <div id="p_top_menu">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown" id="k_info_menu" href="#" role="button">
+                    마이페이지
+                  </a>
+                </li>
+              </ul>
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown" id="k_review_menu" href="#" role="button">
+                    공지사항
+                  </a>
+
+                </li>
+              </ul>
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown" id="k_bu_eroll_menu" href="#" role="button">
+                    리뷰
+                  </a>
+                </li>
+              </ul>
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    사진
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu">
+                    <li><a class="dropdown-item" id="k_re_menu_enroll" href="#">예약메뉴등록</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" id="k_re_cu_menu" href="#">예약 조회/수정</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown" id="k_us_info_menu" href="#" role="button">
+                    지도
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div style="float: right; margin: 0 30px 0 0;">
+        <div class="dropdown text-end" id="p_top_profile">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+            data-bs-toggle="dropdown">
+            <img src="https://media.discordapp.net/attachments/692994434526085184/965630874999730296/1.png" alt="mdo"
+              width="60px">
+          </a>
+          <p style="font-size: 12px; width: 115px; margin: 5px;">사용자ID</p>
+          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="#">마이페이지</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+  </header>
+  
+  <section style="height: 100%;">
+    <div id="main_box" style="background-color: rgb(241, 241, 241);">
+      <div class="c_company_info">
+        <div>
+          <div style="text-align: center;">
+            <a href="#" style="text-align: center;">
+              <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805538590771/cafe.jpg" alt="" style="width: 400px; margin: 30px;">
+            </a>
+          </div>
+          <div style="margin-bottom: 20px; text-align: center;">
+            <h4>집 나가면 개고생 호텔 부산점</h4>
+            <div>
+              <span>☆ 4.8</span>
+            </div>
+            <div>
+              <span><a class="btn btn-primary" href="#" role="button" style="width: 300px;">예약하기</a></span>
+              <span><input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btncheck2">☆</label></button></span>
+            </div>
+          </div>
+          <hr style="margin: 0;">
+
+          <div class="c_button">
+            <div class="c_notice_button">
+                <button type="submit" class="c_nb" style='cursor:pointer'>소식</button>
+            </div>
+            <div class="c_riview_button">
+                <button type="submit" class="c_rb" style='cursor:pointer'>리뷰</button>
+            </div>
+            <div class="c_img_button">
+                <button type="submit" class="c_ib" style='cursor:pointer'>사진</button>
+            </div>
+            <div class="c_map_button">
+                <button type="submit" class="c_mb" style='cursor:pointer'>지도</button>
+            </div>
+          </div>
+          <div>
+            <div class="c_Notice">
+              <div style="background-color: white; margin-top: -10px auto; width: 900px; height: 900px;">
+                업체 공지사항 출력
+              </div>
+            </div>
+            <div class="c_Review">
+              <div style="background-color: white; margin: 0 auto; width: 900px;">
+                리뷰리스트 출력
+                <div>
+                  <p class="box_font">리뷰</p>
+                  <div>
+                    <table class="table" style="width: 900px;">
+                      <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">제목</th>
+                          <th scope="col">작성일자</th>
+                          <th scope="col">아이디</th>
+                          <th scope="col">별점</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>제목</td>
+                          <td>리뷰내용</td>
+                          <td>아이디</td>
+                          <td>별점</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>제목</td>
+                          <td>리뷰내용</td>
+                          <td>아이디</td>
+                          <td>별점</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>제목</td>
+                          <td>리뷰내용</td>
+                          <td>아이디</td>
+                          <td>별점</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="c_ComImg">
+              <div style="background-color: white; margin: 0 auto; width: 900px;">
+                업체 등록 사진 db에서 가져오기
+              </div>
+            </div>
+            <div class="c_Map">
+              <div style="background-color: white; margin: 0 auto; width: 900px;">
+                지도 api 예정
+              </div>
+            </div>
+    
+    
+          </div>
+
+
+        </div>
+      </div>
+      
+
+        
+        <style>
+        .c_button {
+          margin: 0 auto;
+          bottom: 50px;
+          display:flex;
+          justify-content: center;
+          background-color: white;
+          width: 900px;
+        }
+        .c_button div{
+          margin-bottom: 40px;
+        }
+        .c_button div button{
+          width: 100px;
+          height: 40px;
+        }
+
+        
+        </style>
+
+<script>
+  // section2 - 로드 시 디폴트 페이지
+  $(document).ready(function() {
+      $('.c_Notice').show();
+      $('.c_Review').hide();
+      $('.c_ComImg').hide();
+      $('.c_Map').hide();
+      });
+
+  // section2 > event button 클릭 시 효과
+  $('.c_nb').click(function() {
+      $('.c_Notice').fadeIn(350);
+      $('.c_Review').fadeOut(350);
+      $('.c_ComImg').fadeOut(350);
+      $('.c_Map').fadeOut(350);
+      $('.c_nb').css({
+          "background-color":"#0B5ED7",
+          "color": "#FFFFFF"});
+      $('.c_rb').css({
+          "background-color":"#FFFFFF",  
+          "color":"#0B5ED7"});
+      $('.c_ib').css({
+          "background-color":"#FFFFFF",  
+          "color":"#0B5ED7"});
+      $('.c_mb').css({
+          "background-color":"#FFFFFF",  
+          "color":"#0B5ED7"});
+  });
+  // section2 > snap button 클릭 시 효과
+  $('.c_rb').click(function() {
+      $('.c_Review').fadeIn(350);
+      $('.c_Notice').fadeOut(350);
+      $('.c_ComImg').fadeOut(350);
+      $('.c_Map').fadeOut(350);
+      $('.c_rb').css({
+          "background-color" : "#0B5ED7",
+          "color": "#FFFFFF",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+      $('.c_nb').css({
+          "background-color":"#FFFFFF",
+          "color":"#0B5ED7",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+      $('.c_ib').css({
+          "background-color":"#FFFFFF",
+          "color":"#0B5ED7",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+      $('.c_mb').css({
+          "background-color":"#FFFFFF",
+          "color":"#0B5ED7",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+  });
+  // section2 > snap button 클릭 시 효과
+  $('.c_ib').click(function() {
+      $('.c_ComImg').fadeIn(350);
+      $('.c_Notice').fadeOut(350);
+      $('.c_Review').fadeOut(350);
+      $('.c_Map').fadeOut(350);
+      $('.c_ib').css({
+          "background-color" : "#0B5ED7",
+          "color": "#FFFFFF",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+      $('.c_nb').css({
+          "background-color":"#FFFFFF",
+          "color":"#0B5ED7",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+      $('.c_rb').css({
+          "background-color":"#FFFFFF",
+          "color":"#0B5ED7",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+      $('.c_mb').css({
+          "background-color":"#FFFFFF",
+          "color":"#0B5ED7",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+  });
+  // section2 > snap button 클릭 시 효과
+  $('.c_mb').click(function() {
+      $('.c_Map').fadeIn(350);
+      $('.c_Notice').fadeOut(350);
+      $('.c_ComImg').fadeOut(350);
+      $('.c_Review').fadeOut(350);
+      $('.c_mb').css({
+          "background-color" : "#0B5ED7",
+          "color": "#FFFFFF",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+      $('.c_nb').css({
+          "background-color":"#FFFFFF",
+          "color":"#0B5ED7",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+      $('.c_rb').css({
+          "background-color":"#FFFFFF",
+          "color":"#0B5ED7",
+          "border": "1px solid #0B5ED7",
+          "border-spacing": "0px"});
+      $('.c_ib').css({
+          "background-color":"#FFFFFF",
+          "color":"#0B5ED7",
+          "border" : "#0B5ED7",
+          "border-style" : "solid",
+          "border-width" : "1px",
+          "border-spacing": "0px"});
+  });
+</script>
+        
+        <hr>
+        
+      
+        
+
+        
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </section>
+
+  <content>
+    <article>
+      <div id="k_info_content">
+        내정보 관리 content 내용 들어갑니다 ~~~~~~~~~
+        <!-- 검색 -->
+        <nav class="navbar-light">
+          <div class="container-fluid">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </article>
+    <article>
+      <div id="k_review_content">
+        <p>리뷰내역 조회</p>
+        <!-- 검색 -->
+        <nav class="navbar-light">
+          <div class="container-fluid">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+        <table class="table table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>merong</td>
+              <td>Larry the Bird</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>merong</td>
+              <td>Larry the Bird</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td>merong</td>
+              <td>Larry the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+    <article>
+      <div id="k_bu_eroll_content">
+        업체등록 content 내용 들어갑니다 ~~~~~~~~~
+        <!-- 검색 -->
+        <nav class="navbar-light">
+          <div class="container-fluid">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </article>
+    <article>
+      <div id="k_re_menu_content">
+        예약 메뉴등록 content 내용 들어갑니다 ~~~~~~~~~
+        <!-- 검색 -->
+        <nav class="navbar-light">
+          <div class="container-fluid">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </article>
+    <article>
+      <div id="k_re_cu_content">
+        예약 조회/수정 content 내용 들어갑니다 ~~~~~~~~~
+        <!-- 검색 -->
+        <nav class="navbar-light">
+          <div class="container-fluid">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </article>
+    <article>
+      <div id="k_us_info_content">
+        <p>회원정보 조회</p>
+        <!-- 검색 -->
+        <nav class="navbar-light">
+          <div class="container-fluid">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+        <table class="table table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>merong</td>
+              <td>Larry the Bird</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>merong</td>
+              <td>Larry the Bird</td>
+              <td>@twitter</td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td>merong</td>
+              <td>Larry the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+  </content>
+
+  <script>
+    $("#k_info_menu").click(function () {
+      $("#k_info_content").show();
+      $("#k_bu_eroll_content").hide();
+      $("#k_re_menu_content").hide();
+      $("#k_re_cu_content").hide();
+      $("#k_us_info_content").hide();
+      $("#k_review_content").hide();
+      $("#main_box").hide();
+    });
+    $("#k_review_menu").click(function () {
+      $("#k_info_content").hide();
+      $("#k_review_content").show();
+      $("#k_bu_eroll_content").hide();
+      $("#k_re_cu_content").hide();
+      $("#k_us_info_content").hide();
+      $("#k_re_menu_content").hide();
+      $("#main_box").hide();
+    });
+    $("#k_bu_eroll_menu").click(function () {
+      $("#k_info_content").hide();
+      $("#k_review_content").hide();
+      $("#k_re_menu_content").hide();
+      $("#k_bu_eroll_content").show();
+      $("#k_re_cu_content").hide();
+      $("#k_us_info_content").hide();
+      $("#main_box").hide();
+    });
+    $("#k_re_menu_enroll").click(function () {
+      $("#k_info_content").hide();
+      $("#k_review_content").hide();
+      $("#k_re_cu_content").hide();
+      $("#k_bu_eroll_content").hide();
+      $("#k_re_menu_content").show();
+      $("#k_us_info_content").hide();
+      $("#main_box").hide();
+    });
+    $("#k_re_cu_menu").click(function () {
+      $("#k_info_content").hide();
+      $("#k_review_content").hide();
+      $("#k_us_info_content").hide();
+      $("#k_bu_eroll_content").hide();
+      $("#k_re_menu_content").hide();
+      $("#k_re_cu_content").show();
+      $("#main_box").hide();
+    });
+    $("#k_us_info_menu").click(function () {
+      $("#k_info_content").hide();
+      $("#k_review_content").hide();
+      $("#k_re_cu_content").hide();
+      $("#k_bu_eroll_content").hide();
+      $("#k_re_menu_content").hide();
+      $("#k_us_info_content").show();
+      $("#main_box").hide();
+    }); 
+  </script>
+
+  <script>
+    // Create the chart
+    Highcharts.chart('container', {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: ''
+      },
+      accessibility: {
+        announceNewData: {
+          enabled: true
+        },
+        point: {
+          valueSuffix: '%'
+        }
+      },
+      plotOptions: {
+        series: {
+          dataLabels: {
+            enabled: true,
+            format: '{point.name}: {point.y:.1f}%'
+          }
+        }
+      },
+      series: [
+        {
+          name: "평균",
+          colorByPoint: true,
+          data: [
+            {
+              name: "1점",
+              y: 5,
+            },
+            {
+              name: "2점",
+              y: 7,
+            },
+            {
+              name: "3점",
+              y: 8,
+            },
+            {
+              name: "4점",
+              y: 20,
+            },
+            {
+              name: "5점",
+              y: 60,
+            }
+          ]
+        }
+      ]
+    });
+  </script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+
+
+  <!--방문자통계-->
+  <script>
+    Highcharts.chart('container_visit', {
+      data: {
+        table: 'datatable'
+      },
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: ''
+      },
+      yAxis: {
+        allowDecimals: false,
+        title: {
+          text: 'count'
+        }
+      }
+    }); 
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
