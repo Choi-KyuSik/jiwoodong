@@ -431,64 +431,69 @@
 
     <!--업체리스트 style-->
     <style>
-        .c_company-slider{
-    width: 1200px;
-    margin:0px auto;
-    position:relative;
-    background-color: #e9f3f9;
-  }
-  .c_company-slider .c_silder-title{
-    text-align:center;
-    margin:30px auto;
-  }
-  .c_company-slider .c_next{
-    position:absolute;
-    top:50%;
-    right:30px;
-    font-size:2em;
-    color:gray;
-    cursor: pointer;
-  }
-  .c_company-slider .c_prev{
-    position:absolute;
-    top:50%;
-    left:30px;
-    font-size:2em;
-    color:gray;
-    cursor: pointer;
-  }
-  .c_company-slider .c_company-wrapper{
-  
-    width:84%;
-    height:350px;
-    margin:0px auto;
-    overflow: hidden;
-    padding:10px 0px 10px 0px;
-    display: flex;
-    align-items: center;
-  }
-  .c_company-slider .c_company-wrapper .c_company{
-    width:300px;
-    height:300px;
-    margin:0px 10px;
-    display:inline-block;
-    background:white;
-    border-radius: 5px;
-  }
-  .c_company-slider .c_company-wrapper .c_company .c_company-info{
-    font-size:13px;
-    height:30%;
-    padding-left:10px;
-  }
-  .c_company-slider .c_company-wrapper .c_company .c_slider-image{
-    width:100%;
-    height:200px;
-    border-top-left-radius:5px;
-    border-top-right-radius:5px;
-  }
-    </style>
+        .c_company-slider {
+            width: 1200px;
+            margin: 0px auto;
+            position: relative;
+        }
 
-    <!--업체리스트 script-->
+        .c_company-slider .c_silder-title {
+            text-align: center;
+            margin: 10px auto;
+            color: #0072bb;
+        }
+
+        .c_company-slider .c_next {
+            position: absolute;
+            top: 50%;
+            right: 30px;
+            font-size: 2em;
+            color: gray;
+            cursor: pointer;
+        }
+
+        .c_company-slider .c_prev {
+            position: absolute;
+            top: 50%;
+            left: 30px;
+            font-size: 2em;
+            color: gray;
+            cursor: pointer;
+        }
+
+        .c_company-slider .c_company-wrapper {
+
+            width: 84%;
+            height: 350px;
+            margin: 0px auto;
+            overflow: hidden;
+            padding: 10px 0px 10px 0px;
+            display: flex;
+            align-items: center;
+        }
+
+        .c_company-slider .c_company-wrapper .c_company {
+            width: 300px;
+            height: 300px;
+            margin: 0px 10px;
+            display: inline-block;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .c_company-slider .c_company-wrapper .c_company .c_company-info {
+            font-size: 13px;
+            height: 30%;
+            padding-left: 10px;
+        }
+
+        .c_company-slider .c_company-wrapper .c_company .c_slider-image {
+            width: 100%;
+            height: 200px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+    </style>
     
 </head>
 <body>
@@ -521,28 +526,57 @@
         </div>
     </header>
     <!-- 공지사항 -->
-    <section>     
-        <div style="background-color: #0072BB; margin: 0 auto; width: 1200px;">
-          <div>
-            <span style="color: aliceblue;"><h4>공지사항</h4></span>
-            <a style="color: aliceblue; float: right;" href="#">더보기</a>
-            <ul style="background-color: aliceblue;">
-              <li style="margin-bottom: 10px;">
-                <a href="#" style="text-decoration: none; color: black;">새롭게 단장한 홈페이지를 소개합니다.</a>
-              </li>
-              <li style="margin-bottom: 10px;">
-                <a href="#" style="text-decoration: none; color: black;">신규회원에게 다양한 혜택이 준비중입니다.</a>
-              </li>
-              <li style="margin-bottom: 10px;">
-                <a href="#" style="text-decoration: none; color: black;">여러분의 지금 우리 동네를 소개해주세요.</a>
-              </li>
-              <li style="margin-bottom: 10px;">
-                <a href="#" style="text-decoration: none; color: black;">여긴 어디? 나는 누구?</a>
-              </li>
-            </ul>
-          </div>
+    <section style="background-color: #F5F6F8;">
+        <div style=" margin: 0 auto; width: 1200px; padding: 30px 50px;">
+            <div>
+                <span style="color: #0072bb; text-align: center;">
+                    <h4>공지사항</h4>
+                </span>
+                <table class="table table table-hover" style="clear: both;">
+                    <thead>
+                        <tr>
+                            <th scope="col">글번호</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td><a href="#">서비스 점검 예정(4/20)</a></td>
+                            <td>관리자</td>
+                            <td>22/04/19</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td><a href="#">지우동 주문 POS 위젯 장애 안내</a></td>
+                            <td>관리자</td>
+                            <td>22/04/19</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td><a href="#">잘 되는 매장의 전략 교육 OPEN!</a></td>
+                            <td>관리자</td>
+                            <td>22/04/19</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td><a href="#">서비스 점검 예정(4/20)</a></td>
+                            <td>관리자</td>
+                            <td>22/04/19</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td><a href="#">서비스 점검 예정(4/20)</a></td>
+                            <td>관리자</td>
+                            <td>22/04/19</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-      </section>
+    </section>
 
     <!-- 이용 안내  -->
     <section style="overflow: hidden;">
@@ -598,68 +632,74 @@
     <!--업체 리스트-->
     <section style="margin-bottom: 100px;">
         <!--c_company slider -->
-          <div class="c_company-slider">
-            <h1 class="c_silder-title">Title</h1>
+        <div class="c_company-slider">
+            <h3 class="c_silder-title">업체리스트</h3>
             <div class="fas fa-chevron-left c_prev">〈</div>
             <div class="fas fa-chevron-right c_next">〉</div>
             <div class="c_company-wrapper">
-              <div class="c_company">
-                <a href="#">
-                  <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203806155157504/hotel.jpg" class="c_slider-image">
-                </a>
-                  <div class="c_company-info">
-                  <h6 style="margin-top: 10px;"><a href="#"> 집 나가면 개고생 호텔 부산점 </a></h6>
-                  <div class="far fa-user" style="height:10%;"> 부산광역시 해운대구 헌팅로 65길 31-2 </div>
+                <div class="c_company">
+                    <a href="#">
+                        <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203806155157504/hotel.jpg"
+                            class="c_slider-image">
+                    </a>
+                    <div class="c_company-info">
+                        <h6 style="margin-top: 10px;"><a href="#"> 집 나가면 개고생 호텔 부산점 </a></h6>
+                        <div class="far fa-user" style="height:10%;"> 부산광역시 해운대구 헌팅로 65길 31-2 </div>
+                    </div>
                 </div>
-              </div>
-              <div class="c_company">
-                <a href="#">
-                  <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805815431238/hair.jpg" class="c_slider-image">
-                </a>
-                <div class="c_company-info">
-                  <h6 style="margin-top: 10px;"><a href="#"> 너나 나나 빡빡머리 </a></h6>
-                  <div class="far fa-user" style="height:10%;"> 인천광역시 동구 바리깡로 483번길 39-1</div>
+                <div class="c_company">
+                    <a href="#">
+                        <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805815431238/hair.jpg"
+                            class="c_slider-image">
+                    </a>
+                    <div class="c_company-info">
+                        <h6 style="margin-top: 10px;"><a href="#"> 너나 나나 빡빡머리 </a></h6>
+                        <div class="far fa-user" style="height:10%;"> 인천광역시 동구 바리깡로 483번길 39-1</div>
+                    </div>
                 </div>
-              </div>
-              <div class="c_company">
-                <a href="#">
-                  <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805538590771/cafe.jpg" class="c_slider-image">
-                </a>
-                <div class="c_company-info">
-                  <h6 style="margin-top: 10px;"><a href="#"> 투썸벅스 </a></h6>
-                  <div class="far fa-user" style="height:10%;"> 서울특별시 강남구 원두로 84번길  </div>
+                <div class="c_company">
+                    <a href="#">
+                        <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805538590771/cafe.jpg"
+                            class="c_slider-image">
+                    </a>
+                    <div class="c_company-info">
+                        <h6 style="margin-top: 10px;"><a href="#"> 투썸벅스 </a></h6>
+                        <div class="far fa-user" style="height:10%;"> 서울특별시 강남구 원두로 84번길 </div>
+                    </div>
                 </div>
-              </div>
-              <div class="c_company">
-                <a href="#">
-                  <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805815431238/hair.jpg" class="c_slider-image">
-                </a>
-                <div class="c_company-info">
-                  <h6 style="margin-top: 10px;"><a href="#"> 샴푸 전문집 </a></h6>
-                  <div class="far fa-user" style="height:10%;">서울특별시 강서구 샴푸길 12-327길 </div>
+                <div class="c_company">
+                    <a href="#">
+                        <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805815431238/hair.jpg"
+                            class="c_slider-image">
+                    </a>
+                    <div class="c_company-info">
+                        <h6 style="margin-top: 10px;"><a href="#"> 샴푸 전문집 </a></h6>
+                        <div class="far fa-user" style="height:10%;">서울특별시 강서구 샴푸길 12-327길 </div>
+                    </div>
                 </div>
-              </div>
-              <div class="c_company">
-                <a href="#">
-                  <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203806155157504/hotel.jpg" class="c_slider-image">
-                </a>
-                <div class="c_company-info">
-                  <h6 style="margin-top: 10px;"><a href="#"> 쉬었다 갈래 호텔 </a></h6>
-                  <div class="far fa-user" style="height:10%;"> 경기도 김포시 피곤로 24길 11-4 </div>
+                <div class="c_company">
+                    <a href="#">
+                        <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203806155157504/hotel.jpg"
+                            class="c_slider-image">
+                    </a>
+                    <div class="c_company-info">
+                        <h6 style="margin-top: 10px;"><a href="#"> 쉬었다 갈래 호텔 </a></h6>
+                        <div class="far fa-user" style="height:10%;"> 경기도 김포시 피곤로 24길 11-4 </div>
+                    </div>
                 </div>
-              </div>
-              <div class="c_company">
-                <a href="#">
-                  <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805538590771/cafe.jpg" class="c_slider-image">
-                </a>
-                <div class="c_company-info">
-                  <h6 style="margin-top: 10px;"><a href="#"> 카페 이름이 뭐였지? </a></h6>
-                  <div class="far fa-user" style="height:10%;"> 서울특별시 서초구 콜드브루로 1번길 </div>
+                <div class="c_company">
+                    <a href="#">
+                        <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805538590771/cafe.jpg"
+                            class="c_slider-image">
+                    </a>
+                    <div class="c_company-info">
+                        <h6 style="margin-top: 10px;"><a href="#"> 카페 이름이 뭐였지? </a></h6>
+                        <div class="far fa-user" style="height:10%;"> 서울특별시 서초구 콜드브루로 1번길 </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </section>
+        </div>
+    </section>
     <!--리뷰-->
     <section>
         <div class="j_review" style="margin: 0 auto;">
