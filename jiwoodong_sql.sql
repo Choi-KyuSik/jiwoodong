@@ -938,7 +938,7 @@ INSERT INTO CLAUSE VALUES (03,'위치정보서비스','위치 정보 제공 서�
 INSERT INTO CLAUSE VALUES (04,'환불약관','환불약관 서비스에 동의합니다.','Y');
 
 ------------------------------------------------------------------
---최규식--
+-- 최구식 --
 
 --사용자--
 INSERT INTO U_MEMBER(UM_ID, UM_PWD, UM_NAME, UM_GENDER, UM_BIRTH, UM_TEL,UM_POSTCODE, UM_ADDRESS, UM_DETAIL_ADDRESS, UM_EMAIL)
