@@ -15,7 +15,7 @@
                     style="font-size: 14px; margin: 0 0 0 30px; color: red; font-weight: bold; text-decoration: none;">로그아웃</a>
             </div>
             <div id="p_top_logo" style="float: left; margin: 0 0 0 30px;">
-                <a href="http://localhost:8090/jwd/AdminMyPage"><img
+                <a href="http://localhost:8090/jwd/AdminMainPage"><img
                         src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"
                         width="80px" alt="logo" id="logo"></a>
             </div>

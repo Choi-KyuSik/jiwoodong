@@ -35,8 +35,6 @@ public class AdminNoticeDao {
 		} finally {
 			close(pstmt);
 		}
-
 		return -1; // 오류면 -1 반환
 	}
-
 }

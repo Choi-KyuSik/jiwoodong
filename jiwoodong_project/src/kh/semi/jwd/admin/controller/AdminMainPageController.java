@@ -26,6 +26,13 @@ public class AdminMainPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String tabMenu = (String)request.getSession().getAttribute("tabMenu");
+		request.getSession().removeAttribute("tabMenu");
+		System.out.println(tabMenu);
+		if(!(tabMenu != null && !tabMenu.equals(""))) {
+			tabMenu = "0";
+		}
+		request.setAttribute("tabMenu", tabMenu);
 		request.getRequestDispatcher("WEB-INF/admin/adminMainPage.jsp").forward(request, response);
 	}
 

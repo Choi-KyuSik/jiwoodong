@@ -13,6 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
 <title>관리자 메인페이지</title>
 </head>
 <body>
@@ -25,7 +26,7 @@
 	</div>
 
     <section>
-        <div id="main_box">
+        <div id="main_box" class="tab_menu">
             <div class="nav_tab_div">
                 <div id="s_bu_accept_list">
                     <p style="margin-top: 10px; font-weight: bold;">업체 등록 요청 현황</p>
@@ -66,7 +67,6 @@
                     <p style="margin-top: 10px; font-weight: bold;">업체별 예약 현황</p>
                     <div>
                         <!-- 통계 -->
-                        <script src="https://code.highcharts.com/highcharts.js"></script>
                         <figure class="highcharts-figure">
                             <div id="container"></div>
                             <p class="highcharts-description" style="font-size: small;">
@@ -124,10 +124,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section>
         <article>
-            <div id="s_notice_content"
+            <div id="s_notice_content" class="tab_menu"
                 style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
                 <p style="text-align: center; font-weight: bold; padding-top: 20px; font-size: large;">공지사항 조회</p>
                 <button type="button" id="s_notice_insert_btn" class="btn btn-primary" data-bs-dismiss="modal">글 등록</button>
@@ -209,7 +207,7 @@
             </div>
         </article>
         <article>
-            <div id="s_bu_accept_content"
+            <div id="s_bu_accept_content" class="tab_menu"
                 style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
                 업체 승인 content 내용 들어갑니다 ~~~~~~~~~
                 <!-- 검색 -->
@@ -224,7 +222,7 @@
             </div>
         </article>
         <article>
-            <div id="s_bu_info_content"
+            <div id="s_bu_info_content" class="tab_menu"
                 style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
                 사업자 정보 content 내용 들어갑니다 ~~~~~~~~~
                 <!-- 검색 -->
@@ -239,7 +237,7 @@
             </div>
         </article>
         <article>
-            <div id="s_us_info_content"
+            <div id="s_us_info_content" class="tab_menu"
                 style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
                 사용자 관리 content 내용 들어갑니다 ~~~~~~~~~
                 <!-- 검색 -->
@@ -254,7 +252,7 @@
             </div>
         </article>
         <article>
-            <div id="s_review_content"
+            <div id="s_review_content" class="tab_menu"
                 style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
                 리뷰 관리 content 내용 들어갑니다 ~~~~~~~~~
                 <!-- 검색 -->
@@ -333,45 +331,51 @@
     </script>
     <!-- 메뉴별 content display변경 -->
     <script>
+	let tabMenu = '${tabMenu}';
+    	console.log("tabMenu: "+tabMenu);
+    	if(tabMenu == ''){
+    		tabMenu = 0;
+    	}
+    	showTabMenu();
+    	function showTabMenu(){
+       		console.log(tabMenu);
+    		$(".tab_menu").each(function(index, elem){
+        		console.log(index);
+        		console.log(elem);
+        		if(index == tabMenu){
+        			console.log("show");
+        			console.log(elem);
+        			$(elem).show();
+        		}else{
+        			$(elem).hide();
+        		}
+        	});
+    	}
         $("#s_notice_menu").click(function () {
-            $("#s_notice_content").show();
+		tabMenu = 1;
+        	showTabMenu();
+/*            $("#s_notice_content").show();
             $("#s_bu_accept_content").hide();
             $("#s_bu_info_content").hide();
             $("#s_us_info_content").hide();
             $("#s_review_content").hide();
-            $("#main_box").hide();
+            $("#main_box").hide(); */
         });
         $("#s_bu_accept_menu").click(function () {
-            $("#s_notice_content").hide();
-            $("#s_bu_accept_content").show();
-            $("#s_bu_info_content").hide();
-            $("#s_us_info_content").hide();
-            $("#s_review_content").hide();
-            $("#main_box").hide();
+            tabMenu = 2;
+            showTabMenu();
         });
         $("#s_bu_info_menu").click(function () {
-            $("#s_notice_content").hide();
-            $("#s_bu_accept_content").hide();
-            $("#s_bu_info_content").show();
-            $("#s_us_info_content").hide();
-            $("#s_review_content").hide();
-            $("#main_box").hide();
+            tabMenu = 3;
+            showTabMenu();
         });
         $("#s_us_info_menu").click(function () {
-            $("#s_notice_content").hide();
-            $("#s_bu_accept_content").hide();
-            $("#s_bu_info_content").hide();
-            $("#s_us_info_content").show();
-            $("#s_review_content").hide();
-            $("#main_box").hide();
+            tabMenu = 4;
+            showTabMenu();
         });
         $("#s_review_menu").click(function () {
-            $("#s_notice_content").hide();
-            $("#s_bu_accept_content").hide();
-            $("#s_bu_info_content").hide();
-            $("#s_us_info_content").hide();
-            $("#s_review_content").show();
-            $("#main_box").hide();
+            tabMenu = 5;
+            showTabMenu();
         });
 
     </script>

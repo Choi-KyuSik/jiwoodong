@@ -69,6 +69,7 @@ public class AdminNoticeWriteDoController extends HttpServlet {
 			response.sendRedirect("AdminMainPage");
 		} else {
 			System.out.println("글등록 성공!");
+			request.getSession().setAttribute("tabMenu", "1");
 			response.sendRedirect("AdminMainPage");
 		}
 		
