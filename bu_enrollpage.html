@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사용자 회원가입 페이지</title>
+    <title>사업자 회원가입 페이지</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS --> 
@@ -48,7 +48,7 @@
                 display: inline-block;
                 width: 40%;
             }
-            #email_check_btn{
+            #email_check_btn,#bu_no_btn{
                 display: inline-block;
 
             }
@@ -58,9 +58,14 @@
                 
                 
             }
-            #user_id{
+            #bu_id{
                 display: inline-block;
                 width: 78%;
+            }
+
+            #bu_no{
+               display: inline-block;
+               width: 74%;
             }
     </style>
 
@@ -74,9 +79,16 @@
 <div class="container">
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
-            <h4 class="mb-3"><strong>사용자 회원가입</strong></h4>
+            <h4 class="mb-3"><strong>사업자 회원가입</strong></h4>
             <form class="validation-form" novalidate>
+
                 <div class="row">
+                    <div class="mb-3" style="display: inline-block; width: 100%; margin-left: 2%;"> 
+                        <label for="bu_no" style="display: block;">사업자 번호</label> 
+                        <input type="text" class="form-control" id="bu_no" placeholder="000-00-00000" required >
+                        <div class="invalid-feedback"> 사업자번호를 조회해주세요.</div>
+                        <input type="button" id="bu_no_btn" value="사업자 번호 조회">
+                    </div>
                     <div class="col-md-6 mb-3">
                         <label for="name">이름</label>
                         <input type="text" class="form-control" id="name" placeholder="" name="name" required>
@@ -105,7 +117,7 @@
                 </div>
                 <div class="mb-3" style=" margin-bottom: 4px!important;"> 
                     <label for="email">이메일</label> 
-                    <input type="email" class="form-control" id="email" placeholder="email1@example.com" value="email" required >
+                    <input type="email" class="form-control" id="email" placeholder="email1@example.com" required >
                     <div class="invalid-feedback"> 이메일을 입력해주세요. </div>
                     <input type="button" id="email_btn" value="인증번호 발송">
                 </div>
@@ -117,20 +129,22 @@
                     
                 </div>
                 <div class="mb-3">
-                    <label for="user_id" style="display: block;">아이디</label>
-                    <input type="text" class="form-control" id="user_id" required>
+                    <label for="bu_id" style="display: block;">아이디</label>
+                    <input type="text" class="form-control" id="bu_id" required>
                     <div class="invalid-feedback"> 아이디를 입력해주세요.
                     </div>
-                    <input type="button" id="user_id_check" value="중복확인">
+                    <input type="button" id="bu_id_check" value="중복확인">
                 </div>
-                <div class="mb-3"> <label for="password">비밀번호</label> <input type="text" class="form-control" id="password" required>
+                <div class="mb-3"> 
+                    <label for="password">비밀번호</label> 
+                    <input type="text" class="form-control" id="password" required>
                     <div class="invalid-feedback"> 비밀번호를 입력해주세요. </div>
                 </div>
                 <div class="mb-3"> 
                     <label for="password_re">비밀번호 재확인
                         <span class="text-muted"></span>
                     </label>
-                    <input type="password" class="form-control" id="password_re" placeholder=""> </div>
+                    <input type="password" class="form-control" id="password_re" placeholder="" required> </div>
 
                 <hr class="mb-4">
                 <div id="clause">
