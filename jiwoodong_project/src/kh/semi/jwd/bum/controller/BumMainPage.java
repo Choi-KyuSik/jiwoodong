@@ -34,8 +34,15 @@ public class BumMainPage extends HttpServlet {
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	   ArrayList<Map<String,Object>> list = new BumService().mainPageBookingList();
+	   ArrayList<Map<String, Object>> result = new BumService().mainPageReviewList();
+	   ArrayList<Map<String,Object>> statiscicsVisit = new BumService().mainPageStatisticsVisit();
+	   ArrayList<Map<String,Object>> statiscicsReview = new BumService().mainPageStatisticsReview();
 	   
 	  request.setAttribute("list", list);
+	  request.setAttribute("Rlist", result);
+	  request.setAttribute("visit", statiscicsVisit);
+	  request.setAttribute("review", statiscicsReview);
+	  System.out.println(statiscicsVisit);
       request.getRequestDispatcher("WEB-INF/bum/bumMainPage.jsp").forward(request, response);
       
       

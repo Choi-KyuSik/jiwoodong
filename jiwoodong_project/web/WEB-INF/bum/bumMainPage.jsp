@@ -332,44 +332,32 @@ article>div>p {
 					</div>
 				</div>
 				<div id="review">
-					<p class="box_font">리뷰</p>
-					<div>
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">리뷰넘버</th>
-									<th scope="col">제목</th>
-									<th scope="col">작성일자</th>
-									<th scope="col">아이디</th>
-									<th scope="col">별점</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>제목</td>
-									<td>리뷰내용</td>
-									<td>아이디</td>
-									<td>별점</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>제목</td>
-									<td>리뷰내용</td>
-									<td>아이디</td>
-									<td>별점</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td>제목</td>
-									<td>리뷰내용</td>
-									<td>아이디</td>
-									<td>별점</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+		<p class="box_font">리뷰</p>
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">작성일자</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">별점</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               <c:forEach items="${Rlist}" var = "list">
+                                   <tr>
+                                       <th scope="row">${list.rownum}</th>
+                                       <td>${list.rvContent}</td>
+                                       <td>${list.rvWriteDate}</td>
+                                       <td>${list.umId}</td>
+                                       <td>${list.rvScore}</td>
+                                   </tr>
+                                </c:forEach>                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 				<div id="statistics_visit">
 					<p class="statiscics_font">월별 예약통계</p>
 					<figure class="highcharts-figure">
