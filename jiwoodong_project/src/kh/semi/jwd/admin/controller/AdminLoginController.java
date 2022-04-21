@@ -17,13 +17,13 @@ import kh.semi.jwd.admin.model.vo.AdminVo;
  * Servlet implementation class AdminLogin
  */
 @WebServlet("/AdminLogin")
-public class AdminLogin extends HttpServlet {
+public class AdminLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminLogin() {
+    public AdminLoginController() {
         super();
         // TODO Auto-generated constructor stub
     }

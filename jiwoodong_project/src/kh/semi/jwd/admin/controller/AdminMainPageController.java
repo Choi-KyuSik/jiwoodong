@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class AdminMyPage
  */
 @WebServlet("/AdminMainPage")
-public class AdminMainPage extends HttpServlet {
+public class AdminMainPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMainPage() {
+    public AdminMainPageController() {
         super();
         // TODO Auto-generated constructor stub
     }

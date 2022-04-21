@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/reset.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/admin.css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,203 +16,13 @@
 <title>관리자 메인페이지</title>
 </head>
 <body>
-    <!--기본 set-->
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
-        a:hover {
-            color: blue;
-        }
-
-        li {
-            list-style-type: none;
-        }
-    </style>
-    <!--header-->
-    <style>
-        .navbar-nav {
-            margin-left: 30px;
-            padding-bottom: 20px;
-        }
-
-        .dropdown-toggle,
-        .dropdown {
-            font-weight: bold;
-        }
-    </style>
-    <!--section-->
-    <style>
-        #main_box {
-            width: 1200px;
-            height: 1000px;
-            margin: 0 auto;
-            margin-top: 20px;
-            /* background-color: rgb(228, 226, 226); */
-        }
-
-        #s_bu_statistics,
-        #s_bu_accept_list {
-            text-align: center;
-            width: 550px;
-            height: 500px;
-            background-color: white;
-            border-radius: 30px;
-            margin: 40px 10px;
-            padding: 20px 30px;
-        }
-
-        #s_ad_notice {
-            text-align: center;
-            width: 1120px;
-            height: 500px;
-            background-color: white;
-            border-radius: 30px;
-            margin: 10px;
-            padding: 20px 30px;
-            margin: 10px 10px 40px;
-        }
-
-        .nav_tab_div {
-            background-color: rgba(241, 241, 241);
-            width: 1200px;
-            margin: 10px 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            border-radius: 15px;
-        }
-    </style>
-    <!-- 통계 -->
-    <style>
-        .highcharts-figure,
-        .highcharts-data-table table {
-            min-width: 320px;
-            max-width: 660px;
-            margin: 1em auto;
-        }
-
-        .highcharts-data-table table {
-            font-family: Verdana, sans-serif;
-            border-collapse: collapse;
-            border: 1px solid #ebebeb;
-            margin: 10px auto;
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .highcharts-data-table caption {
-            padding: 1em 0;
-            font-size: 1.2em;
-            color: #555;
-        }
-
-        .highcharts-data-table th {
-            font-weight: 600;
-            padding: 0.5em;
-        }
-
-        .highcharts-data-table td,
-        .highcharts-data-table th,
-        .highcharts-data-table caption {
-            padding: 0.5em;
-        }
-
-        .highcharts-data-table thead tr,
-        .highcharts-data-table tr:nth-child(even) {
-            background: #f8f8f8;
-        }
-
-        .highcharts-data-table tr:hover {
-            background: #f1f7ff;
-        }
-    </style>
-    <!-- 테이블 -->
-    <style>
-        .s_tr_modal:hover {
-           cursor: pointer; 
-        }
-    </style>
+    
 </head>
 
 <body>
-    <header style="margin-top: 10px;">
-        <div id="p_main_top" style="width: 1200px; margin: 0 auto; border-bottom: 2px solid silver;">
-            <div style="float: right;">
-                <p style="font-size: 10px; margin: 25px 30px 0 10px;">환영합니다 손은진님</p>
-                <a href=""
-                    style="font-size: 14px; margin: 0 0 0 30px; color: red; font-weight: bold; text-decoration: none;">로그아웃</a>
-            </div>
-            <div id="p_top_logo" style="float: left; margin: 0 0 0 30px;">
-                <a href=""><img
-                        src="https://media.discordapp.net/attachments/958566133752016901/960910113219178597/1.png"
-                        width="80px" alt="logo" id="logo"></a>
-            </div>
-            <div style="float: left; margin: 15px 0 0 0;">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse">
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" id="s_notice_menu" href="#" role="button"
-                                        data-bs-toggle="dropdown">
-                                        공지사항 관리
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown">
-                                        사업자관리
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu">
-                                        <li><a class="dropdown-item" href="#" id="s_bu_accept_menu">업체 승인</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#" id="s_bu_info_menu">사업자 정보 조회</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown" href="#" role="button" id="s_us_info_menu">
-                                        사용자관리
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                                        id="s_review_menu">
-                                        리뷰관리
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <div style="float: right; margin-top: 10px;">
-                <div style="text-align: center;">
-                    <img src="https://media.discordapp.net/attachments/692994434526085184/965630874999730296/1.png"
-                        alt="프사" width="60px">
-                </div>
-            </div>
-            <div style="clear: both;"></div>
-        </div>
-
-    </header>
+    <div>
+		<%@ include file="../view/admin/admin_header.jsp" %>
+	</div>
 
     <section>
         <div id="main_box">
@@ -318,7 +130,7 @@
             <div id="s_notice_content"
                 style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
                 <p style="text-align: center; font-weight: bold; padding-top: 20px; font-size: large;">공지사항 조회</p>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">글 등록</button>
+                <button type="button" id="s_notice_insert_btn" class="btn btn-primary" data-bs-dismiss="modal">글 등록</button>
                 <!-- 검색 -->
                 <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
                     <div class="container-fluid">
@@ -562,6 +374,12 @@
             $("#main_box").hide();
         });
 
+    </script>
+    <script>
+    	$("#s_notice_insert_btn").click(function() {
+    		location.href="AdminNoticeWrite";
+    	}) 
+    	
     </script>
 </body>
 </html>
