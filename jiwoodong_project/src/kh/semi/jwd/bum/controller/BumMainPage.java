@@ -42,7 +42,7 @@ public class BumMainPage extends HttpServlet {
 	  request.setAttribute("Rlist", result);
 	  request.setAttribute("visit", statiscicsVisit);
 	  request.setAttribute("review", statiscicsReview);
-	  System.out.println(statiscicsVisit);
+	  System.out.println(statiscicsReview);
       request.getRequestDispatcher("WEB-INF/bum/bumMainPage.jsp").forward(request, response);
       
       

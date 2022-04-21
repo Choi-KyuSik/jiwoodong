@@ -18,7 +18,7 @@ public class BumDao {
 	//jw
 	public ArrayList<Map<String, Object>> mainPageBookingList(Connection conn) {
 		
-		String sql = "select * from(select rownum,x.* from (select a.* from booking a order by a.bk_write_date desc) x) where rownum between 1 and 7";
+		String sql = "select * from(select rownum,x.* from (select a.* from booking a order by a.bk_write_date desc) x) where rownum between 1 and 7 and cp_no = 14";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -120,15 +120,22 @@ public class BumDao {
 	//jw
 	public ArrayList<Map<String, Object>> mainPageStatisticsReview(Connection conn){
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-		String sql = "select rv_score, count(*) from review join booking using (bk_no) where cp_no = 14 group by rv_score;";
+		String sql = "select count(*) from review join booking using (bk_no) where rv_score = 1 and cp_no = 14\r\n"
+				+ "union all\r\n"
+				+ "select count(*) from review join booking using (bk_no) where rv_score = 2 and cp_no = 14\r\n"
+				+ "union all\r\n"
+				+ "select count(*) from review join booking using (bk_no) where rv_score = 3 and cp_no = 14\r\n"
+				+ "union all\r\n"
+				+ "select count(*) from review join booking using (bk_no) where rv_score = 4 and cp_no = 14\r\n"
+				+ "union all\r\n"
+				+ "select count(*) from review join booking using (bk_no) where rv_score = 5 and cp_no = 14";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("score", rs.getInt(1));
-				map.put("count", rs.getInt(2));
+				map.put("count", rs.getInt(1));
 				list.add(map);
 			}
 			

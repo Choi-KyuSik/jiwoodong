@@ -316,15 +316,12 @@ article>div>p {
 							<tbody>
 								<c:forEach items="${list }" var="list">
 									<tr>
-										<th scope="row">${list.bkName }</th>
+										<th scope="row"><c:out value="${list.bkName }"/> </th>
 										<td>${list.bkPhone }</td>
 										<td>${list.bkNo }</td>
 										<td>${list.bkDate }</td>
 										<td>${list.bkTime }</td>
-										<td><c:choose>
-												<c:when test="${list.bsStatus eq 'R' }">예약</c:when>
-												<c:otherwise>취소</c:otherwise>
-											</c:choose></td>
+										<td><c:out value="${list.bsStatus eq 'R' ? '예약' : '취소' }"/></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -348,7 +345,7 @@ article>div>p {
                                <c:forEach items="${Rlist}" var = "list">
                                    <tr>
                                        <th scope="row">${list.rownum}</th>
-                                       <td>${list.rvContent}</td>
+                                       <td><c:out value="${list.rvContent}"/>  </td>
                                        <td>${list.rvWriteDate}</td>
                                        <td>${list.umId}</td>
                                        <td>${list.rvScore}</td>
@@ -655,29 +652,31 @@ article>div>p {
 				series : {
 					dataLabels : {
 						enabled : true,
-						format : '{point.name}: {point.y:.1f}%'
+						format : '{point.name}: {point.y:1f}개'
 					}
 				}
 			},
 			series : [ {
-				name : "평균",
+				name : "카운터",
 				colorByPoint : true,
-				data : [ {
-					name : "1점",
-					y : 5,
-				}, {
-					name : "2점",
-					y : 7,
-				}, {
-					name : "3점",
-					y : 8,
-				}, {
-					name : "4점",
-					y : 20,
-				}, {
-					name : "5점",
-					y : 60,
-				} ]
+				data : [
+					{
+						name : "1점",
+						y : ${review[0].count},
+					}, {
+						name : "2점",
+						y : ${review[1].count},
+					}, {
+						name : "3점",
+						y : ${review[2].count},
+					}, {
+						name : "4점",
+						y : ${review[3].count},
+					}, {
+						name : "5점",
+						y : ${review[4].count},
+					}
+				]
 			} ]
 		});
 	</script>
