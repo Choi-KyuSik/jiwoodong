@@ -19,16 +19,23 @@ public class AdminNoticeVo {
 	private Timestamp ntWriteDate;
 	private int ntCount;
 	private String flGno;
+	// TO_CHAR 이용하여 담는 변수
+	private String ntDate;
 	
 	public AdminNoticeVo() {
 		super();
 	}
 	
+	
+
+
 	@Override
 	public String toString() {
-		return "\n공지사항NO : " + ntNo + ", 제목 : " + ntTitle + ", 내용 : " + ntContent + ", 작성일 : "
-				+ ntWriteDate + ", 조회수 : " + ntCount + ", 파일 : " + flGno + "\n";
+		return "AdminNoticeVo [ntNo=" + ntNo + ", ntTitle=" + ntTitle + ", ntContent=" + ntContent + ", ntWriteDate="
+				+ ntWriteDate + ", ntCount=" + ntCount + ", flGno=" + flGno + ", ntDate=" + ntDate + "]";
 	}
+
+
 
 
 	public int getNtNo() {
@@ -66,6 +73,14 @@ public class AdminNoticeVo {
 	}
 	public void setFlGno(String flGno) {
 		this.flGno = flGno;
+	}
+
+	public String getNtDate() {
+		return ntDate;
+	}
+
+	public void setNtDate(String ntDate) {
+		this.ntDate = ntDate;
 	}
 	
 	

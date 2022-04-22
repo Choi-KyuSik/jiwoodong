@@ -14,6 +14,7 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>관리자 메인페이지</title>
 </head>
 <body>
@@ -75,6 +76,15 @@
                         </figure>
                     </div>
                 </div>
+                <!-- 
+                	private int ntNo;
+					private String ntTitle;
+					private String ntContent;
+					private Timestamp ntWriteDate;
+					private int ntCount;
+					private String flGno;
+                
+                 -->
                 <div id="s_ad_notice">
                     <p style="margin-top: 10px; font-weight: bold;">공지사항</p>
                     <div>
@@ -88,36 +98,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            	<c:forEach items="${adnolist }" var="i">
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>서비스 점검 예정(4/20)</td>
+                                    <th scope="row">${i.ntNo}</th>
+                                    <td>${i.ntTitle}</td>
                                     <td>관리자</td>
-                                    <td>22/04/19</td>
+                                    <td>${i.ntDate}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>지우동 주문 POS 위젯 장애 안내</td>
-                                    <td>관리자</td>
-                                    <td>22/04/19</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>잘 되는 매장의 전략 교육 OPEN!</td>
-                                    <td>관리자</td>
-                                    <td>22/04/19</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>서비스 점검 예정(4/20)</td>
-                                    <td>관리자</td>
-                                    <td>22/04/19</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>서비스 점검 예정(4/20)</td>
-                                    <td>관리자</td>
-                                    <td>22/04/19</td>
-                                </tr>
+                            	</c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -139,21 +127,16 @@
                     </div>
                 </nav>
                 <!-- Modal -->
+                <c:forEach items="${adnolist }" var="i">
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">서비스 점검 예정(4/20)</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">${i.ntTitle}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p>서버 안정화를 위해 서비스 점검이 진행됩니다.</p> 
-                                <p>서버 안정화를 위해 서비스 점검이 진행됩니다.</p> 
-                                <p>서버 안정화를 위해 서비스 점검이 진행됩니다.</p> 
-                                <p>서버 안정화를 위해 서비스 점검이 진행됩니다.</p> 
-                                <p>서버 안정화를 위해 서비스 점검이 진행됩니다.</p> 
-                                <p>다들 나가주세요.</p>
-                                <p>혼자있고 싶어요</p>
+                                <p>${i.ntContent}</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정</button>
@@ -162,47 +145,43 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table table-hover" style="clear: both;">
+                </c:forEach>
+                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
                     <thead>
                         <tr>
-                            <th scope="col">글번호</th>
-                            <th scope="col">제목</th>
+                            <th scope="col" style="width: 100px;">글번호</th>
+                            <th scope="col" style="width: 300px;">제목</th>
+                            <th scope="col" style="width: 450px;">내용</th>
                             <th scope="col">작성자</th>
                             <th scope="col">작성일</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <th scope="row">1</th>
-                            <td>서비스 점검 예정(4/20)</td>
-                            <td>관리자</td>
-                            <td>22/04/19</td>
-                        </tr>
-                        <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <th scope="row">2</th>
-                            <td>지우동 주문 POS 위젯 장애 안내</td>
-                            <td>관리자</td>
-                            <td>22/04/19</td>
-                        </tr>
-                        <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <th scope="row">3</th>
-                            <td>잘 되는 매장의 전략 교육 OPEN!</td>
-                            <td>관리자</td>
-                            <td>22/04/19</td>
-                        </tr>
-                        <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <th scope="row">4</th>
-                            <td>서비스 점검 예정(4/20)</td>
-                            <td>관리자</td>
-                            <td>22/04/19</td>
-                        </tr>
-                        <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <th scope="row">5</th>
-                            <td>서비스 점검 예정(4/20)</td>
-                            <td>관리자</td>
-                            <td>22/04/19</td>
-                        </tr>
+                        <c:forEach items="${adnolist }" var="i">
+                                <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <th scope="row">${i.ntNo}</th>
+                                    <td style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${i.ntTitle}</td>
+                                    <td style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${i.ntContent}</td>
+                                    <td>관리자</td>
+                                    <td>${i.ntDate}</td>
+                                </tr>
+                            	</c:forEach>
                     </tbody>
+                    <tfoot>
+                    <!-- <nav aria-label="Page navigation example">
+					  <ul class="pagination justify-content-center">
+					    <li class="page-item disabled">
+					      <a class="page-link">Previous</a>
+					    </li>
+					    <li class="page-item"><a class="page-link" href="#">1</a></li>
+					    <li class="page-item"><a class="page-link" href="#">2</a></li>
+					    <li class="page-item"><a class="page-link" href="#">3</a></li>
+					    <li class="page-item">
+					      <a class="page-link" href="#">Next</a>
+					    </li>
+					  </ul>
+					</nav> -->
+                    </tfoot>
                 </table>
             </div>
         </article>

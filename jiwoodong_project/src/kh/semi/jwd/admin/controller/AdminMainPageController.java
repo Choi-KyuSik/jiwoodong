@@ -1,11 +1,16 @@
 package kh.semi.jwd.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import kh.semi.jwd.admin.model.service.AdminNoticeService;
+import kh.semi.jwd.admin.model.vo.AdminNoticeVo;
 
 /**
  * Servlet implementation class AdminMyPage
@@ -32,7 +37,12 @@ public class AdminMainPageController extends HttpServlet {
 		if(!(tabMenu != null && !tabMenu.equals(""))) {
 			tabMenu = "0";
 		}
+		
+		ArrayList<AdminNoticeVo> adnolist = new AdminNoticeService().noticeList();
+		
 		request.setAttribute("tabMenu", tabMenu);
+		request.setAttribute("adnolist", adnolist);
+//		System.out.println("controller다. 담겼니?" + adnolist);
 		request.getRequestDispatcher("WEB-INF/admin/adminMainPage.jsp").forward(request, response);
 	}
 

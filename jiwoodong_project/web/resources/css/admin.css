@@ -92,3 +92,9 @@
 .s_tr_modal:hover {
 	cursor: pointer;
 }
+
+.short {
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
