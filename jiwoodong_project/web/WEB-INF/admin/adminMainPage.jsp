@@ -36,30 +36,22 @@
                             <thead>
                                 <tr>
                                     <th scope="col">NO</th>
+                                    <th scope="col">사업자번호</th>
+                                    <th scope="col">업종</th>
                                     <th scope="col">업체명</th>
-                                    <th scope="col">전화번호</th>
                                     <th scope="col">신청일자</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <c:forEach items="${cpAccept }" var="i">
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>빡빡미러</td>
-                                    <td>010-5678-1234</td>
-                                    <td>22/04/19</td>
+                                    <th scope="row">${i.rownum}</th>
+                                    <td>${i.buNumber}</td>
+                                    <td>${i.cpCategory}</td>
+                                    <td>${i.cpName}</td>
+                                    <td>${i.cpWriteDate}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>카페인충전소</td>
-                                    <td>010-5678-5324</td>
-                                    <td>22/04/19</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>야놀래말래</td>
-                                    <td>010-1234-1234</td>
-                                    <td>22/04/19</td>
-                                </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -128,23 +120,23 @@
                 </nav>
                 <!-- Modal -->
                 <c:forEach items="${adnolist }" var="i">
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">${i.ntTitle}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>${i.ntContent}</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정</button>
-                                <button type="button" class="btn btn-secondary">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+	                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	                    <div class="modal-dialog modal-dialog modal-xl">
+	                        <div class="modal-content">
+	                            <div class="modal-header">
+	                                <h5 class="modal-title" id="exampleModalLabel">${i.ntTitle}</h5>
+	                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                            </div>
+	                            <div class="modal-body">
+	                                <p>${i.ntContent}</p>
+	                            </div>
+	                            <div class="modal-footer">
+	                                <button type="button" id="s_update_btn" class="btn btn-primary" data-bs-dismiss="modal">수정</button>
+	                                <button type="button" id="s_delete_btn" class="btn btn-secondary">삭제</button>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
                 </c:forEach>
                 <table class="table table table-hover" style="clear: both; table-layout: fixed;">
                     <thead>
@@ -361,6 +353,12 @@
     <script>
     	$("#s_notice_insert_btn").click(function() {
     		location.href="AdminNoticeWrite";
+    	}) 
+    	$("#s_update_btn").click(function() {
+    		location.href="AdminNoticeUpdate";
+    	}) 
+    	$("#s_delete_btn").click(function() {
+    		location.href="";
     	}) 
     	
     </script>

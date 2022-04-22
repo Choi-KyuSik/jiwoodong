@@ -2,6 +2,7 @@ package kh.semi.jwd.admin.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Map;
 
 import kh.semi.jwd.admin.model.dao.AdminNoticeDao;
 import kh.semi.jwd.admin.model.vo.AdminNoticeVo;
@@ -32,5 +33,15 @@ public class AdminNoticeService {
 		
 		return voList;
 	}
+	
+	// 글 수정
+	public int updateNotice(AdminNoticeVo adnvo) {
+		Connection conn = getConnection();
+		int result = dao.updateNotice(conn, adnvo);
+		
+		close(conn);
+		return result;
+	}
+	
 	
 }

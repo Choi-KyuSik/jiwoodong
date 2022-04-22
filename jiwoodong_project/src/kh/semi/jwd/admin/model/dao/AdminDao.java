@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import kh.semi.jwd.admin.model.vo.AdminVo;
 //import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
@@ -62,5 +64,48 @@ public class AdminDao {
 		return result;
 	}
 	
+	// 업체등록요청 현황 조회
+	public ArrayList<Map<String, Object>> companyAcceptList(Connection conn) {
+
+		String sql = "SELECT * \r\n"
+				+ "FROM (\r\n"
+				+ "    SELECT ROWNUM, A.* \r\n"
+				+ "    FROM (\r\n"
+				+ "        SELECT CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD')\r\n"
+				+ "        FROM COMPANY C\r\n"
+				+ "        JOIN B_MEMBER B USING(BU_NO)\r\n"
+				+ "        WHERE CP_SIGNYN = 'N'\r\n"
+				+ "        ORDER BY CP_WRITE_DATE DESC) A )\r\n"
+				+ "WHERE ROWNUM BETWEEN 1 AND 9";
+		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("rownum", rs.getString(1));
+					map.put("cpCategory", rs.getString(2));
+					map.put("cpName", rs.getString(3));
+					map.put("buNumber", rs.getString(4));
+					map.put("cpWriteDate", rs.getString(5));
+
+					list.add(map);
+
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+
+		return list;
+
+
+	}
 	
 }
