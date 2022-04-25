@@ -42,7 +42,7 @@ public class AdminNoticeDao {
 		return -1; // 오류면 -1 반환
 	}
 
-	// 글조회
+	// 글조회(메인)
 	public ArrayList<AdminNoticeVo> noticeList(Connection conn) {
 
 		ArrayList<AdminNoticeVo> voList = null;
@@ -54,6 +54,51 @@ public class AdminNoticeDao {
 				+ "     FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE\r\n"
 				+ "           FROM NOTICE ORDER BY NT_NO DESC) A) B\r\n"
 				+ "WHERE RNUM BETWEEN 1 AND 10";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				voList = new ArrayList<AdminNoticeVo>();
+				//				NT_NO         NOT NULL NUMBER         
+				//				NT_TITLE      NOT NULL VARCHAR2(300)  
+				//				NT_CONTENT    NOT NULL VARCHAR2(4000) 
+				//				NT_WRITE_DATE NOT NULL TIMESTAMP(6)   
+				//				NT_COUNT      NOT NULL NUMBER 
+				do {
+					AdminNoticeVo adnvo = new AdminNoticeVo();
+					adnvo.setNtNo(rs.getInt(1));
+					adnvo.setNtTitle(rs.getString(2));
+					adnvo.setNtContent(rs.getString(3));
+					adnvo.setNtDate(rs.getString(4));
+
+					voList.add(adnvo);
+					//					System.out.println("dao다. 값 담겼니?" + voList);
+
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return voList;
+	}
+
+	// 글조회(공지사항조회)
+	public ArrayList<AdminNoticeVo> noticeListDetail(Connection conn) {
+
+		ArrayList<AdminNoticeVo> voList = null;
+
+		//		String sql = "SELECT * FROM NOTICE ORDER BY NT_WRITE_DATE DESC";
+		//		String sql = "SELECT * FROM(SELECT A.*, ROWNUM RNUM FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') FROM NOTICE ORDER BY NT_WRITE_DATE DESC) A) WHERE RNUM BETWEEN 1 AND 10";
+		String sql = "SELECT B.NT_NO, B.NT_TITLE, B.NT_CONTENT, B.NT_WRITE_DATE\r\n"
+				+ "FROM(SELECT ROWNUM RNUM, A.* \r\n"
+				+ "     FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE\r\n"
+				+ "           FROM NOTICE ORDER BY NT_NO DESC) A) B\r\n"
+				+ "WHERE RNUM BETWEEN 1 AND 18";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -103,17 +148,71 @@ public class AdminNoticeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, adnvo.getNtTitle());
+			// System.out.println("update SQL문 실행중? 글제목 : " + adnvo.getNtTitle());
 			pstmt.setString(2, adnvo.getNtContent());
+			// System.out.println("update SQL문 실행중? 글내용 : " + adnvo.getNtContent());
 			pstmt.setInt(3, adnvo.getNtNo());
+			// System.out.println("update SQL문 실행중? 글번호 : " + adnvo.getNtNo());
 			result = pstmt.executeUpdate();
-			return result; // 성공 시 result 반환
+			// System.out.println("update SQL문 실행중? DAO : " + result);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		return -1; // 오류면 -1 반환
+		return result;
 	}
-	
-	
+
+	// 글 삭제
+	public int deleteNotice(Connection conn, AdminNoticeVo adnvo) {
+		int result = 0;
+
+		String sql = "DELETE FROM NOTICE WHERE NT_NO = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, adnvo.getNtNo());
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	// 특정 게시글 번호의 모든 정보
+	public AdminNoticeVo readNotice(Connection conn, int ntNo) {
+
+		AdminNoticeVo adnvo = null;
+
+		String sql = "SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD')\r\n"
+				+ "FROM NOTICE\r\n"
+				+ "WHERE NT_NO = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ntNo);
+			rs = pstmt.executeQuery();
+
+			adnvo = new AdminNoticeVo();
+			if(rs.next()) {
+				adnvo.setNtNo(rs.getInt(1));
+				adnvo.setNtTitle(rs.getString(2));
+				adnvo.setNtContent(rs.getString(3));
+				adnvo.setNtDate(rs.getString(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+
+		return adnvo;
+	}
+
+
 }

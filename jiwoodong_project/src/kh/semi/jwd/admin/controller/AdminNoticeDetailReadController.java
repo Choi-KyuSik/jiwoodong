@@ -1,9 +1,6 @@
 package kh.semi.jwd.admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,20 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.jwd.admin.model.service.AdminNoticeService;
-import kh.semi.jwd.admin.model.service.AdminService;
 import kh.semi.jwd.admin.model.vo.AdminNoticeVo;
 
 /**
- * Servlet implementation class AdminMyPage
+ * Servlet implementation class AdminNoticeDetailReadController
  */
-@WebServlet("/AdminMainPage")
-public class AdminMainPageController extends HttpServlet {
+@WebServlet("/AdminNoticeDetailRead")
+public class AdminNoticeDetailReadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMainPageController() {
+    public AdminNoticeDetailReadController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +29,18 @@ public class AdminMainPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String tabMenu = (String)request.getSession().getAttribute("tabMenu");
-		request.getSession().removeAttribute("tabMenu");
-		if(!(tabMenu != null && !tabMenu.equals(""))) {
-			tabMenu = "0";
-		}
 		
-		ArrayList<AdminNoticeVo> adnolist = new AdminNoticeService().noticeList();
-		ArrayList<AdminNoticeVo> adnoDetailList = new AdminNoticeService().noticeListDetail();
-		ArrayList<Map<String, Object>> result = new AdminService().companyAcceptList();
+		String ntNoStr = request.getParameter("ntNo");
+		int ntNo = Integer.parseInt(ntNoStr);
+//		AdminNoticeVo anvo = new AdminNoticeVo();
+//		int ntNo = anvo.getNtNo();
+		System.out.println("ntNo의 값은?" + ntNo);
 		
-		request.setAttribute("tabMenu", tabMenu);
-		request.setAttribute("adnolist", adnolist);
-		request.setAttribute("cpAccept", result);
-		request.setAttribute("adnoDetailList", adnoDetailList);
-//		System.out.println("controller다. 담겼니?" + adnolist);
-		request.getRequestDispatcher("WEB-INF/admin/adminMainPage.jsp").forward(request, response);
+		AdminNoticeVo adnvo = new AdminNoticeService().readNotice(ntNo);
+		
+		request.setAttribute("adnvoList", adnvo);
+		
+		request.getRequestDispatcher("WEB-INF/admin/adminNoticeDetailRead.jsp").forward(request, response);
 	}
 
 	/**

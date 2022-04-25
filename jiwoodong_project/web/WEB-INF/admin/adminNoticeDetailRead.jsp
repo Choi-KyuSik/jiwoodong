@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 글쓰기</title>
+<title>공지사항 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
@@ -44,23 +44,27 @@
     </header>
 	<div class="container">
 		<div class="row" style="width: 1200px; margin: 0 auto; padding-top: 30px;">
-			<form method="post" action="AdminNoticeWriteDo">
+			<form id="frm" method="post" action="AdminNoticeUpdateDo">
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th colspan="2">공지사항 작성</th>
+							<th colspan="2">공지사항 상세보기</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="text" class="form-control" placeholder="글 제목" name="ntTitle" maxlength="300" required="required"></td>
+							<td><input type="hidden" class="form-control" placeholder="글 번호" name="ntNo" maxlength="300" required="required" value="${adnvoList.ntNo}"/></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="form-control" placeholder="글 제목" name="ntTitle" maxlength="300" required="required" value="${adnvoList.ntTitle}"/></td>
 						</tr>
 						<tr>	
-							<td><textarea class="form-control" placeholder="글 내용" name="ntContent" maxlength="4000" style="height: 350px; resize: none;" required="required"></textarea></td>
+							<td><textarea class="form-control" placeholder="글 내용" name="ntContent" maxlength="4000" style="height: 350px; resize: none;" required="required">${adnvoList.ntContent}</textarea></td>
 						</tr>
 					</tbody>
 				</table>
-				<input type="submit" class="btn btn-primary pull-right" style="float: right; margin-right: 10px;" value="글쓰기">
+				<input type="button" id="s_delete_btn" class="btn btn-danger pull-right" style="float: right; margin-right: 10px;" onClick="deletePage(ntNo)" value="삭제하기">
+				<input type="button" id="s_update_btn" class="btn btn-primary pull-right" style="float: right; margin-right: 10px;" value="수정하기">
 				<input type="button" id="back_btn" class="btn btn-secondary pull-right" style="float: right; margin-right: 10px;" value="뒤로가기">
 			</form>
 		</div>
@@ -119,7 +123,27 @@
 		$("#back_btn").click(function() {
 			history.back();
 		});
+		
+		$("#s_update_btn").click(function() {
+			if(confirm("정말 수정하시겠습니까?") == true) {
+				var frmEl = $("#frm");
+				frmEl.attr("action","AdminNoticeUpdateDo");
+				frmEl.attr("method","post");
+				frmEl.submit();
+			} else {
+				history.back();
+			}
+		});
+		
+		$("#s_delete_btn").click(function() {
+			if(confirm("정말 삭제하시겠습니까?") == true) {
+				var frmEl = $("#frm");
+				frmEl.attr("action","AdminNoticeDeleteDo");
+				frmEl.attr("method","post");
+				frmEl.submit();
+			} else {
+				history.back();
+			}
+		})
 	</script>
-	
-</body>
 </html>

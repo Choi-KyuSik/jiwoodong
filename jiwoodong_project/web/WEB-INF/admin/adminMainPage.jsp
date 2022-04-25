@@ -118,26 +118,6 @@
                         </form>
                     </div>
                 </nav>
-                <!-- Modal -->
-                <c:forEach items="${adnolist }" var="i">
-	                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	                    <div class="modal-dialog modal-dialog modal-xl">
-	                        <div class="modal-content">
-	                            <div class="modal-header">
-	                                <h5 class="modal-title" id="exampleModalLabel">${i.ntTitle}</h5>
-	                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	                            </div>
-	                            <div class="modal-body">
-	                                <p>${i.ntContent}</p>
-	                            </div>
-	                            <div class="modal-footer">
-	                                <button type="button" id="s_update_btn" class="btn btn-primary" data-bs-dismiss="modal">수정</button>
-	                                <button type="button" id="s_delete_btn" class="btn btn-secondary">삭제</button>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-                </c:forEach>
                 <table class="table table table-hover" style="clear: both; table-layout: fixed;">
                     <thead>
                         <tr>
@@ -148,10 +128,11 @@
                             <th scope="col">작성일</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <c:forEach items="${adnolist }" var="i">
-                                <tr class="s_tr_modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <th scope="row">${i.ntNo}</th>
+                    
+                    <tbody style="cursor: pointer;">
+                        <c:forEach items="${adnoDetailList }" var="i">
+                                <tr class="s_tr_readList" class="s_tr_modal">
+                                    <th scope="row" class="s_ntNo">${i.ntNo}</th>
                                     <td style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${i.ntTitle}</td>
                                     <td style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${i.ntContent}</td>
                                     <td>관리자</td>
@@ -352,15 +333,26 @@
     </script>
     <script>
     	$("#s_notice_insert_btn").click(function() {
+    		console.log("등록버튼 눌리니?");
     		location.href="AdminNoticeWrite";
-    	}) 
-    	$("#s_update_btn").click(function() {
-    		location.href="AdminNoticeUpdate";
-    	}) 
-    	$("#s_delete_btn").click(function() {
-    		location.href="";
-    	}) 
-    	
+    	});
+    	$(".s_tr_readList").click(function() {
+    		// 배열 선언
+    		var tdArr = new Array();
+    		// 현재 클릭된 행(tr의 td)
+    		var tr = $(this);
+    		var td = tr.children();
+    		
+    		// 반복문을 통해 배열에 값을 담아 사용
+    		td.each(function(i) {
+    			tdArr.push(td.eq(i).text());
+    		})
+    		// td들이 배열에 담겨있는데 그 중 1번째가 필요
+    		console.log("배열에 담긴 값 : " + tdArr[0]);
+    		
+    		// 링크로 넘기기
+    		location.href="AdminNoticeDetailRead?ntNo=" + tdArr[0];
+    	});
     </script>
 </body>
 </html>
