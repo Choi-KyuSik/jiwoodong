@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import kh.semi.jwd.bum.model.vo.BumVo;
+
 import static kh.semi.jwd.common.jdbc.JdbcDBCP. *;
 
 public class BumDao {
@@ -148,5 +150,108 @@ public class BumDao {
 		
 		return list;
 	}
+	
+	//승희 - 회원가입..도전..!
+	
+	public int insertBuMember(BumVo vo) {
+		
+//		BU_NO          NOT NULL NUMBER         
+//		BU_ID          NOT NULL VARCHAR2(20)   
+//		BU_NUMBER      NOT NULL VARCHAR2(20)   
+//		BU_PWD         NOT NULL VARCHAR2(40)   
+//		BU_NAME        NOT NULL VARCHAR2(20)   
+//		BU_BIRTH       NOT NULL VARCHAR2(20)   
+//		BU_GENDER      NOT NULL VARCHAR2(1)    
+//		BU_EMAIL       NOT NULL VARCHAR2(100)  
+//		BU_TEL         NOT NULL VARCHAR2(20)   
+//		BU_USEYN       NOT NULL VARCHAR2(1)    
 
+		int result = 0 ;
+		Connection conn = null;
+		String sql = "INSERT INTO b_member(BU_NO,BU_ID,BU_NUMBER,BU_PWD,BU_NAME,BU_BIRTH,BU_GENDER,BU_EMAIL,BU_TEL,BU_USEYN) values(?,?,?,?,?,?,?,?,?,?)";
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, vo.getBuNo());
+			pstmt.setString(1, vo.getBuId());
+			pstmt.setString(2, vo.getBuNumber());
+			pstmt.setString(3, vo.getBuPwd());
+			pstmt.setString(4, vo.getBuName());
+			pstmt.setString(5, vo.getBuBirth());
+			pstmt.setString(6, vo.getBuGender());
+			pstmt.setString(7, vo.getBuEmail());
+			pstmt.setString(8, vo.getBuTel());
+			pstmt.setString(9, vo.getBuUseYn());
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(conn);
+		}
+		return result;
+	}
+	
+	//승희 - 아이디 중복확인
+	
+	public boolean checkDublicatedBuId(Connection conn,BumVo vo) {
+		
+		boolean flag = true;
+		ResultSet rs = null;
+		String sql = "";
+		sql = "SELECT COUNT * FROM B_MEMBER WHERE BU_ID=? ";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getBuId());
+			rs=pstmt.executeQuery();
+			if(rs.next() && rs.getInt(1)>0) {
+				flag = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		return flag;
+	}
+	
+	//승희 - 사업자 로그인
+	public BumVo loginBuMember(Connection conn,BumVo vo) {
+		BumVo bvo = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		sql = "SELECT BU_NO,BU_ID,BU_NUMBER,BU_PWD,BU_NAME,BU_BIRTH,BU_GENDER,BU_EMAIL,BU_TEL,BU_USEYN FROM B_MEMEBER WHERE BU_ID =? AND BU_PWD=? ";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bvo.getBuId());
+			pstmt.setString(2, bvo.getBuPwd());
+			rs=pstmt.executeQuery();
+			//id와 pwd 가 일치하는 것이 나올때만 rs에 값이 있다.
+			if(rs.next()) {
+				bvo = new BumVo();
+				bvo.setBuNo(rs.getInt("bu_No"));
+				bvo.setBuId(rs.getString("bu_Id"));
+				bvo.setBuNumber(rs.getString("bu_Number"));
+				bvo.setBuPwd(rs.getString("bu_Pwd"));
+				bvo.setBuName(rs.getString("bu_Name"));
+				bvo.setBuBirth(rs.getString("bu_Birth"));
+				bvo.setBuGender(rs.getString("bu_Gender"));
+				bvo.setBuEmail(rs.getString("bu_Email"));
+				bvo.setBuTel(rs.getString("bu_Tel"));
+				bvo.setBuUseYn(rs.getString("bu_UseYn"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		
+		return bvo;
+	}
 }
