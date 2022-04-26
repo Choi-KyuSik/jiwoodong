@@ -700,64 +700,54 @@ article>div>p {
 	
 					</content>
 	<script>
-		$("#k_info_menu").click(function() {
-			//DB에서 정보 읽어오기 - 내정보			
-			getMyInfo();
-			
-			
-			$("#k_info_content").show();
-			$("#k_bu_eroll_content").hide();
-			$("#k_re_menu_content").hide();
-			$("#k_re_cu_content").hide();
-			$("#k_us_info_content").hide();
-			$("#k_review_content").hide();
-			$("#main_box").hide();
-		});
-		$("#k_review_menu").click(function() {
-			$("#k_info_content").hide();
-			$("#k_review_content").show();
-			$("#k_bu_eroll_content").hide();
-			$("#k_re_cu_content").hide();
-			$("#k_us_info_content").hide();
-			$("#k_re_menu_content").hide();
-			$("#main_box").hide();
-		});
-		$("#k_bu_eroll_menu").click(function() {
-			$("#k_info_content").hide();
-			$("#k_review_content").hide();
-			$("#k_re_menu_content").hide();
-			$("#k_bu_eroll_content").show();
-			$("#k_re_cu_content").hide();
-			$("#k_us_info_content").hide();
-			$("#main_box").hide();
-		});
-		$("#k_re_menu_enroll").click(function() {
-			$("#k_info_content").hide();
-			$("#k_review_content").hide();
-			$("#k_re_cu_content").hide();
-			$("#k_bu_eroll_content").hide();
-			$("#k_re_menu_content").show();
-			$("#k_us_info_content").hide();
-			$("#main_box").hide();
-		});
-		$("#k_re_cu_menu").click(function() {
-			$("#k_info_content").hide();
-			$("#k_review_content").hide();
-			$("#k_us_info_content").hide();
-			$("#k_bu_eroll_content").hide();
-			$("#k_re_menu_content").hide();
-			$("#k_re_cu_content").show();
-			$("#main_box").hide();
-		});
-		$("#k_us_info_menu").click(function() {
-			$("#k_info_content").hide();
-			$("#k_review_content").hide();
-			$("#k_re_cu_content").hide();
-			$("#k_bu_eroll_content").hide();
-			$("#k_re_menu_content").hide();
-			$("#k_us_info_content").show();
-			$("#main_box").hide();
-		});
+			$("#k_info_menu").click(function() {
+				$("#k_info_content").show();
+				$("#k_bu_eroll_content").hide();
+				$("#k_re_menu_content").hide();
+				$("#k_re_cu_content").hide();
+				$("#k_us_info_content").hide();
+				$("#k_review_content").hide();
+				$("#main_box").hide();
+			});
+			$("#k_review_menu").click(function() {
+				$("#k_info_content").hide();
+				$("#k_review_content").show();
+				$("#k_bu_eroll_content").hide();
+				$("#k_re_cu_content").hide();
+				$("#k_us_info_content").hide();
+				$("#k_re_menu_content").hide();
+				$("#main_box").hide();
+			});
+			$("#k_bu_eroll_menu").click(function() {
+				$("#k_info_content").hide();
+				$("#k_review_content").hide();
+				$("#k_re_menu_content").hide();
+				$("#k_bu_eroll_content").show();
+				$("#k_re_cu_content").hide();
+				$("#k_us_info_content").hide();
+				$("#main_box").hide();
+			});
+			$("#k_re_menu_enroll").click(function() {
+				$("#k_info_content").hide();
+				$("#k_review_content").hide();
+				$("#k_re_cu_content").hide();
+				$("#k_bu_eroll_content").hide();
+				$("#k_re_menu_content").show();
+				$("#k_us_info_content").hide();
+				$("#main_box").hide();
+			});
+			$("#k_re_cu_menu").click(function() {
+				location.href = "<%=request.getContextPath()%>/burscheck";
+			});
+			$("#k_us_info_menu").click(function() {
+				$("#k_info_content").hide();
+				$("#k_review_content").hide();
+				$("#k_re_cu_content").hide();
+				$("#k_bu_eroll_content").hide();
+				$("#k_re_menu_content").hide();
+				$("#k_us_info_content").show();
+				$("#main_box").hide();
+			});
 	</script>
 	<script>
 		// Create the chart
