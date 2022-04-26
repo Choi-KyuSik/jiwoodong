@@ -16,6 +16,7 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>관리자 메인페이지</title>
+
 </head>
 <body>
     
@@ -30,7 +31,7 @@
         <div id="main_box" class="tab_menu">
             <div class="nav_tab_div">
                 <div id="s_bu_accept_list">
-                    <p style="margin-top: 10px; font-weight: bold;">업체 등록 요청 현황</p>
+                    <p class="p_title_style">업체 등록 요청 현황</p>
                     <div>
                         <table class="table table table-hover">
                             <thead>
@@ -57,7 +58,7 @@
                     </div>
                 </div>
                 <div id="s_bu_statistics">
-                    <p style="margin-top: 10px; font-weight: bold;">업체별 예약 현황</p>
+                    <p class="p_title_style">업체별 예약 현황</p>
                     <div>
                         <!-- 통계 -->
                         <figure class="highcharts-figure">
@@ -78,7 +79,7 @@
                 
                  -->
                 <div id="s_ad_notice">
-                    <p style="margin-top: 10px; font-weight: bold;">공지사항</p>
+                    <p class="p_title_style">공지사항</p>
                     <div>
                         <table class="table table table-hover" style="clear: both;">
                             <thead>
@@ -104,10 +105,10 @@
                 </div>
             </div>
         </div>
-        <article>
-            <div id="s_notice_content" class="tab_menu"
-                style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
-                <p style="text-align: center; font-weight: bold; padding-top: 20px; font-size: large;">공지사항 조회</p>
+        <!-- 공지사항 content : 손은진 -->
+        <div>
+            <div id="s_notice_content" class="tab_menu s_content">
+                <p class="p_content_style">공지사항 조회</p>
                 <button type="button" id="s_notice_insert_btn" class="btn btn-primary" data-bs-dismiss="modal">글 등록</button>
                 <!-- 검색 -->
                 <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
@@ -131,10 +132,10 @@
                     
                     <tbody style="cursor: pointer;">
                         <c:forEach items="${adnoDetailList }" var="i">
-                                <tr class="s_tr_readList" class="s_tr_modal">
+                                <tr class="s_tr_readList s_tr_modal">
                                     <th scope="row" class="s_ntNo">${i.ntNo}</th>
-                                    <td style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${i.ntTitle}</td>
-                                    <td style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${i.ntContent}</td>
+                                    <td class="s_td_short">${i.ntTitle}</td>
+                                    <td class="s_td_short">${i.ntContent}</td>
                                     <td>관리자</td>
                                     <td>${i.ntDate}</td>
                                 </tr>
@@ -156,14 +157,25 @@
 					</nav> -->
                     </tfoot>
                 </table>
-            </div>
-        </article>
-        <article>
-            <div id="s_bu_accept_content" class="tab_menu"
-                style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
-                업체 승인 content 내용 들어갑니다 ~~~~~~~~~
+				<div id="pagingBox">
+					<ul class="pagination">
+						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				</div>
+			</div>
+        </div>
+        <!-- 업체승인 Content : 손은진 -->
+        <div>
+            <div id="s_notice_content" class="tab_menu s_content">
+                <p class="p_content_style">업체 신청 내역</p>
                 <!-- 검색 -->
-                <nav class="navbar navbar-light">
+                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
                     <div class="container-fluid">
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -171,11 +183,47 @@
                         </form>
                     </div>
                 </nav>
-            </div>
-        </article>
-        <article>
-            <div id="s_bu_info_content" class="tab_menu"
-                style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
+                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
+                    <thead>
+                        <tr>
+                        	<th scope="col" style="width: 50px;">NO</th>
+                        	<th scope="col" style="width: 100px;">사업자번호</th>
+                            <th scope="col">사업자 등록 번호</th>
+                            <th scope="col" style="width: 150px;">업종</th>
+                            <th scope="col">업체명</th>
+                            <th scope="col" style="width: 250px;">전화번호</th>
+                            <th scope="col" style="width: 100px;">신청일자</th>
+                        </tr>
+                    </thead>
+                    <tbody style="cursor: pointer;">
+                        <c:forEach items="${cpAcceptDetail }" var="i">
+                                <tr class="s_tr_modal s_tr_readBuList">
+                                    <th scope="row" class="s_ntNo">${i.rownum}</th>
+                                    <td>${i.buNo}</td>
+                                    <td>${i.buNumber}</td>
+                                    <td>${i.cpCategory}</td>
+                                    <td class="s_td_short">${i.cpName}</td>
+                                    <td>${i.buTel}</td>
+                                    <td>${i.cpWriteDate}</td>
+                                </tr>
+                            	</c:forEach>
+                    </tbody>
+                </table>
+				<div id="pagingBox">
+					<ul class="pagination">
+						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				</div>
+			</div>
+        </div>
+        <div>
+            <div id="s_bu_info_content" class="tab_menu s_content">
                 사업자 정보 content 내용 들어갑니다 ~~~~~~~~~
                 <!-- 검색 -->
                 <nav class="navbar navbar-light">
@@ -187,11 +235,10 @@
                     </div>
                 </nav>
             </div>
-        </article>
-        <article>
-            <div id="s_us_info_content" class="tab_menu"
-                style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
-                사용자 관리 content 내용 들어갑니다 ~~~~~~~~~
+        </div>
+        <div>
+        <div id="s_bu_delete_content" class="tab_menu s_content">
+                사업자 탈퇴 content 내용 들어갑니다 ~~~~~~~~~
                 <!-- 검색 -->
                 <nav class="navbar navbar-light">
                     <div class="container-fluid">
@@ -202,10 +249,37 @@
                     </div>
                 </nav>
             </div>
-        </article>
-        <article>
-            <div id="s_review_content" class="tab_menu"
-                style="width: 1200px; height: 1000px; display: none; margin: 0 auto; background-color: rgb(241, 241, 241); margin-top: 20px; padding: 30px; border-radius: 15px;">
+        </div>
+        <div>
+            <div id="s_us_info_content" class="tab_menu s_content">
+                사용자 정보 content 내용 들어갑니다 ~~~~~~~~~
+                <!-- 검색 -->
+                <nav class="navbar navbar-light">
+                    <div class="container-fluid">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div>
+            <div id="s_us_delete_content" class="tab_menu s_content">
+                사용자 탈퇴 content 내용 들어갑니다 ~~~~~~~~~
+                <!-- 검색 -->
+                <nav class="navbar navbar-light">
+                    <div class="container-fluid">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div>
+            <div id="s_review_content" class="tab_menu s_content">
                 리뷰 관리 content 내용 들어갑니다 ~~~~~~~~~
                 <!-- 검색 -->
                 <nav class="navbar navbar-light">
@@ -217,7 +291,7 @@
                     </div>
                 </nav>
             </div>
-        </article>
+        </div>
     </section>
     <!-- 통계 -->
     <script>
@@ -321,12 +395,20 @@
             tabMenu = 3;
             showTabMenu();
         });
-        $("#s_us_info_menu").click(function () {
+        $("#s_bu_delete_menu").click(function () {
             tabMenu = 4;
             showTabMenu();
         });
-        $("#s_review_menu").click(function () {
+        $("#s_us_info_menu").click(function () {
             tabMenu = 5;
+            showTabMenu();
+        });
+        $("#s_us_delete_menu").click(function () {
+            tabMenu = 6;
+            showTabMenu();
+        });
+        $("#s_review_menu").click(function () {
+            tabMenu = 7;
             showTabMenu();
         });
 
@@ -346,12 +428,30 @@
     		// 반복문을 통해 배열에 값을 담아 사용
     		td.each(function(i) {
     			tdArr.push(td.eq(i).text());
-    		})
+    		});
     		// td들이 배열에 담겨있는데 그 중 1번째가 필요
     		console.log("배열에 담긴 값 : " + tdArr[0]);
+    		console.log(typeof(tdArr[0]));
     		
     		// 링크로 넘기기
     		location.href="AdminNoticeDetailRead?ntNo=" + tdArr[0];
+    	});
+    	$(".s_tr_readBuList").click(function() {
+    		// 배열 선언
+    		var tdArr = new Array();
+    		// 현재 클릭된 행(tr의 td)
+    		var tr = $(this);
+    		var td = tr.children();
+    		
+    		// 반복문을 통해 배열에 값을 담아 사용
+    		td.each(function(i) {
+    			tdArr.push(td.eq(i).text());
+    		});
+    		// td들이 배열에 담겨있는데 그 중 1번째가 필요
+    		console.log("배열에 담긴 값 : " + tdArr);
+    		console.log("배열에 담긴 값 : " + tdArr[1]);
+    		console.log(typeof(tdArr[1]));
+    		location.href="AdminBuDetailInfo?buNo=" + tdArr[1];
     	});
     </script>
 </body>

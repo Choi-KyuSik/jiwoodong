@@ -53,7 +53,7 @@ public class AdminNoticeDao {
 				+ "FROM(SELECT ROWNUM RNUM, A.* \r\n"
 				+ "     FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE\r\n"
 				+ "           FROM NOTICE ORDER BY NT_NO DESC) A) B\r\n"
-				+ "WHERE RNUM BETWEEN 1 AND 10";
+				+ "WHERE RNUM BETWEEN 1 AND 9";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

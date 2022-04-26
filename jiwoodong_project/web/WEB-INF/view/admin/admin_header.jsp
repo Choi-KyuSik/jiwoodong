@@ -8,14 +8,14 @@
 </head>
 <body>
 	<header style="margin-top: 10px;">
-        <div id="p_main_top" style="width: 1200px; margin: 0 auto; border-bottom: 2px solid silver;">
+        <div id="p_main_top">
             <div style="float: right;">
-                <p style="font-size: 10px; margin: 25px 30px 0 10px;">환영합니다 손은진님</p>
-                <a href=""
-                    style="font-size: 14px; margin: 0 0 0 30px; color: red; font-weight: bold; text-decoration: none;">로그아웃</a>
+                <p id="p_welcome_msg">환영합니다 손은진님</p>
+                <a id="s_logout" href=""
+                    style="">로그아웃</a>
             </div>
-            <div id="p_top_logo" style="float: left; margin: 0 0 0 30px;">
-                <a href="http://localhost:8090/jwd/AdminMainPage"><img
+            <div id="p_top_logo">
+                <a href="<%=request.getContextPath()%>/AdminMainPage"><img
                         src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"
                         width="80px" alt="logo" id="logo"></a>
             </div>
@@ -43,15 +43,28 @@
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li><a class="dropdown-item" href="#" id="s_bu_info_menu">사업자 정보 조회</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="#" id="s_bu_delete_menu">사업자 탈퇴 조회</a></li>
+                                        
                                     </ul>
                                 </li>
                             </ul>
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown" href="#" role="button" id="s_us_info_menu">
+                                    <a class="nav-link dropdown dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown">
                                         사용자관리
                                     </a>
-                                </li>
+									<ul class="dropdown-menu dropdown-menu">
+										<li><a class="dropdown-item" href="#" id="s_us_info_menu">사용자 정보 조회</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="#" id="s_us_delete_menu">사용자 탈퇴 조회</a></li>
+									</ul>
+								</li>
                             </ul>
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">

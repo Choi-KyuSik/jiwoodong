@@ -37,4 +37,20 @@ public class AdminService {
 		return result;
 	}
 
+	// 업체등록요청 현황 조회(상세)
+	public ArrayList<Map<String, Object>> companyAcceptDetailList() {
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> result = dao.companyAcceptList(conn);
+		close(conn);
+		return result;
+	}
+	
+	// 업체등록요청 세부 1개 조회
+	public ArrayList<Map<String, Object>> companyAcceptDetailRead(int buNo) {
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> result = dao.companyAcceptDetailRead(conn, buNo);
+		close(conn);
+		return result;
+	}
+
 }

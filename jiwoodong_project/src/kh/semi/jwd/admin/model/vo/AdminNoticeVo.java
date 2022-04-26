@@ -26,16 +26,12 @@ public class AdminNoticeVo {
 		super();
 	}
 	
-	
-
 
 	@Override
 	public String toString() {
 		return "AdminNoticeVo [ntNo=" + ntNo + ", ntTitle=" + ntTitle + ", ntContent=" + ntContent + ", ntWriteDate="
 				+ ntWriteDate + ", ntCount=" + ntCount + ", flGno=" + flGno + ", ntDate=" + ntDate + "]";
 	}
-
-
 
 
 	public int getNtNo() {
