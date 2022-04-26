@@ -10,16 +10,18 @@ import java.util.Map;
 
 import kh.semi.jwd.bum.model.vo.BumVo;
 
-import static kh.semi.jwd.common.jdbc.JdbcDBCP. *;
+import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
 public class BumDao {
-	
-	
+
+	// DB를 왔다갔다 하는것
 	private PreparedStatement pstmt = null;
+	// DB를 Java용 언어로 바꿔주는것
 	private ResultSet rs = null;
-	//jw
+
+	// 재우
 	public ArrayList<Map<String, Object>> mainPageBookingList(Connection conn) {
-		
+
 		String sql = "select * from(select rownum,x.* from (select a.* from booking a order by a.bk_write_date desc) x) where rownum between 1 and 7 and cp_no = 14";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		try {
@@ -43,35 +45,36 @@ public class BumDao {
 		}
 		return list;
 	}
-	//wj
-	 public ArrayList<Map<String, Object>> mainPageReviewList(Connection conn) {
-	      
-	      
-	      String sql="select * from(select rownum, x.* from (select r.rv_content, to_char(rv_write_date, 'yyyy/mm/dd'), b.um_id, r.rv_score from booking b join review r using(bk_no) order by b.bk_write_date desc) x) where rownum between 1 and 7";
-	      
-	      ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-	      
-	      try {
-	         pstmt = conn.prepareStatement(sql);
-	         rs = pstmt.executeQuery();
-	         while(rs.next()) {
-	            Map<String, Object> map = new HashMap<String, Object>();
-	            map.put("rownum", rs.getInt(1));            
-	            map.put("rvContent", rs.getString(2));
-	            map.put("rvWriteDate", rs.getString(3));
-	            map.put("umId", rs.getString(4));
-	            map.put("rvScore", rs.getInt(5));
-	            
-	            list.add(map);
-	            System.out.println("BumDao result:" + sql);
-	         }
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      }
-	      
-	      return list;
-	   }
-	//jw
+
+	// 우진
+	public ArrayList<Map<String, Object>> mainPageReviewList(Connection conn) {
+
+		String sql = "select * from(select rownum, x.* from (select r.rv_content, to_char(rv_write_date, 'yyyy/mm/dd'), b.um_id, r.rv_score from booking b join review r using(bk_no) where b.cp_no = 14 order by b.bk_write_date desc) x) where rownum between 1 and 7";
+
+		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("rownum", rs.getInt(1));
+				map.put("rvContent", rs.getString(2));
+				map.put("rvWriteDate", rs.getString(3));
+				map.put("umId", rs.getString(4));
+				map.put("rvScore", rs.getInt(5));
+
+				list.add(map);
+				System.out.println("BumDao result:" + sql);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	// 재우
 	public ArrayList<Map<String, Object>> mainPageStatisticsVisit(Connection conn) {
 		
 		String sql = "select \r\n"
@@ -119,9 +122,10 @@ public class BumDao {
 		}
 		return list;
 	}
-	//jw
-	public ArrayList<Map<String, Object>> mainPageStatisticsReview(Connection conn){
-		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+
+	// 재우
+	public ArrayList<Map<String, Object>> mainPageStatisticsReview(Connection conn) {
+		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		String sql = "select count(*) from review join booking using (bk_no) where rv_score = 1 and cp_no = 14\r\n"
 				+ "union all\r\n"
 				+ "select count(*) from review join booking using (bk_no) where rv_score = 2 and cp_no = 14\r\n"
@@ -131,23 +135,23 @@ public class BumDao {
 				+ "select count(*) from review join booking using (bk_no) where rv_score = 4 and cp_no = 14\r\n"
 				+ "union all\r\n"
 				+ "select count(*) from review join booking using (bk_no) where rv_score = 5 and cp_no = 14";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("count", rs.getInt(1));
 				list.add(map);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
-		
+
 		return list;
 	}
 	
@@ -254,4 +258,56 @@ public class BumDao {
 		
 		return bvo;
 	}
+	
+// TODO 우진: 나중에 로그인 구현되면 Session에 담아야함 
+	public ArrayList<BumVo> companyCheck(Connection conn, int buNo) {
+		//public return 값이 BumVo이므로 result의 변수값은 null
+		ArrayList<BumVo> list = new ArrayList<BumVo>();
+		//sql문 작성
+		//sql문 실행, 변수에 담기
+		String sql = "select bu_number, bu_name, bu_birth, bu_id, bu_pwd, bu_pwd, bu_email, bu_tel "
+						+ "from b_member where bu_no = ?";
+		//try-catch문 
+		// where절에 ?가 있으므로 stmt가 아닌 pstmt 사용		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			// list의 값을 담아서 DB로 보낸다.
+			pstmt.setInt(1, rs.getInt(3));
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {				
+				BumVo bvo = new BumVo();				
+//				BU_NO          NOT NULL NUMBER         
+//				BU_ID          NOT NULL VARCHAR2(20)   
+//				BU_NUMBER      NOT NULL VARCHAR2(20)   
+//				BU_PWD         NOT NULL VARCHAR2(40)   
+//				BU_NAME        NOT NULL VARCHAR2(20)   
+//				BU_BIRTH       NOT NULL VARCHAR2(20)      
+//				BU_EMAIL       NOT NULL VARCHAR2(100)  
+//				BU_TEL         NOT NULL VARCHAR2(20)   	  
+//				FL_GNO                  VARCHAR2(4000)
+				
+//				bvo.setBuNo(rs.getInt("bu_No"));
+				bvo.setBuNumber(rs.getString("bu_Number"));
+				bvo.setBuName(rs.getString("bu_Name"));
+				bvo.setBuBirth(rs.getString("bu_Birth"));
+				bvo.setBuId(rs.getString("bu_Id"));
+				bvo.setBuPwd(rs.getString("bu_Pwd"));
+				bvo.setBuPwd(rs.getString("bu_Pwd"));
+				bvo.setBuEmail(rs.getString("bu_Email"));
+				bvo.setBuTel(rs.getString("bu_Tel"));
+				
+				list.add(bvo);
+				System.out.println("companyCheckDao:" + bvo);
+			} 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		//finally 작성, pstmt close하기
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println("companyCheck:" + list);
+		return list;
+		}
 }

@@ -1,7 +1,7 @@
 package kh.semi.jwd.bum.model.vo;
 
 public class BumVo {
-	
+		
 //	BU_NO          NOT NULL NUMBER         
 //	BU_ID          NOT NULL VARCHAR2(20)   
 //	BU_NUMBER      NOT NULL VARCHAR2(20)   
@@ -11,8 +11,13 @@ public class BumVo {
 //	BU_GENDER      NOT NULL VARCHAR2(1)    
 //	BU_EMAIL       NOT NULL VARCHAR2(100)  
 //	BU_TEL         NOT NULL VARCHAR2(20)   
-//	BU_USEYN       NOT NULL VARCHAR2(1)   
-	
+//	BU_USEYN       NOT NULL VARCHAR2(1)    
+//	BU_WRITE_DATE           TIMESTAMP(6)   
+//	BU_UPDATE_DATE          TIMESTAMP(6)   
+//	BU_OUT_DATE             TIMESTAMP(6)   
+//	FL_GNO                  VARCHAR2(4000) 
+		
+	//우진
 	private int buNo ;
 	private String buId;
 	private String buNumber;
@@ -25,12 +30,25 @@ public class BumVo {
 	private String buUseYn;
 	private String flGno;
 	
-	//우진
+	
+	@Override
+	public String toString() {
+		return "BumVo [buNo=" + buNo + ", buId=" + buId + ", buNumber=" + buNumber + ", buPwd=" + buPwd + ", buName="
+				+ buName + ", buBirth=" + buBirth + ", buGender=" + buGender + ", buEmail=" + buEmail + ", buTel="
+				+ buTel + ", flGno=" + flGno + "]";
+	}
+	
 	public int getBuNo() {
 		return buNo;
 	}
 	public void setBuNo(int buNo) {
 		this.buNo = buNo;
+	}
+	public String getBuId() {
+		return buId;
+	}
+	public void setBuId(String buId) {
+		this.buId = buId;
 	}
 	public String getBuNumber() {
 		return buNumber;

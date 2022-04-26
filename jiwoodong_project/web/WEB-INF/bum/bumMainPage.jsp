@@ -222,6 +222,20 @@ article>div>p {
 	float: right;
 	margin-bottom: 20px;
 }
+
+/* 내정보 관리 */
+.k_company {
+	font-weight: bold;
+}
+
+/* 업체등록 */
+#k_bu_eroll_top {
+	display: flex;
+}
+
+.k_company_info {
+	resize: none;
+}
 </style>
 </head>
 <script>
@@ -241,7 +255,7 @@ article>div>p {
 						<div class="collapse navbar-collapse">
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
-									id="k_info_menu" href="#" role="button"> 내정보 관리 </a></li>
+									id="k_info_menu" role="button"> 내정보 관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
@@ -316,12 +330,12 @@ article>div>p {
 							<tbody>
 								<c:forEach items="${list }" var="list">
 									<tr>
-										<th scope="row"><c:out value="${list.bkName }"/> </th>
+										<th scope="row"><c:out value="${list.bkName }" /></th>
 										<td>${list.bkPhone }</td>
 										<td>${list.bkNo }</td>
 										<td>${list.bkDate }</td>
 										<td>${list.bkTime }</td>
-										<td><c:out value="${list.bsStatus eq 'R' ? '예약' : '취소' }"/></td>
+										<td><c:out value="${list.bsStatus eq 'R' ? '예약' : '취소' }" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -329,32 +343,32 @@ article>div>p {
 					</div>
 				</div>
 				<div id="review">
-		<p class="box_font">리뷰</p>
-                    <div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">제목</th>
-                                    <th scope="col">작성일자</th>
-                                    <th scope="col">아이디</th>
-                                    <th scope="col">별점</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               <c:forEach items="${Rlist}" var = "list">
-                                   <tr>
-                                       <th scope="row">${list.rownum}</th>
-                                       <td><c:out value="${list.rvContent}"/>  </td>
-                                       <td>${list.rvWriteDate}</td>
-                                       <td>${list.umId}</td>
-                                       <td>${list.rvScore}</td>
-                                   </tr>
-                                </c:forEach>                               
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+					<p class="box_font">리뷰</p>
+					<div>
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">제목</th>
+									<th scope="col">작성일자</th>
+									<th scope="col">아이디</th>
+									<th scope="col">별점</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${Rlist}" var="list">
+									<tr>
+										<th scope="row">${list.rownum}</th>
+										<td><c:out value="${list.rvContent}" /></td>
+										<td>${list.rvWriteDate}</td>
+										<td>${list.umId}</td>
+										<td>${list.rvScore}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
 				<div id="statistics_visit">
 					<p class="statiscics_font">월별 예약통계</p>
 					<figure class="highcharts-figure">
@@ -399,20 +413,80 @@ article>div>p {
 			</div>
 		</div>
 	</section>
-	<content>
+	<content> 
+	<!-- 내정보 관리 -->
 	<article>
 		<div id="k_info_content">
-			내정보 관리 content 내용 들어갑니다 ~~~~~~~~~
-			<!-- 검색 -->
-			<nav class="navbar navbar-light">
-				<div class="container-fluid">
-					<form class="d-flex">
-						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
-				</div>
+			<nav id="k_bu_eroll_top">
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown"><a class="nav-link dropdown"
+						id="k_info_menu" href="#" role="button"> 기본정보 </a></li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown"><a class="nav-link dropdown"
+						id="k_info_menu" href="#" role="button"> 내정보 삭제 </a></li>
+				</ul>
 			</nav>
+			<!-- 사업자번호 읽기만 -->
+			<div>
+				사업자 번호
+				<div>
+					  
+				</dvi>
+			</div>
+			<div>
+				이름
+				<p>
+					<input type="text" value="이름">
+				</p>
+			</div>
+			<div>
+				생년월일
+				<p>
+					<input type="text">
+				</p>
+			</div>
+			<!-- 아이디 읽기만 -->
+			<div>
+				아이디
+				<div>
+					  
+				</div>
+			</div>
+			<div>
+				변경할 비밀번호
+				<p>
+					<input type="password">
+				</p>
+			</div>
+			<div>
+				변경할 비밀번호 확인
+				<p>
+					<input type="password">
+				</p>
+			</div>
+			<div>
+				본인확인 메일
+				<p>
+					<input type="text">
+				</p>
+			</div>
+			<div>
+				핸드폰번호
+				<p>
+					<select name="phone">
+						<option>010</option>
+						<option>011</option>
+						<option>017</option>
+						<option>019</option>
+					</select>&nbsp;-&nbsp; <input type="text">&nbsp;-&nbsp; <input
+						type="text">
+				</p>
+			</div>
+			<div>
+				<button>취소</button>
+				<button>수정하기</button>
+			</div>
 		</div>
 	</article>
 	<article>
@@ -474,28 +548,77 @@ article>div>p {
 	</article>
 	<article>
 		<div id="k_bu_eroll_content">
-			업체등록 content 내용 들어갑니다 ~~~~~~~~~
-			<!-- 검색 -->
-			<nav class="navbar navbar-light">
-				<div class="container-fluid">
-					<form class="d-flex">
-						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
+			<div>
+				<div class="k_company">
+					<strong>업체명을 입력해주세요.<span class="k_essential_info">*필수</span></strong>
+					<p>
+						<input type="text" placeholder="대표업체명을 입력해주세요.">
+					</p>
 				</div>
-			</nav>
-		</div>
-	</article>
-	<article>
-		<div id="k_re_menu_content">
+				<div class="k_company">
+					<strong>업종을 선택해주세요.<span class="k_essential_info">*필수</span></strong>
+					<p>
+						<select name="category">
+							<option value="category_select">업종을 선택해주세요</option>
+							<option value="category_salon">미용실</option>
+							<option value="category_cafe">카페</option>
+							<option value="category_hotel">호텔</option>
+						</select>
+					</p>
+				</div>
+
+				<div class="k_company">
+					상세설명을 입력해주세요
+					<p>
+						<textarea placeholder="우리업체를 고객들에게 자세히 설명해주세요"
+							class="k_company_info">                            
+                            </textarea>
+					</p>
+				</div>
+				<div class="k_company">업체 사진을 추가해 주세요</div>
+				<div class="k_company">
+					운영 구분
+					<p>
+						<label><span>모든 영업일 같아요</span></label> <label><span>평일/주말
+								달라요</span></label>
+					</p>
+				</div>
+				<div>
+					<strong>전화번호를 입력해주세요<span class="k_essential_info">*필수</span></strong>
+					<p>
+						<input type="text">
+					</p>
+				</div>
+				<div class="k_company">
+					<strong>주소를 입력해주세요<span class="k_essential_info">*필수</span></strong>
+					<p>
+						<input type="text">
+					</p>
+					<p>
+						<span>찾아오는 길 설명이 필요하신가요?</span>
+
+						<p>
+                                <textarea placeholder="예)"
+							class="k_company_info">                            
+                                </textarea>
+                            </p>
+                        </p>
+                        
+                        <button>취소하기</button>
+					<button>수정하기</button>
+                    </div>
+                </div>                
+            </div>
+        </article>
+        <article>
+							<div id="k_re_menu_content">
 			예약 메뉴등록 content 내용 들어갑니다 ~~~~~~~~~
 			<!-- 검색 -->
 			<nav class="navbar navbar-light">
 				<div class="container-fluid">
 					<form class="d-flex">
 						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
+												placeholder="Search" aria-label="Search">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</form>
 				</div>
@@ -510,7 +633,7 @@ article>div>p {
 				<div class="container-fluid">
 					<form class="d-flex">
 						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
+												placeholder="Search" aria-label="Search">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</form>
 				</div>
@@ -525,7 +648,7 @@ article>div>p {
 				<div class="container-fluid">
 					<form class="d-flex">
 						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
+												placeholder="Search" aria-label="Search">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</form>
 				</div>
@@ -574,9 +697,14 @@ article>div>p {
 			</table>
 		</div>
 	</article>
-	</content>
+	
+					</content>
 	<script>
 		$("#k_info_menu").click(function() {
+			//DB에서 정보 읽어오기 - 내정보			
+			getMyInfo();
+			
+			
 			$("#k_info_content").show();
 			$("#k_bu_eroll_content").hide();
 			$("#k_re_menu_content").hide();
