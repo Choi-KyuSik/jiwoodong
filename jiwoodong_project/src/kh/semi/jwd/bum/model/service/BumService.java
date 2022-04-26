@@ -10,7 +10,7 @@ import kh.semi.jwd.bum.model.vo.BumVo;
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
 public class BumService {
-	//犁快
+	//鞛毎
 	public ArrayList<Map<String, Object>> mainPageBookingList() {
 		Connection conn = getConnection();
 		ArrayList<Map<String,Object>> list = new BumDao().mainPageBookingList(conn);
@@ -18,7 +18,7 @@ public class BumService {
 
 		return list;
 	}
-	//快柳
+	//鞖办
 	 public ArrayList<Map<String, Object>> mainPageReviewList(){
 	      Connection conn = getConnection();
 	      ArrayList<Map<String, Object>> result = new BumDao().mainPageReviewList(conn);
@@ -26,21 +26,21 @@ public class BumService {
 	      System.out.println("BumService result:" + result);
 	      return result;
 	   }
-	//犁快
+	//鞛毎
 	public ArrayList<Map<String, Object>> mainPageStatisticsVisit(){
 		Connection conn = getConnection();
 		ArrayList<Map<String,Object>> list = new BumDao().mainPageStatisticsVisit(conn);
 		close(conn);
 		return list;
 	}
-	//犁快
+	//鞛毎
 	public ArrayList<Map<String, Object>> mainPageStatisticsReview(){
 		Connection conn = getConnection();
 		ArrayList<Map<String,Object>> list = new BumDao().mainPageStatisticsReview(conn);
 		close(conn);
 		return list;
 	}
-	//快柳
+	//鞖办
 	public ArrayList<BumVo> companyCheck(int buNo){
 		Connection conn = getConnection();
 		ArrayList<BumVo> list = null;
