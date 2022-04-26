@@ -50,12 +50,6 @@ public class BumVo {
 	public void setBuNo(int buNo) {
 		this.buNo = buNo;
 	}
-	public String getBuId() {
-		return buId;
-	}
-	public void setBuId(String buId) {
-		this.buId = buId;
-	}
 	public String getBuNumber() {
 		return buNumber;
 	}
@@ -110,11 +104,6 @@ public class BumVo {
 		this.buGender = buGender;
 		this.buEmail = buEmail;
 		this.flGno = flGno;
-	}
-	@Override
-	public String toString() {
-		return "BumVo [buNo=" + buNo + ", buNumber=" + buNumber + ", buPwd=" + buPwd + ", buName=" + buName
-				+ ", buBirth=" + buBirth + ", buGender=" + buGender + ", buEmail=" + buEmail + ", flGno=" + flGno + "]";
 	}
 	
 	//승희

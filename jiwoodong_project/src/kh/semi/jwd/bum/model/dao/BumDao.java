@@ -157,7 +157,7 @@ public class BumDao {
 	
 	//승희 - 회원가입..도전..!
 	
-	public int insertBuMember(BumVo vo) {
+	public int insertBuMember(Connection conn, BumVo vo) {
 		
 //		BU_NO          NOT NULL NUMBER         
 //		BU_ID          NOT NULL VARCHAR2(20)   
@@ -171,7 +171,6 @@ public class BumDao {
 //		BU_USEYN       NOT NULL VARCHAR2(1)    
 
 		int result = 0 ;
-		Connection conn = null;
 		String sql = "INSERT INTO b_member(BU_NO,BU_ID,BU_NUMBER,BU_PWD,BU_NAME,BU_BIRTH,BU_GENDER,BU_EMAIL,BU_TEL,BU_USEYN) values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			
@@ -201,7 +200,6 @@ public class BumDao {
 	public boolean checkDublicatedBuId(Connection conn,BumVo vo) {
 		
 		boolean flag = true;
-		ResultSet rs = null;
 		String sql = "";
 		sql = "SELECT COUNT * FROM B_MEMBER WHERE BU_ID=? ";
 		try {
@@ -232,7 +230,7 @@ public class BumDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bvo.getBuId());
 			pstmt.setString(2, bvo.getBuPwd());
-			rs=pstmt.executeQuery();
+			rs=pstmt.executeQuery(sql);
 			//id와 pwd 가 일치하는 것이 나올때만 rs에 값이 있다.
 			if(rs.next()) {
 				bvo = new BumVo();
