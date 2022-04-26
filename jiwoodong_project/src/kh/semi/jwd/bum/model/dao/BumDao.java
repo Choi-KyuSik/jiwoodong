@@ -272,7 +272,7 @@ public class BumDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			// list의 값을 담아서 DB로 보낸다.
-			pstmt.setInt(1, rs.getInt(3));
+			pstmt.setInt(1, buNo);
 			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {				

@@ -1,5 +1,7 @@
 package kh.semi.jwd.bum.model.vo;
 
+import java.sql.Date;
+
 public class BumVo {
 		
 //	BU_NO          NOT NULL NUMBER         
@@ -28,6 +30,9 @@ public class BumVo {
 	private String buEmail;
 	private String buTel;
 	private String buUseYn;
+	private Date buWriteDate;
+	private Date buUpdateDate;
+	private Date buOutDate;
 	private String flGno;
 	
 	
@@ -35,7 +40,8 @@ public class BumVo {
 	public String toString() {
 		return "BumVo [buNo=" + buNo + ", buId=" + buId + ", buNumber=" + buNumber + ", buPwd=" + buPwd + ", buName="
 				+ buName + ", buBirth=" + buBirth + ", buGender=" + buGender + ", buEmail=" + buEmail + ", buTel="
-				+ buTel + ", flGno=" + flGno + "]";
+				+ buTel + ", buUseYn=" + buUseYn + ", buWriteDate=" + buWriteDate + ", buUpdateDate=" + buUpdateDate
+				+ ", buOutDate=" + buOutDate + ", flGno=" + flGno + "]";
 	}
 	
 	public int getBuNo() {

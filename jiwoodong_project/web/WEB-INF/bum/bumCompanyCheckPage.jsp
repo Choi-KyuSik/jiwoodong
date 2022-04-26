@@ -187,66 +187,64 @@ article>div>p {
 				</ul>
 			</nav>
 			<!-- 사업자번호 읽기만 -->
+			<c:forEach items="${list}" var="list">
 			<div>
-				사업자번호
+				 사업자 번호
 				<p>
-					<input type="text" readonly>
+					<input type="text" value="${list.buNumber}" readonly>
 				</p>
 			</div>
 			<div>
 				이름
 				<p>
-					<input type="text" value="이름">
+					<input type="text" value="${list.buName}" readonly>
 				</p>
 			</div>
 			<div>
 				생년월일
 				<p>
-					<input type="text">
+					<input type="text" value= "${list.buBirth}" readonly>
 				</p>
 			</div>
 			<!-- 아이디 읽기만 -->
 			<div>
 				아이디
 				<p>
-					<input type="text" readonly>
+					<input type="text" value="${list.buId}" readonly>
 				</p>
 			</div>
 			<div>
 				변경할 비밀번호
 				<p>
-					<input type="password">
+					<input type="password" value="${list.buPwd}" >
 				</p>
 			</div>
 			<div>
 				변경할 비밀번호 확인
 				<p>
-					<input type="password">
+					<input type="password" value="${list.buPwd}">
 				</p>
 			</div>
 			<div>
 				본인확인 메일
 				<p>
-					<input type="text">
+					<input type="text" value="${list.buEmail}" readonly>
 				</p>
 			</div>
 			<div>
-				핸드폰번호
+				핸드폰번호('-'없이 입력하여주세요)
 				<p>
-					<select name="phone">
-						<option>010</option>
-						<option>011</option>
-						<option>017</option>
-						<option>019</option>
-					</select>&nbsp;-&nbsp; <input type="text">&nbsp;-&nbsp; <input
-						type="text">
-				</p>
+					<input type="text" id="k_tel" value="${list.buTel}" placeholder="000-0000-0000" maxlength="13">
+				</p>				
 			</div>
+			</c:forEach>
 			<div>
+			
 				<button>취소</button>
 				<button>수정하기</button>
 			</div>
 		</div>
+		
 	</article>
 	
 	<!-- <article>
@@ -316,8 +314,18 @@ article>div>p {
 	<script>								
 	$("#k_info_content").show();				
 	</script>
+		
+	<!--전화번호 하이픈 정규식 DOM  -->
+	<script>
+	 $("#k_tel").on("input", function () {
+         var target = document.getElementById("k_tel");
+         target.value = target.value.replace(/[^0-9]/g, '')
+.replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+
+     });
+	</script>
 	<script src="https://code.highcharts.com/modules/data.js"></script>
-	
+		
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
