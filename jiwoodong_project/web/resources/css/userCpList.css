@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+header {
+	margin-top: 10px;
+}
+
+#p_main_top {
+	width: 1200px;
+	margin: 0 auto;
+	border-bottom: 2px solid silver;
+}
+
+#p_top_logo {
+	float: left;
+	margin-left: 30px;
+}
+
+#p_top_menu {
+	float: left;
+	margin: 15px 0 0 10px;
+}
+
+#p_top_profile {
+	float: left;
+}
+
+.navbar-nav {
+	margin-right: 20px;
+}
+
+.dropdown-toggle, .dropdown {
+	font-weight: bold;
+}
+
+#dropdownUser1 {
+	padding-right: 10px;
+}
