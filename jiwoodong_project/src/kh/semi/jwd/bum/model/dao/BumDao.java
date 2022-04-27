@@ -157,6 +157,7 @@ public class BumDao {
 	
 	//승희 - 회원가입..도전..!
 	
+	
 	public int insertBuMember(Connection conn, BumVo vo) {
 		
 //		BU_NO          NOT NULL NUMBER         
@@ -171,11 +172,11 @@ public class BumDao {
 //		BU_USEYN       NOT NULL VARCHAR2(1)    
 
 		int result = 0 ;
-		String sql = "INSERT INTO b_member(BU_NO,BU_ID,BU_NUMBER,BU_PWD,BU_NAME,BU_BIRTH,BU_GENDER,BU_EMAIL,BU_TEL,BU_USEYN) values(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO b_member(BU_NO,BU_ID,BU_NUMBER,BU_PWD,BU_NAME,BU_BIRTH,BU_GENDER,BU_EMAIL,BU_TEL,BU_USEYN) values(B_MEMBER_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?)";
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, vo.getBuNo());
+			
 			pstmt.setString(1, vo.getBuId());
 			pstmt.setString(2, vo.getBuNumber());
 			pstmt.setString(3, vo.getBuPwd());
@@ -189,8 +190,8 @@ public class BumDao {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
+			close(rs);
 			close(pstmt);
-			close(conn);
 		}
 		return result;
 	}

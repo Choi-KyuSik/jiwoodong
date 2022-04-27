@@ -50,4 +50,12 @@ public class BumService {
 		return list;
 		
 	}
+	//승희
+	public int insertBuMember(BumVo vo) {
+		int result = 0;
+		Connection conn = getConnection();
+		result = new BumDao().insertBuMember(conn, vo);
+		close(conn);
+		return result;
+	}
 }
