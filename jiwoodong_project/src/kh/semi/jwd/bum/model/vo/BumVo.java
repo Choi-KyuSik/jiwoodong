@@ -125,6 +125,24 @@ public class BumVo {
 	public void setBuUseYn(String buUseYn) {
 		this.buUseYn = buUseYn;
 	}
+
+	public BumVo(int buNo, String buId, String buNumber, String buPwd, String buName, String buBirth, String buGender,
+			String buEmail, String buTel, String buUseYn) {
+		super();
+		this.buNo = buNo;
+		this.buId = buId;
+		this.buNumber = buNumber;
+		this.buPwd = buPwd;
+		this.buName = buName;
+		this.buBirth = buBirth;
+		this.buGender = buGender;
+		this.buEmail = buEmail;
+		this.buTel = buTel;
+		this.buUseYn = buUseYn;
+	}
+
+
+	
 	
 	
 }

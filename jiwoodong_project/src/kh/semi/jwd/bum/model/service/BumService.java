@@ -55,7 +55,11 @@ public class BumService {
 		int result = 0;
 		Connection conn = getConnection();
 		result = new BumDao().insertBuMember(conn, vo);
-		close(conn);
-		return result;
+		if(result > 0) {
+			commit(conn);
+		}else {
+			close(conn);
+		}
+			return result;			
 	}
 }
