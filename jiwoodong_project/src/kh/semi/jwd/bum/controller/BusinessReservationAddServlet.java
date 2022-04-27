@@ -22,13 +22,13 @@ import kh.semi.jwd.bum.model.service.BusinessReservationService;
  * Servlet implementation class BusinessReservationAddServelt
  */
 @WebServlet("/bursaddAjax")
-public class BusinessReservationAddServelt extends HttpServlet {
+public class BusinessReservationAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusinessReservationAddServelt() {
+    public BusinessReservationAddServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

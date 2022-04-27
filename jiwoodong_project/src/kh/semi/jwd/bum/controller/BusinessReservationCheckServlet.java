@@ -17,13 +17,13 @@ import kh.semi.jwd.bum.model.vo.BumReservationVo;
  * Servlet implementation class BumBookingList
  */
 @WebServlet("/burscheck")
-public class BusinessReservationCheckServelt extends HttpServlet {
+public class BusinessReservationCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusinessReservationCheckServelt() {
+    public BusinessReservationCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

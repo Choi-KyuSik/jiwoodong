@@ -19,13 +19,13 @@ import kh.semi.jwd.bum.model.vo.BumReservationVo;
  * Servlet implementation class BumBookingList
  */
 @WebServlet("/priceSelectAjax")
-public class BusinessReservationPriceServelt extends HttpServlet {
+public class BusinessReservationPriceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusinessReservationPriceServelt() {
+    public BusinessReservationPriceServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
