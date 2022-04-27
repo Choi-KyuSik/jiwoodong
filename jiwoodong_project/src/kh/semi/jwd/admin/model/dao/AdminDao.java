@@ -187,5 +187,132 @@ public class AdminDao {
 		
 		return list;
 	}
+	
+	// 승인 거절 시
+	public int companyAcceptReject(Connection conn, String rejectMsg, int buNo) {
+		
+		int result = 0;
+		
+		String sql = "UPDATE COMPANY SET CP_SIGNYN = 'R', CP_REJECT_MSG = ? WHERE BU_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rejectMsg);
+			pstmt.setInt(2, buNo);
+			result = pstmt.executeUpdate();
+			System.out.println("승인 거절 결과 : " + result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	// 승인 수락 시
+	public int companyAcceptApproval(Connection conn, int buNo) {
+		
+		int result = 0;
+		
+		String sql = "UPDATE COMPANY SET CP_SIGNYN = 'Y' WHERE BU_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, buNo);
+			result = pstmt.executeUpdate();
+			
+			System.out.println("승인 수락 결과 : " + result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	// 승인 거절 리스트
+	public ArrayList<Map<String, Object>> companyAcceptRejectList(Connection conn) {
+		String sql = "SELECT * \r\n"
+				+ "FROM (\r\n"
+				+ "    SELECT ROWNUM, A.* \r\n"
+				+ "    FROM (\r\n"
+				+ "        SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, CP_REJECT_MSG\r\n"
+				+ "        FROM COMPANY C\r\n"
+				+ "        JOIN B_MEMBER B USING(BU_NO)\r\n"
+				+ "        WHERE CP_SIGNYN = 'R'\r\n"
+				+ "        ORDER BY CP_WRITE_DATE DESC) A )\r\n"
+				+ "WHERE ROWNUM BETWEEN 1 AND 18";
+		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("buNo", rs.getString(1));
+					map.put("rownum", rs.getString(2));
+					map.put("cpCategory", rs.getString(3));
+					map.put("cpName", rs.getString(4));
+					map.put("buNumber", rs.getString(5));
+					map.put("cpWriteDate", rs.getString(6));
+					map.put("buTel", rs.getString(7));
+					map.put("cpRejectMsg", rs.getString(8));
+
+					list.add(map);
+
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	// 승인 수락 리스트
+	public ArrayList<Map<String, Object>> companyAcceptApprovalList(Connection conn) {
+		String sql = "SELECT * \r\n"
+				+ "FROM (\r\n"
+				+ "    SELECT ROWNUM, A.* \r\n"
+				+ "    FROM (\r\n"
+				+ "        SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL\r\n"
+				+ "        FROM COMPANY C\r\n"
+				+ "        JOIN B_MEMBER B USING(BU_NO)\r\n"
+				+ "        WHERE CP_SIGNYN = 'Y'\r\n"
+				+ "        ORDER BY CP_WRITE_DATE DESC) A )\r\n"
+				+ "WHERE ROWNUM BETWEEN 1 AND 18";
+		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("buNo", rs.getString(1));
+					map.put("rownum", rs.getString(2));
+					map.put("cpCategory", rs.getString(3));
+					map.put("cpName", rs.getString(4));
+					map.put("buNumber", rs.getString(5));
+					map.put("cpWriteDate", rs.getString(6));
+					map.put("buTel", rs.getString(7));
+
+					list.add(map);
+
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 
 }

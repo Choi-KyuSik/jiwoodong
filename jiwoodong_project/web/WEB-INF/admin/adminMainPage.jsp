@@ -170,9 +170,9 @@
 				</div>
 			</div>
         </div>
-        <!-- 업체승인 Content : 손은진 -->
+        <!-- 업체 신청 Content : 손은진 -->
         <div>
-            <div id="s_notice_content" class="tab_menu s_content">
+            <div id="s_accept_content" class="tab_menu s_content">
                 <p class="p_content_style">업체 신청 내역</p>
                 <!-- 검색 -->
                 <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
@@ -205,6 +205,109 @@
                                     <td class="s_td_short">${i.cpName}</td>
                                     <td>${i.buTel}</td>
                                     <td>${i.cpWriteDate}</td>
+                                </tr>
+                            	</c:forEach>
+                    </tbody>
+                </table>
+				<div id="pagingBox">
+					<ul class="pagination">
+						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				</div>
+			</div>
+        </div>
+        <!-- 업체승인 수락 Content : 손은진 -->
+        <div>
+            <div id="s_accept_result_content" class="tab_menu s_content">
+                <p class="p_content_style">업체 승인 수락 리스트</p>
+                <!-- 검색 -->
+                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
+                    <div class="container-fluid">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
+                    <thead>
+                    <!-- cpacApproval -->
+                        <tr>
+                        	<th scope="col" style="width: 50px;">NO</th>
+                        	<th scope="col" style="width: 100px;">사업자번호</th>
+                            <th scope="col">사업자 등록 번호</th>
+                            <th scope="col" style="width: 150px;">업종</th>
+                            <th scope="col">업체명</th>
+                            <th scope="col" style="width: 250px;">전화번호</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${acceptApprovalList }" var="i">
+                                <tr class="s_tr_modal">
+                                    <th scope="row" class="s_ntNo">${i.buNo}</th>
+                                    <td>${i.rownum}</td>
+                                    <td>${i.buNumber}</td>
+                                    <td>${i.cpCategory}</td>
+                                    <td class="s_td_short">${i.cpName}</td>
+                                    <td>${i.buTel}</td>
+                                </tr>
+                            	</c:forEach>
+                    </tbody>
+                </table>
+				<div id="pagingBox">
+					<ul class="pagination">
+						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				</div>
+			</div>
+        </div>
+        <!-- 업체승인 거절 Content : 손은진 -->
+        <div>
+            <div id="s_accept_result_reject_content" class="tab_menu s_content">
+                <p class="p_content_style">업체 승인 거절 리스트</p>
+                <!-- 검색 -->
+                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
+                    <div class="container-fluid">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
+                    <thead>
+                        <tr>
+                        	<th scope="col" style="width: 50px;">NO</th>
+                        	<th scope="col" style="width: 100px;">사업자번호</th>
+                            <th scope="col">사업자 등록 번호</th>
+                            <th scope="col" style="width: 150px;">업종</th>
+                            <th scope="col">업체명</th>
+                            <th scope="col" style="width: 150px;">전화번호</th>
+                            <th scope="col" style="width: 250px;">거절사유</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${acceptRejectList }" var="i">
+                                <tr class="s_tr_modal">
+                                    <th scope="row" class="s_ntNo">${i.buNo}</th>
+                                    <td>${i.rownum}</td>
+                                    <td>${i.buNumber}</td>
+                                    <td>${i.cpCategory}</td>
+                                    <td class="s_td_short">${i.cpName}</td>
+                                    <td>${i.buTel}</td>
+                                    <td class="s_td_short">${i.cpRejectMsg}</td>
                                 </tr>
                             	</c:forEach>
                     </tbody>
@@ -391,24 +494,32 @@
             tabMenu = 2;
             showTabMenu();
         });
-        $("#s_bu_info_menu").click(function () {
+        $("#s_bu_accept_result_approval_menu").click(function () {
             tabMenu = 3;
             showTabMenu();
         });
-        $("#s_bu_delete_menu").click(function () {
+        $("#s_bu_accept_result_reject_menu").click(function () {
             tabMenu = 4;
             showTabMenu();
         });
-        $("#s_us_info_menu").click(function () {
+        $("#s_bu_info_menu").click(function () {
             tabMenu = 5;
             showTabMenu();
         });
-        $("#s_us_delete_menu").click(function () {
+        $("#s_bu_delete_menu").click(function () {
             tabMenu = 6;
             showTabMenu();
         });
-        $("#s_review_menu").click(function () {
+        $("#s_us_info_menu").click(function () {
             tabMenu = 7;
+            showTabMenu();
+        });
+        $("#s_us_delete_menu").click(function () {
+            tabMenu = 8;
+            showTabMenu();
+        });
+        $("#s_review_menu").click(function () {
+            tabMenu = 9;
             showTabMenu();
         });
 
@@ -447,7 +558,7 @@
     		td.each(function(i) {
     			tdArr.push(td.eq(i).text());
     		});
-    		// td들이 배열에 담겨있는데 그 중 1번째가 필요
+    		// td들이 배열에 담겨있는데 그 중 2번째가 필요
     		console.log("배열에 담긴 값 : " + tdArr);
     		console.log("배열에 담긴 값 : " + tdArr[1]);
     		console.log(typeof(tdArr[1]));

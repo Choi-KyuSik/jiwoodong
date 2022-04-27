@@ -48,6 +48,7 @@
 		</div>
 	</header>
 	<div class="container">
+		<form action="" id="frm" method="post">
 		<div class="row"
 			style="width: 1200px; margin: 0 auto; padding-top: 30px;">
 			<table class="table">
@@ -96,6 +97,7 @@
 							<td class="table-light">(${i.cpPostcode }) ${i.cpAddress }
 								${i.cpDtaddress }</td>
 						</tr>
+						<input type="hidden" name="buNo" value="${i.buNo }"/>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -103,40 +105,45 @@
 		<div style="width: 1200px; margin: 0 auto;">
 			<input type="button" id="s_no_btn"
 				class="btn btn-danger pull-right s_ad_ac_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" value="거절"> 
-				<input type="button" id="s_ok_btn"
+				<input type="button" id="s_result_ok_btn"
 				class="btn btn-primary pull-right s_ad_ac_btn" value="승인"> 
 				<input type="button" id="back_btn"
 				class="btn btn-secondary pull-right s_ad_ac_btn" value="뒤로가기">
 		</div>
 		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">승인 거절</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body"><input type="text" id="s_result_input" name="rejectMsg" placeholder="거절 사유를 입력하세요." class="form-control"></div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">취소</button>
-						<button type="button" id="s_result_send_btn" class="btn btn-primary">보내기</button>
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">승인 거절</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<input type="text" id="s_result_input" name="rejectMsg"
+								placeholder="거절 사유를 입력하세요." required="required" class="form-control">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">취소</button>
+							<button type="button" id="s_result_send_btn"
+								class="btn btn-primary">보내기</button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 	<script>
 		$("#back_btn").click(function() {
 			history.back();
 		});
 
-		$("#s_update_btn").click(function() {
+		$("#s_result_ok_btn").click(function() {
 			if (confirm("정말 승인하시겠습니까?") == true) {
 				var frmEl = $("#frm");
-				frmEl.attr("action", "AdminNoticeUpdateDo");
+				frmEl.attr("action", "AdminBuAcceptResult");
 				frmEl.attr("method", "post");
 				frmEl.submit();
 			} else {
@@ -146,11 +153,12 @@
 		
 		$("#s_result_send_btn").click(function() {
 			console.log("거절사유 : " + $("#s_result_input").val());
-			$("#s_result_input").val("");
 			alert("정상 처리되었습니다.");
 			$("#exampleModal").click();
-			// location.href="AdminBuDetailInfo?buNo=" + $("#s_url_no").text();
-			// location.href="AdminBuDetailInfo";
+			var frmEl = $("#frm");
+			frmEl.attr("action", "AdminBuAcceptResult");
+			frmEl.attr("method", "post");
+			frmEl.submit();
 		});
 
 		/* $("#s_delete_btn").click(function() {

@@ -38,14 +38,14 @@
                                         사업자관리
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu">
-                                        <li><a class="dropdown-item" href="#" id="s_bu_accept_menu">업체 승인</a></li>
+                                        <li><a class="dropdown-item" href="#" id="s_bu_accept_menu">업체 신청 내역</a></li>
+                                        
+                                        <li><a class="dropdown-item" href="#" id="s_bu_accept_result_approval_menu">업체 승인 수락 리스트</a></li>
+                                        <li><a class="dropdown-item" href="#" id="s_bu_accept_result_reject_menu">업체 승인 거절 리스트</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li><a class="dropdown-item" href="#" id="s_bu_info_menu">사업자 정보 조회</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
                                         <li><a class="dropdown-item" href="#" id="s_bu_delete_menu">사업자 탈퇴 조회</a></li>
                                         
                                     </ul>

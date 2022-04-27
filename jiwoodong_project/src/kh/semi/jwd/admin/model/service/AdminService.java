@@ -44,7 +44,7 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
-	
+
 	// 업체등록요청 세부 1개 조회
 	public ArrayList<Map<String, Object>> companyAcceptDetailRead(int buNo) {
 		Connection conn = getConnection();
@@ -52,5 +52,52 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+
+	// 승인 거절 시
+	public int companyAcceptReject(String rejectMsg, int buNo) {
+		int result = 0;
+
+		Connection conn = getConnection();
+		result = dao.companyAcceptReject(conn, rejectMsg, buNo);
+		close(conn);
+
+		return result;
+	}
+
+	// 승인 시
+	public int companyAcceptApproval(int buNo) {
+
+		int result = 0;
+
+		Connection conn = getConnection();
+		result = dao.companyAcceptApproval(conn, buNo);
+		close(conn);
+
+		return result;
+
+	}
+	
+	// 승인 거절 리스트
+	public ArrayList<Map<String, Object>> companyAcceptRejectList() {
+		
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> result = dao.companyAcceptRejectList(conn);
+		close(conn);
+		return result;
+		
+	}
+	
+	
+	// 승인 수락 리스트
+	public ArrayList<Map<String, Object>> companyAcceptApprovalList() {
+		
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> result = dao.companyAcceptApprovalList(conn);
+		close(conn);
+		return result;
+		
+	}
+	
+	
 
 }
