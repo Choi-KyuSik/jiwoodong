@@ -39,16 +39,21 @@
                         <div class="invalid-feedback"> 이름을 입력해주세요.
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
+<!--                     <div class="col-md-6 mb-3">
                         <label for="birth">생년월일</label> 
                         <input type="text" class="form-control" id="birth" placeholder="YYYY-MM-DD" name="birth" required="required">
+                        <div class="invalid-feedback"> 생년월일를 입력해주세요. </div>
+                    </div> -->
+					<div class="col-md-6 mb-3">
+                        <label for="birth">생년월일</label> 
+                        <input type="date" class="form-control" id="birth" placeholder="YYYY/MM/DD" name="birth" required="required">
                         <div class="invalid-feedback"> 생년월일를 입력해주세요. </div>
                     </div>
                     <div class="col-md-8 mb-3"> 
                         <label for="gender">성별</label> 
                         <select class="custom-select d-block w-100" id="gender" name="gender" required="required">
-                            <option value="gender">여자</option>
-                            <option value="gender">남자</option>
+                            <option value="F">여자</option>
+                            <option value="M">남자</option>
 
                     </select>
                     <div class="invalid-feedback"> 성별을 선택해주세요. </div>
@@ -120,7 +125,43 @@
     
     <script type="text/javascript">
 
+    <!--생년월일 하이픈 정규식 DOM  -->
+    $("#birth").on("input",function() {
+                var target = document.getElementById("birth");
+                target.value = target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g,"$1-$2-$3").replace(/(-{1,2})$/g,"");
+    }); 
+    
+    <!--전화번호 하이픈 정규식 DOM  -->
+    $("#phone").on(
+            "input",
+            function() {
+                var target = document.getElementById("phone");
+                target.value = target.value.replace(/[^0-9]/g,'').replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(-{1,2})$/g,"");
+    }); 
+    <!--사업자 번호 하이픈 정규식 DOM  -->
+    $("#bu_num").on("input",function() {
+                var target = document.getElementById("bu_num");
+                target.value = target.value.replace(/[^0-9]/g,'').replace(/^(\d{0,3})(\d{0,2})(\d{0,5})$/g, "$1-$2-$3").replace(/(-{1,2})$/g,"");
+    }); 
+        
+    
 	$("#j_bu_enroll_btn").click(function(){
+	
+	var bu_num = $("#bu_num").val().trim();
+	var regExpPhone = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/; // 숫자3-숫자3,4-숫자4
+	if(!regExpPhone.test(bu_num)){
+		alert("사업자번호 입력란에는 000-00-00000 형식");
+		$("#bu_num").focus();
+		return false;
+	}
+	
+	var phone = $("#phone").val().trim();
+	var regExpPhone = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/; // 숫자3-숫자3,4-숫자4
+	if(!regExpPhone.test(phone)){
+		alert("전화번호 입력란에는 000-0000-0000 형식");
+		$("#phone").focus();
+		return false;
+	}
 	var password = $("#password").val().trim();
 	if(!password || password != $("#password_check").val().trim()){
 		alert("패스워드 입력란과 확인란이 같지 않습니다.");
@@ -135,13 +176,7 @@
 		$("#password").focus();
 		return false;
 	}
-	var phone = $("#phone").val().trim();
-	var regExpPhone = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/; // 숫자3-숫자3,4-숫자4
-	if(!regExpPhone.test(phone)){
-		alert("전화번호 입력란에는 000-0000-0000 형식");
-		$("#phone").focus();
-		return false;
-	}
+
 	
 	var frm = $("#frm");
 	frm.attr("action","bumenroll.lo"); 

@@ -173,7 +173,7 @@ public class BumDao {
 //		BU_USEYN       NOT NULL VARCHAR2(1)    
 
 		int result = 0 ;
-		String sql = "INSERT INTO b_member(BU_NO,BU_ID,BU_NUMBER,BU_PWD,BU_NAME,BU_BIRTH,BU_GENDER,BU_EMAIL,BU_TEL,BU_USEYN) values(B_MEMBER_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO b_member(BU_NO,BU_ID,BU_NUMBER,BU_PWD,BU_NAME,BU_BIRTH,BU_GENDER,BU_EMAIL,BU_TEL) values(B_MEMBER_SEQ.NEXTVAL,?,?,?,?,REPLACE(?,'-','/'),?,?,?)";
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
@@ -186,8 +186,10 @@ public class BumDao {
 			pstmt.setString(6, vo.getBuGender());
 			pstmt.setString(7, vo.getBuEmail());
 			pstmt.setString(8, vo.getBuTel());
-			pstmt.setString(9, vo.getBuUseYn());
+
 			result = pstmt.executeUpdate();
+			
+			System.out.println("SQL문장 실행 성공.");
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
