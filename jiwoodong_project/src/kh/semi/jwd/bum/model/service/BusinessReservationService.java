@@ -56,4 +56,32 @@ public class BusinessReservationService {
 		return result;
 	}
 
+	public int reservationUpdate(Map<String, Object> map, int cpNo) {
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationUpdate(conn, map, cpNo);
+		close(conn);
+		return result;
+	}
+
+	public int reservationUpdateMenu(Map<String, Object> map, int cpNo) {
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationUpdateMenu(conn, map, cpNo);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<BumReservationVo> AllStatus(String date, int cpNo) {
+		Connection conn = getConnection();
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().AllStatus(conn, date, cpNo);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<BumReservationVo> selectStatus(String date, int cpNo, String status) {
+		Connection conn = getConnection();
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().selectStatus(conn, date, cpNo, status);
+		close(conn);
+		return result;
+	}
+
 }

@@ -53,6 +53,8 @@ public class BusinessReservationPriceServlet extends HttpServlet {
 		price = new BusinessReservationService().priceSelect(map);
 		System.out.println(price.get("menuPrice"));
 		out.println(price.get("menuPrice"));
+		out.flush();
+		out.close();
 		
 
 		

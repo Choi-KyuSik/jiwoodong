@@ -45,6 +45,8 @@ public class BusinessReservationCancleServlet extends HttpServlet {
 			System.out.println("취소실패");
 		} else {
 			out.println("취소 성공");
+			out.flush();
+			out.close();
 		}
 	}
 
