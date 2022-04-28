@@ -1,0 +1,159 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  a :hover() {
+    color: blue;
+  }
+
+  ;
+
+  li {
+    list-style-type: none;
+  }
+  header {
+    margin-top: 10px;
+  }
+
+  #p_main_top {
+    width: 1200px;
+    margin: 0 auto;
+    border-bottom: 2px solid silver;
+  }
+
+  #p_top_logo {
+    float: left;
+    margin-left: 30px;
+  }
+
+  #p_top_menu {
+    float: left;
+    margin: 15px 0 0 10px;
+  }
+
+  #p_top_profile {
+    float: left;
+  }
+
+  .navbar-nav {
+	margin-left: 30px;
+	padding-bottom: 20px;
+}
+
+  .dropdown-toggle,
+  .dropdown {
+    font-weight: bold;
+  }
+
+  #dropdownUser1 {
+    padding-right: 10px;
+  }
+
+ .c_info_title{
+     font-size: x-large;
+     font-weight: 600;
+     color: #0D6EFD;
+     margin: 0;
+ }
+
+.c_main_box {
+	width: 1200px;
+	height: 1000px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+.c_outline {
+	background-color: rgba(241, 241, 241);
+	width: 1200px;
+	margin: 10px 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	border-radius: 15px;
+}
+
+#c_inner_info {
+	text-align: center;
+	width: 550px;
+	height: 500px;
+	background-color: white;
+	border-radius: 30px;
+	margin: 40px 10px;
+	padding: 20px 30px;
+}
+
+#c_inner_info_l {
+	text-align: center;
+	width: 1120px;
+	height: 500px;
+	background-color: white;
+	border-radius: 30px;
+	margin: 10px;
+	padding: 20px 30px;
+	margin: 10px 10px 40px;
+}
+
+/* */
+.c_company-slider {
+    width: 1050px;
+    margin: 0px auto;
+    position: relative;
+}
+
+.c_company-slider .c_next {
+    position: absolute;
+    top: 40%;
+    right: 30px;
+    font-size: 2em;
+    color: gray;
+    cursor: pointer;
+}
+
+.c_company-slider .c_prev {
+    position: absolute;
+    top: 40%;
+    left: 30px;
+    font-size: 2em;
+    color: gray;
+    cursor: pointer;
+}
+
+.c_company-slider .c_company-wrapper {
+
+    width: 84%;
+    height: 400px;
+    margin: 0px auto;
+    overflow: hidden;
+    /* padding: 10px 0px 10px 0px; */
+    display: flex;
+    align-items: center;
+}
+
+.c_company-slider .c_company-wrapper .c_company {
+    width: 300px;
+    margin: 0px 10px;
+    display: inline-block;
+    background: white;
+    border-radius: 5px;
+}
+
+.c_company-slider .c_company-wrapper .c_company .c_company-info {
+    font-size: 13px;
+    height: 30%;
+    padding-left: 10px;
+}
+
+.c_company-slider .c_company-wrapper .c_company .c_slider-image {
+    width: 100%;
+    height: 270px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
