@@ -51,17 +51,6 @@ public class BumVo {
 		this.buNo = buNo;
 	}
 
-
-	public String getBuId() {
-		return buId;
-	}
-
-
-	public void setBuId(String buId) {
-		this.buId = buId;
-	}
-
-
 	public String getBuNumber() {
 		return buNumber;
 	}
@@ -98,12 +87,8 @@ public class BumVo {
 	public void setBuEmail(String buEmail) {
 		this.buEmail = buEmail;
 	}
-	public String getFlGno() {
-		return flGno;
-	}
-	public void setFlGno(String flGno) {
-		this.flGno = flGno;
-	}
+	
+	
 	public BumVo() {}
 	public BumVo(int buNo, String buNumber, String buPwd, String buName, String buBirth, String buGender,
 			String buEmail, String flGno) {
@@ -191,10 +176,4 @@ public class BumVo {
 		this.buTel = buTel;
 		this.buUseYn = buUseYn;
 	}
-
-
-	
-	
-	
-
 }
