@@ -46,7 +46,7 @@
                     </div> -->
 					<div class="col-md-6 mb-3">
                         <label for="birth">생년월일</label> 
-                        <input type="date" class="form-control" id="birth" placeholder="YYYY/MM/DD" name="birth" required="required">
+                        <input type="date" class="form-control" id="birth" name="birth" placeholder="YYYY/MM/DD" required="required">
                         <div class="invalid-feedback"> 생년월일를 입력해주세요. </div>
                     </div>
                     <div class="col-md-8 mb-3"> 
@@ -93,7 +93,8 @@
                     <label for="password_check">비밀번호 재확인
                         <span class="text-muted"></span>
                     </label>
-                    <input type="password" class="form-control" id="password_check" name="password_check" required="required"> </div>
+                    <input type="password" class="form-control" id="password_check" name="password_check" required="required">
+                </div>
 
                 <hr class="mb-4">
                 <div id="clause">
@@ -170,7 +171,8 @@
 		$("#password").focus();
 		return false;
 	}
-	var regExpPassword = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,16}$/; // 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자
+	//var regExpPassword = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,16}$/; // 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자
+	var regExpPassword = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,16}$/; // 영문자, 숫자가 적어도 1개이상, 8~16글자
 	if(!regExpPassword.test(password)){
 		alert("패스워드 입력란에는 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자");
 		$("#password").focus();
