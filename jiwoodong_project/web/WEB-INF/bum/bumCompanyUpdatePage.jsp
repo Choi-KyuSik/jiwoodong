@@ -17,7 +17,7 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>사업자 메인페이지</title>
 <!--header-->
 <style>
@@ -171,11 +171,13 @@ article>div>p {
 			</div>
 			<div style="clear: both;"></div>
 		</div>
-	</header>	
-	<content> 
+	</header>
+<content> 
 	<!-- 내정보 관리 -->
 	<article>
+
 		<div id="k_info_content">
+
 			<nav id="k_bu_eroll_top">
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a class="nav-link dropdown"
@@ -328,7 +330,7 @@ article>div>p {
 				});
 	</script> 
 
-	<script src="https://code.highcharts.com/modules/data.js"></script> <script>
+	<script src="https://code.highcharts.com/modules/data.js"></script> <script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>

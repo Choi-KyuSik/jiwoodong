@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import kh.semi.jwd.bum.model.vo.BumVo;
+import kh.semi.jwd.bum.model.vo.CompanyVo;
 
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
@@ -27,8 +28,8 @@ public class BumDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				Map<String , Object> map  = new HashMap<String,Object>();
+			while (rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("bkName", rs.getString("bk_name"));
 				map.put("bkPhone", rs.getString("bk_phone"));
 				map.put("bkNo", rs.getInt("bk_no"));
@@ -76,7 +77,7 @@ public class BumDao {
 
 	// 재우
 	public ArrayList<Map<String, Object>> mainPageStatisticsVisit(Connection conn) {
-		
+
 		String sql = "select \r\n"
 				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -4),'mm') and cp_no=14) 취소내역, \r\n"
 				+ "(select count(*) from booking where bk_status = 'R' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -4),'mm') and cp_no=14) 예약내역, \r\n"
@@ -259,23 +260,23 @@ public class BumDao {
 	}
 	
 // TODO 우진: 나중에 로그인 구현되면 Session에 담아야함 
-	public ArrayList<BumVo> companyCheck(Connection conn, int buNo) {
-		//public return 값이 BumVo이므로 result의 변수값은 null
-		ArrayList<BumVo> list = new ArrayList<BumVo>();
-		//sql문 작성
-		//sql문 실행, 변수에 담기
+	public BumVo companyCheck(Connection conn, int buNo) {
+		// public return 값이 BumVo이므로 result의 변수값은 null
+		BumVo bvo = null;
+		// sql문 작성
+		// sql문 실행, 변수에 담기
 		String sql = "select bu_number, bu_name, bu_birth, bu_id, bu_pwd, bu_pwd, bu_email, bu_tel "
-						+ "from b_member where bu_no = ?";
-		//try-catch문 
-		// where절에 ?가 있으므로 stmt가 아닌 pstmt 사용		
+				+ "from b_member where bu_no = ?";
+		// try-catch문
+		// where절에 ?가 있으므로 stmt가 아닌 pstmt 사용
 		try {
 			pstmt = conn.prepareStatement(sql);
 			// list의 값을 담아서 DB로 보낸다.
 			pstmt.setInt(1, buNo);
-			
+
 			rs = pstmt.executeQuery();
-			while (rs.next()) {				
-				BumVo bvo = new BumVo();				
+			if (rs.next()) {
+				bvo = new BumVo();
 //				BU_NO          NOT NULL NUMBER         
 //				BU_ID          NOT NULL VARCHAR2(20)   
 //				BU_NUMBER      NOT NULL VARCHAR2(20)   
@@ -285,7 +286,7 @@ public class BumDao {
 //				BU_EMAIL       NOT NULL VARCHAR2(100)  
 //				BU_TEL         NOT NULL VARCHAR2(20)   	  
 //				FL_GNO                  VARCHAR2(4000)
-				
+
 //				bvo.setBuNo(rs.getInt("bu_No"));
 				bvo.setBuNumber(rs.getString("bu_Number"));
 				bvo.setBuName(rs.getString("bu_Name"));
@@ -295,18 +296,96 @@ public class BumDao {
 				bvo.setBuPwd(rs.getString("bu_Pwd"));
 				bvo.setBuEmail(rs.getString("bu_Email"));
 				bvo.setBuTel(rs.getString("bu_Tel"));
-				
-				list.add(bvo);
+
 				System.out.println("companyCheckDao:" + bvo);
-			} 			
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		//finally 작성, pstmt close하기
+			// finally 작성, pstmt close하기
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println("companyCheck:" + list);
-		return list;
+		System.out.println("companyCheck:" + bvo);
+		return bvo;
+	}
+
+	//우진 - 내정보관리 수정
+	public int companyUpdate(Connection conn, int buNo, BumVo vo) {
+		System.out.println("companyUpdate Dao:"+vo);
+		int result = 0;
+		String sql = "update b_member " + "set bu_pwd = ?, bu_email = ?, bu_tel = ? " + "where bu_no = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getBuPwd());
+			pstmt.setString(2, vo.getBuEmail());
+			pstmt.setString(3, vo.getBuTel());
+			pstmt.setInt(4, buNo);
+			result = pstmt.executeUpdate();
+			System.out.println("BoardDao companyUpdate:" + result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
+		System.out.println("Dao companyUpdate:" + result);
+		return result;
+	}
+	
+	// 우진 - 업체등록
+	public int companyWrite (Connection conn, CompanyVo cvo) {
+	
+	int result = 0;
+	
+//	CP_NO          NOT NULL NUMBER         
+//	BU_NO          NOT NULL NUMBER         
+//	CP_CATEGORY    NOT NULL VARCHAR2(20)   
+//	CP_NAME        NOT NULL VARCHAR2(20)   
+//	CP_EXPLAIN              VARCHAR2(4000) 
+//	CP_CLASSIFY    NOT NULL VARCHAR2(1)    
+//	CP_SIGNYN      NOT NULL VARCHAR2(1)    
+//	CP_OPEN_DATE            VARCHAR2(40)   
+//	CP_CLOSE_DATE           VARCHAR2(40)   
+//	CP_OPEN_TIME            VARCHAR2(40)   
+//	CP_CLOSE_TIME           VARCHAR2(40)   
+//	CP_TERM                 VARCHAR2(100)  
+//	CP_POSTCODE    NOT NULL VARCHAR2(20)   
+//	CP_ADDRESS     NOT NULL VARCHAR2(200)  
+//	CP_DTADDRESS   NOT NULL VARCHAR2(1000) 
+//	CP_WRITE_DATE           TIMESTAMP(6)   
+//	CP_UPDATE_DATE          TIMESTAMP(6)   
+//	FL_GNO                  VARCHAR2(4000) 
+//	CP_REJECT_MSG           VARCHAR2(200) 
+	
+		
+	String sql = "INSERT INTO company(CP_NO, BU_NO, CP_NAME, CP_CATEGORY, CP_CLASSIFY , CP_OPEN_DATE , CP_CLOSE_DATE, CP_ADDRESS, CP_POSTCODE , CP_DTADDRESS)"
+			+"VALUES(COMPANY_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?)";
+	try {
+
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, cvo.getBuNo());		
+		pstmt.setString(2, cvo.getCpName());
+		pstmt.setString(3, cvo.getCpCategory());
+		System.out.println(cvo.getCpCategory());
+		pstmt.setString(4, cvo.getCpClassify());
+		pstmt.setString(5, cvo.getCpOpenDate());
+		pstmt.setString(6, cvo.getCpCloseDate());
+		pstmt.setString(7, cvo.getCpAddress());
+		pstmt.setString(8, cvo.getCpPostcode());
+		pstmt.setString(9, cvo.getCpDtaddress());
+		
+		result = pstmt.executeUpdate();
+		System.out.println("companyWrite Dao result:" +result);
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+		close(conn);
+	}
+	System.out.println("companyWrite Dao return result:" +result);
+	return result;	
+	
+	}
+	
 }

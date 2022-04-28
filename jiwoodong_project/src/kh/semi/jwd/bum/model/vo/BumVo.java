@@ -3,7 +3,7 @@ package kh.semi.jwd.bum.model.vo;
 import java.sql.Date;
 
 public class BumVo {
-		
+// 	B_MEMBER table
 //	BU_NO          NOT NULL NUMBER         
 //	BU_ID          NOT NULL VARCHAR2(20)   
 //	BU_NUMBER      NOT NULL VARCHAR2(20)   
@@ -50,6 +50,18 @@ public class BumVo {
 	public void setBuNo(int buNo) {
 		this.buNo = buNo;
 	}
+
+
+	public String getBuId() {
+		return buId;
+	}
+
+
+	public void setBuId(String buId) {
+		this.buId = buId;
+	}
+
+
 	public String getBuNumber() {
 		return buNumber;
 	}
@@ -125,6 +137,45 @@ public class BumVo {
 	public void setBuUseYn(String buUseYn) {
 		this.buUseYn = buUseYn;
 	}
+	
+		public Date getBuWriteDate() {
+		return buWriteDate;
+	}
+
+
+	public void setBuWriteDate(Date buWriteDate) {
+		this.buWriteDate = buWriteDate;
+	}
+
+
+	public Date getBuUpdateDate() {
+		return buUpdateDate;
+	}
+
+
+	public void setBuUpdateDate(Date buUpdateDate) {
+		this.buUpdateDate = buUpdateDate;
+	}
+
+
+	public Date getBuOutDate() {
+		return buOutDate;
+	}
+
+
+	public void setBuOutDate(Date buOutDate) {
+		this.buOutDate = buOutDate;
+	}
+
+
+	public String getFlGno() {
+		return flGno;
+	}
+
+
+	public void setFlGno(String flGno) {
+		this.flGno = flGno;
+	}
 
 	public BumVo(int buNo, String buId, String buNumber, String buPwd, String buName, String buBirth, String buGender,
 			String buEmail, String buTel, String buUseYn) {
@@ -145,4 +196,5 @@ public class BumVo {
 	
 	
 	
+
 }

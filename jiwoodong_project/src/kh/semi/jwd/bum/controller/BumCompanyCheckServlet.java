@@ -14,7 +14,7 @@ import kh.semi.jwd.bum.model.service.BumService;
 import kh.semi.jwd.bum.model.vo.BumVo;
 
 /**
- * Servlet implementation class BumCompanyCheckServelt
+ * Servlet implementation class BumCompanyCheckServlet
  */
 @WebServlet("/bucpcheck")
 public class BumCompanyCheckServlet extends HttpServlet {
@@ -33,12 +33,12 @@ public class BumCompanyCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//TODO Session 값을 넣을 수 있으면 나중에 변경 할 것.
-		int buNo = 3;
+		int buNo = 5;
 		
-		ArrayList<BumVo> list = new BumService().companyCheck(buNo);
+		BumVo bvo = new BumService().companyCheck(buNo);
 	
-		request.setAttribute("nolist", list);
-		System.out.println("cotroller에 접속완료:" +list);
+		request.setAttribute("bvo", bvo);
+		System.out.println("cotroller에 접속완료:" +bvo);
 		request.getRequestDispatcher("WEB-INF/bum/bumCompanyCheckPage.jsp").forward(request, response);
 	}
 

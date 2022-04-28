@@ -6,6 +6,7 @@ import java.util.Map;
 
 import kh.semi.jwd.bum.model.dao.BumDao;
 import kh.semi.jwd.bum.model.vo.BumVo;
+import kh.semi.jwd.bum.model.vo.CompanyVo;
 
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
@@ -41,13 +42,13 @@ public class BumService {
 		return list;
 	}
 	//우진
-	public ArrayList<BumVo> companyCheck(int buNo){
+	public BumVo companyCheck(int buNo){
 		Connection conn = getConnection();
-		ArrayList<BumVo> list = null;
-		list = new BumDao().companyCheck(conn, buNo);
+		BumVo vo = null;
+		vo = new BumDao().companyCheck(conn, buNo);
 		close(conn);
-		System.out.println("companyCheck result" + list);
-		return list;
+		System.out.println("companyCheck result" + vo);
+		return vo;
 		
 	}
 	//승희
@@ -61,5 +62,24 @@ public class BumService {
 			close(conn);
 		}
 			return result;			
+	}
+		//우진
+	public int companyUpdate(int buNo, BumVo vo){
+		Connection conn = getConnection();
+		int result = 0;
+		result = new BumDao().companyUpdate(conn, buNo, vo);
+		close(conn);
+		System.out.println("companyCheckService result: " + result);
+		return result;
+		
+	}
+	//우진
+	public int companyWrite(CompanyVo cvo){
+		Connection conn = getConnection();
+		int result = new BumDao().companyWrite(conn, cvo);
+		close(conn);
+		System.out.println("companyWriteService result: " + result);
+		return result;
+		
 	}
 }

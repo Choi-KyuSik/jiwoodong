@@ -33,10 +33,10 @@ public class BumMainPage extends HttpServlet {
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	   ArrayList<Map<String,Object>> list = new BumService().mainPageBookingList();
-	   ArrayList<Map<String, Object>> result = new BumService().mainPageReviewList();
-	   ArrayList<Map<String,Object>> statiscicsVisit = new BumService().mainPageStatisticsVisit();
-	   ArrayList<Map<String,Object>> statiscicsReview = new BumService().mainPageStatisticsReview();
+	  ArrayList<Map<String,Object>> list = new BumService().mainPageBookingList();
+	  ArrayList<Map<String, Object>> result = new BumService().mainPageReviewList();
+	  ArrayList<Map<String,Object>> statiscicsVisit = new BumService().mainPageStatisticsVisit();
+	  ArrayList<Map<String,Object>> statiscicsReview = new BumService().mainPageStatisticsReview();
 	   
 	  request.setAttribute("list", list);
 	  request.setAttribute("Rlist", result);
