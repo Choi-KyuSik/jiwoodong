@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import kh.semi.jwd.admin.model.vo.AdminVo;
+import kh.semi.jwd.bum.model.vo.BumVo;
 
 public class AdminDao {
 	private static PreparedStatement pstmt = null;
@@ -314,5 +315,171 @@ public class AdminDao {
 		}
 		return list;
 	}
+	
+	// 사업자 정보 리스트
+	public ArrayList<BumVo> buMemberInfoList(Connection conn) {
+		
+		ArrayList<BumVo> voList = null;
+		
+		String sql = "SELECT * FROM(\r\n"
+				+ "SELECT ROWNUM, A.* FROM(\r\n"
+				+ "SELECT BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_WRITE_DATE,'YYYY/MM/DD') \r\n"
+				+ "FROM B_MEMBER WHERE BU_USEYN = 'Y' \r\n"
+				+ "ORDER BY BU_NO DESC) A) B\r\n"
+				+ "WHERE ROWNUM BETWEEN 1 AND 18";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			voList = new ArrayList<BumVo>();
+			
+			while(rs.next()) {
+				BumVo vo = new BumVo();
+				vo.setRownum(rs.getInt(1));
+				vo.setBuNo(rs.getInt(2));
+				vo.setBuId(rs.getString(3));
+				vo.setBuName(rs.getString(4));
+				vo.setBuBirth(rs.getString(5));
+				vo.setBuTel(rs.getString(6));
+				vo.setBuEmail(rs.getString(7));
+				vo.setToCharbuWriteDate(rs.getString(8));
+				voList.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return voList;
+		
+	}
+	
+	// 사업자 정보 상세 리스트
+	public BumVo buMemberDetailInfo(Connection conn, int buNo) {
+		
+		BumVo vo = null;
+		
+		String sql = "SELECT BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_WRITE_DATE,'YYYY/MM/DD') \r\n"
+				+ "	FROM B_MEMBER \r\n"
+				+ "	WHERE BU_NO = " + buNo;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new BumVo();
+				vo.setBuNo(rs.getInt("BU_NO")); // 사업자번호
+				vo.setBuId(rs.getString("BU_ID")); // 아이디
+				vo.setBuName(rs.getString("BU_NAME")); // 이름
+				vo.setBuBirth(rs.getString("BU_BIRTH")); // 생년월일
+				vo.setBuTel(rs.getString("BU_TEL")); // 전화번호
+				vo.setBuEmail(rs.getString("BU_EMAIL")); // 이메일
+				vo.setToCharbuWriteDate(rs.getString(7)); // 가입일
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return vo;
+	}
+	
+	// 사업자 정보 수정
+	public int updateBuInfo(Connection conn, BumVo bvo) {
+		
+		int result = 0;
+		
+		String sql = "UPDATE B_MEMBER SET BU_NAME = ?, BU_BIRTH = ?, BU_TEL = ?, BU_EMAIL = ?, BU_UPDATE_DATE = SYSTIMESTAMP\r\n"
+				+ "WHERE BU_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bvo.getBuName());
+			pstmt.setString(2, bvo.getBuBirth());
+			pstmt.setString(3, bvo.getBuTel());
+			pstmt.setString(4, bvo.getBuEmail());
+			pstmt.setInt(5, bvo.getBuNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 사업자 정보 회원탈퇴
+	public int deleteBuInfo(Connection conn, BumVo bvo) {
+		
+		int result = 0;
+		
+		String sql = "UPDATE B_MEMBER SET BU_USEYN = 'N', BU_OUT_DATE = SYSTIMESTAMP WHERE BU_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bvo.getBuNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	// 사업자 탈퇴 리스트
+	public ArrayList<BumVo> buMemberDeleteList(Connection conn) {
+		
+		ArrayList<BumVo> voList = null;
+		
+		String sql = "SELECT * FROM(\r\n"
+				+ "SELECT ROWNUM, A.* FROM(\r\n"
+				+ "SELECT BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_OUT_DATE,'YYYY/MM/DD') \r\n"
+				+ "FROM B_MEMBER WHERE BU_USEYN = 'N'\r\n"
+				+ "ORDER BY BU_NO DESC) A) B\r\n"
+				+ "WHERE ROWNUM BETWEEN 1 AND 18";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			voList = new ArrayList<BumVo>();
+			
+			while(rs.next()) {
+				BumVo vo = new BumVo();
+				vo.setRownum(rs.getInt(1));
+				vo.setBuNo(rs.getInt(2));
+				vo.setBuId(rs.getString(3));
+				vo.setBuName(rs.getString(4));
+				vo.setBuBirth(rs.getString(5));
+				vo.setBuTel(rs.getString(6));
+				vo.setBuEmail(rs.getString(7));
+				vo.setToCharbuOutDate(rs.getString(8));
+				voList.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return voList;
+		
+	}
+	
+	
 
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.jwd.admin.model.service.AdminNoticeService;
 import kh.semi.jwd.admin.model.service.AdminService;
 import kh.semi.jwd.admin.model.vo.AdminNoticeVo;
+import kh.semi.jwd.bum.model.vo.BumVo;
 
 /**
  * Servlet implementation class AdminMyPage
@@ -45,6 +46,8 @@ public class AdminMainPageController extends HttpServlet {
 		ArrayList<Map<String, Object>> cpacDetailList = new AdminService().companyAcceptList();
 		ArrayList<Map<String, Object>> acceptApprovalList = new AdminService().companyAcceptApprovalList();
 		ArrayList<Map<String, Object>> acceptRejectList = new AdminService().companyAcceptRejectList();
+		ArrayList<BumVo> buMemberInfoList = new AdminService().buMemberInfoList();
+		ArrayList<BumVo> buMemberDeleteList = new AdminService().buMemberDeleteList();
 		
 		
 		request.setAttribute("tabMenu", tabMenu);
@@ -54,6 +57,8 @@ public class AdminMainPageController extends HttpServlet {
 		request.setAttribute("adnoDetailList", adnoDetailList);
 		request.setAttribute("acceptApprovalList", acceptApprovalList);
 		request.setAttribute("acceptRejectList", acceptRejectList);
+		request.setAttribute("buMemberInfoList", buMemberInfoList);
+		request.setAttribute("buMemberDeleteList", buMemberDeleteList);
 //		System.out.println("controller다. 담겼니?" + adnolist);
 		request.getRequestDispatcher("WEB-INF/admin/adminMainPage.jsp").forward(request, response);
 	}

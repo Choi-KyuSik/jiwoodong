@@ -6,6 +6,7 @@ import java.util.Map;
 
 import kh.semi.jwd.admin.model.dao.AdminDao;
 import kh.semi.jwd.admin.model.vo.AdminVo;
+import kh.semi.jwd.bum.model.vo.BumVo;
 
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
@@ -98,6 +99,53 @@ public class AdminService {
 		
 	}
 	
+	// 사업자 정보 조회
+	public ArrayList<BumVo> buMemberInfoList() {
+		
+		Connection conn = getConnection();
+		ArrayList<BumVo> result = dao.buMemberInfoList(conn);
+		close(conn);
+		return result;
+		
+	}
+	
+	// 사업자 정보 상세 조회
+	public BumVo buMemberDetailInfo(int buNo) {
+		
+		Connection conn = getConnection();
+		BumVo result = dao.buMemberDetailInfo(conn, buNo);
+		close(conn);
+		return result; 
+	}
+	
+	// 사업자 정보 수정
+	public int updateBuInfo(BumVo bvo) {
+		
+		Connection conn = getConnection();
+		int result = dao.updateBuInfo(conn, bvo);
+		close(conn);
+		return result;
+	}
+	
+	// 사업자 회원 탈퇴
+	public int deleteBuInfo(BumVo bvo) {
+		
+		Connection conn = getConnection();
+		int result = dao.deleteBuInfo(conn, bvo);
+		close(conn);
+		return result;
+		
+	}
+	
+	// 사업자 탈퇴 리스트
+	public ArrayList<BumVo> buMemberDeleteList() {
+	
+		Connection conn = getConnection();
+		ArrayList<BumVo> result = dao.buMemberDeleteList(conn);
+		close(conn);
+		return result;
+		
+	}
 	
 
 }

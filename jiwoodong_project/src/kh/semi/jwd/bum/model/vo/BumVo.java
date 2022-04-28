@@ -35,6 +35,13 @@ public class BumVo {
 	private Date buOutDate;
 	private String flGno;
 	
+	// TO_CHAR이용해서 담는 변수 : 손은진
+	private String toCharbuWriteDate;
+	private String toCharbuOutDate;
+	
+	// rownum용 변수 : 손은진
+	private int rownum;
+	
 	
 	@Override
 	public String toString() {
@@ -44,6 +51,37 @@ public class BumVo {
 				+ ", buOutDate=" + buOutDate + ", flGno=" + flGno + "]";
 	}
 	
+	
+	// toCharbuWriteDate getter, setter : 손은진
+	public String getToCharbuWriteDate() {
+		return toCharbuWriteDate;
+	}
+
+	public void setToCharbuWriteDate(String toCharbuWriteDate) {
+		this.toCharbuWriteDate = toCharbuWriteDate;
+	}
+	
+	// toCharbuOutDate getter, setter : 손은진
+	public String getToCharbuOutDate() {
+		return toCharbuOutDate;
+	}
+
+	public void setToCharbuOutDate(String toCharbuOutDate) {
+		this.toCharbuOutDate = toCharbuOutDate;
+	}
+
+
+	// rownum getter, setter : 손은진
+	public int getRownum() {
+		return rownum;
+	}
+
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
+
+
 	public int getBuNo() {
 		return buNo;
 	}

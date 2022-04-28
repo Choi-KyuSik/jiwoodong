@@ -111,15 +111,23 @@
                 <p class="p_content_style">공지사항 조회</p>
                 <button type="button" id="s_notice_insert_btn" class="btn btn-primary" data-bs-dismiss="modal">글 등록</button>
                 <!-- 검색 -->
-                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
-                    <div class="container-fluid">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
-                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
+				<nav class="navbar navbar-light"
+					style="float: right; margin-bottom: 20px;">
+					<div class="container-fluid">
+						<form action="" method="get" id="frm" class="d-flex">
+							<select style="width: 100px; float: right; margin-right: 10px;"
+								class="form-select" aria-label="Default select example">
+								<option selected>전체</option>
+								<option value="1">제목</option>
+								<option value="2">내용</option>
+							</select> 
+							<input class="form-control me-2" type="search" name="search"
+								placeholder="Search" aria-label="Search">
+							<button id="s_search_btn" class="btn btn-outline-success" type="button">Search</button>
+						</form>
+					</div>
+				</nav>
+				<table class="table table table-hover" style="clear: both; table-layout: fixed;">
                     <thead>
                         <tr>
                             <th scope="col" style="width: 100px;">글번호</th>
@@ -325,11 +333,12 @@
 				</div>
 			</div>
         </div>
+        <!-- 사업자 정보 조회 -->
         <div>
             <div id="s_bu_info_content" class="tab_menu s_content">
-                사업자 정보 content 내용 들어갑니다 ~~~~~~~~~
+                <p class="p_content_style">사업자 정보 조회</p>
                 <!-- 검색 -->
-                <nav class="navbar navbar-light">
+                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
                     <div class="container-fluid">
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -337,13 +346,53 @@
                         </form>
                     </div>
                 </nav>
-            </div>
+                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
+                    <thead>
+                        <tr>
+                        	<th scope="col" style="width: 50px;">NO</th>
+                        	<th scope="col" style="width: 100px;">사업자번호</th>
+                            <th scope="col">아이디</th>
+                            <th scope="col">이름</th>
+                            <th scope="col" style="width: 100px">생년월일</th>
+                            <th scope="col">전화번호</th>
+                            <th scope="col">이메일</th>
+                            <th scope="col" style="width: 100px">가입일</th>
+                        </tr>
+                    </thead>
+                    <tbody style="cursor: pointer;">
+                        <c:forEach items="${buMemberInfoList }" var="i">
+                                <tr class="s_tr_modal s_tr_buInfoList">
+                                    <th scope="row" class="s_ntNo">${i.rownum}</th>
+                                    <td>${i.buNo}</td>
+                                    <td>${i.buId}</td>
+                                    <td>${i.buName}</td>
+                                    <td class="s_td_short">${i.buBirth}</td>
+                                    <td>${i.buTel}</td>
+                                    <td>${i.buEmail}</td>
+                                    <td>${i.toCharbuWriteDate}</td>
+                                </tr>
+                            	</c:forEach>
+                    </tbody>
+                </table>
+				<div id="pagingBox">
+					<ul class="pagination">
+						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				</div>
+			</div>
         </div>
+        <!-- 사업자 탈퇴 조회 -->
         <div>
         <div id="s_bu_delete_content" class="tab_menu s_content">
-                사업자 탈퇴 content 내용 들어갑니다 ~~~~~~~~~
+                <p class="p_content_style">사업자 탈퇴 조회</p>
                 <!-- 검색 -->
-                <nav class="navbar navbar-light">
+                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
                     <div class="container-fluid">
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -351,6 +400,45 @@
                         </form>
                     </div>
                 </nav>
+                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
+                    <thead>
+                        <tr>
+                        	<th scope="col" style="width: 50px;">NO</th>
+                        	<th scope="col" style="width: 100px;">사업자번호</th>
+                            <th scope="col">아이디</th>
+                            <th scope="col">이름</th>
+                            <th scope="col" style="width: 100px">생년월일</th>
+                            <th scope="col">전화번호</th>
+                            <th scope="col">이메일</th>
+                            <th scope="col" style="width: 100px">탈퇴일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${buMemberDeleteList }" var="i">
+                                <tr class="s_tr_modal">
+                                    <th scope="row" class="s_ntNo">${i.rownum}</th>
+                                    <td>${i.buNo}</td>
+                                    <td>${i.buId}</td>
+                                    <td>${i.buName}</td>
+                                    <td class="s_td_short">${i.buBirth}</td>
+                                    <td>${i.buTel}</td>
+                                    <td>${i.buEmail}</td>
+                                    <td>${i.toCharbuOutDate}</td>
+                                </tr>
+                            	</c:forEach>
+                    </tbody>
+                </table>
+				<div id="pagingBox">
+					<ul class="pagination">
+						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				</div>
             </div>
         </div>
         <div>
@@ -472,27 +560,27 @@
         		console.log(index);
         		console.log(elem);
         		if(index == tabMenu){
-        			console.log("show");
+        			console.log("보여지는 애들");
         			console.log(elem);
         			$(elem).show();
+        			console.log($(elem));
         		}else{
+        			console.log("숨겨지는 애들");
         			$(elem).hide();
         		}
         	});
     	}
         $("#s_notice_menu").click(function () {
-		tabMenu = 1;
-        	showTabMenu();
-/*            $("#s_notice_content").show();
-            $("#s_bu_accept_content").hide();
-            $("#s_bu_info_content").hide();
-            $("#s_us_info_content").hide();
-            $("#s_review_content").hide();
-            $("#main_box").hide(); */
+			tabMenu = 1;
+       		showTabMenu();
+       		console.log("몇 ? " + $("#main_box.tab_menu").length);
+       		//location.href="AdminMainPage?tabMenu=" + tabMenu;
+
         });
         $("#s_bu_accept_menu").click(function () {
             tabMenu = 2;
             showTabMenu();
+       		console.log($("#main_box.tab_menu"));
         });
         $("#s_bu_accept_result_approval_menu").click(function () {
             tabMenu = 3;
@@ -521,6 +609,12 @@
         $("#s_review_menu").click(function () {
             tabMenu = 9;
             showTabMenu();
+        });
+        $("#s_search_btn").click(function() {
+        	$("#frm").attr("action", "AdminMainPage");
+        	tabMenu = 1;
+        	showTabMenu();
+        	$("#frm").submit();
         });
 
     </script>
@@ -564,6 +658,24 @@
     		console.log(typeof(tdArr[1]));
     		location.href="AdminBuDetailInfo?buNo=" + tdArr[1];
     	});
+    	$(".s_tr_buInfoList").click(function() {
+    		// 배열 선언
+    		var tdArr = new Array();
+    		// 현재 클릭된 행(tr의 td)
+    		var tr = $(this);
+    		var td = tr.children();
+    		
+    		// 반복문을 통해 배열에 값을 담아 사용
+    		td.each(function(i) {
+    			tdArr.push(td.eq(i).text());
+    		});
+    		// td들이 배열에 담겨있는데 그 중 2번째가 필요
+    		console.log("배열에 담긴 값 : " + tdArr);
+    		console.log("배열에 담긴 값 : " + tdArr[1]);
+    		console.log(typeof(tdArr[1]));
+    		location.href="AdminBuInfoDetailList?buNo=" + tdArr[1];
+    	});
+    	
     </script>
 </body>
 </html>
