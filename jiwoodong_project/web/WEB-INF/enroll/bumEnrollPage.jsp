@@ -1,3 +1,7 @@
+    <!-- Bootstrap CSS --> 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bum_enrollpage.css"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <%@page import="java.sql.SQLException"%>
 <%@page import="kh.semi.jwd.common.jdbc.JdbcDBCP"%>
 <%@page import="java.sql.Connection"%>
@@ -8,76 +12,10 @@
 <head>
 <meta charset="UTF-8">
 <title>사업자 회원가입 페이지</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!-- Bootstrap CSS --> 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="../resources/css/bum_enrollpage.css"> 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<style>
-body { 
-    min-height: 100vh;
-     background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c)); 
-     background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
-      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); }
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-
-.input-form { 
-    max-width: 680px;
-    margin-top: 80px;
-    padding: 32px;
-    background: #fff;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px; 
-    border-radius: 10px; 
-    -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15); 
-    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15) 
-    }
-
-    .btn{
-        padding-top: 0.5rem;
-    }
-
-    .col-md-8{
-        max-width: 50%;
-    }
-
-    #email{
-    display: inline-block;
-    width: 70%;
-    }
-    #email_check, #email_check_no{
-        display: inline-block;
-        width: 40%;
-    }
-    #email_check_btn,#bu_num_btn{
-        display: inline-block;
-
-    }
-
-    #email_check{
-        display: inline-block;
-        
-        
-    }
-    #bu_id{
-        display: inline-block;
-        width: 78%;
-    }
-
-    #bu_num{
-       display: inline-block;
-       width: 74%;
-    }
-
-</style>
 </head>
 <body>
 <section>
@@ -86,7 +24,7 @@ body {
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3"><strong>사업자 회원가입</strong></h4>
-            <form class="validation-form" name="bu_enroll" onclick="" novalidate >
+            <form id="frm" class="validation-form" name="bu_enroll" onclick="" novalidate >
             
             <div class="row">
                   <div class="mb-3" style="display: inline-block; width: 100%; margin-left: 2%;"> 
@@ -143,7 +81,7 @@ body {
                 </div>
                 <div class="mb-3"> 
                     <label for="password">비밀번호</label> 
-                    <input type="text" class="form-control" id="password" name="password" required="required">
+                    <input type="password" class="form-control" id="password" name="password" required="required">
                     <div class="invalid-feedback"> 비밀번호를 입력해주세요. </div>
                 </div>
                 <div class="mb-3"> 
@@ -168,9 +106,8 @@ body {
                     </div>
                 </div>
                 <br>
-				<input type="hidden" value="bu_signin" name="command"><br>
-				<input type="hidden" value="" name="flag">            
-                <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+	           
+                <button id="j_bu_enroll_btn" class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
             </form>
         </div>
     </div>
@@ -183,10 +120,34 @@ body {
     
     <script type="text/javascript">
 
-	var frm = document.bu_enroll;
-	frm.action = "bumenroll.lo";
-	frm.method = "post";
+	$("#j_bu_enroll_btn").click(function(){
+	var password = $("#password").val().trim();
+	if(!password || password != $("#password_check").val().trim()){
+		alert("패스워드 입력란과 확인란이 같지 않습니다.");
+		$("#password").val("");
+		$("#password_check").val("");
+		$("#password").focus();
+		return false;
+	}
+	var regExpPassword = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,16}$/; // 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자
+	if(!regExpPassword.test(password)){
+		alert("패스워드 입력란에는 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자");
+		$("#password").focus();
+		return false;
+	}
+	var phone = $("#phone").val().trim();
+	var regExpPhone = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/; // 숫자3-숫자3,4-숫자4
+	if(!regExpPhone.test(phone)){
+		alert("전화번호 입력란에는 000-0000-0000 형식");
+		$("#phone").focus();
+		return false;
+	}
+	
+	var frm = $("#frm");
+	frm.attr("action","bumenroll.lo"); 
+	frm.attr("method","post");
 	frm.submit();
+	});
 </script>
 </body>
 </html>
