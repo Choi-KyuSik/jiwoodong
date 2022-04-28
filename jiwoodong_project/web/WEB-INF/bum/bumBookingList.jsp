@@ -192,7 +192,7 @@ td, th {
 					<form class="d-flex">
 						<input class="form-control me-2" type="search"
 							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success" type="submit">Search</button>
+						<button class="btn btn-outline-success" type="submit" onclick="search()">Search</button>
 					</form>
 				</div>
 			</nav>
@@ -216,12 +216,11 @@ td, th {
 						<th scope="col">요청사항</th>
 					</tr>
 				</thead>
-				<tbody style="cursor: pointer;" id="reservationListTbody">
-					<div id="hereyo"></div>
+				<tbody id="reservationListTbody">
 					<c:forEach items="${reservation }" var="reservation">
 						<tr class="bookingList" data-bs-toggle="modal"
 							data-bs-target="#exampleModal" data-bs-whatever="@mdo"
-							class="reservationListTr">
+							style="cursor: pointer;">
 							<td class="l1"><c:out value="${reservation.bkNo }" /></td>
 							<td class="l2"><c:out value="${reservation.umId }" /></td>
 							<td class="l3"><c:out value="${reservation.bkName }" /></td>
@@ -257,6 +256,7 @@ td, th {
 			</table>
 		</div>
 	</article>
+	</content>
 	<div class="modal fade" id="exampleModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true"
 		style="top: 5%;">
@@ -282,7 +282,8 @@ td, th {
 							id="bkdate" name="bkdate"><br> <label for="bktime"
 							style="margin: 10px;">예약시간 :</label><input type="time"
 							id="bktime" name="bktime"><br> <label for="bkMenuNo"
-							style="margin: 10px;">메뉴 :</label> <select id="bkMenuNo"
+							style="margin: 10px;">메뉴 :</label>
+							 <select id="bkMenuNo"
 							onchange="bkPriceChange()" name="bkMenuNo">
 							<c:forEach items="${menulist }" var="menulist">
 								<option value="${menulist.menuNo }">${menulist.menuName }</option>
@@ -306,7 +307,6 @@ td, th {
 			</div>
 		</div>
 	</div>
-	</content>
 	<script>
     $(function(){
     	/* 날짜선택 오늘날짜 */
@@ -331,7 +331,7 @@ td, th {
     			$(".modal-body").children().children().val("");
     	});
     	/* 예약 리스트  클릭시*/
-    	$(".bookingList").click(function(){
+    	$(document).on('click', '.bookingList', function(){
     		/* 모달 추가, 상세정보 같이사용해서 selected 충돌 클릭시 초기화*/
     		$("#bkMenuNo option").removeAttr("selected");
     		var bkMenuName=$(this).children('.l7').html();
@@ -358,7 +358,6 @@ td, th {
     			});
     			$("#bkPrice").val($(this).children('.l8').html());
 
-    			console.log(bkrequire)
     			if(bkrequire == 'O'){
     				$("#bkrequire").val($(this).children('.l10').html());
     			} else {
@@ -479,7 +478,7 @@ td, th {
     	}
     </script>
 	<script>
-		/* 상단 예약상태 select 부분 */
+		/* 상단 예약상태 select 부분 선택 시 */
     	$("#bkStatus").change(function(){
     		var status = $(this).val();
     		if($(this).val() == '전체'){
@@ -491,7 +490,7 @@ td, th {
     				success : function(list){
     					var html = '';
     					for(var i =0 ;  i <list.length;i++){
-    						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo' class='reservationListTr'>"
+    						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo'  style='cursor: pointer''>"
                             html += "<td class='l1'>"+list[i].bkNo+"</td>"
                             html += "<td class='l2'>"+list[i].umId+"</td>"
                             html += '<td class="l3">'+list[i].bkName+'</td>'
@@ -520,8 +519,8 @@ td, th {
                             html += ' <td  class="l11"   style="display: none">'+list[i].bkStatus+'</td>'
                             html += '</tr>'
     					}
-    					$("#reservationListTbody").children().remove()
-    					$("#reservationListTbody").append(html);
+    					$(".bookingList").html().remove();
+    					$(".bookingList").html(html);
     				}
     			})
     		} else {
@@ -533,7 +532,7 @@ td, th {
     				success : function(data){
     					var html = '';
     					for(var i =0 ;  i <data.length;i++){
-    						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo' class='reservationListTr'>"
+    						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo'  style='cursor: pointer'>"
                             html += "<td class='l1'>"+data[i].bkNo+"</td>"
                             html += "<td class='l2'>"+data[i].umId+"</td>"
                             html += '<td class="l3">'+data[i].bkName+'</td>'
@@ -552,7 +551,6 @@ td, th {
                             html += '<td class="l7">'+data[i].menuName+'</td>'
                             html += '<td class="l8">'+data[i].menuPrice+'원</td>'
                             html += '<td class="l9">'
-                            console.log(data[i].bkRequire);
                             if(data[i].bkRequire == null){
                             	 html +="X"
                             } else {
@@ -569,7 +567,7 @@ td, th {
     			})
     		}
     	})
-    	
+    	/* 상단 날짜 선택시 조회 */
     	$("#todayDate").change(function(){
     		if($("#bkStatus").val() == '전체'){
     			$.ajax({
@@ -580,7 +578,7 @@ td, th {
     				success : function(list){
     					var html = '';
     					for(var i =0 ;  i <list.length;i++){
-    						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo' class='reservationListTr'>"
+    						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo' style='cursor: pointer'>"
                             html += "<td class='l1'>"+list[i].bkNo+"</td>"
                             html += "<td class='l2'>"+list[i].umId+"</td>"
                             html += '<td class="l3">'+list[i].bkName+'</td>'
@@ -610,7 +608,7 @@ td, th {
                             html += '</tr>'
     					}
     					$("#reservationListTbody").children().remove()
-    					$("#reservationListTbody").append(html);
+    					$("#reservationListTbody").html(html);
     				}
     			})
     		} else {
@@ -622,7 +620,7 @@ td, th {
 				success : function(data){
 					var html = '';
 					for(var i =0 ;  i <data.length;i++){
-						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo' class='reservationListTr'>"
+						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo' style='cursor: pointer'>"
                         html += "<td class='l1'>"+data[i].bkNo+"</td>"
                         html += "<td class='l2'>"+data[i].umId+"</td>"
                         html += '<td class="l3">'+data[i].bkName+'</td>'
@@ -641,7 +639,6 @@ td, th {
                         html += '<td class="l7">'+data[i].menuName+'</td>'
                         html += '<td class="l8">'+data[i].menuPrice+'원</td>'
                         html += '<td class="l9">'
-                        console.log(data[i].bkRequire);
                         if(data[i].bkRequire == null){
                         	 html +="X"
                         } else {
@@ -653,11 +650,23 @@ td, th {
                         html += '</tr>'
 					}
 					$("#reservationListTbody").children().remove()
-					$("#reservationListTbody").append(html);
+					$("#reservationListTbody").html(html);
 				}
 			})
     		}
     	})
+    	
+    	/* function search(){
+			$.ajax({
+				url :" reservationSearch",
+				type:"post",
+				data : {"search":},
+				datatype :"json",
+				success : function(){
+					
+				}
+			})
+		} */
 		</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

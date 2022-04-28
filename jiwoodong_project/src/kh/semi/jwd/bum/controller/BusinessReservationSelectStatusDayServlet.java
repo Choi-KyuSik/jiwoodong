@@ -17,16 +17,16 @@ import kh.semi.jwd.bum.model.service.BusinessReservationService;
 import kh.semi.jwd.bum.model.vo.BumReservationVo;
 
 /**
- * Servlet implementation class BusinessReservationAllStatus
+ * Servlet implementation class BusinessReservationSelectStatus
  */
-@WebServlet("/allStatus")
-public class BusinessReservationAllStatus extends HttpServlet {
+@WebServlet("/selectStatusDay")
+public class BusinessReservationSelectStatusDayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusinessReservationAllStatus() {
+    public BusinessReservationSelectStatusDayServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,23 +43,21 @@ public class BusinessReservationAllStatus extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
+//		response.setCharacterEncoding("UTF-8"); // 이건 필터가 하니까..  암튼.. gson을 쓰면 이 모든것 신경안써도 됨ㅎㅎㅎ
+		response.setContentType("application/json");   // 보낼때 text.html이 아니라 json 형태다.. 티내주고 가는거에요 심플도 많이 쓰니까.. 이 어렵ㅂ고 힘든것도 해봐야 gson의 고마움을 알죠 ㅎㅎㅎㅎ그럼 전 이만
+        PrintWriter out = response.getWriter();
 		String date = request.getParameter("day");
+		String status = request.getParameter("status");
 		int cpNo = 14;
-		ArrayList<BumReservationVo> list = new BusinessReservationService().AllStatus(date, cpNo);
-		
-		JSONArray jsonArray = new JSONArray ();
+		ArrayList<BumReservationVo> list = new BusinessReservationService().selectStatus(date, cpNo, status);
+		JSONArray Array = new JSONArray ();
 
 		JSONObject json = null;
 
 		for(int i=0; i<list.size();i++){
-
 		  json = new JSONObject();
-
-		  BumReservationVo vo = (BumReservationVo) list.get(i);
-
+		  BumReservationVo vo = new BumReservationVo();
+		  vo = (BumReservationVo) list.get(i);
 		   json.put("bkNo",vo.getBkNo());
 		   json.put("umId",vo.getUmId());
 		   json.put("bkName",vo.getBkName());
@@ -71,11 +69,10 @@ public class BusinessReservationAllStatus extends HttpServlet {
 		   json.put("menuPrice",vo.getMenuPrice());
 		   json.put("bkRequire",vo.getBkRequire());
 		   json.put("bkStatus",vo.getBkStatus());
-
-		  jsonArray.add(json);
-
+		  Array.add(json);
 		}
-		out.println(jsonArray);
+		System.out.println(Array);
+		out.println(Array);
 		out.flush();
 		out.close();
 	}

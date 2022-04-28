@@ -249,7 +249,7 @@ article>div>p {
 	<header>
 		<div id="p_main_top">
 			<div id="p_top_logo">
-				<a href="" id="k_logo"><img
+				<a href="<%=request.getContextPath() %>/MainPage" id="k_logo"><img
 					src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"
 					width="80px" alt="logo"></a>
 			</div>
