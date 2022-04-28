@@ -109,6 +109,10 @@ header {
 	font-weight: bold;
 	margin-top: 22px;
 }
+.table{
+	font-size : 15px;
+	text-align: center;
+}
 </style>
 <!--월별 예약통계-->
 <style>

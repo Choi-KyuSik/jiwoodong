@@ -1,11 +1,8 @@
 package kh.semi.jwd.bum.controller;
 
-import static kh.semi.jwd.common.jdbc.JdbcDBCP.close;
-import static kh.semi.jwd.common.jdbc.JdbcDBCP.getConnection;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.jwd.bum.model.dao.BusinessReservationDao;
 import kh.semi.jwd.bum.model.service.BusinessReservationService;
 
 /**
@@ -45,20 +41,29 @@ public class BusinessReservationAddServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			System.out.println(request.getParameter("bkname"));
-			request.getParameter("bkname");
-			request.getParameter("bkphone");
-			request.getParameter("bkdate");
-			request.getParameter("bktime");
-			request.getParameter("bkmenu");
-			request.getParameter("bkprice");
-			request.getParameter("bkrequire");
-			
-			Map<String, Object> map = new HashMap<String, Object>();
-
-			int result = new BusinessReservationService().reservationAdd(map);
-
-			
+		PrintWriter out = response.getWriter(); 
+		String msg = "";
+		Map<String, Object> map = new HashMap<String, Object>();
+			map.put("bkName", request.getParameter("bkname"));
+			map.put("bkPhone", request.getParameter("bkphone"));
+			map.put("bkDate", request.getParameter("bkdate"));
+			map.put("bkTime", request.getParameter("bktime"));
+			map.put("bkRequire", request.getParameter("bkrequire"));
+			map.put("bkMenuNo", request.getParameter("bkMenuNo"));
+			map.put("bkPrice", request.getParameter("bkPrice"));
+			int cpNo = 14;
+			int result = new BusinessReservationService().reservationAdd(map, cpNo);
+			if(result < 0) {
+				msg = "예약 등록 실패";
+			} else {
+				int result2 = new BusinessReservationService().reservationAddMenu(map, cpNo);
+				if(result2 < 0) {
+					msg = "예약 메뉴 등록 실패";
+				} else {
+					msg = "등록 성공";
+				}
+			}
+			out.println(msg);
 	}
 
 }

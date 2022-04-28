@@ -6,15 +6,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.Scrollable;
+
 import kh.semi.jwd.bum.model.dao.BusinessReservationDao;
 import kh.semi.jwd.bum.model.vo.BumReservationVo;
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
 public class BusinessReservationService {
 	
-	public ArrayList<BumReservationVo>  BusinessReservationCheck(){
+	public ArrayList<BumReservationVo>  BusinessReservationCheck(int cpNo){
 		Connection conn = getConnection();
-		ArrayList<BumReservationVo> result = new  BusinessReservationDao().BusinessReservationCheck(conn);
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().BusinessReservationCheck(conn, cpNo);
 		close(conn);
 		return result;
 	}
@@ -26,18 +28,32 @@ public class BusinessReservationService {
 		return result;
 		}
 	
-	public int reservationAdd(Map<String, Object> map){
-		Connection conn = getConnection();
-		int result = new BusinessReservationDao().reservationAdd(conn, map);
-		close(conn);
-		return result;
-	}
-	
 	public Map<String,Object> priceSelect(Map<String,Object> map){
 		Connection conn = getConnection();
 		Map<String,Object> priceMap = new BusinessReservationDao().priceSelect(conn, map);
 		close(conn);
 		return priceMap;
+	}
+
+	public int reservationAdd(Map<String, Object> map, int cpNo){
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationAdd(conn, map, cpNo);
+		close(conn);
+		return result;
+	}
+	
+	public int reservationAddMenu(Map<String, Object> map, int cpNo) {
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationAddMenu(conn, map, cpNo);
+		close(conn);
+		return result;
+	}
+
+	public int reservationCancle(String bkNo) {
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationAddMenu(conn, bkNo);
+		close(conn);
+		return result;
 	}
 
 }
