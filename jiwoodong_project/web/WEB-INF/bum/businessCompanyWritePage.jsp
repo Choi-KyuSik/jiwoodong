@@ -69,6 +69,16 @@ content>article>div {
 	background-color: rgb(241, 241, 241);
 }
 
+#k_bu_eroll_content{
+width: 1200px;
+	height: 1000px;
+	padding: 30px;
+	display: none;
+	margin: 20px auto 0;
+	background-color: rgb(241, 241, 241);
+}
+}
+
 /* 컨텐트안 제목 */
 article>div>p {
 	text-align: center;
@@ -96,15 +106,19 @@ article>div>p {
 .k_company_info {
 	resize: none;
 }
+
+.k_essential_info{
+	color: cornflowerblue;
+}
 </style>
 
 </head>
 
 <body>
-    <header>
+     <header>
         <div id="p_main_top">
             <div id="p_top_logo">
-                <a href="" id="k_logo"><img
+                <a href="BumMainPage" id="k_logo"><img
                         src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"
                         width="80px" alt="logo"></a>
             </div>
@@ -113,7 +127,7 @@ article>div>p {
                     <div class="container-fluid">
                         <div class="collapse navbar-collapse">
                             <ul class="navbar-nav">
-                                <li class="nav-item dropdown"><a class="nav-link dropdown" id="k_info_menu"
+                                <li class="nav-item dropdown"><a class="nav-link dropdown" id="k_info_menu" href="bucpcheck"
                                         role="button"> 내정보 관리 </a></li>
                             </ul>
                             <ul class="navbar-nav">
@@ -121,7 +135,7 @@ article>div>p {
                                         role="button"> 리뷰관리 </a></li>
                             </ul>
                             <ul class="navbar-nav">
-                                <li class="nav-item dropdown"><a class="nav-link dropdown" id="k_bu_eroll_menu" href="#"
+                                <li class="nav-item dropdown"><a class="nav-link dropdown" id="k_bu_eroll_menu" href="bucompany"
                                         role="button"> 업체등록 </a></li>
                             </ul>
                             <ul class="navbar-nav">
@@ -167,8 +181,7 @@ article>div>p {
         </div>
     </header>
     
-   <body>
-    <content>
+    <%-- <content> --%>
             <!-- 업체등록 -->
             <article>
             <form action="<%=request.getContextPath() %>/bucompany" method="post">
@@ -195,48 +208,95 @@ article>div>p {
                         <div class="k_company">
                             상세설명을 입력해주세요
                             <p>
-                                <textarea class="k_company_info" name="cpExplain"></textarea>
+                                <textarea class="k_company_info" placeholder="우리업체를 고객들에게 자세히 설명해주세요." name="cpExplain"></textarea>
                             </p>
                         </div>
                         <!-- TODO -->
                         <div class="k_company">
-                        업체 사진을 추가해 주세요
+                        TODO: 업체 사진을 추가해 주세요
                         </div>
+
                         <div class="k_company">
                             운영 구분
-                            <p>
-                                <label>모든 영업일이 같아요<input type="radio" value="A" name="cpClassify"></label>
-                                <label>평일/주말이 달라요<input type="radio" value="B" name="cpClassify"></label>
-                            </p>
+                            <div>                                
+                                <label><input type="radio" id="k_everyday" value="B" name="cpClassify" >평일만 운영해요</label>                               
+                                <label><input type="radio" id="k_neveryday" value="A" name="cpClassify">주말까지 운영해요</label>
+                                <br>
+                                <div id="k_Classify" >
+                                    <div id = k_everyday_content>
+                                        운영시작일: 
+                                        <input type="date" name="cpOpenDate">
+                                        운영종료일: 
+                                        <input type="date" name="cpCloseDate">
+                                        <br>
+                                        
+                                        영업시작시간:
+                                        <input type="time" name="cpOpenTime">
+                                        영업마감시간:
+                                        <input type="time" name="cpCloseTime">
+                                        
+                                    </div>
+                                    <div id = k_neveryday_content>
+                                        운영시작일: 
+                                        <input type="date" name="cpOpenDate">
+                                        운영종료일: 
+                                        <input type="date" name="cpCloseDate">
+                                        <br>
+                                        
+                                        영업시작시간:
+                                        <input type="time" name="cpOpenTime">
+                                        영업마감시간:
+                                        <input type="time" name="cpCloseTime">
+                                    </div>                                    
+                                </div>
+                            </div>                           
                         </div>
-                 
+                        <!-- 주소입력 -->
                         <div class="k_company">
                             <strong>주소를 입력해주세요<span class="k_essential_info">*필수</span></strong>
                             <div>
-                                <input type="text" name="cpAddress">                               
+                            	<input type="text" name="cpPostcode" placeholder="우편번호">
+                                <input type="text" name="cpAddress" placeholder="주소">
+                                <input type="text" name="cpDtaddress" placeholder="상세주소 ">
                             </div>
-                            <p>
-                             <input type="text" name="cpPostcode">
-                            </p>
-                            <p>
-                                <span>찾아오는 길 설명이 필요하신가요?</span>
-
-                            <p>
-                                <input type="text" placeholder="예)" class="k_company_info" name="cpDtaddress">                      
-                            </p>
-                          
-
-                            <button>취소하기</button>
+                            <button type="button" id="k_cancle_btn" >취소하기</button>
                             <input type="submit" value="등록하기"></input>
                         </div>
                     </div>                   
                 </div>
                </form>
             </article>
-    </content>
-   </body>
+    <%-- </content> --%>
     <script>
         $("#k_bu_eroll_content").show();
+               
+        $("#k_info_menu").click(function() {
+			location.href="bucpcheck";
+		});
+		$("#k_review_menu").click(function() {
+			$("#k_info_content").hide();
+			$("#k_review_content").show();
+			$("#k_bu_eroll_content").hide();
+			$("#k_re_cu_content").hide();
+			$("#k_us_info_content").hide();
+			$("#k_re_menu_content").hide();
+			$("#main_box").hide();
+		});
+		$("#k_bu_eroll_menu").click(function() {
+			location.href="bucompany";
+		});
+		$("#k_re_cu_menu").click(function() {
+			location.href = "<%=request.getContextPath()%>/burscheck";
+		});
+		$("#k_us_info_menu").click(function() {
+			$("#k_info_content").hide();
+			$("#k_review_content").hide();
+			$("#k_re_cu_content").hide();
+			$("#k_bu_eroll_content").hide();
+			$("#k_re_menu_content").hide();
+			$("#k_us_info_content").show();
+			$("#main_box").hide();
+		});
     </script>
 
     <!--전화번호 하이픈 정규식 DOM  -->
@@ -251,6 +311,33 @@ article>div>p {
 
             });
     </script>
+    
+    <script>
+        $("#k_cancle_btn").click(function() {
+        	var result = confirm('메인페이지로 이동하시겠습니까?'); 
+        	if(result) { 
+        		//yes 
+        		location.href="BumMainPage";
+        		} else { 
+        		//no 
+        		}            
+        });
+
+        $("#k_everyday").click(function() {
+            $("#k_everyday_content").show();
+            $("#k_neveryday_content").hide();
+        });
+
+        $("#k_neveryday").click(function() {
+            $("#k_neveryday_content").show();
+            $("#k_everyday_content").hide();
+        });
+
+        $(document).ready(function() {            
+            $("#k_neveryday_content").hide();
+            $("#k_everyday_content").hide();
+        });
+        </script>
 
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

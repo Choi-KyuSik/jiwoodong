@@ -19,7 +19,7 @@ import kh.semi.jwd.bum.model.service.BusinessReservationService;
  */
 @WebServlet("/bursaddAjax")
 public class BusinessReservationAddServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -29,41 +29,41 @@ public class BusinessReservationAddServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+//   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//      // TODO Auto-generated method stub
+//      response.getWriter().append("Served at: ").append(request.getContextPath());
+//   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter(); 
-		String msg = "";
-		Map<String, Object> map = new HashMap<String, Object>();
-			map.put("bkName", request.getParameter("bkname"));
-			map.put("bkPhone", request.getParameter("bkphone"));
-			map.put("bkDate", request.getParameter("bkdate"));
-			map.put("bkTime", request.getParameter("bktime"));
-			map.put("bkRequire", request.getParameter("bkrequire"));
-			map.put("bkMenuNo", request.getParameter("bkMenuNo"));
-			map.put("bkPrice", request.getParameter("bkPrice"));
-			int cpNo = 14;
-			int result = new BusinessReservationService().reservationAdd(map, cpNo);
-			if(result < 0) {
-				msg = "예약 등록 실패";
-			} else {
-				int result2 = new BusinessReservationService().reservationAddMenu(map, cpNo);
-				if(result2 < 0) {
-					msg = "예약 메뉴 등록 실패";
-				} else {
-					msg = "등록 성공";
-				}
-			}
-			out.println(msg);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      PrintWriter out = response.getWriter(); 
+      String msg = "";
+      Map<String, Object> map = new HashMap<String, Object>();
+         map.put("bkName", request.getParameter("bkname"));
+         map.put("bkPhone", request.getParameter("bkphone"));
+         map.put("bkDate", request.getParameter("bkdate"));
+         map.put("bkTime", request.getParameter("bktime"));
+         map.put("bkRequire", request.getParameter("bkrequire"));
+         map.put("bkMenuNo", request.getParameter("bkMenuNo"));
+         map.put("bkPrice", request.getParameter("bkPrice"));
+         int cpNo = 14;
+         int result = new BusinessReservationService().reservationAdd(map, cpNo);
+         if(result < 0) {
+            msg = "예약 등록 실패";
+         } else {
+            int result2 = new BusinessReservationService().reservationAddMenu(map, cpNo);
+            if(result2 < 0) {
+               msg = "예약 메뉴 등록 실패";
+            } else {
+               msg = "등록 성공";
+            }
+         }
+         out.println(msg);
+   }
 
 }

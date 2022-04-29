@@ -334,12 +334,12 @@ public class BumDao {
 		System.out.println("Dao companyUpdate:" + result);
 		return result;
 	}
-	
+
 	// 우진 - 업체등록
-	public int companyWrite (Connection conn, CompanyVo cvo) {
-	
-	int result = 0;
-	
+	public int companyWrite(Connection conn, CompanyVo cvo) {
+
+		int result = 0;
+
 //	CP_NO          NOT NULL NUMBER         
 //	BU_NO          NOT NULL NUMBER         
 //	CP_CATEGORY    NOT NULL VARCHAR2(20)   
@@ -359,35 +359,56 @@ public class BumDao {
 //	CP_UPDATE_DATE          TIMESTAMP(6)   
 //	FL_GNO                  VARCHAR2(4000) 
 //	CP_REJECT_MSG           VARCHAR2(200) 
-	
-		
-	String sql = "INSERT INTO company(CP_NO, BU_NO, CP_NAME, CP_CATEGORY, CP_CLASSIFY , CP_OPEN_DATE , CP_CLOSE_DATE, CP_ADDRESS, CP_POSTCODE , CP_DTADDRESS)"
-			+"VALUES(COMPANY_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?)";
-	try {
 
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, cvo.getBuNo());		
-		pstmt.setString(2, cvo.getCpName());
-		pstmt.setString(3, cvo.getCpCategory());
-		System.out.println(cvo.getCpCategory());
-		pstmt.setString(4, cvo.getCpClassify());
-		pstmt.setString(5, cvo.getCpOpenDate());
-		pstmt.setString(6, cvo.getCpCloseDate());
-		pstmt.setString(7, cvo.getCpAddress());
-		pstmt.setString(8, cvo.getCpPostcode());
-		pstmt.setString(9, cvo.getCpDtaddress());
-		
-		result = pstmt.executeUpdate();
-		System.out.println("companyWrite Dao result:" +result);
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
-		close(pstmt);
-		close(conn);
+		String sql = "INSERT INTO company(CP_NO, BU_NO, CP_NAME, CP_CATEGORY, CP_CLASSIFY , CP_OPEN_DATE , CP_CLOSE_DATE, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, CP_OPEN_TIME, CP_CLOSE_TIME ,CP_EXPLAIN)"
+				+ "VALUES(COMPANY_SEQ.NEXTVAL,?,?,?,?,REPLACE(?, '-', '/'),REPLACE(?, '-', '/'),?,?,?,?,?,?)";
+		try {
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cvo.getBuNo());
+			pstmt.setString(2, cvo.getCpName());
+			pstmt.setString(3, cvo.getCpCategory());
+			pstmt.setString(4, cvo.getCpClassify());
+			pstmt.setString(5, cvo.getCpOpenDate());
+			pstmt.setString(6, cvo.getCpCloseDate());
+			pstmt.setString(7, cvo.getCpAddress());
+			pstmt.setString(8, cvo.getCpPostcode());
+			pstmt.setString(9, cvo.getCpDtaddress());
+			pstmt.setString(10, cvo.getCpOpenTime());
+			pstmt.setString(11, cvo.getCpCloseTime());
+			pstmt.setString(12, cvo.getCpExplain());
+
+			result = pstmt.executeUpdate();
+			System.out.println("companyWrite Dao result:" + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		System.out.println("companyWrite Dao return result:" + result);
+		return result;
+
 	}
-	System.out.println("companyWrite Dao return result:" +result);
-	return result;	
-	
+
+	// 우진 - 내정보 삭제
+	public int companyDelete(Connection conn, BumVo vo) {
+		System.out.println("companyDelete buNo:" + vo);
+		int result = 0;
+		String sql = "update b_member set bu_useyn = 'n' where bu_no = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, vo.getBuNo() );
+			result = pstmt.executeUpdate();
+			System.out.println("BoardDao companyUpdate:" + result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println("Dao companyUpdate:" + result);
+		return result;
 	}
-	
+
 }

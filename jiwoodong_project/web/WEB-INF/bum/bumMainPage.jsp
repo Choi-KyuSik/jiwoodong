@@ -436,7 +436,6 @@ article>div>p {
 				사업자 번호
 				<div>
 					  
-				</dvi>
 			</div>
 			<div>
 				이름
@@ -552,8 +551,11 @@ article>div>p {
 	</article>
 	<article>
 		<div id="k_bu_eroll_content">
+				<div>
+					<%@ include file="./businessCompanyWritePage.jsp"%>
+				</div>
 			<div>
-				<div class="k_company">
+				<!-- <div class="k_company">
 					<strong>업체명을 입력해주세요.<span class="k_essential_info">*필수</span></strong>
 					<p>
 						<input type="text" placeholder="대표업체명을 입력해주세요.">
@@ -700,18 +702,11 @@ article>div>p {
 				</tbody>
 			</table>
 		</div>
-	</article>
-	
-					</content>
+	</article>	
+</content>
 	<script>
 			$("#k_info_menu").click(function() {
-				$("#k_info_content").show();
-				$("#k_bu_eroll_content").hide();
-				$("#k_re_menu_content").hide();
-				$("#k_re_cu_content").hide();
-				$("#k_us_info_content").hide();
-				$("#k_review_content").hide();
-				$("#main_box").hide();
+				location.href="bucpcheck";
 			});
 			$("#k_review_menu").click(function() {
 				$("#k_info_content").hide();
@@ -723,22 +718,7 @@ article>div>p {
 				$("#main_box").hide();
 			});
 			$("#k_bu_eroll_menu").click(function() {
-				$("#k_info_content").hide();
-				$("#k_review_content").hide();
-				$("#k_re_menu_content").hide();
-				$("#k_bu_eroll_content").show();
-				$("#k_re_cu_content").hide();
-				$("#k_us_info_content").hide();
-				$("#main_box").hide();
-			});
-			$("#k_re_menu_enroll").click(function() {
-				$("#k_info_content").hide();
-				$("#k_review_content").hide();
-				$("#k_re_cu_content").hide();
-				$("#k_bu_eroll_content").hide();
-				$("#k_re_menu_content").show();
-				$("#k_us_info_content").hide();
-				$("#main_box").hide();
+				location.href="bucompany";
 			});
 			$("#k_re_cu_menu").click(function() {
 				location.href = "<%=request.getContextPath()%>/burscheck";

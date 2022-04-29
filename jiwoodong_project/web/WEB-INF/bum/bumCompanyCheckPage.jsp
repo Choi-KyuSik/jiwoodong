@@ -107,7 +107,7 @@ article>div>p {
 	<header>
 		<div id="p_main_top">
 			<div id="p_top_logo">
-				<a href="" id="k_logo"><img
+				<a href="BumMainPage" id="k_logo"><img
 					src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"
 					width="80px" alt="logo"></a>
 			</div>
@@ -116,7 +116,7 @@ article>div>p {
 					<div class="container-fluid">
 						<div class="collapse navbar-collapse">
 							<ul class="navbar-nav">
-								<li class="nav-item dropdown"><a class="nav-link dropdown"
+								<li class="nav-item dropdown"><a class="nav-link dropdown" href="bucpcheck"
 									id="k_info_menu" role="button"> 내정보 관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
@@ -124,7 +124,7 @@ article>div>p {
 									id="k_review_menu" href="#" role="button"> 리뷰관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
-								<li class="nav-item dropdown"><a class="nav-link dropdown"
+								<li class="nav-item dropdown"><a class="nav-link dropdown" href="bucompany"
 									id="k_bu_eroll_menu" href="#" role="button"> 업체등록 </a></li>
 							</ul>
 							<ul class="navbar-nav">
@@ -179,11 +179,11 @@ article>div>p {
 			<nav id="k_bu_eroll_top">
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a class="nav-link dropdown"
-						id="k_info_menu" href="#" role="button"> 기본정보 </a></li>
+						id="k_info_menu" href="bucpcheck" role="button"> 기본정보 </a></li>
 				</ul>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a class="nav-link dropdown"
-						id="k_info_menu" href="#" role="button"> 내정보 삭제 </a></li>
+						id="k_info_menu" href="bucpdelete" role="button"> 내정보 삭제 </a></li>
 				</ul>
 			</nav>
 				<form action="<%=request.getContextPath() %>/bucpupdate" method="post">
@@ -213,18 +213,23 @@ article>div>p {
 						<input type="text" value="${bvo.buId}" readonly>
 					</p>
 				</div>
-				<div>
+				<div id = "k_passwordChange">
 					변경할 비밀번호
+
 					<p>
-						<input type="password" name ="buPwd" value="${bvo.buPwd}">
+						<input type="password" class="pwd" id="buPwd" name ="buPwd" value="${bvo.buPwd}">						
 					</p>
 				</div>
-				<%-- <div>
+				 <div>
 					변경할 비밀번호 확인
 					<p>
-						<input type="password" name ="buPwd" value="${bvo.buPwd}">
+						<input type="password" id ="buPwd_re" name ="buPwd" value="${bvo.buPwd}">						
 					</p>
-				</div> --%>
+			<!-- <div class="content_content">
+					<span id="alert-success"style="display: none;">비밀번호가 일치합니다.</span> 
+					<span id="alert-danger"style="display: none; color: #d92742; font-weight: bold;">비밀번호가 일치하지 않습니다.</span>
+				</div> -->
+				</div> 
 				<div>
 					이메일 주소
 					<p>
@@ -239,84 +244,32 @@ article>div>p {
 					</p>
 				</div>
 				<div>
-					<input type="submit" value="수정하기">
+					<input type="button" id="k_cancle_btn" value="취소하기">
+					<input type="submit" id="update_btn" value="수정하기">
 				</div>
 			</form>
 		</div>
 
 	</article>
 </content>
-	<!-- <article>
-		<div id="k_bu_eroll_content">
-			<div>
-				<div class="k_company">
-					<strong>업체명을 입력해주세요.<span class="k_essential_info">*필수</span></strong>
-					<p>
-						<input type="text" placeholder="대표업체명을 입력해주세요.">
-					</p>
-				</div>
-				<div class="k_company">
-					<strong>업종을 선택해주세요.<span class="k_essential_info">*필수</span></strong>
-					<p>
-						<select name="category">
-							<option value="category_select">업종을 선택해주세요</option>
-							<option value="category_salon">미용실</option>
-							<option value="category_cafe">카페</option>
-							<option value="category_hotel">호텔</option>
-						</select>
-					</p>
-				</div>
-
-				<div class="k_company">
-					상세설명을 입력해주세요
-					<p>
-						<textarea placeholder="우리업체를 고객들에게 자세히 설명해주세요"
-							class="k_company_info">                            
-                            </textarea>
-					</p>
-				</div>
-				<div class="k_company">업체 사진을 추가해 주세요</div>
-				<div class="k_company">
-					운영 구분
-					<p>
-						<label><span>모든 영업일 같아요</span></label> <label><span>평일/주말
-								달라요</span></label>
-					</p>
-				</div>
-				<div>
-					<strong>전화번호를 입력해주세요<span class="k_essential_info">*필수</span></strong>
-					<p>
-						<input type="text">
-					</p>
-				</div>
-				<div class="k_company">
-					<strong>주소를 입력해주세요<span class="k_essential_info">*필수</span></strong>
-					<p>
-						<input type="text">
-					</p>
-					<p>
-						<span>찾아오는 길 설명이 필요하신가요?</span>
-
-						<p>
-                                <textarea placeholder="예)"
-							class="k_company_info">                            
-                                </textarea>
-                            </p>
-                        </p>
-                        
-                        <button>취소하기</button>
-					<button>수정하기</button>
-                    </div>
-                </div>                
-            </div>
-        </article>--> 
-        
+          
         <script>
-			$("#k_info_content").show();
-		</script> 
+		$("#k_info_content").show();
 		
-		<!--전화번호 하이픈 정규식 DOM  --> 
-		<script>
+		/* 취소하기 btn */
+		$("#k_cancle_btn").click(function() {
+        	var result = confirm('메인페이지로 이동하시겠습니까?'); 
+        	if(result) { 
+        		//yes 
+        		location.href="BumMainPage";
+        		} else { 
+        		//no 
+        		}            
+        });
+		
+		
+					
+		<!--전화번호 하이픈 정규식 DOM  --> 		
 		$("#k_tel").on(
 				"input",
 				function() {
@@ -326,7 +279,65 @@ article>div>p {
 							.replace(/(\-{1,2})$/g, "");
 
 				});
-	</script> 
+		</script> 
+		
+		<script>
+        //유효성체크
+        //$("#mId").focusout(function(){});
+
+       /*  $("#btnenroll").click(function(){
+            var mId = $("#mId").val().trim();
+            var regExpId = /[A-Za-z0-9]{6,20}$/; 
+            //var regExpId = /^[A-Za-z][A-Za-z0-9!]{2,4}$/;   // 첫글자는 영문자, 영문자숫자!_으로 3-5자 입력가능
+            if(!regExpId.test(mId)){
+                alert("아이디 입력란에는 영문자, 숫자를 사용한 6자이상 20자이하");
+                $("#mId").focus();
+                return false;
+            } */
+            
+            $("#update_btn").click(function(){           
+            var password = $("#buPwd").val().trim();
+            if(!password || password != $("#buPwd_re").val().trim()){
+                alert("패스워드 입력란과 확인란이 같지 않습니다.");
+                $("#buPwd").val("");
+                $("#buPwd_re").val("");
+                $("#buPwd").focus();
+                return false;
+            }
+          //   var regExpPassword = /^(?=.[A-Za-z])(?=.[0-9])(?=.*[^A-Za-z0-9]).{8,16}$/; // 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자
+           /* if(!regExpPassword.test(buPwd)){
+                alert("패스워드 입력란에는 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자");
+                $("#buPwd").focus();
+                return false;
+            } */
+                               	
+            var num = password.search(/[0-9]/g);
+       	 	var eng = password.search(/[A-Za-z]/ig);
+       	 	var spe = password.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+	       	 if(password.length < 8 || password.length > 16){
+	       	  alert("패스워드 입력란에는 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자.");
+	       	  return false;
+	       	 }else if(password.search(/\s/) != -1){
+	       	  alert("비밀번호는 공백 없이 입력해주세요.");
+	       	  return false;
+	       	 }else if(num < 0 || eng < 0 || spe < 0 ){
+	       	  alert("패스워드 입력란에는 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자.");
+	       	  return false;
+	       	 }else {
+	       		console.log("통과"); 
+	       	    return true;
+	       	 }
+
+            var phone = $("#buTel").val().trim();
+            var regExpPhone = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/; // 숫자3-숫자3,4-숫자4
+            if(!regExpPhone.test(phone)){
+                alert("전화번호 입력란에는 000-0000-0000 형식");
+                $("#buTel").focus();
+                return false;
+            }
+        });
+    </script>
 
 	<script src="https://code.highcharts.com/modules/data.js"></script> <script>
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

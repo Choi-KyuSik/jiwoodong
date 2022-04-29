@@ -40,33 +40,26 @@ public class BusinessCompanyWriteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-//	System.out.println("테스트요!");
-
-		// Write이므로 Dao에 값을 넣어주는 insert!!
-
 		int result = 0;
 
-		//	cp_name
-		//	cp_category
-		//	cp_explain
-		//	Fl_Gno
-		//	Cp_classify
-		//	cp_address
-		//	cp_postcode
-		//	찾아오는 길
-		//	cp_dtaddress
-
-		int buNo = 13;
+		int buNo = 24;
 
 		String cpName = request.getParameter("cpName");
 		String cpCategory = request.getParameter("cpCategory");
 		String cpExplain = request.getParameter("cpExplain");
-		//	String flGno
-		// 운영구분(?)
+		//	String flGno 
 		String cpClassify = request.getParameter("cpClassify");
-		String cpAddress = request.getParameter("cpAddress");
+		System.out.println(cpClassify);
+		String cpOpenDate = request.getParameter("cpOpenDate");
+		System.out.println(cpOpenDate);
+		String cpCloseDate = request.getParameter("cpCloseDate");
+		System.out.println(cpCloseDate);
+		String cpOpenTime = request.getParameter("cpOpenTime");
+		System.out.println(cpOpenTime);
+		String cpCloseTime = request.getParameter("cpCloseTime");
 		String cpPostcode = request.getParameter("cpPostcode");
+		System.out.println("cpPostcode:" + cpPostcode);
+		String cpAddress = request.getParameter("cpAddress");		
 		String cpDtaddress = request.getParameter("cpDtaddress");
 
 		CompanyVo cvo = new CompanyVo();
@@ -75,19 +68,24 @@ public class BusinessCompanyWriteServlet extends HttpServlet {
 		cvo.setCpCategory(cpCategory);
 		cvo.setCpExplain(cpExplain);
 		cvo.setCpClassify(cpClassify);
-		cvo.setCpAddress(cpAddress);
+		cvo.setCpOpenDate(cpOpenDate);
+		cvo.setCpCloseDate(cpCloseDate);
+		cvo.setCpOpenTime(cpOpenTime);
+		cvo.setCpCloseTime(cpCloseTime);
 		cvo.setCpPostcode(cpPostcode);
+		cvo.setCpAddress(cpAddress);		
 		cvo.setCpDtaddress(cpDtaddress);
 
 		result = new BumService().companyWrite(cvo);
 
 		System.out.println("Controller result" + result);
 
-		if (result < 0) {
+		if (result < 1) {
 			System.out.println("업체 등록실패============");
-			request.getRequestDispatcher("WEB-INF/bum/businessCompanyWritePage.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/bum/businessCompyWritePage.jsp").forward(request, response);
 		} else {
 			System.out.println("업체 등록 *성공*");
+			request.getRequestDispatcher("WEB-INF/bum/bumMainPage.jsp").forward(request, response);
 			// 얼럿창 띄워준 후 select문으로 업체등록 된 내역 보여주기
 		}
 
