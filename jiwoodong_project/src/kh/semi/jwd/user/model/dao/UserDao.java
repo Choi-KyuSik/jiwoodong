@@ -17,7 +17,7 @@ public class UserDao {
 	private ResultSet rs = null;
 	
 	//승희 - 사용자 회원가입
-	public int insetUserMember(Connection conn, UserVo vo) {
+	public int insertUserMember(Connection conn, UserVo vo) {
 //		UM_ID             NOT NULL VARCHAR2(20)  
 //		UM_PWD            NOT NULL VARCHAR2(40)  
 //		UM_NAME           NOT NULL VARCHAR2(20)  
@@ -25,10 +25,12 @@ public class UserDao {
 //		UM_BIRTH          NOT NULL VARCHAR2(20)  
 //		UM_TEL            NOT NULL VARCHAR2(20)  
 //		UM_EMAIL          NOT NULL VARCHAR2(100) 
-		
+//		UM_POSTCODE       NOT NULL VARCHAR2(20)  
+//		UM_ADDRESS        NOT NULL VARCHAR2(100) 
+//		UM_DETAIL_ADDRESS NOT NULL VARCHAR2(100)
 		int result = 0;
-		String sql = "INSERT INTO u_member(UM_ID,UM_PWD,UM_NAME,UM_GENDER,UM_BIRTH,UM_TEL,UM_EMAIL) VALUES (?,?,?,?,?,?,?)";
-		
+		String sql = "INSERT INTO u_member(UM_ID,UM_PWD,UM_NAME,UM_GENDER,UM_BIRTH,UM_TEL,UM_EMAIL,UM_POSTCODE,UM_ADDRESS,UM_DETAIL_ADDRESS) VALUES(?,?,?,?,REPLACE(?,'-','/'),?,?,?,?,?)";
+//		UM_ID,UM_PWD,UM_NAME,UM_GENDER,UM_BIRTH,UM_TEL,UM_EMAIL
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -39,6 +41,9 @@ public class UserDao {
 			pstmt.setString(5, vo.getUmBirth());
 			pstmt.setString(6, vo.getUmTel());
 			pstmt.setString(7, vo.getUmEmail());
+			pstmt.setString(8, vo.getUmPostode());
+			pstmt.setString(9, vo.getUmAddress());
+			pstmt.setString(10, vo.getUmDetailAddress());
 			
 			result = pstmt.executeUpdate();
 			

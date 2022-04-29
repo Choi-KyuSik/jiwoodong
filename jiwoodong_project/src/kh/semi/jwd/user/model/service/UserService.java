@@ -11,10 +11,10 @@ import kh.semi.jwd.user.model.vo.UserVo;
 public class UserService {
 
 	//승희 - 사용자 회원가입 
-	public int insetUserMember(UserVo vo) {
+	public int insertUserMember(UserVo vo) {
 		int result = 0;
 		Connection conn = getConnection();
-		result = new UserDao().insetUserMember(conn, vo);
+		result = new UserDao().insertUserMember(conn, vo);
 		if(result > 0) {
 			commit(conn);
 		}else {

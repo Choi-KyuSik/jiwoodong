@@ -46,6 +46,9 @@ public class UserEnrollDoController extends HttpServlet {
 		String email = request.getParameter("email");
 		String user_id = request.getParameter("user_id");
 		String password = request.getParameter("password");
+		String postcode = request.getParameter("postcode");
+		String address = request.getParameter("address");
+		String detailAddress = request.getParameter("detailAddress");
 	
 		UserVo vo = new UserVo();
 		vo.setUmName(name);
@@ -55,10 +58,13 @@ public class UserEnrollDoController extends HttpServlet {
 		vo.setUmEmail(email);
 		vo.setUmId(user_id);
 		vo.setUmPwd(password);
+		vo.setUmPostode(postcode);
+		vo.setUmAddress(address);
+		vo.setUmDetailAddress(detailAddress);
 		
 		System.out.println("UserEnrollcontroller vo: "+ vo);
 		
-		int result = new UserService().insetUserMember(vo);
+		int result = new UserService().insertUserMember(vo);
 		
 		System.out.println("UserEnrollcontroller result : "+result);
 		

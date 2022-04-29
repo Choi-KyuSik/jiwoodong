@@ -47,7 +47,7 @@ public class UserVo {
 	
 	//회원가입시 사용할 생성자
 	public UserVo(String umId, String umPwd, String umName, String umGender, String umBirth, String umTel,
-			String umEmail, String umUseYn) {
+			String umEmail) {
 		super();
 		this.umId = umId;
 		this.umPwd = umPwd;
@@ -56,7 +56,6 @@ public class UserVo {
 		this.umBirth = umBirth;
 		this.umTel = umTel;
 		this.umEmail = umEmail;
-		this.umUseYn = umUseYn;
 	}
 
 	

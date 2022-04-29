@@ -1,0 +1,79 @@
+
+        
+    *{
+        padding: 0;
+        margin: 0;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    body { 
+        min-height: 100vh;
+         background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c)); 
+         background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+          background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
+          background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
+          background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+    }
+
+    #join_div { 
+    max-width: 1000px;
+    margin-top: 80px;
+    background: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px; 
+    border-radius: 10px; 
+    -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15); 
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15) 
+    }             
+
+    #join_div{
+        box-sizing: border-box;
+        width: 1200px;
+        margin: 0 auto;
+    }
+    #join{
+        margin: 0 auto;
+        border-collapse: collapse;
+        text-align: center;
+
+        width: 100%;
+        height: 600px;
+    }
+    #join>tr{
+        width: 100%;
+    }
+    #join td{
+        box-sizing: border-box;
+        
+
+    }
+    #bu_icon{
+        margin: 0;
+    }
+    #join_bu>img,#join_user>img{
+        width: 70%;
+    }
+    #join_bu_btn,#join_u_btn
+    ,#join_bu_kakao_btn,#join_u_kakao_btn{
+        width: 200px;
+        height: 40px;
+        margin: 2px;
+
+        border: 0px;
+        background-color: #fff;
+        font-weight: bolder;
+        color: #0f7bc3;
+
+       
+        
+    }
+    #join_bu_btn:hover,
+    #join_u_btn:hover,
+    #join_bu_kakao_btn:hover,
+    #join_u_kakao_btn:hover{
+        background-color: #3771ae;
+        color: #fff;
+
+        border-radius: 30px;
+    }
+

@@ -173,7 +173,8 @@ public class BumDao {
 //		BU_USEYN       NOT NULL VARCHAR2(1)    
 
 		int result = 0 ;
-		String sql = "INSERT INTO b_member(BU_NO,BU_ID,BU_NUMBER,BU_PWD,BU_NAME,BU_BIRTH,BU_GENDER,BU_EMAIL,BU_TEL) values(B_MEMBER_SEQ.NEXTVAL,?,?,?,?,REPLACE(?,'-','/'),?,?,?)";
+		String sql = "INSERT INTO b_member(BU_NO,BU_ID,BU_NUMBER,BU_PWD,BU_NAME,BU_BIRTH,BU_GENDER,BU_EMAIL,BU_TEL) "
+				+ "values(B_MEMBER_SEQ.NEXTVAL,?,?,?,?,REPLACE(?,'-','/'),?,?,?)";
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
