@@ -49,11 +49,7 @@ public class AdminNoticeDao {
 
 		//		String sql = "SELECT * FROM NOTICE ORDER BY NT_WRITE_DATE DESC";
 		//		String sql = "SELECT * FROM(SELECT A.*, ROWNUM RNUM FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') FROM NOTICE ORDER BY NT_WRITE_DATE DESC) A) WHERE RNUM BETWEEN 1 AND 10";
-		String sql = "SELECT B.NT_NO, B.NT_TITLE, B.NT_CONTENT, B.NT_WRITE_DATE\r\n"
-				+ "FROM(SELECT ROWNUM RNUM, A.* \r\n"
-				+ "     FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE\r\n"
-				+ "           FROM NOTICE ORDER BY NT_NO DESC) A) B\r\n"
-				+ "WHERE RNUM BETWEEN 1 AND 9";
+		String sql = "SELECT B.NT_NO, B.NT_TITLE, B.NT_CONTENT, B.NT_WRITE_DATE FROM(SELECT ROWNUM RNUM, A.* FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE FROM NOTICE ORDER BY NT_NO DESC) A) B WHERE RNUM BETWEEN 1 AND 9";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -74,7 +70,7 @@ public class AdminNoticeDao {
 					adnvo.setNtDate(rs.getString(4));
 
 					voList.add(adnvo);
-					//					System.out.println("dao다. 값 담겼니?" + voList);
+					// System.out.println("dao다. 값 담겼니?" + voList);
 
 				} while (rs.next());
 			}
@@ -87,21 +83,19 @@ public class AdminNoticeDao {
 		return voList;
 	}
 
-	// 글조회(공지사항조회)
-	public ArrayList<AdminNoticeVo> noticeListDetail(Connection conn) {
+	// 글조회(공지사항조회) - 페이징
+	public ArrayList<AdminNoticeVo> noticeListDetailPaging(Connection conn, int startRnum, int endRnum) {
 
 		ArrayList<AdminNoticeVo> voList = null;
 
 		//		String sql = "SELECT * FROM NOTICE ORDER BY NT_WRITE_DATE DESC";
 		//		String sql = "SELECT * FROM(SELECT A.*, ROWNUM RNUM FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') FROM NOTICE ORDER BY NT_WRITE_DATE DESC) A) WHERE RNUM BETWEEN 1 AND 10";
-		String sql = "SELECT B.NT_NO, B.NT_TITLE, B.NT_CONTENT, B.NT_WRITE_DATE\r\n"
-				+ "FROM(SELECT ROWNUM RNUM, A.* \r\n"
-				+ "     FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE\r\n"
-				+ "           FROM NOTICE ORDER BY NT_NO DESC) A) B\r\n"
-				+ "WHERE RNUM BETWEEN 1 AND 18";
+		String sql = "SELECT B.NT_NO, B.NT_TITLE, B.NT_CONTENT, B.NT_WRITE_DATE FROM(SELECT ROWNUM RNUM, A.* FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE FROM NOTICE ORDER BY NT_NO DESC) A) B WHERE RNUM BETWEEN ? AND ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
@@ -142,8 +136,7 @@ public class AdminNoticeDao {
 		//			NT_WRITE_DATE NOT NULL TIMESTAMP(6)   
 		//			NT_COUNT      NOT NULL NUMBER         
 
-		String sql = "UPDATE NOTICE SET NT_TITLE = ?, NT_CONTENT = ?\r\n"
-				+ "WHERE NT_NO = ?";
+		String sql = "UPDATE NOTICE SET NT_TITLE = ?, NT_CONTENT = ? WHERE NT_NO = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -188,9 +181,7 @@ public class AdminNoticeDao {
 
 		AdminNoticeVo adnvo = null;
 
-		String sql = "SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD')\r\n"
-				+ "FROM NOTICE\r\n"
-				+ "WHERE NT_NO = ?";
+		String sql = "SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') FROM NOTICE WHERE NT_NO = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -212,6 +203,29 @@ public class AdminNoticeDao {
 		}
 
 		return adnvo;
+	}
+
+	// 공지사항 글 개수
+	public int countNoticeList(Connection conn) {
+
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM NOTICE";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+
 	}
 
 

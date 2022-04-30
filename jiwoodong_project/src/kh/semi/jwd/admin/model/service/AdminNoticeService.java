@@ -34,11 +34,11 @@ public class AdminNoticeService {
 		return voList;
 	}
 	
-	// 글 조회(공지사항조회)
-	public ArrayList<AdminNoticeVo> noticeListDetail() {
+	// 글 조회(공지사항조회) - 페이징처리
+	public ArrayList<AdminNoticeVo> noticeListDetailPaging(int startRnum, int endRnum) {
 
 		Connection conn = getConnection();
-		ArrayList<AdminNoticeVo> voList = dao.noticeListDetail(conn);
+		ArrayList<AdminNoticeVo> voList = dao.noticeListDetailPaging(conn, startRnum, endRnum);
 		close(conn);
 
 		//		System.out.println("service다. 담겼니?" + voList);
@@ -69,6 +69,14 @@ public class AdminNoticeService {
 		Connection conn = getConnection();
 		AdminNoticeVo result = dao.readNotice(conn, ntNo);
 		
+		close(conn);
+		return result;
+	}
+	
+	// 공지사항 개수 확인
+	public int countNoticeList() {
+		Connection conn = getConnection();
+		int result = dao.countNoticeList(conn);
 		close(conn);
 		return result;
 	}

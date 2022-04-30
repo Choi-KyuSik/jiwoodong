@@ -40,7 +40,7 @@ public class AdminBuDetailInfoController extends HttpServlet {
 		ArrayList<Map<String, Object>> adBuAccept = new AdminService().companyAcceptDetailRead(buNo);
 		
 		request.setAttribute("adBuAccept", adBuAccept);
-//		System.out.println(adBuAccept);
+		System.out.println("adBuAccept" + adBuAccept);
 		
 		request.getRequestDispatcher("WEB-INF/admin/adminBuDetailInfo.jsp").forward(request, response);
 	}

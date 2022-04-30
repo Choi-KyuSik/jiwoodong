@@ -65,12 +65,11 @@ public class AdminNoticeWriteDoController extends HttpServlet {
 		int result = new AdminNoticeService().insertNotice(adnvo);
 		if(result < 1) {
 			System.out.println("글등록 실패!");
-			request.getRequestDispatcher(request.getContextPath() + "/admin/adminMainPage.jsp").forward(request, response);
-			response.sendRedirect("AdminMainPage");
+			// request.getRequestDispatcher(request.getContextPath() + "/admin/adminMainPage.jsp").forward(request, response);
+			response.sendRedirect("AdminNoticeList");
 		} else {
 			System.out.println("글등록 성공!");
-			request.getSession().setAttribute("tabMenu", "1");
-			response.sendRedirect("AdminMainPage");
+			response.sendRedirect("AdminNoticeList");
 		}
 		
 	}

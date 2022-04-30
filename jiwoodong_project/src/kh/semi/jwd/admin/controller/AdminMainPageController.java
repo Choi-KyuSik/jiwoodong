@@ -14,6 +14,7 @@ import kh.semi.jwd.admin.model.service.AdminNoticeService;
 import kh.semi.jwd.admin.model.service.AdminService;
 import kh.semi.jwd.admin.model.vo.AdminNoticeVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
+import kh.semi.jwd.user.model.vo.AdminUserVo;
 
 /**
  * Servlet implementation class AdminMyPage
@@ -41,24 +42,24 @@ public class AdminMainPageController extends HttpServlet {
 		}
 		
 		ArrayList<AdminNoticeVo> adnolist = new AdminNoticeService().noticeList();
-		ArrayList<AdminNoticeVo> adnoDetailList = new AdminNoticeService().noticeListDetail();
 		ArrayList<Map<String, Object>> cpaclist = new AdminService().companyAcceptList();
-		ArrayList<Map<String, Object>> cpacDetailList = new AdminService().companyAcceptList();
 		ArrayList<Map<String, Object>> acceptApprovalList = new AdminService().companyAcceptApprovalList();
 		ArrayList<Map<String, Object>> acceptRejectList = new AdminService().companyAcceptRejectList();
 		ArrayList<BumVo> buMemberInfoList = new AdminService().buMemberInfoList();
 		ArrayList<BumVo> buMemberDeleteList = new AdminService().buMemberDeleteList();
+		ArrayList<AdminUserVo> usMemberInfoList = new AdminService().usMemberInfoList();
+		ArrayList<AdminUserVo> usMemberDeleteList = new AdminService().umMemberDeleteList();
 		
 		
 		request.setAttribute("tabMenu", tabMenu);
 		request.setAttribute("adnolist", adnolist);
 		request.setAttribute("cpAccept", cpaclist);
-		request.setAttribute("cpAcceptDetail", cpacDetailList);
-		request.setAttribute("adnoDetailList", adnoDetailList);
 		request.setAttribute("acceptApprovalList", acceptApprovalList);
 		request.setAttribute("acceptRejectList", acceptRejectList);
 		request.setAttribute("buMemberInfoList", buMemberInfoList);
 		request.setAttribute("buMemberDeleteList", buMemberDeleteList);
+		request.setAttribute("usMemberInfoList", usMemberInfoList);
+		request.setAttribute("usMemberDeleteList", usMemberDeleteList);
 //		System.out.println("controller다. 담겼니?" + adnolist);
 		request.getRequestDispatcher("WEB-INF/admin/adminMainPage.jsp").forward(request, response);
 	}
