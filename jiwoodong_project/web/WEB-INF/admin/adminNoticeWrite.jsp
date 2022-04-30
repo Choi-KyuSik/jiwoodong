@@ -65,56 +65,6 @@
 			</form>
 		</div>
 	</div>
-	<!-- 메뉴별 content display변경 -->
-    <script>
-	let tabMenu = '${tabMenu}';
-    	console.log("tabMenu: "+tabMenu);
-    	if(tabMenu == ''){
-    		tabMenu = 0;
-    	}
-    	showTabMenu();
-    	function showTabMenu(){
-       		console.log(tabMenu);
-    		$(".tab_menu").each(function(index, elem){
-        		console.log(index);
-        		console.log(elem);
-        		if(index == tabMenu){
-        			console.log("show");
-        			console.log(elem);
-        			$(elem).show();
-        		}else{
-        			$(elem).hide();
-        		}
-        	});
-    	}
-        $("#s_notice_menu").click(function () {
-			tabMenu = 1;
-        	showTabMenu();
-/*            $("#s_notice_content").show();
-            $("#s_bu_accept_content").hide();
-            $("#s_bu_info_content").hide();
-            $("#s_us_info_content").hide();
-            $("#s_review_content").hide();
-            $("#main_box").hide(); */
-        });
-        $("#s_bu_accept_menu").click(function () {
-            tabMenu = 2;
-            showTabMenu();
-        });
-        $("#s_bu_info_menu").click(function () {
-            tabMenu = 3;
-            showTabMenu();
-        });
-        $("#s_us_info_menu").click(function () {
-            tabMenu = 4;
-            showTabMenu();
-        });
-        $("#s_review_menu").click(function () {
-            tabMenu = 5;
-            showTabMenu();
-        });
-
-    </script>
 	<script>
 		$("#back_btn").click(function() {
 			history.back();

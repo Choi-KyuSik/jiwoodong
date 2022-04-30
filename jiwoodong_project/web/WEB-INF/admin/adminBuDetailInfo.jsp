@@ -50,7 +50,7 @@
 	<div class="container">
 		<form action="" id="frm" method="post">
 		<div class="row"
-			style="width: 1200px; margin: 0 auto; padding-top: 30px;">
+			style="width: 1200px; margin: 0 auto; padding-top: 30px; display: block;">
 			<table class="table">
 				<thead>
 					<tr>

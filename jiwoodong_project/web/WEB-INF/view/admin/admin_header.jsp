@@ -33,7 +33,7 @@
                             </ul>
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown dropdown-toggle" href="#" role="button"
+                                    <a class="nav-link dropdown dropdown-toggle" id="s_bu_menu" href="#" role="button"
                                         data-bs-toggle="dropdown">
                                         사업자관리
                                     </a>

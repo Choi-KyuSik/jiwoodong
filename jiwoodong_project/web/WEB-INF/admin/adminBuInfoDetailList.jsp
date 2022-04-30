@@ -57,7 +57,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<th class="table-primary s_ac_th">사업자 번호</th>
+							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">사업자 번호</th>
 							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
 								name="buNo" maxlength="300" readonly="readonly"
 								value="${buMemberDetail.buNo}" /></td>
@@ -69,7 +69,7 @@
 								value="${buMemberDetail.buId}" /></td>
 						</tr>
 						<tr>
-							<th class="table-primary s_ac_th">이름</th>
+							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">이름</th>
 							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
 								name="buName" maxlength="300"
 								value="${buMemberDetail.buName}" /></td>
@@ -81,7 +81,7 @@
 								required="required" value="${buMemberDetail.buBirth}" /></td>
 						</tr>
 						<tr>
-							<th class="table-primary s_ac_th">전화번호</th>
+							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">전화번호</th>
 							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
 								name="buTel" maxlength="300"
 								required="required" value="${buMemberDetail.buTel}" /></td>
@@ -93,7 +93,7 @@
 								required="required" value="${buMemberDetail.buEmail}" /></td>
 						</tr>
 						<tr>
-							<th class="table-primary s_ac_th">가입일</th>
+							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">가입일</th>
 							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
 								name="toCharbuWriteDate" maxlength="300" readonly="readonly"
 								required="required" value="${buMemberDetail.toCharbuWriteDate}" /></td>
