@@ -81,6 +81,7 @@ header {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	border-radius: 15px;
 }
 
 .statiscics_font {
@@ -88,13 +89,14 @@ header {
 	margin-top: 22px;
 }
 /* 컨텐트 */
-content>article>div {
+.c_info_bgcolor {
 	width: 1200px;
 	height: 1000px;
 	padding: 30px;
-	display: none;
 	margin: 20px auto 0;
+	display: none;
 	background-color: rgb(241, 241, 241);
+	border-radius: 15px;
 }
 
 /* 컨텐트안 제목 */
@@ -103,6 +105,18 @@ article>div>p {
 	font-weight: bold;
 	padding-top: 20px;
 	font-size: large;
+}
+
+/* 홈 탭*/
+.c_home_info {
+	width: 13%;
+	padding: 15px;
+	border-right: 1px solid #a7a6a6;
+	text-align: center;
+}
+
+.c_home_info_td {
+	padding-left: 20px;
 }
 
 /* 상세페이지 사진 탭 */
@@ -124,33 +138,4 @@ article>div>p {
 	width: 100%;
 	height: 200px;
 	overflow: hidden;
-}
-
-.c_button {
-	margin: 0 auto;
-	bottom: 50px;
-	display: flex;
-	justify-content: center;
-	background-color: white;
-	width: 900px;
-}
-
-.c_button div {
-	margin-bottom: 40px;
-}
-
-.c_button div button {
-	width: 100px;
-	height: 40px;
-}
-
-.c_home_info {
-	width: 13%;
-	padding: 15px;
-	border-right: 1px solid #a7a6a6;
-	text-align: center;
-}
-
-.c_home_info_td {
-	padding-left: 20px;
 }

@@ -27,8 +27,16 @@ public class UsercpSearchpageVo {
 	private String cpCloseTime;
 	private String cpExplain;
 	private int cpNo;
-//	private String flGno;
+	private String flGno;
 	
+	public String getFlGno() {
+		return flGno;
+	}
+
+	public void setFlGno(String flGno) {
+		this.flGno = flGno;
+	}
+
 	public String getCpName() {
 		return cpName;
 	}
@@ -89,7 +97,7 @@ public class UsercpSearchpageVo {
 	public String toString() {
 		return "UsercpSearchpageVo [cpName=" + cpName + ", cpAddress=" + cpAddress + ", cpDTAddress=" + cpDTAddress
 				+ ", cpOpenTime=" + cpOpenTime + ", cpCloseTime=" + cpCloseTime + ", cpExplain=" + cpExplain + ", cpNo="
-				+ cpNo + "]";
+				+ cpNo + ", flGno=" + flGno + "]";
 	}
 
 	public UsercpSearchpageVo() {
