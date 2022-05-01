@@ -1,6 +1,8 @@
 package kh.semi.jwd.bum.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,8 +31,7 @@ public class BumEnrollDoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		request.getRequestDispatcher("request.getContextPath()/enroll.jsp").forward(request, response);
+//		request.getRequestDispatcher("WEB-INF/enroll/bumIdCheck.jsp").forward(request, response);
 //	}
 
 	/**
@@ -58,6 +59,7 @@ public class BumEnrollDoController extends HttpServlet {
 		String email = request.getParameter("email");
 		String bu_id = request.getParameter("bu_id");
 		String password = request.getParameter("password");
+		String password_check = request.getParameter("password_check");
 //		String clause1 = request.getParameter("clause1");
 //		String clause2 = request.getParameter("clause2");
 //		String clause3 = request.getParameter("clause3");
@@ -87,7 +89,7 @@ public class BumEnrollDoController extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 		}
 		
-		
+
 		
 	}
 

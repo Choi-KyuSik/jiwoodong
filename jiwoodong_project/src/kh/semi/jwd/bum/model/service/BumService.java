@@ -68,6 +68,26 @@ public class BumService {
 		}
 		return result;
 	}
+	
+	public int checkBuId(String bu_id) {
+		int result;
+		Connection conn = getConnection();
+		result = new BumDao().checkBuId(conn, bu_id);
+		close(conn);
+		System.out.println("checkBuId result:" + result);
+		return result;
+		
+	}
+	public int loginBuMember(BumVo vo) {
+		int result;
+		Connection conn = getConnection();
+		result = new BumDao().loginBuMember(conn, vo);
+		close(conn);
+		System.out.println("loginBuMember result:" + result);
+		return result;
+		
+	}
+	
 
 	// 우진
 	public int companyUpdate(int buNo, BumVo vo) {

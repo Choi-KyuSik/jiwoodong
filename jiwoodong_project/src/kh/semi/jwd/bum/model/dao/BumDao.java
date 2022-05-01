@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,7 @@ import kh.semi.jwd.bum.model.vo.CompanyVo;
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
 public class BumDao {
-
+	private Statement stmt = null;
 	// DB를 왔다갔다 하는것
 	private PreparedStatement pstmt = null;
 	// DB를 Java용 언어로 바꿔주는것
@@ -202,55 +203,53 @@ public class BumDao {
 	
 	//승희 - 아이디 중복확인
 	
-	public boolean checkDublicatedBuId(Connection conn,BumVo vo) {
+	public int checkBuId(Connection conn, String bu_id) {
 		
-		boolean flag = true;
+		int result = -1;
+		
+		String sql = "select bu_id from b_member where bu_id=?";
+		System.out.println(bu_id);
+		try {
+//			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bu_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = 0;
+			}else {
+				result = 1;
+			}
+			System.out.println("아이디 중복체크 결과: "+result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
+		}
+		return result;
+	}
+	
+	
+	//승희 - 사업자 로그인
+	public int loginBuMember(Connection conn,BumVo vo) {
+		int result = -1;
 		String sql = "";
-		sql = "SELECT COUNT * FROM B_MEMBER WHERE BU_ID=? ";
+		
+		sql = "SELECT * FROM b_member WHERE BU_ID = ? AND BU_PWD= ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getBuId());
-			rs=pstmt.executeQuery();
-			if(rs.next() && rs.getInt(1)>0) {
-				flag = false;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-			close(conn);
-		}
-		return flag;
-	}
-	
-	//승희 - 사업자 로그인
-	public BumVo loginBuMember(Connection conn,BumVo vo) {
-		BumVo bvo = null;
-		ResultSet rs = null;
-		String sql = "";
-		
-		sql = "SELECT BU_NO,BU_ID,BU_NUMBER,BU_PWD,BU_NAME,BU_BIRTH,BU_GENDER,BU_EMAIL,BU_TEL,BU_USEYN FROM B_MEMEBER WHERE BU_ID =? AND BU_PWD=? ";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, bvo.getBuId());
-			pstmt.setString(2, bvo.getBuPwd());
+			pstmt.setString(2, vo.getBuPwd());
 			rs=pstmt.executeQuery(sql);
 			//id와 pwd 가 일치하는 것이 나올때만 rs에 값이 있다.
 			if(rs.next()) {
-				bvo = new BumVo();
-				bvo.setBuNo(rs.getInt("bu_No"));
-				bvo.setBuId(rs.getString("bu_Id"));
-				bvo.setBuNumber(rs.getString("bu_Number"));
-				bvo.setBuPwd(rs.getString("bu_Pwd"));
-				bvo.setBuName(rs.getString("bu_Name"));
-				bvo.setBuBirth(rs.getString("bu_Birth"));
-				bvo.setBuGender(rs.getString("bu_Gender"));
-				bvo.setBuEmail(rs.getString("bu_Email"));
-				bvo.setBuTel(rs.getString("bu_Tel"));
-				bvo.setBuUseYn(rs.getString("bu_UseYn"));
+				result = 0;
 				
+			}else {
+				result = 1;
 			}
+			System.out.println("로그인 결과: "+result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -259,7 +258,7 @@ public class BumDao {
 			close(conn);
 		}
 		
-		return bvo;
+		return result;
 	}
 	
 // TODO 우진: 나중에 로그인 구현되면 Session에 담아야함 

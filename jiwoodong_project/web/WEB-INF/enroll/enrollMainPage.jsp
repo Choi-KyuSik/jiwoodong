@@ -30,7 +30,7 @@
                 <td id="join_bu">
                    
                     <img alt="사업자 이미지" src="https://cdn.discordapp.com/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png"><br>
-                    <input type="button" id="join_bu_btn" value="사업자로 시작하기"><br>
+                    <input type="button" id="join_bu_btn" value="사업자로 시작하기" ><br>
                     <input type="button" id="join_bu_kakao_btn" value="카카오톡으로 시작하기">
                 </td>
                 <td id="join_user">
@@ -46,6 +46,29 @@
         </table>
     </form>
     </div>
+    
+    <script>
+    //일반적인 회원가입
+    $("#join_bu_btn").click(function() {
+        var result = confirm('사용자 회원가입을 원하시나요??'); 
+        if(result) { 
+            //yes 
+            location.href="bumenroll";
+            } else { 
+            //no 
+            }
+    });
+    $("#join_u_btn").click(function() {
+        var result = confirm('사업자 회원가입을 원하시나요??'); 
+        if(result) { 
+            //yes 
+            location.href="userenroll";
+            } else { 
+            //no 
+            }
+    });
+    //카카오톡
+    </script>
 </body>
 </body>
 </html>

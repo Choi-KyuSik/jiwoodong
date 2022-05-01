@@ -24,7 +24,7 @@
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3"><strong>사업자 회원가입</strong></h4>
-            <form id="frm" class="validation-form" name="bu_enroll" onclick="" novalidate >
+            <form id="frm" class="validation-form" name="bu_enroll" onsubmit="return check()"  novalidate >
             
             <div class="row">
                   <div class="mb-3" style="display: inline-block; width: 100%; margin-left: 2%;"> 
@@ -39,11 +39,6 @@
                         <div class="invalid-feedback"> 이름을 입력해주세요.
                         </div>
                     </div>
-<!--                     <div class="col-md-6 mb-3">
-                        <label for="birth">생년월일</label> 
-                        <input type="text" class="form-control" id="birth" placeholder="YYYY-MM-DD" name="birth" required="required">
-                        <div class="invalid-feedback"> 생년월일를 입력해주세요. </div>
-                    </div> -->
 					<div class="col-md-6 mb-3">
                         <label for="birth">생년월일</label> 
                         <input type="date" class="form-control" id="birth" name="birth" placeholder="YYYY/MM/DD" required="required">
@@ -79,10 +74,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="bu_id" style="display: block;">아이디</label>
-                    <input type="text" class="form-control" id="bu_id" name="bu_id" required="required">
+                    <input type="text" class="form-control" id="bu_id" name="bu_id" onkeyPress="winopen()"  required="required">
                     <div class="invalid-feedback"> 아이디를 입력해주세요.
                     </div>
-                    <input type="button" id="bu_id_check" value="중복확인" onclick="CheckId()" >
+                    <input type="button" name="bu_id_check" id="bu_id_check" value="중복확인" onclick="winopen()" >
                 </div>
                 <div class="mb-3"> 
                     <label for="password">비밀번호</label> 
@@ -114,6 +109,7 @@
                 <br>
 	           
                 <button id="j_bu_enroll_btn" class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+                <button id="j_cancle_btn" class="btn btn-primary btn-lg btn-block" type="submit">취소하기</button>
             </form>
         </div>
     </div>
@@ -125,6 +121,15 @@
     
     
     <script type="text/javascript">
+    $("#j_cancle_btn").click(function() {
+        var result = confirm('메인페이지로 이동하시겠습니까?'); 
+        if(result) { 
+            //yes 
+            location.href="MainPage";
+            } else { 
+            //no 
+            }
+    });
 
     <!--생년월일 하이픈 정규식 DOM  -->
     $("#birth").on("input",function() {
@@ -133,9 +138,7 @@
     }); 
     
     <!--전화번호 하이픈 정규식 DOM  -->
-    $("#phone").on(
-            "input",
-            function() {
+    $("#phone").on("input",function() {
                 var target = document.getElementById("phone");
                 target.value = target.value.replace(/[^0-9]/g,'').replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(-{1,2})$/g,"");
     }); 
@@ -148,6 +151,9 @@
     
 	$("#j_bu_enroll_btn").click(function(){
 	
+		    
+		   
+	//형식 체크
 	var bu_num = $("#bu_num").val().trim();
 	var regExpPhone = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/; // 숫자3-숫자3,4-숫자4
 	if(!regExpPhone.test(bu_num)){
@@ -178,13 +184,100 @@
 		$("#password").focus();
 		return false;
 	}
-
 	
 	var frm = $("#frm");
 	frm.attr("action","bumenroll.lo"); 
 	frm.attr("method","post");
 	frm.submit();
 	});
+	
+	 function check() {
+		//빈칸 체크
+		 
+		var f = document.bu_enroll; 
+		    
+			 
+		    if (frm.value == "") {
+		        alert("아이디를 입력해주십시오");
+		        f.bu_id.focus();
+		        return false;
+		    }
+		    else if (f.bu_id_check.value == "") {
+		        alert("아이디 중복체크를 해주십시오");
+		        f.bu_id_check.focus();
+		        return false;
+		    }
+		    else if (f.password.value == "") {
+		        alert("비밀번호를 입력해주십시오");
+		        f.password.focus();
+		        
+		        return false;
+		    }
+
+		    else if (f.name.value == "") {
+		        alert("이름을 입력해주십시오");
+		        f.name.focus();
+		        return false;
+		    }
+
+		    else if (f.birth.value == "") {
+		        alert("생년월일을 입력해주십시오");
+		        f.birth.focus();
+		        return false;
+		    }
+
+		    if (f.phone.value == "") {
+		        alert("핸드폰 번호를 입력해주십시오");
+		        f.phone.focus();
+		        return false;
+		    }
+
+		    if (f.email.value == "") {
+		        alert("이메일을 입력해주십시오");
+		        f.email.focus();
+		        return false;
+		    }
+
+		    if (f.email_check_no.value == "") {
+		        alert("인증번호를 입력해주십시오");
+		        f.email_check_no.focus();
+		        return false;
+		    }
+
+
+		    if (f.clause1.value == "" || f.clause1.length==0) {
+		        alert("이용약관에 동의 해주십시오");
+		        f.clause1.focus();
+		        return false;
+		    }
+
+
+		    if (f.clause2.value == "" || f.clause2.length==0) {
+		        alert("개인정보 수집및 이용약관에 동의해주십시오");
+		        f.clause2.focus();
+		        return false;
+		    }
+	            
+	    }   
+	 //아이디 중복체크
+<!-- 아이디중복체크 -->
+		function winopen(){
+			//새창을 열어서 페이지를 오픈 후 -> 회원아이디정보를 가지고 중복체크
+			//1. 아이디가 없으면 알림창과 진행x
+			//if(frm.bu_id.value =="" || frm.bu_id.value.length < 0){
+				//alert("아이디를 먼저 입력해주세요")
+				//frm.bu_id.focus();
+			//}else{
+				//2. 회원정보아이디를 가지고 있는 지 체크하려면 DB에 접근해야한다.
+				//자바스크립트로 어떻게 DB에 접근할까? => 파라미터로 id값을 가져가서 jsp페이지에서 진행하면 된다.
+				frm.bu_id.value="";						
+				window.open("bumIdCheck?bu_id="+frm.bu_id.value,"","width=500, height=300");
+			
+			
+			//}
+		}
+	
+
 </script>
 </body>
 </html>

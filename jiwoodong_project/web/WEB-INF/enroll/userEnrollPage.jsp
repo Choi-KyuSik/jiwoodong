@@ -36,7 +36,7 @@
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3"><strong>사용자 회원가입</strong></h4>
-            <form id="frm" name="user_enroll" onclick="" method="post" class="validation-form" novalidate>
+            <form id="frm" name="user_enroll"  method="post" class="validation-form" onsubmit="return check()"  novalidate>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="name">이름</label>
@@ -118,6 +118,7 @@
                 <br>
                 <button id="j_user_enroll_btn" class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
             </form>
+                <button id="j_cancle_btn" class="btn btn-primary btn-lg btn-block" type="submit">뒤로 가기</button>
        </div>
      </div>
     </div>
@@ -127,7 +128,16 @@
     </footer>
 
    <script type="text/javascript">
-
+   //뒤로 가기
+   $("#j_cancle_btn").click(function() {
+       var result = confirm('메인페이지로 이동하시겠습니까?'); 
+       if(result) { 
+           //yes 
+           location.href="MainPage";
+           } else { 
+           //no 
+           }
+   });
    <!--생년월일 하이픈 정규식 DOM  -->
    $("#birth").on("input",function() {
                var target = document.getElementById("birth");
@@ -135,8 +145,7 @@
    }); 
    
    <!--전화번호 하이픈 정규식 DOM  -->
-   $("#phone").on(
-           "input",
+   $("#phone").on("input",
            function() {
                var target = document.getElementById("phone");
                target.value = target.value.replace(/[^0-9]/g,'').replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(-{1,2})$/g,"");
@@ -161,9 +170,9 @@
 			return false;
 		}
 		//var regExpPassword = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,16}$/; // 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자
-		var regExpPassword = /^(?=.*[A-Za-z])(?=.*[0-9]).{8,16}$/; // 영문자, 숫자가 적어도 1개이상, 8~16글자
+		var regExpPassword =/^(?=.*[A-Za-z])(?=.*[0-9]).{8,16}$/;  // 영문자, 숫자가 적어도 1개이상, 8~16글자
 		if(!regExpPassword.test(password)){
-			alert("패스워드 입력란에는 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자");
+			alert("패스워드 입력란에는 영문자, 숫자가 적어도 1개이상, 8~16글자");
 			$("#password").focus();
 			return false;
 		}
@@ -224,8 +233,94 @@
 	            }
 	        }).open();
 	    });
-    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 
+		 function check() {
+				//빈칸 체크
+				 
+				var f = document.user_enroll; 
+				    
+					 
+				    if (f.user_id.value == "") {
+				        alert("아이디를 입력해주십시오");
+				        f.user_id.focus();
+				        return false;
+				    }
+				    else if (f.user_id_check.value == "") {
+				        alert("아이디 중복체크를 해주십시오");
+				        f.bu_id_check.focus();
+				        return false;
+				    }
+				    else if (f.password.value == "") {
+				        alert("비밀번호를 입력해주십시오");
+				        f.password.focus();
+				        
+				        return false;
+				    }
+
+				    else if (f.name.value == "") {
+				        alert("이름을 입력해주십시오");
+				        f.name.focus();
+				        return false;
+				    }
+
+				    else if (f.birth.value == "") {
+				        alert("생년월일을 입력해주십시오");
+				        f.birth.focus();
+				        return false;
+				    }
+
+				    if (f.phone.value == "") {
+				        alert("핸드폰 번호를 입력해주십시오");
+				        f.phone.focus();
+				        return false;
+				    }
+
+				    if (f.email.value == "") {
+				        alert("이메일을 입력해주십시오");
+				        f.email.focus();
+				        return false;
+				    }
+
+				    if (f.email_check_no.value == "") {
+				        alert("인증번호를 입력해주십시오");
+				        f.email_check_no.focus();
+				        return false;
+				    }
+				    if (f.postcode.value == "" || f.clause1.length==0) {
+				        alert("주소를 입력해주세요");
+				        f.clause1.focus();
+				        return false;
+				    }
+				    if (f.clause1.value == "" || f.clause1.length==0) {
+				        alert("이용약관에 동의 해주십시오");
+				        f.clause1.focus();
+				        return false;
+				    }
+
+
+				    if (f.clause2.value == "" || f.clause2.length==0) {
+				        alert("개인정보 수집및 이용약관에 동의해주십시오");
+				        f.clause2.focus();
+				        return false;
+				    }
+			            
+			    }
+		 //아이디 중복체크
+		 <!-- 아이디중복체크 -->
+		 		function winopen(){
+		 			//새창을 열어서 페이지를 오픈 후 -> 회원아이디정보를 가지고 중복체크
+		 			//1. 아이디가 없으면 알림창과 진행x
+		 			if(frm.user_id.value =="" || frm.user_id.value.length < 0){
+		 				alert("아이디를 먼저 입력해주세요")
+		 				frm.user_id.focus();
+		 			}else{
+		 				//2. 회원정보아이디를 가지고 있는 지 체크하려면 DB에 접근해야한다.
+		 				//자바스크립트로 어떻게 DB에 접근할까? => 파라미터로 id값을 가져가서 jsp페이지에서 진행하면 된다.
+		 				window.open("userIdCheck?user_id="+frm.user_id.value,"","width=500, height=300");
+		 			
+		 			
+		 			}
+		 		}
 	</script>
 </body>
 </html>
