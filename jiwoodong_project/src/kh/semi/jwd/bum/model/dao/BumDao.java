@@ -317,7 +317,7 @@ public class BumDao {
 	public int companyUpdate(Connection conn, int buNo, BumVo vo) {
 		System.out.println("companyUpdate Dao:"+vo);
 		int result = 0;
-		String sql = "update b_member " + "set bu_pwd = ?, bu_email = ?, bu_tel = ? " + "where bu_no = ?";
+		String sql = "update b_member set bu_pwd = ?, bu_email = ?, bu_tel = ? where bu_no = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -362,7 +362,7 @@ public class BumDao {
 //	CP_REJECT_MSG           VARCHAR2(200) 
 
 		String sql = "INSERT INTO company(CP_NO, BU_NO, CP_NAME, CP_CATEGORY, CP_CLASSIFY , CP_OPEN_DATE , CP_CLOSE_DATE, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, CP_OPEN_TIME, CP_CLOSE_TIME ,CP_EXPLAIN)"
-				+ "VALUES(COMPANY_SEQ.NEXTVAL,?,?,?,?,REPLACE(?, '-', '/'),REPLACE(?, '-', '/'),?,?,?,?,?,?)";
+				+ " VALUES(COMPANY_SEQ.NEXTVAL,?,?,?,?,REPLACE(?, '-', '/'),REPLACE(?, '-', '/'),?,?,?,?,?,?)";
 		try {
 
 			pstmt = conn.prepareStatement(sql);
@@ -372,8 +372,8 @@ public class BumDao {
 			pstmt.setString(4, cvo.getCpClassify());
 			pstmt.setString(5, cvo.getCpOpenDate());
 			pstmt.setString(6, cvo.getCpCloseDate());
-			pstmt.setString(7, cvo.getCpAddress());
-			pstmt.setString(8, cvo.getCpPostcode());
+			pstmt.setString(7, cvo.getCpPostcode());
+			pstmt.setString(8, cvo.getCpAddress());
 			pstmt.setString(9, cvo.getCpDtaddress());
 			pstmt.setString(10, cvo.getCpOpenTime());
 			pstmt.setString(11, cvo.getCpCloseTime());
@@ -396,7 +396,7 @@ public class BumDao {
 	public int companyDelete(Connection conn, BumVo vo) {
 		System.out.println("companyDelete buNo:" + vo);
 		int result = 0;
-		String sql = "update b_member set bu_useyn = 'n' where bu_no = ?";
+		String sql = "update b_member set bu_useyn = 'N' where bu_no = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

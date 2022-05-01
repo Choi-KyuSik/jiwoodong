@@ -244,7 +244,7 @@ article>div>p {
 				</div>
 				<div>
 					<input type="button" id="k_cancle_btn" value="취소하기">
-					<input type="submit" value="수정하기">
+					<input type="submit" id= "k_update_btn" value="수정하기">
 				</div>
 			</form>
 		</div>
@@ -267,6 +267,19 @@ article>div>p {
         		}            
         });
         
+		/* 수정하기 버튼 */
+		
+		$("#k_update_btn").click(function() {
+        	var result = confirm('회원님의 정보를 수정하시겠습니까?'); 
+        	if(result) { 
+        		//yes 
+        		location.href="bucpupdate";
+        		} else { 
+        		//no 
+        		}            
+        });
+		
+		
         //유효성체크
         //$("#mId").focusout(function(){});
 

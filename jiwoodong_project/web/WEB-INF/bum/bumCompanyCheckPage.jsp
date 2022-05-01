@@ -61,13 +61,14 @@ header {
 <!--content-->
 <style>
 /* 컨텐트 */
-content>article>div {
+#k_info_content {
 	width: 1200px;
 	height: 1000px;
 	padding: 30px;
 	display: none;
 	margin: 20px auto 0;
 	background-color: rgb(241, 241, 241);
+	border-radius: 15px;
 }
 
 /* 컨텐트안 제목 */
@@ -116,16 +117,17 @@ article>div>p {
 					<div class="container-fluid">
 						<div class="collapse navbar-collapse">
 							<ul class="navbar-nav">
-								<li class="nav-item dropdown"><a class="nav-link dropdown" href="bucpcheck"
-									id="k_info_menu" role="button"> 내정보 관리 </a></li>
+								<li class="nav-item dropdown"><a class="nav-link dropdown"
+									href="bucpcheck" id="k_info_menu" role="button"> 내정보 관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
 									id="k_review_menu" href="#" role="button"> 리뷰관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
-								<li class="nav-item dropdown"><a class="nav-link dropdown" href="bucompany"
-									id="k_bu_eroll_menu" href="#" role="button"> 업체등록 </a></li>
+								<li class="nav-item dropdown"><a class="nav-link dropdown"
+									href="bucompany" id="k_bu_eroll_menu" href="#" role="button">
+										업체등록 </a></li>
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a
@@ -149,6 +151,7 @@ article>div>p {
 					</div>
 				</nav>
 			</div>
+			
 			<div style="float: right; margin: 0 30px 0 0;">
 				<div class="dropdown text-end" id="p_top_profile">
 					<a href="#"
@@ -172,7 +175,6 @@ article>div>p {
 			<div style="clear: both;"></div>
 		</div>
 	</header>	
-	<content> 
 	<!-- 내정보 관리 -->
 	<article>
 		<div id="k_info_content">
@@ -183,7 +185,7 @@ article>div>p {
 				</ul>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a class="nav-link dropdown"
-						id="k_info_menu" href="bucpdelete" role="button"> 내정보 삭제 </a></li>
+						id="k_delete_info" href="bucpdelete" role="button"> 내정보 삭제 </a></li>
 				</ul>
 			</nav>
 				<form action="<%=request.getContextPath() %>/bucpupdate" method="post">
@@ -245,13 +247,12 @@ article>div>p {
 				</div>
 				<div>
 					<input type="button" id="k_cancle_btn" value="취소하기">
-					<input type="submit" id="update_btn" value="수정하기">
+					<input type="submit" id="k_update_btn" value="수정하기">
 				</div>
 			</form>
 		</div>
 
 	</article>
-</content>
           
         <script>
 		$("#k_info_content").show();
@@ -266,6 +267,33 @@ article>div>p {
         		//no 
         		}            
         });
+		
+		/* 수정하기 버튼 */
+		
+		$("#k_update_btn").click(function() {
+        	var result = confirm('회원님의 정보를 수정하시겠습니까?'); 
+        	if(result) { 
+        		//yes 
+        		location.href="bucpupdate";
+        		} else { 
+        		//no 
+        		}            
+        });
+		
+		
+		/* 내정보 삭제 버튼 */
+		
+		$("#k_delete_info").click(function() {
+        	var result = confirm('정말 내정보를 삭제하시겠습니까??'); 
+        	if(result) { 
+        		//yes 
+        		location.href="main";
+        		} else { 
+        		//no 
+        		}            
+        });
+		
+		
 		
 		
 					
@@ -295,7 +323,7 @@ article>div>p {
                 return false;
             } */
             
-            $("#update_btn").click(function(){           
+            $("#update_btn").click(function(){ 
             var password = $("#buPwd").val().trim();
             if(!password || password != $("#buPwd_re").val().trim()){
                 alert("패스워드 입력란과 확인란이 같지 않습니다.");
@@ -304,44 +332,46 @@ article>div>p {
                 $("#buPwd").focus();
                 return false;
             }
-          //   var regExpPassword = /^(?=.[A-Za-z])(?=.[0-9])(?=.*[^A-Za-z0-9]).{8,16}$/; // 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자
-           /* if(!regExpPassword.test(buPwd)){
-                alert("패스워드 입력란에는 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자");
-                $("#buPwd").focus();
-                return false;
-            } */
-                               	
+                                      	
             var num = password.search(/[0-9]/g);
        	 	var eng = password.search(/[A-Za-z]/ig);
        	 	var spe = password.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
 	       	 if(password.length < 8 || password.length > 16){
 	       	  alert("패스워드 입력란에는 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자.");
+	       	$("#buPwd").focus();
 	       	  return false;
 	       	 }else if(password.search(/\s/) != -1){
 	       	  alert("비밀번호는 공백 없이 입력해주세요.");
+	       	$("#buPwd").focus();
 	       	  return false;
 	       	 }else if(num < 0 || eng < 0 || spe < 0 ){
 	       	  alert("패스워드 입력란에는 영문자, 숫자, 특수문자가 적어도 1개이상, 8~16글자.");
+	       	$("#buPwd").focus();
 	       	  return false;
 	       	 }else {
 	       		console.log("통과"); 
 	       	    return true;
 	       	 }
 
-            var phone = $("#buTel").val().trim();
-            var regExpPhone = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/; // 숫자3-숫자3,4-숫자4
-            if(!regExpPhone.test(phone)){
-                alert("전화번호 입력란에는 000-0000-0000 형식");
+          var phone = $("#k_tel").val().trim();
+            var regExp = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/; // 숫자3-숫자3,4-숫자4
+            if(phone.search(/\s/) != -1){
+                alert("전화번호는 공백을 입력하실 수 없습니다.");
                 $("#buTel").focus();
                 return false;
-            }
+            } 
         });
+            
+            
+            
     </script>
 
-	<script src="https://code.highcharts.com/modules/data.js"></script> <script>
+	<script src="https://code.highcharts.com/modules/data.js"></script> 
+	<script>
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"
+	</script>
 </body>
 </html>

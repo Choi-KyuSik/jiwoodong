@@ -76,7 +76,8 @@ width: 1200px;
 	display: none;
 	margin: 20px auto 0;
 	background-color: rgb(241, 241, 241);
-}
+	border-radius: 15px;
+
 }
 
 /* 컨텐트안 제목 */
@@ -169,7 +170,7 @@ article>div>p {
                     <p style="font-size: 12px; width: 115px; margin: 5px;">환영합니다
                         사업자님</p>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="#">비밀번호 재설정</a></li>
+                        <li><a class="dropdown-item" href="bucpcheck">비밀번호 재설정</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -260,7 +261,7 @@ article>div>p {
                                 <input type="text" name="cpDtaddress" placeholder="상세주소 ">
                             </div>
                             <button type="button" id="k_cancle_btn" >취소하기</button>
-                            <input type="submit" value="등록하기"></input>
+                            <input type="submit" id="k_enroll_btn" value="등록하기"></input>
                         </div>
                     </div>                   
                 </div>
@@ -322,6 +323,17 @@ article>div>p {
         		//no 
         		}            
         });
+        
+        /* $("#k_enroll_btn").click(function() {
+        	var result = confirm('업체 등록은 단 한번만 가능합니다. 신중하게 입력해주세요 요청하시겠습니까?'); 
+        	if(result) { 
+        		//yes 
+        		alert('업체등록 요청이 완료되었습니다. 우측하단의 카카오톡으로 관리자에게 문의해주시기 바랍니다.')
+        		location.href="BumMainPage";
+        		} else { 
+        		//no 
+        		}	
+        }); */
 
         $("#k_everyday").click(function() {
             $("#k_everyday_content").show();

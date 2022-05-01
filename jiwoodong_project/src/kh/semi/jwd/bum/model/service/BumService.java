@@ -89,4 +89,14 @@ public class BumService {
 		return result;
 
 	}
+	// 우진
+	public int companyDelete(BumVo vo){
+		Connection conn = getConnection();
+		int result = 0;
+		result = new BumDao().companyDelete(conn, vo);
+		close(conn);
+		System.out.println("companyDelete result: " + result);
+		return result;
+
+	}	
 }
