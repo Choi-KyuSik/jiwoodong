@@ -1,6 +1,7 @@
 package kh.semi.jwd.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -52,20 +53,44 @@ public class AdminBuAcceptResultController extends HttpServlet {
 			// request.setAttribute("cpacApproval", cpacApproval);
 			if(cpacApproval < 1) {
 				System.out.println("승인 수락 실패");
+				PrintWriter out = response.getWriter();
+				response.setContentType("text/html; charset=utf-8");
+				out.println("<script language='javascript'>");
+				out.println("alert('승인에 실패하였습니다.'); location.href='AdminBuAcceptList'");
+				out.println("</script>");
+				out.flush();
 			} else {
 				System.out.println("승인 수락 성공");
+				PrintWriter out = response.getWriter();
+				response.setContentType("text/html; charset=utf-8");
+				out.println("<script language='javascript'>");
+				out.println("alert('정상적으로 승인되었습니다.'); location.href='AdminBuAcceptList'");
+				out.println("</script>");
+				out.flush();
 			}
 		} else {
 			int cpacReject = new AdminService().companyAcceptReject(rejectMsg, buNo);
 			// request.setAttribute("cpacReject", cpacReject);
 			if(cpacReject < 1) {
 				System.out.println("승인 거절 실패");
+				PrintWriter out = response.getWriter();
+				response.setContentType("text/html; charset=utf-8");
+				out.println("<script language='javascript'>");
+				out.println("alert('승인 거절에 실패하였습니다.'); location.href='AdminBuAcceptList'");
+				out.println("</script>");
+				out.flush();
 			} else {
 				System.out.println("승인 거절 성공");
+				PrintWriter out = response.getWriter();
+				response.setContentType("text/html; charset=utf-8");
+				out.println("<script language='javascript'>");
+				out.println("alert('정상적으로 승인 거절되었습니다.'); location.href='AdminBuAcceptList'");
+				out.println("</script>");
+				out.flush();
 			}
 		}
 		
-		response.sendRedirect("http://localhost:8090/jwd/AdminMainPage");
+		response.sendRedirect("AdminBuAcceptList");
 	}
 
 }

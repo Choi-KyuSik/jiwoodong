@@ -38,10 +38,10 @@ public class AdminBuInfoDetailListController extends HttpServlet {
 		System.out.println("사업자정보번호 내놔 : " + buNo);
 		
 		BumVo buMemberDetail = new AdminService().buMemberDetailInfo(buNo);
-		ArrayList<BumVo> buMemberDeleteList = new AdminService().buMemberDeleteList();
+		// ArrayList<BumVo> buMemberDeleteList = new AdminService().buMemberDeleteList();
 		
 		request.setAttribute("buMemberDetail", buMemberDetail);
-		request.setAttribute("buMemberDeleteList", buMemberDeleteList);
+		// request.setAttribute("buMemberDeleteList", buMemberDeleteList);
 		
 		request.getRequestDispatcher("WEB-INF/admin/adminBuInfoDetailList.jsp").forward(request, response);
 	}

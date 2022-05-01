@@ -80,10 +80,10 @@ public class AdminService {
 	}
 
 	// 승인 거절 리스트
-	public ArrayList<Map<String, Object>> companyAcceptRejectList() {
+	public ArrayList<Map<String, Object>> companyAcceptRejectList(int startRnum, int endRnum) {
 
 		Connection conn = getConnection();
-		ArrayList<Map<String, Object>> result = dao.companyAcceptRejectList(conn);
+		ArrayList<Map<String, Object>> result = dao.companyAcceptRejectList(conn, startRnum, endRnum);
 		close(conn);
 		return result;
 
@@ -91,20 +91,20 @@ public class AdminService {
 
 
 	// 승인 수락 리스트
-	public ArrayList<Map<String, Object>> companyAcceptApprovalList() {
+	public ArrayList<Map<String, Object>> companyAcceptApprovalList(int startRnum, int endRnum) {
 
 		Connection conn = getConnection();
-		ArrayList<Map<String, Object>> result = dao.companyAcceptApprovalList(conn);
+		ArrayList<Map<String, Object>> result = dao.companyAcceptApprovalList(conn, startRnum, endRnum);
 		close(conn);
 		return result;
 
 	}
 
 	// 사업자 정보 조회
-	public ArrayList<BumVo> buMemberInfoList() {
+	public ArrayList<BumVo> buMemberInfoList(int startRnum, int endRnum) {
 
 		Connection conn = getConnection();
-		ArrayList<BumVo> result = dao.buMemberInfoList(conn);
+		ArrayList<BumVo> result = dao.buMemberInfoList(conn, startRnum, endRnum);
 		close(conn);
 		return result;
 
@@ -139,20 +139,20 @@ public class AdminService {
 	}
 
 	// 사업자 탈퇴 리스트
-	public ArrayList<BumVo> buMemberDeleteList() {
+	public ArrayList<BumVo> buMemberDeleteList(int startRnum, int endRnum) {
 
 		Connection conn = getConnection();
-		ArrayList<BumVo> result = dao.buMemberDeleteList(conn);
+		ArrayList<BumVo> result = dao.buMemberDeleteList(conn, startRnum, endRnum);
 		close(conn);
 		return result;
 
 	}
 
 	// 사용자 정보 조회
-	public ArrayList<AdminUserVo> usMemberInfoList() {
+	public ArrayList<AdminUserVo> usMemberInfoList(int startRnum, int endRnum) {
 
 		Connection conn = getConnection();
-		ArrayList<AdminUserVo> result = dao.usMemberInfoList(conn);
+		ArrayList<AdminUserVo> result = dao.usMemberInfoList(conn, startRnum, endRnum);
 		close(conn);
 		return result;
 
@@ -184,21 +184,69 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
-	
-	// 사업자 탈퇴 리스트
-	public ArrayList<AdminUserVo> umMemberDeleteList() {
+
+	// 사용자 탈퇴 리스트
+	public ArrayList<AdminUserVo> umMemberDeleteList(int startRnum, int endRnum) {
 
 		Connection conn = getConnection();
-		ArrayList<AdminUserVo> result = dao.umMemberDeleteList(conn);
+		ArrayList<AdminUserVo> result = dao.umMemberDeleteList(conn, startRnum, endRnum);
 		close(conn);
 		return result;
 
 	}
-	
+
 	// 업체 신청 리스트 글 개수
 	public int countBuAcceptList() {
 		Connection conn = getConnection();
 		int result = dao.countBuAcceptList(conn);
+		close(conn);
+		return result;
+	}
+
+	// 업체 수락 리스트 글 개수
+	public int countBuAcceptApprovalList() {
+		Connection conn = getConnection();
+		int result = dao.countBuAcceptApprovalList(conn);
+		close(conn);
+		return result;
+	}
+
+	// 업체 거절 리스트 글 개수
+	public int countBuAcceptRejectList() {
+		Connection conn = getConnection();
+		int result = dao.countBuAcceptRejectList(conn);
+		close(conn);
+		return result;
+	}
+
+	// 사업자 정보 리스트 글 개수
+	public int countBuMemberInfoList() {
+		Connection conn = getConnection();
+		int result = dao.countBuMemberInfoList(conn);
+		close(conn);
+		return result;
+	}
+
+	// 사업자 탈퇴자 정보 리스트 글 개수
+	public int countBuMemberInfoDeleteList() {
+		Connection conn = getConnection();
+		int result = dao.countBuMemberInfoDeleteList(conn);
+		close(conn);
+		return result;
+	}
+
+	// 사용자 정보 리스트 글 개수
+	public int countUsMemberInfoList() {
+		Connection conn = getConnection();
+		int result = dao.countUsMemberInfoList(conn);
+		close(conn);
+		return result;
+	}
+
+	// 사업자 탈퇴자 정보 리스트 글 개수
+	public int countUsMemberInfoDeleteList() {
+		Connection conn = getConnection();
+		int result = dao.countUsMemberInfoDeleteList(conn);
 		close(conn);
 		return result;
 	}

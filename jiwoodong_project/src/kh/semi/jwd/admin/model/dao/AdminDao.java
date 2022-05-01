@@ -67,7 +67,7 @@ public class AdminDao {
 	// 업체등록요청 현황 조회
 	public ArrayList<Map<String, Object>> companyAcceptList(Connection conn) {
 
-		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN = 'N' ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN 1 AND 9";
+		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN 1 AND 9";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 
 		try {
@@ -106,23 +106,17 @@ public class AdminDao {
 
 		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM "
 				+ " (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), "
-				+ " BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN = 'N' ORDER BY CP_WRITE_DATE DESC) A )"
+				+ " BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') ORDER BY CP_WRITE_DATE DESC) A )"
 				+ "  WHERE RNUM BETWEEN ? AND ?";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-		System.out.println(startRnum);
-		System.out.println(endRnum);
-		System.out.println(11111);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRnum);
 			pstmt.setInt(2, endRnum);
 
-			System.out.println(1);
 			rs = pstmt.executeQuery();
 
-			System.out.println(123);
 			if(rs.next()) {
-				System.out.println(1);
 				do {
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("rownum", rs.getString(1));
@@ -132,7 +126,6 @@ public class AdminDao {
 					map.put("buNumber", rs.getString(5));
 					map.put("cpWriteDate", rs.getString(6));
 					map.put("buTel", rs.getString(7));
-					System.out.println(2);
 					list.add(map);
 
 				} while (rs.next());
@@ -152,7 +145,7 @@ public class AdminDao {
 
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-		String sql = "SELECT BU_NO, BU_ID, CP_CATEGORY, BU_NUMBER, CP_NAME, CP_EXPLAIN, BU_NAME, BU_TEL, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN = 'N' AND BU_NO = ?";
+		String sql = "SELECT BU_NO, BU_ID, CP_CATEGORY, BU_NUMBER, CP_NAME, CP_EXPLAIN, BU_NAME, BU_TEL, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') AND BU_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, buNo);
@@ -228,12 +221,15 @@ public class AdminDao {
 	}
 
 	// 승인 거절 리스트
-	public ArrayList<Map<String, Object>> companyAcceptRejectList(Connection conn) {
-		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, CP_REJECT_MSG FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN = 'R' ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN 1 AND 18";
+	public ArrayList<Map<String, Object>> companyAcceptRejectList(Connection conn, int startRnum, int endRnum) {
+		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, CP_REJECT_MSG FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('R', 'r') ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN ? AND ?";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 
+		System.out.println("startRnum ? : " + startRnum + ", endRnum ? : " + endRnum);
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				do {
@@ -257,16 +253,19 @@ public class AdminDao {
 			close(rs);
 			close(pstmt);
 		}
+		System.out.println("list : " + list);
 		return list;
 	}
 
 	// 승인 수락 리스트
-	public ArrayList<Map<String, Object>> companyAcceptApprovalList(Connection conn) {
-		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN = 'Y' ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN 1 AND 18";
+	public ArrayList<Map<String, Object>> companyAcceptApprovalList(Connection conn, int startRnum, int endRnum) {
+		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('Y', 'y') ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN ? AND ?";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				do {
@@ -293,14 +292,16 @@ public class AdminDao {
 	}
 
 	// 사업자 정보 리스트
-	public ArrayList<BumVo> buMemberInfoList(Connection conn) {
+	public ArrayList<BumVo> buMemberInfoList(Connection conn, int startRnum, int endRnum) {
 
 		ArrayList<BumVo> voList = null;
 
-		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM SELECT BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_WRITE_DATE,'YYYY/MM/DD') FROM B_MEMBER WHERE BU_USEYN = 'Y' ORDER BY BU_NO DESC) A) B WHERE RNUM BETWEEN 1 AND 18";
+		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_WRITE_DATE,'YYYY/MM/DD') FROM B_MEMBER WHERE BU_USEYN = 'Y' ORDER BY BU_NO DESC) A) B WHERE RNUM BETWEEN ? AND ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
 			rs = pstmt.executeQuery();
 
 			voList = new ArrayList<BumVo>();
@@ -408,14 +409,16 @@ public class AdminDao {
 	}
 
 	// 사업자 탈퇴 리스트
-	public ArrayList<BumVo> buMemberDeleteList(Connection conn) {
+	public ArrayList<BumVo> buMemberDeleteList(Connection conn, int startRnum, int endRnum) {
 
 		ArrayList<BumVo> voList = null;
 
-		String sql = "SELECT * FROM(SELECT ROWNUM RNUM, A.* FROM(SELECT BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_OUT_DATE,'YYYY/MM/DD') FROM B_MEMBER WHERE BU_USEYN = 'N' ORDER BY BU_NO DESC) A) B WHERE RNUM BETWEEN 1 AND 18";
+		String sql = "SELECT * FROM(SELECT ROWNUM RNUM, A.* FROM(SELECT BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_OUT_DATE,'YYYY/MM/DD') FROM B_MEMBER WHERE BU_USEYN IN ('N', 'n') ORDER BY BU_NO DESC) A) B WHERE RNUM BETWEEN ? AND ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
 			rs = pstmt.executeQuery();
 
 			voList = new ArrayList<BumVo>();
@@ -444,14 +447,16 @@ public class AdminDao {
 	}
 
 	// 사용자 정보 리스트
-	public ArrayList<AdminUserVo> usMemberInfoList(Connection conn) {
+	public ArrayList<AdminUserVo> usMemberInfoList(Connection conn, int startRnum, int endRnum) {
 
 		ArrayList<AdminUserVo> voList = null;
 
-		String sql = "SELECT * FROM(SELECT ROWNUM RNUM, A.* FROM(SELECT UM_ID, UM_NAME, UM_BIRTH, UM_TEL, UM_EMAIL, TO_CHAR(UM_WRITE_DATE,'YYYY/MM/DD') FROM U_MEMBER WHERE UM_USEYN = 'Y' ORDER BY UM_WRITE_DATE DESC) A) B WHERE RNUM BETWEEN 1 AND 18";
+		String sql = "SELECT * FROM(SELECT ROWNUM RNUM, A.* FROM(SELECT UM_ID, UM_NAME, UM_BIRTH, UM_TEL, UM_EMAIL, TO_CHAR(UM_WRITE_DATE,'YYYY/MM/DD') FROM U_MEMBER WHERE UM_USEYN IN ('Y', 'y') ORDER BY UM_WRITE_DATE DESC) A) B WHERE RNUM BETWEEN ? AND ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
 			rs = pstmt.executeQuery();
 
 			voList = new ArrayList<AdminUserVo>();
@@ -556,7 +561,7 @@ public class AdminDao {
 			pstmt.setString(6, uvo.getUmAddress());
 			pstmt.setString(7, uvo.getUmDetailAddress());
 			pstmt.setString(8, umId);
-			
+
 			// System.out.println("값 잘 담겼뉘 " + uvo);
 
 
@@ -570,16 +575,18 @@ public class AdminDao {
 
 		return result;
 	}
-	
+
 	// 사용자 탈퇴 리스트
-	public ArrayList<AdminUserVo> umMemberDeleteList(Connection conn) {
+	public ArrayList<AdminUserVo> umMemberDeleteList(Connection conn, int startRnum, int endRnum) {
 
 		ArrayList<AdminUserVo> voList = null;
-		
-		String sql = "SELECT * FROM(SELECT ROWNUM RNUM, A.* FROM(SELECT UM_ID, UM_NAME, UM_BIRTH, UM_TEL, UM_EMAIL, TO_CHAR(UM_OUT_DATE,'YYYY/MM/DD') FROM U_MEMBER WHERE UM_USEYN = 'N' ORDER BY UM_WRITE_DATE DESC) A) B WHERE RNUM BETWEEN 1 AND 18";
+
+		String sql = "SELECT * FROM(SELECT ROWNUM RNUM, A.* FROM(SELECT UM_ID, UM_NAME, UM_BIRTH, UM_TEL, UM_EMAIL, TO_CHAR(UM_OUT_DATE,'YYYY/MM/DD') FROM U_MEMBER WHERE UM_USEYN IN ('N', 'n') ORDER BY UM_WRITE_DATE DESC) A) B WHERE RNUM BETWEEN ? AND ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
 			rs = pstmt.executeQuery();
 
 			voList = new ArrayList<AdminUserVo>();
@@ -605,13 +612,13 @@ public class AdminDao {
 		return voList;
 
 	}
-	
+
 	// 업체 신청 리스트 글 개수
 	public int countBuAcceptList(Connection conn) {
 
 		int result = 0;
 
-		String sql = "SELECT COUNT(*) FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN = 'N'";
+		String sql = "SELECT COUNT(*) FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n')";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -628,5 +635,144 @@ public class AdminDao {
 		return result;
 
 	}
+
+	// 업체 수락 리스트 글 개수
+	public int countBuAcceptApprovalList(Connection conn) {
+
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM COMPANY WHERE CP_SIGNYN IN ('Y', 'y')";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+
+	}
+
+	// 업체 수락 리스트 글 개수
+	public int countBuAcceptRejectList(Connection conn) {
+
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM COMPANY WHERE CP_SIGNYN IN ('R', 'r')";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+
+	}
+
+	// 사업자 정보 리스트 글 개수
+	public int countBuMemberInfoList(Connection conn) {
+
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM B_MEMBER WHERE BU_USEYN IN ('Y', 'y')";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+
+	}
+
+	// 사업자 탈퇴자 정보 리스트 글 개수
+	public int countBuMemberInfoDeleteList(Connection conn) {
+
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM B_MEMBER WHERE BU_USEYN IN ('N', 'n')";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+
+	}
+
+	// 사용자 정보 리스트 글 개수
+	public int countUsMemberInfoList(Connection conn) {
+
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM U_MEMBER WHERE UM_USEYN IN ('Y', 'y')";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+
+	}
+
+	// 사용자 탈퇴자 정보 리스트 글 개수
+	public int countUsMemberInfoDeleteList(Connection conn) {
+
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM U_MEMBER WHERE UM_USEYN IN ('N', 'n')";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+
+	}
+
 
 }

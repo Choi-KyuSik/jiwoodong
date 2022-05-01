@@ -35,31 +35,21 @@ public class AdminMainPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String tabMenu = (String)request.getSession().getAttribute("tabMenu");
-		request.getSession().removeAttribute("tabMenu");
-		if(!(tabMenu != null && !tabMenu.equals(""))) {
-			tabMenu = "0";
-		}
+		/*
+		 * String tabMenu = (String)request.getSession().getAttribute("tabMenu");
+		 * request.getSession().removeAttribute("tabMenu"); if(!(tabMenu != null &&
+		 * !tabMenu.equals(""))) { tabMenu = "0"; }
+		 */
 		
 		ArrayList<AdminNoticeVo> adnolist = new AdminNoticeService().noticeList();
 		ArrayList<Map<String, Object>> cpaclist = new AdminService().companyAcceptList();
-		ArrayList<Map<String, Object>> acceptApprovalList = new AdminService().companyAcceptApprovalList();
-		ArrayList<Map<String, Object>> acceptRejectList = new AdminService().companyAcceptRejectList();
-		ArrayList<BumVo> buMemberInfoList = new AdminService().buMemberInfoList();
-		ArrayList<BumVo> buMemberDeleteList = new AdminService().buMemberDeleteList();
-		ArrayList<AdminUserVo> usMemberInfoList = new AdminService().usMemberInfoList();
-		ArrayList<AdminUserVo> usMemberDeleteList = new AdminService().umMemberDeleteList();
 		
 		
-		request.setAttribute("tabMenu", tabMenu);
+		
+		// request.setAttribute("tabMenu", tabMenu);
 		request.setAttribute("adnolist", adnolist);
 		request.setAttribute("cpAccept", cpaclist);
-		request.setAttribute("acceptApprovalList", acceptApprovalList);
-		request.setAttribute("acceptRejectList", acceptRejectList);
-		request.setAttribute("buMemberInfoList", buMemberInfoList);
-		request.setAttribute("buMemberDeleteList", buMemberDeleteList);
-		request.setAttribute("usMemberInfoList", usMemberInfoList);
-		request.setAttribute("usMemberDeleteList", usMemberDeleteList);
+		
 //		System.out.println("controller다. 담겼니?" + adnolist);
 		request.getRequestDispatcher("WEB-INF/admin/adminMainPage.jsp").forward(request, response);
 	}
