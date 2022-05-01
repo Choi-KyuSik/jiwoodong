@@ -1,11 +1,7 @@
 @charset "UTF-8";
 
-
 header {
 	height: 500px;
-	background-image:
-		url(https://cdn.discordapp.com/attachments/958566133752016901/966382156710555648/yeonhee-XiDD1j4wSxg-unsplash.jpg);
-	background-size: cover;
 	color: white;
 }
 
@@ -14,14 +10,23 @@ header {
 	position: absolute;
 }
 
-#p_main_top {
-	width: 1200px;
-	margin: 0 auto;
+.p_main_top {
+	width: 100%;
+    background-image: url(https://cdn.discordapp.com/attachments/692994434526085184/970185730959749120/34234234324.png);
+    background-size: cover;
+    margin: 0 auto;
+    position: fixed;
+    z-index: 999;
+    height: 80px;
 }
 
 #p_main_logo {
 	float: left;
-	margin: 10px 0 0 15px;
+}
+
+#p_main_logo_bar {
+	width: 1200px;
+	margin: 0 auto;
 }
 
 #p_main_logo>a>img {
@@ -30,6 +35,7 @@ header {
 
 #p_main_bar {
 	padding: 15px 15px 0 0;
+	float: right;
 }
 
 #p_main_bar>ul>li>a {
@@ -43,7 +49,7 @@ header {
 }
 
 #p_main_login {
-	padding: 45px 0 0 0;
+	padding: 100px 0 0 0;
 	clear: both;
 }
 
@@ -74,6 +80,128 @@ header {
 	width: 250px;
 	height: 40px;
 	font-size: 13px;
+}
+
+#first_section {
+	background-color: #20232b;
+}
+
+#first_section_div1 {
+	position: relative;
+    top: -3px;
+    height: 400px;
+    padding: 80px 0 115px;
+    width: 1200px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.first_section_p {
+	margin-bottom: 33px;
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: -1.22px;
+    word-spacing: 5px;
+    color: white;
+    text-align: center;
+    display: inline-block;
+}
+
+.first_section_p2 {
+	margin-bottom: 0;
+    font-size: 38px;
+    letter-spacing: -1.22px;
+    word-spacing: 5px;
+    color: white;
+    text-align: center;
+}
+
+#second_section {
+	background-color: #F9fafb;
+}
+
+#second_section_div1 {
+	width: 1200px;
+	margin: 0 auto;
+	height: 300px;
+}
+
+.second_section_p2 {
+	margin-bottom: 0;
+    font-size: 38px;
+    letter-spacing: -1.22px;
+    word-spacing: 5px;
+    text-align: right;
+    line-height: 600%;
+    font-weight: bold;
+    height: 50px;
+}
+
+#third_section {
+	background-color: #F9fafb;
+}
+
+#third_section_div1 {
+	width: 1200px;
+	margin: 0 auto;
+	height: 300px;
+}
+
+.third_section_p2 {
+	margin-bottom: 0;
+    font-size: 38px;
+    letter-spacing: -1.22px;
+    word-spacing: 5px;
+    text-align: right;
+    line-height: 600%;
+    font-weight: bold;
+    height: 50px;
+}
+
+#fourth_section {
+	background-color: #F9fafb;
+}
+
+#fourth_section_div1 {
+	width: 1200px;
+	margin: 0 auto;
+	height: 300px;
+}
+
+.fourth_section_p2 {
+	margin-bottom: 0;
+    font-size: 38px;
+    letter-spacing: -1.22px;
+    word-spacing: 5px;
+    text-align: right;
+    line-height: 600%;
+    font-weight: bold;
+    height: 50px;
+}
+
+.color_blue {
+	display: inline-block;
+	color: #0072bb;
+	margin-bottom: 0;
+    font-size: 38px;
+    letter-spacing: -1.22px;
+    word-spacing: 5px;
+    line-height: 600%;
+    text-align: right;
+    font-weight: bold;
+    height: 50px;
+}
+
+
+
+.color_yellow {
+	display: inline-block;
+	color: rgb(248, 216, 40);
+	font-size: 50px;
+    font-weight: bold;
+    letter-spacing: -1.22px;
+    word-spacing: 5px;
+    padding-left: 10px;
 }
 
 #section1 {
@@ -245,12 +373,16 @@ header {
 	height: 500px;
 }
 
+#section3 {
+	background-color: #F9fafb;
+}
+
 .j_review {
 	width: 1200px;
 	font-size: 15px;
 	color: #000;
-	margin: 0;
-	padding: 0;
+	margin: 0 auto;
+	padding-top: 30px;
 }
 
 .j_name {
@@ -288,7 +420,7 @@ header {
 	margin: 0 auto;
 	display: block;
 	width: 900px;
-	height: 600px;
+	height: 800px;
 	overflow: hidden;
 }
 
@@ -302,16 +434,16 @@ header {
 	width: 400px;
 	height: 200px;
 	font-size: 17px;
-	font-weight: bold;
+	/* font-weight: bold; */
 	line-height: 200%;
 	text-align: center;
 	position: absolute;
-	left: 18%;
-	top: 35%;
+	left: 19%;
+	top: 37%;
 }
 
 .j_comment>p {
-	margin-top: 10px;
+	margin-top: 30px;
 	font-size: 22px;
 }
 
@@ -322,8 +454,9 @@ header {
 }
 
 footer {
-	background-color: rgb(245, 245, 245);
+	background-color: #F9fafb;
 	height: 220px;
+	margin-top: 50px;
 }
 
 #p_main_bottom {
@@ -423,4 +556,192 @@ footer {
 	height: 200px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+}
+
+/* 지도 API */
+.map_wrap, .map_wrap * {
+	margin: 0;
+	padding: 0;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	font-size: 12px;
+}
+
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
+	color: #000;
+	text-decoration: none;
+}
+
+.map_wrap {
+	position: relative;
+	width: 1280px;
+	margin: 0 auto;
+	height: 500px;
+}
+
+#menu_wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 250px;
+	margin: 10px 0 30px 10px;
+	padding: 5px;
+	overflow-y: auto;
+	background: rgba(255, 255, 255, 0.7);
+	z-index: 1;
+	font-size: 12px;
+	border-radius: 10px;
+}
+
+.bg_white {
+	background: #fff;
+}
+
+#menu_wrap hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 2px solid #5F5F5F;
+	margin: 3px 0;
+}
+
+#menu_wrap .option {
+	text-align: center;
+}
+
+#menu_wrap .option p {
+	margin: 10px 0;
+}
+
+#menu_wrap .option button {
+	margin-left: 5px;
+}
+
+#placesList li {
+	list-style: none;
+}
+
+#placesList .item {
+	position: relative;
+	border-bottom: 1px solid #888;
+	overflow: hidden;
+	cursor: pointer;
+	min-height: 65px;
+}
+
+#placesList .item span {
+	display: block;
+	margin-top: 4px;
+}
+
+#placesList .item h5, #placesList .item .info {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#placesList .item .info {
+	padding: 10px 0 10px 55px;
+}
+
+#placesList .info .gray {
+	color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+	padding-left: 26px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+		no-repeat;
+}
+
+#placesList .info .tel {
+	color: #009900;
+}
+
+#placesList .item .markerbg {
+	float: left;
+	position: absolute;
+	width: 36px;
+	height: 37px;
+	margin: 10px 0 0 10px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+		no-repeat;
+}
+
+#placesList .item .marker_1 {
+	background-position: 0 -10px;
+}
+
+#placesList .item .marker_2 {
+	background-position: 0 -56px;
+}
+
+#placesList .item .marker_3 {
+	background-position: 0 -102px
+}
+
+#placesList .item .marker_4 {
+	background-position: 0 -148px;
+}
+
+#placesList .item .marker_5 {
+	background-position: 0 -194px;
+}
+
+#placesList .item .marker_6 {
+	background-position: 0 -240px;
+}
+
+#placesList .item .marker_7 {
+	background-position: 0 -286px;
+}
+
+#placesList .item .marker_8 {
+	background-position: 0 -332px;
+}
+
+#placesList .item .marker_9 {
+	background-position: 0 -378px;
+}
+
+#placesList .item .marker_10 {
+	background-position: 0 -423px;
+}
+
+#placesList .item .marker_11 {
+	background-position: 0 -470px;
+}
+
+#placesList .item .marker_12 {
+	background-position: 0 -516px;
+}
+
+#placesList .item .marker_13 {
+	background-position: 0 -562px;
+}
+
+#placesList .item .marker_14 {
+	background-position: 0 -608px;
+}
+
+#placesList .item .marker_15 {
+	background-position: 0 -654px;
+}
+
+#pagination {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#pagination a {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#pagination .on {
+	font-weight: bold;
+	cursor: default;
+	color: #777;
 }

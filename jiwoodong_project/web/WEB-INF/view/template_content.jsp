@@ -7,7 +7,58 @@
 <title>Insert title here</title>
 </head>
 <body>
-	    <!-- 이용 안내  -->
+	<section id="first_section">
+		<div id="first_section_div1">
+			<p class="color_yellow">지</p>
+			<p class="first_section_p">금</p>
+			<p class="color_yellow">우</p>
+			<p class="first_section_p">리</p>
+			<p class="color_yellow">동</p>
+			<p class="first_section_p">네는</p>
+			<p class="first_section_p2">우리 동네의 핫플레이스를</p>
+			<p class="first_section_p2">한 눈에 확인하고 예약하세요!</p>
+		</div>
+	</section>
+	<p style="padding-top: 80px;" id="about"></p>
+	<p style="padding-top: 30px;" class="j_title">About</p>
+	<section id="second_section">
+		<div id="second_section_div1">
+			<div data-aos="fade-left" style="margin: 0 auto; float: left;">
+			<img style="float: left;" width="300px" src="https://cdn.discordapp.com/attachments/965916528350478386/970175050118484018/urbanbrush-20210424204040992630-removebg-preview.png">
+			</div>
+			<div data-aos="fade-right" style="float: right; height: 300px;">
+			<p class="second_section_p2">비대면 시대에 맞춰</p>
+			<p class="second_section_p2">온라인으로</p>
+			<p class="color_blue">사업자와 사용자가 쉽게 소통</p>
+			</div>
+		</div>
+	</section>
+	<section id="third_section" style="clear: both;">
+		<div id="third_section_div1">
+			<div data-aos="fade-left" style="float: left; height: 300px;">
+			<p class="third_section_p2">시간과 장소에 구애받지 않고</p>
+			<p class="third_section_p2" style="display: inline-block;">클릭 한 번으로</p>
+			<p class="color_blue" style="text-align: left; padding-left: 15px;">편하게 예약 가능</p>
+			</div>
+			<div data-aos="fade-right" style="margin: 0 auto; float: right;">
+			<img style="float: left;" width="500px" src="https://cdn.discordapp.com/attachments/965916528350478386/970171076267106394/shutterstock_1502148890-removebg-preview.png">
+			</div>
+		</div>
+	</section>
+	<section id="fourth_section">
+		<div id="fourth_section_div1">
+			<div data-aos="fade-left" style="margin: 0 auto; float: left;">
+			<img style="float: left;" width="300px" src="https://cdn.discordapp.com/attachments/965916528350478386/970176992148324372/web-20180113081439258486-removebg-preview.png">
+			</div>
+			<div data-aos="fade-right" style="float: right; height: 300px;">
+			<p class="fourth_section_p2">실시간으로 예약현황을 확인하여</p>
+			<p class="color_blue">고객의 예약 스케쥴 관리</p>
+			</div>
+		</div>
+	</section>
+	<!-- 이용 안내  -->
+	<p style="padding-top: 80px;" id="service"></p>
+	<p style="padding-top: 30px; clear: both;" class="j_title">Service</p>
     <section id="section1">
         <div id="j_explain" style="margin: 0 auto;">
             <div id="j_sl1" data-aos="fade-right" style="margin: 0 auto;">
@@ -60,6 +111,7 @@
     <!-- 공지사항 -->
     <section style="background-color: #F9fafb;">
         <div style=" margin: 0 auto; width: 1200px; padding: 30px 50px;">
+            		<p style="padding-top: 100px;" id="notice"></p>
             <div>
                 <span style="color: #0072bb; text-align: center; margin-bottom: 30px;display: block;">
                     <h3 style="font-size: 30px;">공지사항</h3>
@@ -181,8 +233,8 @@
         </div>
     </section>
     <!--리뷰-->
-    <section>
-        <div class="j_review" style="margin: 0 auto;">
+    <section id="section3">
+        <div class="j_review" style="">
             <h3 class="j_title">
                 고객 이용 후기
             </h3>

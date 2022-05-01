@@ -22,7 +22,7 @@
 	crossorigin="anonymous"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<title>공지사항 content</title>
+<title>공지사항 조회</title>
 </head>
 <body>
 
@@ -33,8 +33,7 @@
 
 		<!-- 공지사항 content : 손은진 -->
 		<div>
-			<div id="s_notice_content" class="tab_menu s_content"
-				style="display: block;">
+			<div id="s_notice_content" class="tab_menu s_content" style="display: block;">
 				<p class="p_content_style">공지사항 조회</p>
 				<button type="button" id="s_notice_insert_btn"
 					class="btn btn-primary" data-bs-dismiss="modal">글 등록</button>
@@ -139,13 +138,38 @@
 			location.href = "AdminNoticeDetailRead?ntNo=" + tdArr[0];
 		});
 	</script>
+	<!-- 메뉴버튼 눌렀을 때 이동할 페이지 -->
 	<script>
     	$("#s_notice_menu").click(function() {
-    		location=href="AdminNoticeList"
+    		location.href="AdminNoticeList";
     	});
     	
     	$("#s_bu_accept_menu").click(function() {
-    		location=href="AdminBuAcceptList"
+    		location.href="AdminBuAcceptList";
+    	});
+    	
+    	$("#s_bu_accept_result_approval_menu").click(function() {
+    		location.href="AdminBuAcceptApprovalList";
+    	});
+    	
+    	$("#s_bu_accept_result_reject_menu").click(function() {
+    		location.href="AdminBuAcceptRejectList";
+    	});
+    	
+    	$("#s_bu_info_menu").click(function() {
+    		location.href="AdminBuInfoList";
+    	});
+    	
+    	$("#s_bu_delete_menu").click(function() {
+    		location.href="AdminBuInfoDeleteList";
+    	});
+    	
+    	$("#s_us_info_menu").click(function() {
+    		location.href="AdminUsInfoList";
+    	});
+    	
+    	$("#s_us_delete_menu").click(function() {
+    		location.href="AdminUsInfoDeleteList";
     	});
     </script>
 

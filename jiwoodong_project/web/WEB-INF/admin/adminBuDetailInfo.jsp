@@ -26,27 +26,9 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<header style="margin-top: 10px;">
-		<div id="p_main_top">
-			<div style="float: right;">
-				<p id="p_welcome_msg">환영합니다 손은진님</p>
-				<a id="s_logout" href="" style="">로그아웃</a>
-			</div>
-			<div id="p_top_logo">
-				<a href="<%=request.getContextPath()%>/AdminMainPage"><img
-					src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"
-					width="80px" alt="logo" id="logo"></a>
-			</div>
-			<div style="float: right; margin-top: 10px;">
-				<div style="text-align: center;">
-					<img
-						src="https://media.discordapp.net/attachments/692994434526085184/965630874999730296/1.png"
-						alt="프사" width="60px">
-				</div>
-			</div>
-			<div style="clear: both;"></div>
-		</div>
-	</header>
+	<div>
+		<%@ include file="../view/admin/admin_header.jsp"%>
+	</div>
 	<div class="container">
 		<form action="" id="frm" method="post">
 		<div class="row"
@@ -153,23 +135,46 @@
 		
 		$("#s_result_send_btn").click(function() {
 			console.log("거절사유 : " + $("#s_result_input").val());
-			alert("정상 처리되었습니다.");
 			$("#exampleModal").click();
 			var frmEl = $("#frm");
 			frmEl.attr("action", "AdminBuAcceptResult");
 			frmEl.attr("method", "post");
 			frmEl.submit();
 		});
-
-		/* $("#s_delete_btn").click(function() {
-			if (confirm("정말 거절하시겠습니까?") == true) {
-				var frmEl = $("#frm");
-				frmEl.attr("action", "AdminNoticeDeleteDo");
-				frmEl.attr("method", "post");
-				frmEl.submit();
-			} else {
-				history.back();
-			}
-		}) */
 	</script>
+	
+	<!-- 메뉴버튼 눌렀을 때 이동할 페이지 -->
+	<script>
+    	$("#s_notice_menu").click(function() {
+    		location.href="AdminNoticeList";
+    	});
+    	
+    	$("#s_bu_accept_menu").click(function() {
+    		location.href="AdminBuAcceptList";
+    	});
+    	
+    	$("#s_bu_accept_result_approval_menu").click(function() {
+    		location.href="AdminBuAcceptApprovalList";
+    	});
+    	
+    	$("#s_bu_accept_result_reject_menu").click(function() {
+    		location.href="AdminBuAcceptRejectList";
+    	});
+    	
+    	$("#s_bu_info_menu").click(function() {
+    		location.href="AdminBuInfoList";
+    	});
+    	
+    	$("#s_bu_delete_menu").click(function() {
+    		location.href="AdminBuInfoDeleteList";
+    	});
+    	
+    	$("#s_us_info_menu").click(function() {
+    		location.href="AdminUsInfoList";
+    	});
+    	
+    	$("#s_us_delete_menu").click(function() {
+    		location.href="AdminUsInfoDeleteList";
+    	});
+    </script>
 </html>

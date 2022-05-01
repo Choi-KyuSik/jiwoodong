@@ -97,321 +97,6 @@
             </div>
         </div>
         
-        <!-- 업체승인 수락 Content : 손은진 -->
-        <div>
-            <div id="s_accept_result_content" class="tab_menu s_content">
-                <p class="p_content_style">업체 승인 수락 리스트</p>
-                <!-- 검색 -->
-                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
-                    <div class="container-fluid">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
-                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
-                    <thead>
-                    <!-- cpacApproval -->
-                        <tr>
-                        	<th scope="col" style="width: 50px;">NO</th>
-                        	<th scope="col" style="width: 100px;">사업자번호</th>
-                            <th scope="col">사업자 등록 번호</th>
-                            <th scope="col" style="width: 150px;">업종</th>
-                            <th scope="col">업체명</th>
-                            <th scope="col" style="width: 250px;">전화번호</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${acceptApprovalList }" var="i">
-                                <tr class="s_tr_modal">
-                                    <th scope="row" class="s_ntNo">${i.buNo}</th>
-                                    <td>${i.rownum}</td>
-                                    <td>${i.buNumber}</td>
-                                    <td>${i.cpCategory}</td>
-                                    <td class="s_td_short">${i.cpName}</td>
-                                    <td>${i.buTel}</td>
-                                </tr>
-                            	</c:forEach>
-                    </tbody>
-                </table>
-				<div id="pagingBox">
-					<ul class="pagination">
-						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</div>
-			</div>
-        </div>
-        <!-- 업체승인 거절 Content : 손은진 -->
-        <div>
-            <div id="s_accept_result_reject_content" class="tab_menu s_content">
-                <p class="p_content_style">업체 승인 거절 리스트</p>
-                <!-- 검색 -->
-                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
-                    <div class="container-fluid">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
-                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
-                    <thead>
-                        <tr>
-                        	<th scope="col" style="width: 50px;">NO</th>
-                        	<th scope="col" style="width: 100px;">사업자번호</th>
-                            <th scope="col">사업자 등록 번호</th>
-                            <th scope="col" style="width: 150px;">업종</th>
-                            <th scope="col">업체명</th>
-                            <th scope="col" style="width: 150px;">전화번호</th>
-                            <th scope="col" style="width: 250px;">거절사유</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${acceptRejectList }" var="i">
-                                <tr class="s_tr_modal">
-                                    <th scope="row" class="s_ntNo">${i.buNo}</th>
-                                    <td>${i.rownum}</td>
-                                    <td>${i.buNumber}</td>
-                                    <td>${i.cpCategory}</td>
-                                    <td class="s_td_short">${i.cpName}</td>
-                                    <td>${i.buTel}</td>
-                                    <td class="s_td_short">${i.cpRejectMsg}</td>
-                                </tr>
-                            	</c:forEach>
-                    </tbody>
-                </table>
-				<div id="pagingBox">
-					<ul class="pagination">
-						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</div>
-			</div>
-        </div>
-        <!-- 사업자 정보 조회 : 손은진 -->
-        <div>
-            <div id="s_bu_info_content" class="tab_menu s_content">
-                <p class="p_content_style">사업자 정보 조회</p>
-                <!-- 검색 -->
-                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
-                    <div class="container-fluid">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
-                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
-                    <thead>
-                        <tr>
-                        	<th scope="col" style="width: 50px;">NO</th>
-                        	<th scope="col" style="width: 100px;">사업자번호</th>
-                            <th scope="col">아이디</th>
-                            <th scope="col">이름</th>
-                            <th scope="col" style="width: 100px">생년월일</th>
-                            <th scope="col">전화번호</th>
-                            <th scope="col">이메일</th>
-                            <th scope="col" style="width: 100px">가입일</th>
-                        </tr>
-                    </thead>
-                    <tbody style="cursor: pointer;">
-                        <c:forEach items="${buMemberInfoList }" var="i">
-                                <tr class="s_tr_modal s_tr_buInfoList">
-                                    <th scope="row" class="s_ntNo">${i.rownum}</th>
-                                    <td>${i.buNo}</td>
-                                    <td>${i.buId}</td>
-                                    <td>${i.buName}</td>
-                                    <td class="s_td_short">${i.buBirth}</td>
-                                    <td>${i.buTel}</td>
-                                    <td>${i.buEmail}</td>
-                                    <td>${i.toCharbuWriteDate}</td>
-                                </tr>
-                            	</c:forEach>
-                    </tbody>
-                </table>
-				<div id="pagingBox">
-					<ul class="pagination">
-						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</div>
-			</div>
-        </div>
-        <!-- 사업자 탈퇴 조회 : 손은진 -->
-        <div>
-        <div id="s_bu_delete_content" class="tab_menu s_content">
-                <p class="p_content_style">사업자 탈퇴 조회</p>
-                <!-- 검색 -->
-                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
-                    <div class="container-fluid">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
-                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
-                    <thead>
-                        <tr>
-                        	<th scope="col" style="width: 50px;">NO</th>
-                        	<th scope="col" style="width: 100px;">사업자번호</th>
-                            <th scope="col">아이디</th>
-                            <th scope="col">이름</th>
-                            <th scope="col" style="width: 100px">생년월일</th>
-                            <th scope="col">전화번호</th>
-                            <th scope="col">이메일</th>
-                            <th scope="col" style="width: 100px">탈퇴일</th>
-                        </tr>
-                    </thead>
-                    <tbody style="cursor: pointer;">
-                        <c:forEach items="${buMemberDeleteList }" var="i">
-                                <tr class="s_tr_modal s_tr_buInfoList">
-                                    <th scope="row" class="s_ntNo">${i.rownum}</th>
-                                    <td>${i.buNo}</td>
-                                    <td>${i.buId}</td>
-                                    <td>${i.buName}</td>
-                                    <td class="s_td_short">${i.buBirth}</td>
-                                    <td>${i.buTel}</td>
-                                    <td>${i.buEmail}</td>
-                                    <td>${i.toCharbuOutDate}</td>
-                                </tr>
-                            	</c:forEach>
-                    </tbody>
-                </table>
-				<div id="pagingBox">
-					<ul class="pagination">
-						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</div>
-            </div>
-        </div>
-        <!-- 사용자 정보 조회 : 손은진 -->
-        <div>
-            <div id="s_us_info_content" class="tab_menu s_content">
-                <p class="p_content_style">사용자 정보 조회</p>
-                <!-- 검색 -->
-                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
-                    <div class="container-fluid">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
-                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
-                    <thead>
-                        <tr>
-                        	<th scope="col" style="width: 50px;">NO</th>
-                            <th scope="col">아이디</th>
-                            <th scope="col">이름</th>
-                            <th scope="col" style="width: 100px">생년월일</th>
-                            <th scope="col">전화번호</th>
-                            <th scope="col">이메일</th>
-                            <th scope="col" style="width: 100px">가입일</th>
-                        </tr>
-                    </thead>
-                    <tbody style="cursor: pointer;">
-                        <c:forEach items="${usMemberInfoList }" var="i">
-                                <tr class="s_tr_modal s_tr_umInfoList">
-                                    <th scope="row" class="s_ntNo">${i.rownum}</th>
-                                    <td>${i.umId}</td>
-                                    <td>${i.umName}</td>
-                                    <td class="s_td_short">${i.umBirth}</td>
-                                    <td>${i.umTel}</td>
-                                    <td>${i.umEmail}</td>
-                                    <td>${i.toCharUmWriteDate}</td>
-                                </tr>
-                            	</c:forEach>
-                    </tbody>
-                </table>
-				<div id="pagingBox">
-					<ul class="pagination">
-						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</div>
-            </div>
-        </div>
-        <!-- 사용자 탈퇴 조회 : 손은진 -->
-        <div>
-            <div id="s_um_delete_content" class="tab_menu s_content">
-                <p class="p_content_style">사용자 탈퇴 조회</p>
-                <!-- 검색 -->
-                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
-                    <div class="container-fluid">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
-                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
-                    <thead>
-                        <tr>
-                        	<th scope="col" style="width: 50px;">NO</th>
-                            <th scope="col" style="width: 150px;">아이디</th>
-                            <th scope="col" style="width: 150px;">이름</th>
-                            <th scope="col" style="width: 150px">생년월일</th>
-                            <th scope="col" style="width: 150px;">전화번호</th>
-                            <th scope="col" style="width: 150px;">이메일</th>
-                            <th scope="col" style="width: 100px">탈퇴일</th>
-                        </tr>
-                    </thead>
-                    <tbody style="cursor: pointer;">
-                        <c:forEach items="${usMemberDeleteList }" var="i">
-                                <tr class="s_tr_modal s_tr_umInfoList">
-                                    <th scope="row" class="s_ntNo">${i.rownum}</th>
-                                    <td>${i.umId}</td>
-                                    <td>${i.umName}</td>
-                                    <td class="s_td_short">${i.umBirth}</td>
-                                    <td>${i.umTel}</td>
-                                    <td>${i.umEmail}</td>
-                                    <td>${i.toCharUmOutDate}</td>
-                                </tr>
-                            	</c:forEach>
-                    </tbody>
-                </table>
-				<div id="pagingBox">
-					<ul class="pagination">
-						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</div>
-            </div>
-        </div>
         <!-- 리뷰 조회 : 전승희 -->
         <div>
             <div id="s_review_menu" class="tab_menu s_content">
@@ -510,6 +195,42 @@
             ]
         });
     </script>
+    
+    <!-- 메뉴버튼 눌렀을 때 이동할 페이지 -->
+	<script>
+    	$("#s_notice_menu").click(function() {
+    		location.href="AdminNoticeList";
+    	});
+    	
+    	$("#s_bu_accept_menu").click(function() {
+    		location.href="AdminBuAcceptList";
+    	});
+    	
+    	$("#s_bu_accept_result_approval_menu").click(function() {
+    		location.href="AdminBuAcceptApprovalList";
+    	});
+    	
+    	$("#s_bu_accept_result_reject_menu").click(function() {
+    		location.href="AdminBuAcceptRejectList";
+    	});
+    	
+    	$("#s_bu_info_menu").click(function() {
+    		location.href="AdminBuInfoList";
+    	});
+    	
+    	$("#s_bu_delete_menu").click(function() {
+    		location.href="AdminBuInfoDeleteList";
+    	});
+    	
+    	$("#s_us_info_menu").click(function() {
+    		location.href="AdminUsInfoList";
+    	});
+    	
+    	$("#s_us_delete_menu").click(function() {
+    		location.href="AdminUsInfoDeleteList";
+    	});
+    </script>
+    
     <!-- 메뉴별 content display변경 -->
     <!-- <script>
 	let tabMenu = '${tabMenu}';
@@ -577,52 +298,7 @@
         
 
     </script> -->
-    <script>
-    	$(".s_tr_buInfoList").click(function() {
-    		// 배열 선언
-    		var tdArr = new Array();
-    		// 현재 클릭된 행(tr의 td)
-    		var tr = $(this);
-    		var td = tr.children();
-    		
-    		// 반복문을 통해 배열에 값을 담아 사용
-    		td.each(function(i) {
-    			tdArr.push(td.eq(i).text());
-    		});
-    		// td들이 배열에 담겨있는데 그 중 2번째가 필요
-    		console.log("배열에 담긴 값 : " + tdArr);
-    		console.log("배열에 담긴 값 : " + tdArr[1]);
-    		console.log(typeof(tdArr[1]));
-    		location.href="AdminBuInfoDetailList?buNo=" + tdArr[1];
-    	});
-    	$(".s_tr_umInfoList").click(function() {
-    		// 배열 선언
-    		var tdArr = new Array();
-    		// 현재 클릭된 행(tr의 td)
-    		var tr = $(this);
-    		var td = tr.children();
-    		
-    		// 반복문을 통해 배열에 값을 담아 사용
-    		td.each(function(i) {
-    			tdArr.push(td.eq(i).text());
-    		});
-    		// td들이 배열에 담겨있는데 그 중 2번째가 필요
-    		console.log("배열에 담긴 값 : " + tdArr);
-    		console.log("배열에 담긴 값 : " + tdArr[1]);
-    		console.log(typeof(tdArr[1]));
-    		location.href="AdminUsInfoDetailList?umId=" + tdArr[1];
-    	});
-    	
-    </script>
-    <!-- 메뉴버튼 눌렀을 때 이동할 페이지 -->
-	<script>
-    	$("#s_notice_menu").click(function() {
-    		location=href="AdminNoticeList"
-    	});
-    	
-    	$("#s_bu_accept_menu").click(function() {
-    		location=href="AdminBuAcceptList"
-    	});
-    </script>
+    
+    
 </body>
 </html>

@@ -25,7 +25,7 @@
                         <div class="collapse navbar-collapse">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link" id="s_notice_menu" role="button"
+                                    <a class="nav-link" id="s_notice_menu" href="#" role="button"
                                         data-bs-toggle="dropdown">
                                         공지사항 관리
                                     </a>
@@ -45,8 +45,8 @@
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="#" id="s_bu_info_menu">사업자 정보 조회</a></li>
-                                        <li><a class="dropdown-item" href="#" id="s_bu_delete_menu">사업자 탈퇴 조회</a></li>
+                                        <li><a class="dropdown-item" href="#" id="s_bu_info_menu">사업자 회원 정보 조회</a></li>
+                                        <li><a class="dropdown-item" href="#" id="s_bu_delete_menu">사업자 탈퇴 회원 조회</a></li>
                                         
                                     </ul>
                                 </li>
@@ -58,11 +58,11 @@
                                         사용자관리
                                     </a>
 									<ul class="dropdown-menu dropdown-menu">
-										<li><a class="dropdown-item" href="#" id="s_us_info_menu">사용자 정보 조회</a></li>
+										<li><a class="dropdown-item" href="#" id="s_us_info_menu">사용자 회원 정보 조회</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="#" id="s_us_delete_menu">사용자 탈퇴 조회</a></li>
+                                        <li><a class="dropdown-item" href="#" id="s_us_delete_menu">사용자 탈퇴 회원 조회</a></li>
 									</ul>
 								</li>
                             </ul>

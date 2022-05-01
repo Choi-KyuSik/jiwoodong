@@ -22,7 +22,7 @@
 	crossorigin="anonymous"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<title>업체 신청 내역</title>
+<title>업체 승인 수락 리스트</title>
 </head>
 <body>
 
@@ -31,11 +31,11 @@
 	</div>
 
 	<section>
-		<!-- 업체 신청 Content : 손은진 -->
+		<!-- 업체승인 수락 Content : 손은진 -->
 		<div>
-			<div id="s_accept_content" class="tab_menu s_content"
+			<div id="s_accept_result_content" class="tab_menu s_content"
 				style="display: block;">
-				<p class="p_content_style">업체 신청 내역</p>
+				<p class="p_content_style">업체 승인 수락 리스트</p>
 				<!-- 검색 -->
 				<nav class="navbar navbar-light"
 					style="float: right; margin-bottom: 20px;">
@@ -50,6 +50,7 @@
 				<table class="table table table-hover"
 					style="clear: both; table-layout: fixed;">
 					<thead>
+						<!-- cpacApproval -->
 						<tr>
 							<th scope="col" style="width: 50px;">NO</th>
 							<th scope="col" style="width: 100px;">사업자번호</th>
@@ -57,19 +58,17 @@
 							<th scope="col" style="width: 150px;">업종</th>
 							<th scope="col">업체명</th>
 							<th scope="col" style="width: 250px;">전화번호</th>
-							<th scope="col" style="width: 100px;">신청일자</th>
 						</tr>
 					</thead>
-					<tbody style="cursor: pointer;">
-						<c:forEach items="${cpacDetailList }" var="i">
-							<tr class="s_tr_modal s_tr_readBuList">
-								<th scope="row" class="s_ntNo">${i.rownum}</th>
-								<td>${i.buNo}</td>
+					<tbody>
+						<c:forEach items="${acceptApprovalList }" var="i">
+							<tr class="s_tr_modal">
+								<th scope="row" class="s_ntNo">${i.buNo}</th>
+								<td>${i.rownum}</td>
 								<td>${i.buNumber}</td>
 								<td>${i.cpCategory}</td>
 								<td class="s_td_short">${i.cpName}</td>
 								<td>${i.buTel}</td>
-								<td>${i.cpWriteDate}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -79,31 +78,31 @@
 						<!-- startPage에서 -1일 때 -->
 						<c:if test="${startPage > 1 }">
 							<li class="page-item"><a class="page-link"
-								href="AdminBuAcceptList?pageNum=${startPage-1 }">Previous</a></li>
+								href="AdminBuAcceptApprovalList?pageNum=${startPage-1 }">Previous</a></li>
 						</c:if>
 						<c:if test="${startPage <= 1 }">
 							<li class="page-item disabled"><a class="page-link"
-								href="AdminBuAcceptList?pageNum=${startPage-1 }">Previous</a></li>
+								href="AdminBuAcceptApprovalList?pageNum=${startPage-1 }">Previous</a></li>
 						</c:if>
 						<c:forEach step="1" begin="${startPage }" end="${ endPage}"
 							var="idx">
 							<c:if test="${idx eq currentPage }">
 								<li class="page-item active"><a class="page-link"
-									href="AdminBuAcceptList?pageNum=${idx }">${idx }</a></li>
+									href="AdminBuAcceptApprovalList?pageNum=${idx }">${idx }</a></li>
 							</c:if>
 							<c:if test="${idx ne currentPage }">
 								<li class="page-item"><a class="page-link"
-									href="AdminBuAcceptList?pageNum=${idx }">${idx }</a></li>
+									href="AdminBuAcceptApprovalList?pageNum=${idx }">${idx }</a></li>
 							</c:if>
 						</c:forEach>
 						<!-- endPage에서 +1일 때 -->
 						<c:if test="${endPage < pageCnt }">
 							<li class="page-item"><a class="page-link"
-								href="AdminBuAcceptList?pageNum=${endPage+1 }">Next</a></li>
+								href="AdminBuAcceptApprovalList?pageNum=${endPage+1 }">Next</a></li>
 						</c:if>
 						<c:if test="${endPage >= pageCnt }">
 							<li class="page-item disabled"><a class="page-link"
-								href="AdminBuAcceptList?pageNum=${endPage+1 }">Next</a></li>
+								href="AdminBuAcceptApprovalList?pageNum=${endPage+1 }">Next</a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -111,25 +110,6 @@
 		</div>
 	</section>
 
-	<script>
-        $(".s_tr_readBuList").click(function() {
-    		// 배열 선언
-    		var tdArr = new Array();
-    		// 현재 클릭된 행(tr의 td)
-    		var tr = $(this);
-    		var td = tr.children();
-    		
-    		// 반복문을 통해 배열에 값을 담아 사용
-    		td.each(function(i) {
-    			tdArr.push(td.eq(i).text());
-    		});
-    		// td들이 배열에 담겨있는데 그 중 2번째가 필요
-    		console.log("배열에 담긴 값 : " + tdArr);
-    		console.log("배열에 담긴 값 : " + tdArr[1]);
-    		console.log(typeof(tdArr[1]));
-    		location.href="AdminBuDetailInfo?buNo=" + tdArr[1];
-    	});
-        </script>
 	<!-- 메뉴버튼 눌렀을 때 이동할 페이지 -->
 	<script>
     	$("#s_notice_menu").click(function() {
@@ -164,5 +144,6 @@
     		location.href="AdminUsInfoDeleteList";
     	});
     </script>
+
 </body>
 </html>
