@@ -481,6 +481,7 @@ td, th {
 		/* 상단 예약상태 select 부분 선택 시 */
     	$("#bkStatus").change(function(){
     		var status = $(this).val();
+    		console.log(status);
     		if($(this).val() == '전체'){
     			$.ajax({
     				type : 'post',
@@ -519,8 +520,8 @@ td, th {
                             html += ' <td  class="l11"   style="display: none">'+list[i].bkStatus+'</td>'
                             html += '</tr>'
     					}
-    					$(".bookingList").html().remove();
-    					$(".bookingList").html(html);
+    					$("#reservationListTbody").children().remove()
+    					$("#reservationListTbody").append(html);
     				}
     			})
     		} else {
