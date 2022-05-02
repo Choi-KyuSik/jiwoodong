@@ -36,7 +36,7 @@
 				<div id="p_small_text">Welcome To JIWOODONG!</div>
 				<div id="p_big_text">IT'S NICE TO MEET YOU</div>
 				<div id="p_login_btn">
-					<button type="button" class="btn btn-primary btn-lg">로그인</button>
+					<button type="button" class="btn btn-primary btn-lg"><a href="loginMain">로그인</a></button>
 					<br>
 					<button type="button" class="btn btn-secondary btn-sm">아이디/비밀번호찾기</button>
 				</div>

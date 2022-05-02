@@ -339,7 +339,7 @@ article>div>p {
 										<td>${list.bkNo }</td>
 										<td>${list.bkDate }</td>
 										<td>${list.bkTime }</td>
-										<td><c:out value="${list.bsStatus eq 'C' ? '취소' : '예약' }" /></td>
+										<td><c:out value="${list.bsStatus eq 'R' ? '예약' : '취소' }" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>

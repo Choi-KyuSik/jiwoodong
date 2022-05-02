@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
 import kh.semi.jwd.bum.model.vo.CompanyVo;
 
@@ -232,33 +233,37 @@ public class BumDao {
 	
 	
 	//승희 - 사업자 로그인
-	public int loginBuMember(Connection conn,BumVo vo) {
-		int result = -1;
+	
+
+	public BumLoginVo loginBuMember(Connection conn,BumLoginVo vo) {
 		String sql = "";
+		BumLoginVo bvo = null;
 		
 		sql = "SELECT * FROM b_member WHERE BU_ID = ? AND BU_PWD= ?";
 		try {
+			System.out.println("vo.getBuId()" + vo.getBuId());
+			System.out.println("vo.getBuPwd()" + vo.getBuPwd());
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getBuId());
 			pstmt.setString(2, vo.getBuPwd());
-			rs=pstmt.executeQuery(sql);
+			rs=pstmt.executeQuery();
 			//id와 pwd 가 일치하는 것이 나올때만 rs에 값이 있다.
 			if(rs.next()) {
-				result = 0;
-				
-			}else {
-				result = 1;
+				bvo = new BumLoginVo();
+				bvo.setBuId(rs.getString("bu_id"));
+				bvo.setBuPwd(rs.getString("bu_pwd")); // 여기 컬럼명 썼어야했어
 			}
-			System.out.println("로그인 결과: "+result);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+			System.out.println("로그인 오류");
+		}
+		finally {
 			close(rs);
 			close(pstmt);
 			close(conn);
 		}
-		
-		return result;
+		System.out.println("DAO loginBuMember bvo:" + bvo);
+		return bvo;
 	}
 	
 // TODO 우진: 나중에 로그인 구현되면 Session에 담아야함 

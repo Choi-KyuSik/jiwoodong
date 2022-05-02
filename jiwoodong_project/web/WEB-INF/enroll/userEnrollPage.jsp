@@ -231,7 +231,7 @@
 	                    guideTextBox.style.display = 'none';
 	                }
 	            }
-	        }).open();
+	        }).open(); 
 	    });
 
 		 function check() {

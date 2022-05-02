@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import kh.semi.jwd.bum.model.dao.BumDao;
+import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
 import kh.semi.jwd.bum.model.vo.CompanyVo;
 
@@ -78,13 +79,14 @@ public class BumService {
 		return result;
 		
 	}
-	public int loginBuMember(BumVo vo) {
-		int result;
+	//승희 - 사업자 로그인
+	public BumLoginVo loginBuMember(BumLoginVo vo) {
+		BumLoginVo bvo = new BumLoginVo();
 		Connection conn = getConnection();
-		result = new BumDao().loginBuMember(conn, vo);
+		bvo = new BumDao().loginBuMember(conn, vo);
 		close(conn);
-		System.out.println("loginBuMember result:" + result);
-		return result;
+		// System.out.println("loginBuMember bvo:" + bvo);
+		return bvo;
 		
 	}
 	

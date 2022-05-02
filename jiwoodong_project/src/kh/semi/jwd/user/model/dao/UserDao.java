@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import kh.semi.jwd.user.model.vo.UserLoginVo;
 import kh.semi.jwd.user.model.vo.UserVo;
 
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
@@ -126,4 +127,36 @@ public class UserDao {
 		
 		return uvo;
 	}
+
+	//승희 - 사용자 로그인
+	public UserLoginVo loginUserMember(Connection conn,UserLoginVo vo) {
+		UserLoginVo uvo = null;
+		String sql = "SELECT * FROM u_member WHERE UM_ID = ? AND UM_PWD= ?";
+		
+		try {
+			System.out.println("vo.getUmId() :"+ vo.getUmId());
+			System.out.println("vo.getUmPwd() : "+vo.getUmPwd());
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUmId());
+			pstmt.setString(2, vo.getUmPwd());
+			rs = pstmt.executeQuery(); // 괄호안에 작성X
+			
+			if(rs.next()) {
+				uvo = new UserLoginVo();
+				uvo.setUmId(rs.getString("um_Id"));
+				uvo.setUmPwd(rs.getString("um_Pwd")); 
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		System.out.println("UserDao loginUserMember uvo:"+ uvo);
+		return uvo;
+	}
 }
+

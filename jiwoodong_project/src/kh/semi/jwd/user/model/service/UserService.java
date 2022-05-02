@@ -6,6 +6,7 @@ import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 import java.sql.Connection;
 
 import kh.semi.jwd.user.model.dao.UserDao;
+import kh.semi.jwd.user.model.vo.UserLoginVo;
 import kh.semi.jwd.user.model.vo.UserVo;
 
 public class UserService {
@@ -21,6 +22,16 @@ public class UserService {
 			close(conn);
 		}
 			return result;			
+	}
+	//승희 - 사용자 로그인
+	public UserLoginVo loginUserMember(UserLoginVo vo) {
+		UserLoginVo uvo = new UserLoginVo();
+		Connection conn = getConnection();
+		uvo = new UserDao().loginUserMember(conn, vo);
+		close(conn);
+		// System.out.println("loginBuMember bvo:" + bvo);
+		return uvo;
+		
 	}
 	
 	// 내 정보 수정 : 손은진

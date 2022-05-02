@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bulogin.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/login.css"> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사업자 로그인</title>
+<title>사용자 로그인</title>
 <!-- google font -->
 <style>
 @import
@@ -16,13 +16,13 @@
 <body>
     <div id="j_loginform">
         <p><img id="j_logo_img" alt="지우동 로고" src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"></p>
-        <form action="bumLogin.lo" method="post" name="loginFrm" onsubmit="return validateForm(this);">
+        <form action="userLogin.lo" method="post" name="loginFrm" onsubmit="return validateForm(this);">
             <div id="j_loginform2">
                 <fieldset id="j_loginform3" >
-                    <legend style="color: #0f7bc3; font-size: large; font-weight: bolder;">사업자 로그인</legend>
+                    <legend style="color: #0f7bc3; font-size: large; font-weight: bolder;">사용자 로그인</legend>
                     <div id="j_id_div">
-                    <label id="j_id" for="bu_id" style="display: inline- block; color: #0f7bc3;"><strong>아이디</strong></label>
-                    <input type="text" id="bu_id" name="bu_id" /><br />
+                    <label id="j_id" for="um_id" style="display: inline- block; color: #0f7bc3;"><strong>아이디</strong></label>
+                    <input type="text" id="um_id" name="um_id" /><br />
                     </div>
                     <div id="j_pw_div">
                     <label id="j_password" for="password" style="display: inline- block; color: #0f7bc3;"><strong>비밀번호</strong></label>
@@ -39,7 +39,7 @@
 
   	<script>
     function validateForm(form) {
-        if (!form.bu_id.value) {
+        if (!form.um_id.value) {
             alert("아이디를 입력하세요.");
             return false;
         }
