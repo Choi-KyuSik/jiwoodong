@@ -118,7 +118,7 @@ td, th {
 						<div class="collapse navbar-collapse">
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
-									id="k_info_menu" href="#" role="button"> 내정보 관리 </a></li>
+									id="k_info_menu" href="bucpcheck" role="button"> 내정보 관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
@@ -126,7 +126,7 @@ td, th {
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
-									id="k_bu_eroll_menu" href="#" role="button"> 업체등록 </a></li>
+									id="k_bu_eroll_menu" href="bucompany" role="button"> 업체등록 </a></li>
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a
@@ -134,11 +134,11 @@ td, th {
 									data-bs-toggle="dropdown"> 예약관리 </a>
 									<ul class="dropdown-menu dropdown-menu">
 										<li><a class="dropdown-item" id="k_re_menu_enroll"
-											href="#">예약메뉴등록</a></li>
+											href="<%=request.getContextPath()%>/burmenu">예약메뉴등록</a></li>
 										<li>
 											<hr class="dropdown-divider">
 										</li>
-										<li><a class="dropdown-item" id="k_re_cu_menu" href="#">예약
+										<li><a class="dropdown-item" id="k_re_cu_menu" href="<%=request.getContextPath()%>/burscheck">예약
 												조회/수정</a></li>
 									</ul></li>
 							</ul>
@@ -257,6 +257,7 @@ td, th {
 		</div>
 	</article>
 	</content>
+	<!-- 모달창 -->
 	<div class="modal fade" id="exampleModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true"
 		style="top: 5%;">
@@ -656,18 +657,7 @@ td, th {
 			})
     		}
     	})
-    	
-    	/* function search(){
-			$.ajax({
-				url :" reservationSearch",
-				type:"post",
-				data : {"search":},
-				datatype :"json",
-				success : function(){
-					
-				}
-			})
-		} */
+    
 		</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

@@ -339,7 +339,7 @@ article>div>p {
 										<td>${list.bkNo }</td>
 										<td>${list.bkDate }</td>
 										<td>${list.bkTime }</td>
-										<td><c:out value="${list.bsStatus eq 'R' ? '예약' : '취소' }" /></td>
+										<td><c:out value="${list.bsStatus eq 'C' ? '취소' : '예약' }" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -434,6 +434,9 @@ article>div>p {
 			});
 			$("#k_bu_eroll_menu").click(function() {
 				location.href="bucompany";
+			});
+			$("#k_re_menu_enroll").click(function() {
+				location.href = "<%=request.getContextPath()%>/burmenu";
 			});
 			$("#k_re_cu_menu").click(function() {
 				location.href = "<%=request.getContextPath()%>/burscheck";

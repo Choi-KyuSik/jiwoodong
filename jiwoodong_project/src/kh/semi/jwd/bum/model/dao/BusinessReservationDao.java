@@ -55,7 +55,7 @@ public class BusinessReservationDao {
 	public ArrayList<Map<String, Object>> menuList(Connection conn, int cpNo) {
 		
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-		String sql = "select * from menu where cp_no=?";
+		String sql = "select * from menu where cp_no=? and menu_useyn = 'Y'";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -72,7 +72,7 @@ public class BusinessReservationDao {
 				map.put("menuUseyn", rs.getString("menu_useyn"));
 				map.put("menuWriteDate", rs.getTimestamp("menu_write_date"));
 				map.put("menuUpdateDate", rs.getTimestamp("menu_update_date"));
-				map.put("fl_gno", rs.getInt("fl_gno"));
+				map.put("flGno", rs.getString("fl_gno"));
 				list.add(map);
 			}
 		} catch (SQLException e) {
@@ -167,7 +167,7 @@ public class BusinessReservationDao {
 //	map.put("bkRequire", request.getParameter("bkrequire"));
 	public int reservationUpdate(Connection conn, Map<String, Object> map, int cpNo) {
 		int result = 0;
-		String sql = "update booking set bk_name = ?, bk_phone = ?, bk_require = ?, bk_date = ?, bk_time = ? where cp_no = ? and bk_no = to_number(?)";
+		String sql = "update booking set bk_name = ?, bk_phone = ?, bk_require = ?, bk_date =  REPLACE(?, '-', '/'), bk_time = ? where cp_no = ? and bk_no = to_number(?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, (String) map.get("bkName"));
@@ -276,6 +276,82 @@ public class BusinessReservationDao {
 			e.printStackTrace();
 		} finally {
 			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Map<String, Object>> reservationMenuList(Connection conn, int cpNo) {
+		String sql = "select * from menu where cp_no = ? and menu_useyn = 'Y' order by menu_no desc";
+		 ArrayList<Map<String, Object>>list = new  ArrayList<Map<String, Object>>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("menuNo", rs.getString("menu_no"));
+				map.put("menuName", rs.getString("menu_name"));
+				map.put("menuPrice", rs.getString("menu_price"));
+				map.put("menuExplain", rs.getString("menu_explain"));
+				map.put("fileUrl", rs.getString("fl_gno"));
+				list.add(map);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	/*
+	 * public int fileUpload(Connection conn, Map<String, Object> map, int cpNo) {
+	 * int result = 0; // src 수정해야함 String sql =
+	 * "insert into jwd_file(fl_gno, fl_name, fl_rename, fl_src) VALUES(?,?,?,'C:/z_workspace/z_java/jiwoodong_project/web/upload')"
+	 * ; try { pstmt = conn.prepareStatement(sql); pstmt.setString(1,
+	 * Integer.toString(cpNo)+map.get("menuName")); pstmt.setString(2, file);
+	 * pstmt.setString(3, fileSysName); result = pstmt.executeUpdate(); } catch
+	 * (SQLException e) { e.printStackTrace(); } finally { close(pstmt); }
+	 * 
+	 * return result; }
+	 */
+
+	public int reservationMenuInsert(Connection conn, Map<String, Object> map, int cpNo) {
+		int result = 0;
+		String sql = "insert into menu(menu_no, cp_no, menu_name, menu_price, menu_explain, fl_gno) VALUES(menu_seq.nextval, ?, ?, to_number(?), ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			pstmt.setString(2, (String) map.get("menuName"));
+			pstmt.setString(3, (String) map.get("menuPrice"));
+			pstmt.setString(4, (String) map.get("menuExplain"));
+			pstmt.setString(5, (String) map.get("fileUrl"));
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int reservationMenuDelete(Connection conn, int menuNo) {
+		int result = 0;
+		String sql = "update menu set menu_useyn = 'N', menu_update_date = sysdate where menu_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, menuNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
 		
