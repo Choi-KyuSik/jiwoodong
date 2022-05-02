@@ -31,7 +31,7 @@ public class MainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		 System.out.println("diur;");
 		 ArrayList<AdminNoticeVo> adnolist = new AdminNoticeService().noticeList();
 		 System.out.println("왜 이거 안찍혀 ? : " + adnolist);
 		 

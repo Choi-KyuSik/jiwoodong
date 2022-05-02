@@ -92,6 +92,14 @@ public class AdminNoticeService {
 		close(conn);
 		return result;
 	}
+	
+	// 공지사항 검색된 것 개수 확인
+	public int countNoticeSearchList(String field, String query) {
+		Connection conn = getConnection();
+		int result = dao.countNoticeSearchList(conn, field, query);
+		close(conn);
+		return result;
+	}
 
 
 }

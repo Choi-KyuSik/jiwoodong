@@ -70,7 +70,7 @@ public class AdminNoticeDao {
 					adnvo.setNtDate(rs.getString(4));
 
 					voList.add(adnvo);
-					// System.out.println("dao다. 값 담겼니?" + voList);
+					System.out.println("dao다. 값 담겼니?" + voList);
 
 				} while (rs.next());
 			}
@@ -272,6 +272,32 @@ public class AdminNoticeDao {
 			close(rs);
 			close(pstmt);
 		}
+		return result;
+
+	}
+	
+	// 공지사항 검색된 것 개수 확인
+	public int countNoticeSearchList(Connection conn, String field, String query) {
+
+		String ntContent = '%' + query + '%';
+
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM NOTICE WHERE " + field + " LIKE '" + ntContent + "'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println("dao에서 개수맞게 들어갔을까 ? : " + result);
 		return result;
 
 	}

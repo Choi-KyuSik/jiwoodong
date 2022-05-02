@@ -32,6 +32,26 @@ public class AdminNoticeListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		// 검색
+		String field = request.getParameter("f");
+		String query = request.getParameter("q");
+		
+		System.out.println("field : " + field);
+		System.out.println("query : " + query);
+		
+		// 사용자가 검색 전달을 안했을 때
+		String field_ = "nt_title";
+		if(field != null) {
+			// 기본이 제목이 선택되도록
+			field_ = field;
+		}
+		
+		String query_ = "";
+		if(query != null) {
+			query_ = query;
+		}
+		
 		String pageNumStr = request.getParameter("pageNum");
 		System.out.println("pageNumStr:"+pageNumStr);
 		int currentPage = 1;
@@ -40,7 +60,15 @@ public class AdminNoticeListController extends HttpServlet {
 		System.out.println("currentPage:"+currentPage);
 		final int pageSize = 18;
 		final int pageBlock = 3;
-		int totalCnt = countNoticeList();
+		int totalCnt = 0;
+		
+		if(field == null || query == null) {
+			// 검색결과가 없을 때
+			totalCnt = countNoticeList();
+		} else {
+			// 검색결과가 있을 때
+			totalCnt = countNoticeSearchList(field, query);
+		}
 		
 		// paging 처리
 		// 총 페이지 수
@@ -67,25 +95,6 @@ public class AdminNoticeListController extends HttpServlet {
 			endRnum = totalCnt;
 		}
 		
-		// 검색
-		
-		// 사용자가 검색 전달을 안했을 때
-		String field = request.getParameter("f");
-		String query = request.getParameter("q");
-		
-		System.out.println("field : " + field);
-		System.out.println("query : " + query);
-		
-		String field_ = "nt_title";
-		if(field != null) {
-			// 기본이 제목이 선택되도록
-			field_ = field;
-		}
-		
-		String query_ = "";
-		if(query != null) {
-			query_ = query;
-		}
 		
 		ArrayList<AdminNoticeVo> noticeListDetailPaging = new AdminNoticeService().noticeListDetailPaging(startRnum, endRnum);
 		ArrayList<AdminNoticeVo> noticeListSearch = new AdminNoticeService().noticeListDetailPaging(field, query, startRnum, endRnum);
@@ -106,12 +115,19 @@ public class AdminNoticeListController extends HttpServlet {
 		request.setAttribute("query", query);
 		
 		request.getRequestDispatcher("WEB-INF/admin/adminNoticeList.jsp").forward(request, response);
+		
+	}
+	public int countNoticeSearchList(String field, String query) {
+		int result = new AdminNoticeService().countNoticeSearchList(field, query);
+		System.out.println("결과 나옵니까 ? : " + result);
+		return result;
 	}
 	
 	public int countNoticeList() {
 		int result = new AdminNoticeService().countNoticeList();
 		return result;
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

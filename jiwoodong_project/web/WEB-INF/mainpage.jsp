@@ -117,38 +117,6 @@ a:hover {
 	<div>
 		<%@ include file="./view/template_content.jsp"%>
 	</div>
-	<!-- 공지사항 -->
-	<section style="background-color: #F9fafb;">
-		<div style="margin: 0 auto; width: 1200px; padding: 30px 50px;">
-			<p style="padding-top: 100px;" id="notice"></p>
-			<p class="j_title">공지사항</p>
-			<div>
-				<table class="table table table-hover" style="clear: both;">
-					<thead>
-						<tr>
-							<th scope="col">글번호</th>
-							<th scope="col">제목</th>
-							<th scope="col">작성자</th>
-							<th scope="col">작성일</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${adnolist }" var="i">
-							<tr>
-								<th scope="row">${i.ntNo}</th>
-								<td>${i.ntTitle}</td>
-								<td>관리자</td>
-								<td>${i.ntDate}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</section>
-	<div>
-		<%@ include file="./view/template_second_content.jsp"%>
-	</div>
 	<p class="j_title" style="padding-top: 30px;">원하는 장소와 업체를 검색해보세요!</p>
 	<div class="map_wrap">
 		<div id="map"
