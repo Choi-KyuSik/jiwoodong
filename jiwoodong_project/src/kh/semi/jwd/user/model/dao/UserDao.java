@@ -57,4 +57,73 @@ public class UserDao {
 		}
 		return result;
 	}
+	
+	// 내 정보 수정 : 손은진
+	public int updateUmInfo(Connection conn, UserVo uvo) {
+		
+		int result = 0;
+		
+		String umId = uvo.getUmId();
+		
+		String sql = "UPDATE U_MEMBER SET UM_PWD = ?, UM_NAME = ?, UM_BIRTH = ?, "
+				+ " UM_TEL = ?, UM_EMAIL = ?, UM_POSTCODE = ?, UM_ADDRESS = ?, "
+				+ " UM_DETAIL_ADDRESS = ?, UM_UPDATE_DATE = SYSTIMESTAMP WHERE UM_ID = '" + umId + "'";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, uvo.getUmPwd());
+			pstmt.setString(2, uvo.getUmName());
+			pstmt.setString(3, uvo.getUmBirth());
+			pstmt.setString(4, uvo.getUmTel());
+			pstmt.setString(5, uvo.getUmEmail());
+			pstmt.setString(6, uvo.getUmPostode());
+			pstmt.setString(7, uvo.getUmAddress());
+			pstmt.setString(8, uvo.getUmDetailAddress());
+			
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 내 정보 조회 : 손은진
+	public UserVo usMemberListInfo(Connection conn, String umId) {
+		
+		UserVo uvo = new UserVo();
+		
+		String sql = "SELECT UM_ID, UM_NAME, UM_BIRTH, UM_TEL, UM_POSTCODE, UM_ADDRESS, "
+				+ " UM_DETAIL_ADDRESS, UM_EMAIL, UM_PWD FROM U_MEMBER "
+				+ " WHERE UM_ID = '" + umId + "'";
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				uvo.setUmId(rs.getString(1)); // 아이디
+				uvo.setUmName(rs.getString(2)); // 이름
+				uvo.setUmBirth(rs.getString(3)); // 생년월일
+				uvo.setUmTel(rs.getString(4)); // 전화번호
+				uvo.setUmPostode(rs.getString(5)); // 우편번호
+				uvo.setUmAddress(rs.getString(6)); // 주소
+				uvo.setUmDetailAddress(rs.getString(7)); // 상세주소
+				uvo.setUmEmail(rs.getString(8)); // 이메일
+				uvo.setUmPwd(rs.getString(9)); // 비밀번호
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return uvo;
+	}
 }

@@ -31,8 +31,6 @@ public class AdminNoticeListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
 		// 검색
 		String field = request.getParameter("f");
 		String query = request.getParameter("q");
@@ -119,7 +117,7 @@ public class AdminNoticeListController extends HttpServlet {
 	}
 	public int countNoticeSearchList(String field, String query) {
 		int result = new AdminNoticeService().countNoticeSearchList(field, query);
-		System.out.println("결과 나옵니까 ? : " + result);
+		// System.out.println("결과 나옵니까 ? : " + result);
 		return result;
 	}
 	
@@ -127,7 +125,6 @@ public class AdminNoticeListController extends HttpServlet {
 		int result = new AdminNoticeService().countNoticeList();
 		return result;
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

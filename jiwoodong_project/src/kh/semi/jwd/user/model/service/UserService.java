@@ -22,4 +22,26 @@ public class UserService {
 		}
 			return result;			
 	}
+	
+	// 내 정보 수정 : 손은진
+	public int updateUmInfo(UserVo uvo) {
+		int result = 0;
+		
+		Connection conn = getConnection();
+		result = new UserDao().updateUmInfo(conn, uvo);
+		close(conn);
+		
+		return result;
+	}
+	
+	// 내 정보 조회 : 손은진
+	public UserVo usMemberListInfo(String umId) {
+		UserVo result = null;
+
+		Connection conn = getConnection();
+		result = new UserDao().usMemberListInfo(conn, umId);
+		close(conn);
+
+		return result;
+	}
 }

@@ -173,3 +173,7 @@
 	margin-right: 10px;
 	width: 90px;
 }
+
+.border_none {
+	border: 0;
+}

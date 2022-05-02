@@ -100,7 +100,7 @@
 					<c:if test="${startPage <= 1 }">
 						<li class="page-item disabled"><a class="page-link" href="AdminNoticeList?pageNum=${startPage-1 }">Previous</a></li>
 					</c:if>
-					<c:forEach step="1" begin="${startPage }" end="${ endPage}" var="idx">
+					<c:forEach step="1" begin="${startPage }" end="${endPage }" var="idx">
 						<c:if test="${idx eq currentPage }">
 						<li class="page-item active"><a class="page-link" href="AdminNoticeList?pageNum=${idx }">${idx }</a></li>
 						</c:if>

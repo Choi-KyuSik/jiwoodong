@@ -70,7 +70,7 @@ public class AdminNoticeDao {
 					adnvo.setNtDate(rs.getString(4));
 
 					voList.add(adnvo);
-					System.out.println("dao다. 값 담겼니?" + voList);
+					// System.out.println("dao다. 값 담겼니?" + voList);
 
 				} while (rs.next());
 			}
