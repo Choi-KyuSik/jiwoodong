@@ -773,6 +773,47 @@ public class AdminDao {
 		return result;
 
 	}
+	
+	// 업종별 예약현황 통계 count
+	public ArrayList<Map<String, Object>> bookingCount(Connection conn) {
+		
+		ArrayList<Map<String, Object>> result = null;
+		
+		String sql = "SELECT COUNT(*)"
+				+ " FROM BOOKING"
+				+ " JOIN COMPANY USING (CP_NO)"
+				+ " WHERE CP_CATEGORY = '카페'"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*)"
+				+ " FROM BOOKING"
+				+ " JOIN COMPANY USING (CP_NO)"
+				+ " WHERE CP_CATEGORY = '미용실'"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*)"
+				+ " FROM BOOKING"
+				+ " JOIN COMPANY USING (CP_NO)"
+				+ " WHERE CP_CATEGORY = '호텔'";
+		
+		result = new ArrayList<Map<String,Object>>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String,Object> map = new HashMap<String, Object>();
+				map.put("bookingCnt", rs.getInt(1));
+				result.add(map);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+		
+	}
 
 
 }

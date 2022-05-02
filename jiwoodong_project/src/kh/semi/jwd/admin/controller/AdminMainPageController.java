@@ -43,14 +43,15 @@ public class AdminMainPageController extends HttpServlet {
 		
 		ArrayList<AdminNoticeVo> adnolist = new AdminNoticeService().noticeList();
 		ArrayList<Map<String, Object>> cpaclist = new AdminService().companyAcceptList();
-		
+		ArrayList<Map<String, Object>> bookingCnt = new AdminService().bookingCount();
 		
 		
 		// request.setAttribute("tabMenu", tabMenu);
 		request.setAttribute("adnolist", adnolist);
 		request.setAttribute("cpAccept", cpaclist);
+		request.setAttribute("bookingCnt", bookingCnt);
 		
-//		System.out.println("controller다. 담겼니?" + adnolist);
+		// System.out.println("controller다. 담겼니?" + adnolist);
 		request.getRequestDispatcher("WEB-INF/admin/adminMainPage.jsp").forward(request, response);
 	}
 

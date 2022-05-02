@@ -38,7 +38,7 @@
                                 <tr>
                                     <th scope="col">NO</th>
                                     <th scope="col">사업자번호</th>
-                                    <th scope="col">업종</th>
+                      				<th scope="col">업종</th>
                                     <th scope="col">업체명</th>
                                     <th scope="col">신청일자</th>
                                 </tr>
@@ -177,18 +177,18 @@
                     data: [
                         {
                             name: "호텔",
-                            y: 45,
+                            y: ${bookingCnt[2].bookingCnt},
                         },
                         {
                             name: "",
                         },
                         {
                             name: "미용실",
-                            y: 32,
+                            y: ${bookingCnt[1].bookingCnt},
                         },
                         {
                             name: "카페",
-                            y: 23,
+                            y: ${bookingCnt[0].bookingCnt},
                         }
                     ]
                 }
@@ -200,6 +200,7 @@
 	<script>
     	$("#s_notice_menu").click(function() {
     		location.href="AdminNoticeList";
+    		//location.href="AdminNoticeList?f=nt_title&q=";
     	});
     	
     	$("#s_bu_accept_menu").click(function() {
@@ -298,6 +299,29 @@
         
 
     </script> -->
+    
+    <!-- 카카오 스크립트 -->
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+    	$("#s_logout").click(function() {
+    		Kakao.init('f276b6cc77a90e02edac0cb9b783cc3f'); //발급받은 키 중 javascript키를 사용해준다.
+    		if (Kakao.Auth.getAccessToken()) {
+				Kakao.API.request({
+					url : '/v1/user/unlink',
+					success : function(response) {
+						console.log(response);
+						alert("로그아웃 성공");
+						location.href="AdminLogin";
+					},
+					fail : function(error) {
+						console.log(error);
+						alert("로그아웃 실패");
+					},
+				})
+				Kakao.Auth.setAccessToken(undefined)
+			}
+    	});
+    </script>
     
     
 </body>

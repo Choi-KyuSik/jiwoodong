@@ -125,6 +125,54 @@ public class AdminNoticeDao {
 		}
 		return voList;
 	}
+	
+	// 글조회(공지사항조회) - 페이징 & 검색
+		public ArrayList<AdminNoticeVo> noticeListDetailPaging(Connection conn, String field, String query, int startRnum, int endRnum) {
+
+			String ntContent = '%' + query + '%';
+			
+			// System.out.println("title값 잘 왔니?" + ntTitle + "content값 잘 왔니?" + ntContent);
+			
+			ArrayList<AdminNoticeVo> voList = null;
+
+			//		String sql = "SELECT * FROM NOTICE ORDER BY NT_WRITE_DATE DESC";
+			//		String sql = "SELECT * FROM(SELECT A.*, ROWNUM RNUM FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') FROM NOTICE ORDER BY NT_WRITE_DATE DESC) A) WHERE RNUM BETWEEN 1 AND 10";
+			String sql = "SELECT NT_NO, NT_TITLE, NT_CONTENT, NT_WRITE_DATE FROM(SELECT ROWNUM RNUM, A.* FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE FROM NOTICE WHERE "+ field +" LIKE ? ORDER BY NT_NO DESC) A ) WHERE RNUM BETWEEN ? AND ?";
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, ntContent);
+				pstmt.setInt(2, startRnum);
+				pstmt.setInt(3, endRnum);
+				rs = pstmt.executeQuery();
+
+				if(rs.next()) {
+					voList = new ArrayList<AdminNoticeVo>();
+					//				NT_NO         NOT NULL NUMBER         
+					//				NT_TITLE      NOT NULL VARCHAR2(300)  
+					//				NT_CONTENT    NOT NULL VARCHAR2(4000) 
+					//				NT_WRITE_DATE NOT NULL TIMESTAMP(6)   
+					//				NT_COUNT      NOT NULL NUMBER 
+					do {
+						AdminNoticeVo adnvo = new AdminNoticeVo();
+						adnvo.setNtNo(rs.getInt(1));
+						adnvo.setNtTitle(rs.getString(2));
+						adnvo.setNtContent(rs.getString(3));
+						adnvo.setNtDate(rs.getString(4));
+
+						voList.add(adnvo);
+						// System.out.println("dao다. 값 담겼니?" + voList);
+
+					} while (rs.next());
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return voList;
+		}
 
 	// 글 수정
 	public int updateNotice(Connection conn, AdminNoticeVo adnvo) {

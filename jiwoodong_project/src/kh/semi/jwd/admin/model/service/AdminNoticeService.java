@@ -45,6 +45,18 @@ public class AdminNoticeService {
 
 		return voList;
 	}
+	
+	// 글 조회(공지사항조회) - 페이징, 검색처리
+	public ArrayList<AdminNoticeVo> noticeListDetailPaging(String field, String query, int startRnum, int endRnum) {
+
+		Connection conn = getConnection();
+		ArrayList<AdminNoticeVo> voList = dao.noticeListDetailPaging(conn, field, query, startRnum, endRnum);
+		close(conn);
+
+		//		System.out.println("service다. 담겼니?" + voList);
+
+		return voList;
+	}
 
 	// 글 수정
 	public int updateNotice(AdminNoticeVo adnvo) {

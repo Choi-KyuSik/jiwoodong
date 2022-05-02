@@ -11,7 +11,7 @@
         <div id="p_main_top">
             <div style="float: right;">
                 <p id="p_welcome_msg">환영합니다 손은진님</p>
-                <a id="s_logout" href=""
+                <a id="s_logout" href="javascript:void(0)"
                     style="">로그아웃</a>
             </div>
             <div id="p_top_logo">

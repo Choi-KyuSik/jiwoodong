@@ -156,6 +156,29 @@
     		location.href="AdminUsInfoDeleteList";
     	});
     </script>
+    
+        <!-- 카카오 스크립트 -->
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+    	$("#s_logout").click(function() {
+    		Kakao.init('f276b6cc77a90e02edac0cb9b783cc3f'); //발급받은 키 중 javascript키를 사용해준다.
+    		if (Kakao.Auth.getAccessToken()) {
+				Kakao.API.request({
+					url : '/v1/user/unlink',
+					success : function(response) {
+						console.log(response);
+						alert("로그아웃 성공");
+						location.href="AdminLogin";
+					},
+					fail : function(error) {
+						console.log(error);
+						alert("로그아웃 실패");
+					},
+				})
+				Kakao.Auth.setAccessToken(undefined)
+			}
+    	});
+    </script>
 
 </body>
 </html>

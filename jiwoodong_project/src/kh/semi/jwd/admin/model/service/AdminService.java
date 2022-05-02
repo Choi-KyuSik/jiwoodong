@@ -250,5 +250,14 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+	
+	// 업종별 예약현황 통계 count
+	public ArrayList<Map<String, Object>> bookingCount() {
+		
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> result = dao.bookingCount(conn);
+		close(conn);
+		return result;
+	}
 
 }

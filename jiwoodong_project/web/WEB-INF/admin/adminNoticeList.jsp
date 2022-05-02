@@ -29,7 +29,7 @@
 	<div>
 		<%@ include file="../view/admin/admin_header.jsp"%>
 	</div>
-	<section>
+	<section id="contents">
 
 		<!-- 공지사항 content : 손은진 -->
 		<div>
@@ -41,16 +41,14 @@
 				<nav class="navbar navbar-light"
 					style="float: right; margin-bottom: 20px;">
 					<div class="container-fluid">
-						<form action="" method="get" id="frm" class="d-flex">
-							<select name="selectkind" style="width: 100px; float: right; margin-right: 10px;"
+						<form action="AdminNoticeList" method="get" id="frm" class="d-flex">
+							<select name="f" style="width: 100px; float: right; margin-right: 10px;"
 								class="form-select" aria-label="Default select example">
-								<option value="ntAll" selected>전체</option>
-								<option value="ntTitle" value="1">제목</option>
-								<option value="ntContent" value="2">내용</option>
-							</select> <input class="form-control me-2" type="search" name="search"
-								placeholder="Search" aria-label="Search">
-							<button id="s_search_btn" class="btn btn-outline-success"
-								type="button">Search</button>
+								<option value="nt_title" selected="selected" ${field eq 'nt_title' ? 'selected' : ''}>제목</option>
+								<option value="nt_content" ${field eq 'nt_content' ? 'selected' : ''}>내용</option>
+							</select> 
+							<input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" value="${query }">
+							<button id="s_search_btn" class="btn btn-outline-success" type="submit">Search</button>
 						</form>
 					</div>
 				</nav>
@@ -66,7 +64,8 @@
 						</tr>
 					</thead>
 
-					<tbody style="cursor: pointer;">
+					<tbody id="tbody" style="cursor: pointer;">
+					<c:if test="${empty query}">
 						<c:forEach items="${noticeListDetailPaging }" var="i">
 							<tr class="s_tr_readList s_tr_modal">
 								<th scope="row" class="s_ntNo">${i.ntNo}</th>
@@ -76,6 +75,18 @@
 								<td>${i.ntDate}</td>
 							</tr>
 						</c:forEach>
+					</c:if>
+					<c:if test="${not empty query}">
+						<c:forEach items="${noticeListSearch }" var="i">
+							<tr class="s_tr_readList s_tr_modal">
+								<th scope="row" class="s_ntNo">${i.ntNo}</th>
+								<td class="s_td_short">${i.ntTitle}</td>
+								<td class="s_td_short">${i.ntContent}</td>
+								<td>관리자</td>
+								<td>${i.ntDate}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
 					</tbody>
 					<tfoot>
 					</tfoot>
@@ -114,10 +125,10 @@
 			console.log("등록버튼 눌리니?");
 			location.href = "AdminNoticeWrite";
 		});
-		$("#s_search_btn").click(function() {
+		/* $("#s_search_btn").click(function() {
         	$("#frm").attr("action", "AdminNoticeList");
         	$("#frm").submit();
-        });
+        }); */
 		
 		$(".s_tr_readList").click(function() {
 			// 배열 선언
@@ -172,6 +183,28 @@
     		location.href="AdminUsInfoDeleteList";
     	});
     </script>
-
+    
+    <!-- 카카오 스크립트 -->
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+    	$("#s_logout").click(function() {
+    		Kakao.init('f276b6cc77a90e02edac0cb9b783cc3f'); //발급받은 키 중 javascript키를 사용해준다.
+    		if (Kakao.Auth.getAccessToken()) {
+				Kakao.API.request({
+					url : '/v1/user/unlink',
+					success : function(response) {
+						console.log(response);
+						alert("로그아웃 성공");
+						location.href="AdminLogin";
+					},
+					fail : function(error) {
+						console.log(error);
+						alert("로그아웃 실패");
+					},
+				})
+				Kakao.Auth.setAccessToken(undefined)
+			}
+    	});
+    </script>
 </body>
 </html>

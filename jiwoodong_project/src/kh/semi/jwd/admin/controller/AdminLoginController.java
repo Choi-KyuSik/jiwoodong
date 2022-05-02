@@ -47,9 +47,7 @@ public class AdminLoginController extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
-		// DB 확인
-		ArrayList<AdminVo> avo = new AdminService().listAdmin();
-		System.out.println(avo);
+		request.getRequestDispatcher("AdminMyPage");
 	}
 
 }

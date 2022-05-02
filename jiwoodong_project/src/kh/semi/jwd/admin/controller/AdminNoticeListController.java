@@ -67,15 +67,43 @@ public class AdminNoticeListController extends HttpServlet {
 			endRnum = totalCnt;
 		}
 		
+		// 검색
+		
+		// 사용자가 검색 전달을 안했을 때
+		String field = request.getParameter("f");
+		String query = request.getParameter("q");
+		
+		System.out.println("field : " + field);
+		System.out.println("query : " + query);
+		
+		String field_ = "nt_title";
+		if(field != null) {
+			// 기본이 제목이 선택되도록
+			field_ = field;
+		}
+		
+		String query_ = "";
+		if(query != null) {
+			query_ = query;
+		}
+		
 		ArrayList<AdminNoticeVo> noticeListDetailPaging = new AdminNoticeService().noticeListDetailPaging(startRnum, endRnum);
+		ArrayList<AdminNoticeVo> noticeListSearch = new AdminNoticeService().noticeListDetailPaging(field, query, startRnum, endRnum);
+		
+		System.out.println("noticeListSearch" + noticeListSearch);
+		
 		// System.out.println("여기불림 ? ");
-		System.out.println("noticeListDetailPaging" + noticeListDetailPaging);
-		System.out.println("여기확인중 : 시작 " + startPage + ", 끝 " + endPage);
+		// System.out.println("noticeListDetailPaging" + noticeListDetailPaging);
+		// System.out.println("여기확인중 : 시작 " + startPage + ", 끝 " + endPage);
 		request.setAttribute("noticeListDetailPaging", noticeListDetailPaging);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCnt", pageCnt);
 		request.setAttribute("currentPage", currentPage);
+		
+		request.setAttribute("noticeListSearch", noticeListSearch);
+		request.setAttribute("field", field);
+		request.setAttribute("query", query);
 		
 		request.getRequestDispatcher("WEB-INF/admin/adminNoticeList.jsp").forward(request, response);
 	}

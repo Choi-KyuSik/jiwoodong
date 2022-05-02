@@ -1,11 +1,16 @@
 package kh.semi.jwd.main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import kh.semi.jwd.admin.model.service.AdminNoticeService;
+import kh.semi.jwd.admin.model.vo.AdminNoticeVo;
 
 /**
  * Servlet implementation class MainController
@@ -26,6 +31,12 @@ public class MainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		 ArrayList<AdminNoticeVo> adnolist = new AdminNoticeService().noticeList();
+		 System.out.println("왜 이거 안찍혀 ? : " + adnolist);
+		 
+		 request.setAttribute("adnolist", adnolist);
+		 
 		request.getRequestDispatcher("WEB-INF/mainpage.jsp").forward(request, response);
 		
 	}

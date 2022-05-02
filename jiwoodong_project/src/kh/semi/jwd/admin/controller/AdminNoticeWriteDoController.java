@@ -1,6 +1,7 @@
 package kh.semi.jwd.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
@@ -65,11 +66,21 @@ public class AdminNoticeWriteDoController extends HttpServlet {
 		int result = new AdminNoticeService().insertNotice(adnvo);
 		if(result < 1) {
 			System.out.println("글등록 실패!");
-			// request.getRequestDispatcher(request.getContextPath() + "/admin/adminMainPage.jsp").forward(request, response);
-			response.sendRedirect("AdminNoticeList");
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html; charset=utf-8");
+			out.println("<script language='javascript'>");
+			out.println("alert('글 등록에 실패하였습니다.'); location.href='AdminNoticeList'");
+			out.println("</script>");
+			out.flush();
 		} else {
 			System.out.println("글등록 성공!");
-			response.sendRedirect("AdminNoticeList");
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html; charset=utf-8");
+			out.println("<script language='javascript'>");
+			out.println("alert('정상적으로 등록하였습니다.'); location.href='AdminNoticeList'");
+			out.println("</script>");
+			out.flush();
+			// response.sendRedirect("AdminNoticeList");
 		}
 		
 	}

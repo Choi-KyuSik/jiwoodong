@@ -1,6 +1,8 @@
 package kh.semi.jwd.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,11 +64,23 @@ public class AdminUmInfoUpdateDoController extends HttpServlet {
 		
 		if(result < 1) {
 			System.out.println("사용자 정보 수정 실패!");
-			request.getRequestDispatcher("AdminMainPage").forward(request, response);
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html; charset=utf-8");
+			out.println("<script language='javascript'>");
+			out.println("alert('수정에 실패하였습니다.'); location.href='AdminUsInfoList'");
+			out.println("</script>");
+			out.flush();
+			// request.getRequestDispatcher("AdminMainPage").forward(request, response);
 		} else {
 			System.out.println("사용자 정보 수정 성공!");
 			// request.getSession().setAttribute("tabMenu", "3");
-			response.sendRedirect("AdminMainPage");
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html; charset=utf-8");
+			out.println("<script language='javascript'>");
+			out.println("alert('정상적으로 수정되었습니다.'); location.href='AdminUsInfoList'");
+			out.println("</script>");
+			out.flush();
+			// response.sendRedirect("AdminMainPage");
 		}
 		
 	}

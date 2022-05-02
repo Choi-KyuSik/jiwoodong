@@ -7,13 +7,12 @@
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-	crossorigin="anonymous"></script>
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
+	rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <!-- aos css -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <!-- 스와이퍼 슬라이드 css-->
@@ -24,8 +23,10 @@
 	href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet"
 	href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
 <head>
 <meta charset="UTF-8">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>메인페이지</title>
 
 <!-- google font -->
@@ -115,6 +116,38 @@ a:hover {
 	</div>
 	<div>
 		<%@ include file="./view/template_content.jsp"%>
+	</div>
+	<!-- 공지사항 -->
+	<section style="background-color: #F9fafb;">
+		<div style="margin: 0 auto; width: 1200px; padding: 30px 50px;">
+			<p style="padding-top: 100px;" id="notice"></p>
+			<p class="j_title">공지사항</p>
+			<div>
+				<table class="table table table-hover" style="clear: both;">
+					<thead>
+						<tr>
+							<th scope="col">글번호</th>
+							<th scope="col">제목</th>
+							<th scope="col">작성자</th>
+							<th scope="col">작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${adnolist }" var="i">
+							<tr>
+								<th scope="row">${i.ntNo}</th>
+								<td>${i.ntTitle}</td>
+								<td>관리자</td>
+								<td>${i.ntDate}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	<div>
+		<%@ include file="./view/template_second_content.jsp"%>
 	</div>
 	<p class="j_title" style="padding-top: 30px;">원하는 장소와 업체를 검색해보세요!</p>
 	<div class="map_wrap">
@@ -437,6 +470,13 @@ a:hover {
 				el.removeChild(el.lastChild);
 			}
 		}
+	</script>
+	<script>
+		var data = '<c:out value="${adnolist}"/>';
+		console.log("data ? : " + data);
+		
+		var data2 = '${adnolist}';
+		console.log("data2 ? : " + data2);
 	</script>
 </body>
 </html>
