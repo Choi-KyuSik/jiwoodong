@@ -2,6 +2,7 @@ package kh.semi.jwd.user.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.jwd.bum.model.vo.CompanyVo;
 import kh.semi.jwd.user.model.service.UserService;
 import kh.semi.jwd.user.model.vo.UserVo;
 
@@ -34,6 +36,14 @@ public class UserMypageController extends HttpServlet {
 		String umId = "apple";
 		
 		UserVo usMemberListInfo = new UserService().usMemberListInfo(umId);
+		ArrayList<CompanyVo> usCpList = new UserService().usCpList();
+		ArrayList<Map<String, Object>> usBkList = new UserService().usBkList();
+		
+		// System.out.println("usCpList : " + usCpList);
+		
+		request.setAttribute("usCpList", usCpList);
+		request.setAttribute("usBkList", usBkList);
+		
 		request.setAttribute("usMemberListInfo", usMemberListInfo);
 		
 		// System.out.println("결과를 내놓아라!" + usMemberListInfo);

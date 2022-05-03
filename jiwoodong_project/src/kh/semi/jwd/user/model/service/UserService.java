@@ -4,7 +4,10 @@ package kh.semi.jwd.user.model.service;
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Map;
 
+import kh.semi.jwd.bum.model.vo.CompanyVo;
 import kh.semi.jwd.user.model.dao.UserDao;
 import kh.semi.jwd.user.model.vo.UserLoginVo;
 import kh.semi.jwd.user.model.vo.UserVo;
@@ -76,4 +79,28 @@ public class UserService {
 
 		return result;
 	}
+	
+	// 사용자 마이페이지 - 업체 조회 : 최규식
+		public ArrayList<CompanyVo> usCpList() {
+			
+			 ArrayList<CompanyVo> volist = null;
+			 
+			 Connection conn = getConnection();
+			 volist = new UserDao().usCpList(conn);
+			 close(conn);
+			 
+			 return volist;
+			
+		}
+		
+		// 사용자 마이페이지 - 예약 현황 조회 : 최규식
+		public ArrayList<Map<String, Object>> usBkList() {
+			
+			ArrayList<Map<String, Object>> volist = null;
+			Connection conn = getConnection();
+			volist = new UserDao().usBkList(conn);
+			close(conn);
+			
+			return volist;
+		}
 }

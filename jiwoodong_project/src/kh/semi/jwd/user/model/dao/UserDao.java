@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import kh.semi.jwd.bum.model.vo.CompanyVo;
 import kh.semi.jwd.user.model.vo.UserLoginVo;
 import kh.semi.jwd.user.model.vo.UserVo;
 
@@ -209,5 +213,104 @@ public class UserDao {
 		return result;
 		
 	}
+	
+	// 사용자 마이페이지 - 업체 조회 : 최규식
+		public ArrayList<CompanyVo> usCpList(Connection conn) {
+			
+			ArrayList<CompanyVo> volist = null;
+			
+			String sql = "SELECT CP_NAME, CP_ADDRESS, CP_DTADDRESS FROM COMPANY WHERE CP_SIGNYN IN ('Y','y')";
+			
+			volist = new ArrayList<CompanyVo>();
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					CompanyVo cvo = new CompanyVo();
+					cvo.setCpName(rs.getString("CP_NAME"));
+					cvo.setCpAddress(rs.getString("CP_ADDRESS"));
+					cvo.setCpDtaddress(rs.getString("CP_DTADDRESS"));
+					
+					volist.add(cvo);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return volist;
+			
+			
+		}
+		
+		// 사용자 마이페이지 - 예약 현황 조회 : 최규식
+		public ArrayList<Map<String, Object>> usBkList(Connection conn) {
+			
+			 ArrayList<Map<String, Object>> volist = null;
+			 
+			 String sql = "select * from"
+			 		+ "    (select rownum rnum, a.*"
+			 		+ "     from (select cp_name,bk_date, bk_status,REPLACE(REPLACE(REPLACE (BK_STATUS,'R','예약완료'),'H','예약대기'),'C','예약취소') as bk_statusC"
+			 		+ "            from booking b"
+			 		+ "            join company c on b.cp_no = c.cp_no) a)"
+			 		+ "where rnum between 1 and 3";
+					 
+					/* "select * from "
+			 		+ " (select rownum rnum, a.*"
+			 		+ " from (select cp_name,bk_date, bk_status"
+			 		+ " from booking b"
+			 		+ " join company c on b.cp_no = c.cp_no) a)"
+			 		+ " where rnum between 1 and 3";*/
+			 
+			 try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				volist = new ArrayList<Map<String,Object>>();
+				while(rs.next()) {
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("rownum", rs.getInt(1));
+					map.put("cpName", rs.getString(2));
+					map.put("bkDate", rs.getString(3));
+					map.put("bkStatus", rs.getString(5));
+					
+					volist.add(map);
+					
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			 
+			 return volist;
+		}
+		// 사용자 마이페이지 - 리뷰리스트 : 최규식
+//		public ArrayList<Map<String, Object>> usRvList(Connection conn) {
+//			String sql = "select * from(select rownum, x.* from (select r.rv_content, to_char(rv_write_date, 'yyyy/mm/dd'), b.um_id, r.rv_score from booking b join review r using(bk_no) where b.cp_no = 14 order by b.bk_write_date desc) x) where rownum between 1 and 7";
+//			ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+//			try {
+//				pstmt = conn.prepareStatement(sql);
+//				rs = pstmt.executeQuery();
+//				while (rs.next()) {
+//					Map<String, Object> map = new HashMap<String, Object>();
+//					map.put("rownum", rs.getInt(1));
+//					map.put("rvContent", rs.getString(2));
+//					map.put("rvWriteDate", rs.getString(3));
+//					map.put("umId", rs.getString(4));
+//					map.put("rvScore", rs.getInt(5));
+	//
+//					list.add(map);
+//					System.out.println("BumDao result:" + sql);
+//				}
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			return list;
+//		}
 }
 

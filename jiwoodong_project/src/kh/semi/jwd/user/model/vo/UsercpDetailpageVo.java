@@ -29,7 +29,7 @@ public class UsercpDetailpageVo {
 	private String rvContent;
 	private Date rvWriteDate;
 	private String buTel;
-//	private String flGno;
+	private String flGno;
 
 	public UsercpDetailpageVo() {
 		super();
@@ -40,7 +40,7 @@ public class UsercpDetailpageVo {
 		return "UsercpDetailpageVo [cpNo=" + cpNo + ", cpName=" + cpName + ", cpAddress=" + cpAddress + ", cpDTAddress="
 				+ cpDTAddress + ", cpOpenTime=" + cpOpenTime + ", cpCloseTime=" + cpCloseTime + ", cpExplain="
 				+ cpExplain + ", rvNo=" + rvNo + ", rvScore=" + rvScore + ", rvContent=" + rvContent + ", rvWriteDate="
-				+ rvWriteDate + ", buTel=" + buTel + "]";
+				+ rvWriteDate + ", buTel=" + buTel + ", flGno=" + flGno + "]";
 	}
 
 	public int getCpNo() {
@@ -137,6 +137,13 @@ public class UsercpDetailpageVo {
 
 	public void setBuTel(String buTel) {
 		this.buTel = buTel;
+	}
+	public String getFlGno() {
+		return flGno;
+	}
+
+	public void setFlGno(String flGno) {
+		this.flGno = flGno;
 	}
 
 }
