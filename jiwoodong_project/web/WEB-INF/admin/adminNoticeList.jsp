@@ -22,6 +22,7 @@
 	crossorigin="anonymous"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <title>공지사항 조회</title>
 </head>
 <body>
@@ -88,9 +89,11 @@
 						</c:forEach>
 					</c:if>
 					</tbody>
-					<tfoot>
-					</tfoot>
 				</table>
+				<c:if test="${fn:length(noticeListSearch) == 0 and noticeListDetailPaging == null}">
+					<div class="s_notice_msg">검색결과가 없습니다. 다시 검색해주세요.</div>
+					<div id="s_back_list_div"><button id="s_back_list" class="btn btn-primary" type="button">목록으로</button></div>
+				</c:if>
 				<div id="pagingBox">
 					<ul class="pagination">
 					<!-- startPage에서 -1일 때 -->
@@ -125,10 +128,10 @@
 			console.log("등록버튼 눌리니?");
 			location.href = "AdminNoticeWrite";
 		});
-		/* $("#s_search_btn").click(function() {
-        	$("#frm").attr("action", "AdminNoticeList");
-        	$("#frm").submit();
-        }); */
+		
+		$("#s_back_list").click(function() {
+    		location.href="AdminNoticeList";
+    	});
 		
 		$(".s_tr_readList").click(function() {
 			// 배열 선언

@@ -42,13 +42,13 @@
 					<tbody>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">아이디</th>
-							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
-								name="umId" maxlength="300" readonly="readonly"
+							<td class="table-light" id="s_url_no">
+							<input type="text" class="form-control" style="border: none;" name="umId" maxlength="300" readonly="readonly"
 								value="${usMemberDetail.umId}" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">이름</th>
-							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
+							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
 								name="umName" maxlength="300"
 								value="${usMemberDetail.umName}" /></td>
 						</tr>
@@ -60,19 +60,19 @@
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">전화번호</th>
-							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
+							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
 								name="umTel" maxlength="300"
 								required="required" value="${usMemberDetail.umTel}" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">이메일</th>
-							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
+							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
 								name="umEmail" maxlength="300"
 								required="required" value="${usMemberDetail.umEmail}" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th">주소</th>
-							<td class="table-light" id="s_url_no">
+							<td class="table-light tb_bg_color" id="s_url_no">
 							<input type="text" class="form-control"
 								style="width: 100px; display: inline-block;" name="umPostcode"
 								maxlength="300" required="required"
@@ -88,7 +88,7 @@
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">가입일</th>
 							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
-								name="toCharUmWriteDate" maxlength="300" readonly="readonly"
+								name="toCharUmWriteDate" maxlength="300" readonly="readonly" style="border: none;"
 								required="required" value="${usMemberDetail.toCharUmWriteDate}" /></td>
 					</tbody>
 				</table>

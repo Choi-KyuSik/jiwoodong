@@ -157,7 +157,7 @@
               <p class="c_info_title">즐겨찾기 리스트</p>
 
             </div>
-            <div id="c_inner_info_l">
+            <div id="c_inner_info_l" style="margin-bottom: 40px;">
               <p class="c_info_title">리뷰내역</p>
               <table class="table" style="width: 100%; margin-top: 40px;">
                 <thead>

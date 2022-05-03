@@ -139,6 +139,48 @@ public class AdminDao {
 		System.out.println(list);
 		return list;
 	}
+	
+	// 업체등록요청 현황 조회(상세)
+	public ArrayList<Map<String, Object>> companyAcceptDetailSearchList(Connection conn, String field, String query, int startRnum, int endRnum) {
+
+		String cpName = '%' + query + '%';
+		
+		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM "
+				+ " (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), "
+				+ " BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') AND " + field + " LIKE ? "
+				+ " ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN ? AND ?";
+		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cpName);
+			pstmt.setInt(2, startRnum);
+			pstmt.setInt(3, endRnum);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				do {
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("rownum", rs.getString(1));
+					map.put("buNo", rs.getString(2));
+					map.put("cpCategory", rs.getString(3));
+					map.put("cpName", rs.getString(4));
+					map.put("buNumber", rs.getString(5));
+					map.put("cpWriteDate", rs.getString(6));
+					map.put("buTel", rs.getString(7));
+					list.add(map);
+
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(list);
+		return list;
+	}
 
 	// 업체등록요청 세부 1개 조회
 	public ArrayList<Map<String, Object>> companyAcceptDetailRead(Connection conn, int buNo) {
@@ -328,6 +370,49 @@ public class AdminDao {
 		return voList;
 
 	}
+	
+	// 사업자 정보 리스트 - 검색
+	public ArrayList<BumVo> buMemberInfoSearchList(Connection conn, String field, String query, int startRnum, int endRnum) {
+
+		String buName = '%' + query + '%';
+		
+		ArrayList<BumVo> voList = null;
+
+		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, BU_ID, BU_NAME, BU_BIRTH, "
+				+ " BU_TEL, BU_EMAIL, TO_CHAR(BU_WRITE_DATE,'YYYY/MM/DD') FROM B_MEMBER WHERE BU_USEYN IN ('Y', 'y') AND " + field + " LIKE ? "
+				+ " ORDER BY BU_NO DESC) A) B WHERE RNUM BETWEEN ? AND ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, buName);
+			pstmt.setInt(2, startRnum);
+			pstmt.setInt(3, endRnum);
+			rs = pstmt.executeQuery();
+
+			voList = new ArrayList<BumVo>();
+
+			while(rs.next()) {
+				BumVo vo = new BumVo();
+				vo.setRownum(rs.getInt(1));
+				vo.setBuNo(rs.getInt(2));
+				vo.setBuId(rs.getString(3));
+				vo.setBuName(rs.getString(4));
+				vo.setBuBirth(rs.getString(5));
+				vo.setBuTel(rs.getString(6));
+				vo.setBuEmail(rs.getString(7));
+				vo.setToCharbuWriteDate(rs.getString(8));
+				voList.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return voList;
+
+	}
 
 	// 사업자 정보 상세 리스트
 	public BumVo buMemberDetailInfo(Connection conn, int buNo) {
@@ -457,6 +542,48 @@ public class AdminDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRnum);
 			pstmt.setInt(2, endRnum);
+			rs = pstmt.executeQuery();
+
+			voList = new ArrayList<AdminUserVo>();
+
+			while(rs.next()) {
+				AdminUserVo vo = new AdminUserVo();
+				vo.setRownum(rs.getInt(1));
+				vo.setUmId(rs.getString(2));
+				vo.setUmName(rs.getString(3));
+				vo.setUmBirth(rs.getString(4));
+				vo.setUmTel(rs.getString(5));
+				vo.setUmEmail(rs.getString(6));
+				vo.setToCharUmWriteDate(rs.getString(7));
+				voList.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return voList;
+
+	}
+	
+	// 사용자 정보 리스트 : 검색
+	public ArrayList<AdminUserVo> usMemberInfoSearchList(Connection conn, String field, String query, int startRnum, int endRnum) {
+
+		String umName = '%' + query + '%';
+		
+		ArrayList<AdminUserVo> voList = null;
+
+		String sql = "SELECT * FROM(SELECT ROWNUM RNUM, A.* FROM(SELECT UM_ID, UM_NAME, UM_BIRTH, UM_TEL, "
+				+ " UM_EMAIL, TO_CHAR(UM_WRITE_DATE,'YYYY/MM/DD') FROM U_MEMBER WHERE UM_USEYN IN ('Y', 'y') AND " + field + " LIKE ? "
+				+ " ORDER BY UM_WRITE_DATE DESC) A) B WHERE RNUM BETWEEN ? AND ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, umName);
+			pstmt.setInt(2, startRnum);
+			pstmt.setInt(3, endRnum);
 			rs = pstmt.executeQuery();
 
 			voList = new ArrayList<AdminUserVo>();
@@ -635,6 +762,34 @@ public class AdminDao {
 		return result;
 
 	}
+	
+	// 업체 신청 검색 리스트 카운트 만들기
+	public int countBuAcceptSearchList(Connection conn, String field, String query) {
+
+
+		String cpName = '%' + query + '%';
+
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n')"
+				+ " AND " + field + " LIKE '" + cpName + "'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+
+	}
+			
 
 	// 업체 수락 리스트 글 개수
 	public int countBuAcceptApprovalList(Connection conn) {
@@ -704,6 +859,31 @@ public class AdminDao {
 		return result;
 
 	}
+	
+	// 사업자 정보 리스트 글 개수
+	public int countBuMemberInfoSearchList(Connection conn, String field, String query) {
+
+		String buName = '%' + query + '%';
+		
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM B_MEMBER WHERE BU_USEYN IN ('Y', 'y') AND " + field + " LIKE '" + buName + "'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+		
+	}
 
 	// 사업자 탈퇴자 정보 리스트 글 개수
 	public int countBuMemberInfoDeleteList(Connection conn) {
@@ -749,6 +929,31 @@ public class AdminDao {
 		}
 		return result;
 
+	}
+	
+	// 사용자 정보 검색 리스트 글 개수
+	public int countUsMemberInfoSearchList(Connection conn, String field, String query) {
+		
+		String umName = '%' + query + '%';
+		
+		int result = 0;
+
+		String sql = "SELECT COUNT(*) FROM U_MEMBER WHERE UM_USEYN IN ('Y', 'y') AND " + field + " LIKE '" + umName + "'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+		
 	}
 
 	// 사용자 탈퇴자 정보 리스트 글 개수

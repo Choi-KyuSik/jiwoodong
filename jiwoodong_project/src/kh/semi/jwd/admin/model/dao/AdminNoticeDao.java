@@ -90,7 +90,10 @@ public class AdminNoticeDao {
 
 		//		String sql = "SELECT * FROM NOTICE ORDER BY NT_WRITE_DATE DESC";
 		//		String sql = "SELECT * FROM(SELECT A.*, ROWNUM RNUM FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') FROM NOTICE ORDER BY NT_WRITE_DATE DESC) A) WHERE RNUM BETWEEN 1 AND 10";
-		String sql = "SELECT B.NT_NO, B.NT_TITLE, B.NT_CONTENT, B.NT_WRITE_DATE FROM(SELECT ROWNUM RNUM, A.* FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE FROM NOTICE ORDER BY NT_NO DESC) A) B WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT B.NT_NO, B.NT_TITLE, B.NT_CONTENT, B.NT_WRITE_DATE "
+				+ " FROM(SELECT ROWNUM RNUM, A.* FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, "
+				+ " TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE FROM NOTICE ORDER BY NT_NO DESC) A) B "
+				+ " WHERE RNUM BETWEEN ? AND ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -127,7 +130,7 @@ public class AdminNoticeDao {
 	}
 	
 	// 글조회(공지사항조회) - 페이징 & 검색
-		public ArrayList<AdminNoticeVo> noticeListDetailPaging(Connection conn, String field, String query, int startRnum, int endRnum) {
+		public ArrayList<AdminNoticeVo> noticeListDetailSearchPaging(Connection conn, String field, String query, int startRnum, int endRnum) {
 
 			String ntContent = '%' + query + '%';
 			
@@ -137,7 +140,9 @@ public class AdminNoticeDao {
 
 			//		String sql = "SELECT * FROM NOTICE ORDER BY NT_WRITE_DATE DESC";
 			//		String sql = "SELECT * FROM(SELECT A.*, ROWNUM RNUM FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') FROM NOTICE ORDER BY NT_WRITE_DATE DESC) A) WHERE RNUM BETWEEN 1 AND 10";
-			String sql = "SELECT NT_NO, NT_TITLE, NT_CONTENT, NT_WRITE_DATE FROM(SELECT ROWNUM RNUM, A.* FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE FROM NOTICE WHERE "+ field +" LIKE ? ORDER BY NT_NO DESC) A ) WHERE RNUM BETWEEN ? AND ?";
+			String sql = "SELECT NT_NO, NT_TITLE, NT_CONTENT, NT_WRITE_DATE FROM"
+					+ "	(SELECT ROWNUM RNUM, A.* FROM (SELECT NT_NO, NT_TITLE, NT_CONTENT, "
+					+ "	TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') AS NT_WRITE_DATE FROM NOTICE WHERE "+ field +" LIKE ? ORDER BY NT_NO DESC) A ) WHERE RNUM BETWEEN ? AND ?";
 
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -297,7 +302,7 @@ public class AdminNoticeDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println("dao에서 개수맞게 들어갔을까 ? : " + result);
+		// System.out.println("dao에서 개수맞게 들어갔을까 ? : " + result);
 		return result;
 
 	}

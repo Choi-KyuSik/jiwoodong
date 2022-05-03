@@ -22,6 +22,8 @@
 	crossorigin="anonymous"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <title>사업자 회원 정보 조회</title>
 </head>
 <body>
@@ -38,8 +40,13 @@
                 <!-- 검색 -->
                 <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
                     <div class="container-fluid">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <form action="AdminBuInfoList" method="get" class="d-flex">
+                        	<select name="f" style="width: 100px; float: right; margin-right: 10px;"
+								class="form-select" aria-label="Default select example">
+								<option value="bu_id" selected="selected" ${field eq 'bu_id' ? 'selected' : ''}>아이디</option>
+								<option value="bu_name" ${field eq 'bu_name' ? 'selected' : ''}>이름</option>
+							</select>
+                            <input class="form-control me-2" type="search" name="q" placeholder="Search" value="${query }" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
@@ -58,20 +65,40 @@
                         </tr>
                     </thead>
                     <tbody style="cursor: pointer;">
-                        <c:forEach items="${buMemberInfoList }" var="i">
-                                <tr class="s_tr_modal s_tr_buInfoList">
-                                    <th scope="row" class="s_ntNo">${i.rownum}</th>
-                                    <td>${i.buNo}</td>
-                                    <td>${i.buId}</td>
-                                    <td>${i.buName}</td>
-                                    <td class="s_td_short">${i.buBirth}</td>
-                                    <td>${i.buTel}</td>
-                                    <td>${i.buEmail}</td>
-                                    <td>${i.toCharbuWriteDate}</td>
-                                </tr>
-                            	</c:forEach>
-                    </tbody>
+						<c:if test="${empty query }">
+							<c:forEach items="${buMemberInfoList }" var="i">
+								<tr class="s_tr_modal s_tr_buInfoList">
+									<th scope="row" class="s_ntNo">${i.rownum}</th>
+									<td>${i.buNo}</td>
+									<td>${i.buId}</td>
+									<td>${i.buName}</td>
+									<td class="s_td_short">${i.buBirth}</td>
+									<td>${i.buTel}</td>
+									<td>${i.buEmail}</td>
+									<td>${i.toCharbuWriteDate}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<c:if test="${not empty query }">
+							<c:forEach items="${buMemberInfoSearchList }" var="i">
+								<tr class="s_tr_modal s_tr_buInfoList">
+									<th scope="row" class="s_ntNo">${i.rownum}</th>
+									<td>${i.buNo}</td>
+									<td>${i.buId}</td>
+									<td>${i.buName}</td>
+									<td class="s_td_short">${i.buBirth}</td>
+									<td>${i.buTel}</td>
+									<td>${i.buEmail}</td>
+									<td>${i.toCharbuWriteDate}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
                 </table>
+				<c:if test="${fn:length(buMemberInfoSearchList) == 0 and fn:length(buMemberInfoList) == 0}">
+					<div class="s_notice_msg">검색결과가 없습니다. 다시 검색해주세요.</div>
+					<div id="s_back_list_div"><button id="s_back_list" class="btn btn-primary" type="button">목록으로</button></div>
+				</c:if>
 				<div id="pagingBox">
 					<ul class="pagination">
 					<!-- startPage에서 -1일 때 -->
@@ -119,6 +146,10 @@
     		console.log("배열에 담긴 값 : " + tdArr[1]);
     		console.log(typeof(tdArr[1]));
     		location.href="AdminBuInfoDetailList?buNo=" + tdArr[1];
+    	});
+    	
+    	$("#s_back_list").click(function() {
+    		location.href="AdminBuInfoList";
     	});
     </script>
     

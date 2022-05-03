@@ -31,6 +31,25 @@ public class AdminBuAcceptListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 검색
+		String field = request.getParameter("f");
+		String query = request.getParameter("q");
+
+		System.out.println("field : " + field);
+		System.out.println("query : " + query);
+
+		// 사용자가 검색 전달을 안했을 때
+		String field_ = "cp_category";
+		if(field != null) {
+			// 기본이 업종이 선택되도록
+			field_ = field;
+		}
+
+		String query_ = "";
+		if(query != null) {
+			query_ = query;
+		}
+		
 		String pageNumStr = request.getParameter("pageNum");
 		System.out.println("pageNumStr:"+pageNumStr);
 		int currentPage = 1;
@@ -39,7 +58,16 @@ public class AdminBuAcceptListController extends HttpServlet {
 		System.out.println("currentPage:"+currentPage);
 		final int pageSize = 3;
 		final int pageBlock = 3;
-		int totalCnt = countBuAcceptList();
+		int totalCnt = 0;
+		
+		if(field == null || query == null) {
+			// 검색 결과가 없을 때
+			totalCnt = countBuAcceptList();
+		} else {
+			// 검색 결과가 있을 때
+			totalCnt = countBuAcceptSearchList(field, query);
+		}
+		
 		System.out.println("totalCnt" + totalCnt);
 		
 		// paging 처리
@@ -70,14 +98,22 @@ public class AdminBuAcceptListController extends HttpServlet {
 		System.out.println("endRnum" + endRnum);
 		
 		ArrayList<Map<String, Object>> cpacDetailList = new AdminService().companyAcceptDetailList(startRnum, endRnum);
+		ArrayList<Map<String, Object>> cpacDetailSearchList = new AdminService().companyAcceptDetailSearchList(field, query, startRnum, endRnum);
+		
+		System.out.println("cpacDetailSearchList : " + cpacDetailSearchList);
+		
 		// ArrayList<Map<String, Object>> cpaclist = new AdminService().companyAcceptList();
 		// request.setAttribute("cpAccept", cpaclist);
-		System.out.println("cpacDetailList : " + cpacDetailList);
+		// System.out.println("cpacDetailList : " + cpacDetailList);
 		request.setAttribute("cpacDetailList", cpacDetailList);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCnt", pageCnt);
 		request.setAttribute("currentPage", currentPage);
+		
+		request.setAttribute("cpacDetailSearchList", cpacDetailSearchList);
+		request.setAttribute("field", field);
+		request.setAttribute("query", query);
 		
 		request.getRequestDispatcher("WEB-INF/admin/adminBuAcceptList.jsp").forward(request, response);
 	}
@@ -85,6 +121,12 @@ public class AdminBuAcceptListController extends HttpServlet {
 	// 업체 신청 리스트 카운트 만들기
 	public int countBuAcceptList() {
 		int result = new AdminService().countBuAcceptList();
+		return result;
+	}
+	
+	// 업체 신청 검색 리스트 카운트 만들기
+	public int countBuAcceptSearchList(String field, String query) {
+		int result = new AdminService().countBuAcceptSearchList(field, query);
 		return result;
 	}
 

@@ -47,10 +47,10 @@ public class AdminNoticeService {
 	}
 	
 	// 글 조회(공지사항조회) - 페이징, 검색처리
-	public ArrayList<AdminNoticeVo> noticeListDetailPaging(String field, String query, int startRnum, int endRnum) {
+	public ArrayList<AdminNoticeVo> noticeListDetailSearchPaging(String field, String query, int startRnum, int endRnum) {
 
 		Connection conn = getConnection();
-		ArrayList<AdminNoticeVo> voList = dao.noticeListDetailPaging(conn, field, query, startRnum, endRnum);
+		ArrayList<AdminNoticeVo> voList = dao.noticeListDetailSearchPaging(conn, field, query, startRnum, endRnum);
 		close(conn);
 
 		//		System.out.println("service다. 담겼니?" + voList);

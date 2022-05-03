@@ -41,13 +41,13 @@
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">사업자 번호</th>
 							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
-								name="buNo" maxlength="300" readonly="readonly"
+								name="buNo" maxlength="300" readonly="readonly" style="border: none;" 
 								value="${buMemberDetail.buNo}" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th">아이디</th>
-							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
-								name="buId" maxlength="300" readonly="readonly"
+							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
+								name="buId" maxlength="300" readonly="readonly" style="border: none;"
 								value="${buMemberDetail.buId}" /></td>
 						</tr>
 						<tr>
@@ -58,7 +58,7 @@
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th">생년월일</th>
-							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
+							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
 								name="buBirth" maxlength="300"
 								required="required" value="${buMemberDetail.buBirth}" /></td>
 						</tr>
@@ -70,14 +70,14 @@
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th">이메일</th>
-							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
+							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
 								name="buEmail" maxlength="300"
 								required="required" value="${buMemberDetail.buEmail}" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">가입일</th>
 							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
-								name="toCharbuWriteDate" maxlength="300" readonly="readonly"
+								name="toCharbuWriteDate" maxlength="300" readonly="readonly" style="border: none;"
 								required="required" value="${buMemberDetail.toCharbuWriteDate}" /></td>
 					</tbody>
 				</table>

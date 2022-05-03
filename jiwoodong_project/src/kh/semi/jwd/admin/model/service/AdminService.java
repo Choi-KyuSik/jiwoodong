@@ -46,6 +46,14 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+	
+	// 업체등록요청 현황 조회(상세) - 페이징, 검색처리
+	public ArrayList<Map<String, Object>> companyAcceptDetailSearchList(String field, String query, int startRnum, int endRnum) {
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> result = dao.companyAcceptDetailSearchList(conn, field, query, startRnum, endRnum);
+		close(conn);
+		return result;
+	}
 
 	// 업체등록요청 세부 1개 조회
 	public ArrayList<Map<String, Object>> companyAcceptDetailRead(int buNo) {
@@ -109,6 +117,16 @@ public class AdminService {
 		return result;
 
 	}
+	
+	// 사업자 정보 조회 - 검색
+	public ArrayList<BumVo> buMemberInfoSearchList(String field, String query, int startRnum, int endRnum) {
+
+		Connection conn = getConnection();
+		ArrayList<BumVo> result = dao.buMemberInfoSearchList(conn, field, query, startRnum, endRnum);
+		close(conn);
+		return result;
+
+	}
 
 	// 사업자 정보 상세 조회
 	public BumVo buMemberDetailInfo(int buNo) {
@@ -157,6 +175,17 @@ public class AdminService {
 		return result;
 
 	}
+	
+	// 사용자 정보 조회 : 검색
+	public ArrayList<AdminUserVo> usMemberInfoSearchList(String field, String query, int startRnum, int endRnum) {
+
+		Connection conn = getConnection();
+		ArrayList<AdminUserVo> result = dao.usMemberInfoSearchList(conn, field, query, startRnum, endRnum);
+		close(conn);
+		return result;
+
+	}
+	
 	// 사업자 정보 상세 조회
 	public AdminUserVo usMemberDetailInfo(AdminUserVo uvo) {
 
@@ -202,6 +231,14 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+	
+	// 업체 신청 검색 리스트 카운트 만들기
+	public int countBuAcceptSearchList(String field, String query) {
+		Connection conn = getConnection();
+		int result = dao.countBuAcceptSearchList(conn, field, query);
+		close(conn);
+		return result;
+	}
 
 	// 업체 수락 리스트 글 개수
 	public int countBuAcceptApprovalList() {
@@ -226,6 +263,14 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+	
+	// 사업자 정보 리스트 글 개수
+	public int countBuMemberInfoSearchList(String field, String query) {
+		Connection conn = getConnection();
+		int result = dao.countBuMemberInfoSearchList(conn, field, query);
+		close(conn);
+		return result;
+	}
 
 	// 사업자 탈퇴자 정보 리스트 글 개수
 	public int countBuMemberInfoDeleteList() {
@@ -239,6 +284,14 @@ public class AdminService {
 	public int countUsMemberInfoList() {
 		Connection conn = getConnection();
 		int result = dao.countUsMemberInfoList(conn);
+		close(conn);
+		return result;
+	}
+	
+	// 사용자 정보 검색 리스트 글 개수
+	public int countUsMemberInfoSearchList(String field, String query) {
+		Connection conn = getConnection();
+		int result = dao.countUsMemberInfoSearchList(conn, field, query);
 		close(conn);
 		return result;
 	}

@@ -22,6 +22,7 @@
 	crossorigin="anonymous"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <title>업체 신청 내역</title>
 </head>
 <body>
@@ -40,8 +41,13 @@
 				<nav class="navbar navbar-light"
 					style="float: right; margin-bottom: 20px;">
 					<div class="container-fluid">
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
+						<form action="AdminBuAcceptList" method="get" class="d-flex">
+							<select name="f" style="width: 100px; float: right; margin-right: 10px;"
+								class="form-select" aria-label="Default select example">
+								<option value="cp_category" selected="selected" ${field eq 'cp_category' ? 'selected' : ''}>업종</option>
+								<option value="cp_name" ${field eq 'cp_name' ? 'selected' : ''}>업체명</option>
+							</select>
+							<input class="form-control me-2" type="search" name="q" value="${query }"
 								placeholder="Search" aria-label="Search">
 							<button class="btn btn-outline-success" type="submit">Search</button>
 						</form>
@@ -61,6 +67,7 @@
 						</tr>
 					</thead>
 					<tbody style="cursor: pointer;">
+					<c:if test="${empty query }">
 						<c:forEach items="${cpacDetailList }" var="i">
 							<tr class="s_tr_modal s_tr_readBuList">
 								<th scope="row" class="s_ntNo">${i.rownum}</th>
@@ -72,8 +79,26 @@
 								<td>${i.cpWriteDate}</td>
 							</tr>
 						</c:forEach>
+					</c:if>
+					<c:if test="${not empty query }">
+						<c:forEach items="${cpacDetailSearchList }" var="i">
+							<tr class="s_tr_modal s_tr_readBuList">
+								<th scope="row" class="s_ntNo">${i.rownum}</th>
+								<td>${i.buNo}</td>
+								<td>${i.buNumber}</td>
+								<td>${i.cpCategory}</td>
+								<td class="s_td_short">${i.cpName}</td>
+								<td>${i.buTel}</td>
+								<td>${i.cpWriteDate}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
 					</tbody>
 				</table>
+				<c:if test="${fn:length(cpacDetailSearchList) == 0 and fn:length(cpacDetailList) == 0}">
+					<div class="s_notice_msg">검색결과가 없습니다. 다시 검색해주세요.</div>
+					<div id="s_back_list_div"><button id="s_back_list" class="btn btn-primary" type="button">목록으로</button></div>
+				</c:if>
 				<div id="pagingBox">
 					<ul class="pagination">
 						<!-- startPage에서 -1일 때 -->
@@ -129,6 +154,11 @@
     		console.log(typeof(tdArr[1]));
     		location.href="AdminBuDetailInfo?buNo=" + tdArr[1];
     	});
+        
+		$("#s_back_list").click(function() {
+    		location.href="AdminBuAcceptList";
+    	});
+		
         </script>
 	<!-- 메뉴버튼 눌렀을 때 이동할 페이지 -->
 	<script>

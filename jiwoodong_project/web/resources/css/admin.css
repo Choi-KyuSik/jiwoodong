@@ -177,3 +177,18 @@
 .border_none {
 	border: 0;
 }
+
+.tb_bg_color {
+	background-color: #e9ecef !important;
+}
+
+.s_notice_msg {
+	text-align: center;
+	color: red;
+	font-weight: bold;
+}
+
+#s_back_list_div {
+	text-align: center;
+    margin-top: 20px;
+}

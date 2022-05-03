@@ -35,15 +35,7 @@
         <div>
             <div id="s_um_delete_content" class="tab_menu s_content" style="display: block;">
                 <p class="p_content_style">사용자 탈퇴 회원 조회</p>
-                <!-- 검색 -->
-                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
-                    <div class="container-fluid">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
+                <div style="height: 60px;"></div>
                 <table class="table table table-hover" style="clear: both; table-layout: fixed;">
                     <thead>
                         <tr>

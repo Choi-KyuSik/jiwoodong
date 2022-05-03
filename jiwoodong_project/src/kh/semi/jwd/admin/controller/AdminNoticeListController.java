@@ -95,7 +95,7 @@ public class AdminNoticeListController extends HttpServlet {
 		
 		
 		ArrayList<AdminNoticeVo> noticeListDetailPaging = new AdminNoticeService().noticeListDetailPaging(startRnum, endRnum);
-		ArrayList<AdminNoticeVo> noticeListSearch = new AdminNoticeService().noticeListDetailPaging(field, query, startRnum, endRnum);
+		ArrayList<AdminNoticeVo> noticeListSearch = new AdminNoticeService().noticeListDetailSearchPaging(field, query, startRnum, endRnum);
 		
 		System.out.println("noticeListSearch" + noticeListSearch);
 		
@@ -115,12 +115,14 @@ public class AdminNoticeListController extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/admin/adminNoticeList.jsp").forward(request, response);
 		
 	}
+	// 공지사항 검색 결과 카운트
 	public int countNoticeSearchList(String field, String query) {
 		int result = new AdminNoticeService().countNoticeSearchList(field, query);
 		// System.out.println("결과 나옵니까 ? : " + result);
 		return result;
 	}
 	
+	// 공지사항 리스트 개수
 	public int countNoticeList() {
 		int result = new AdminNoticeService().countNoticeList();
 		return result;

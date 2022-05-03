@@ -32,6 +32,25 @@ public class AdminUsInfoListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		// 검색
+		String field = request.getParameter("f");
+		String query = request.getParameter("q");
+
+		System.out.println("field : " + field);
+		System.out.println("query : " + query);
+
+		// 사용자가 검색 전달을 안했을 때
+		String field_ = "um_id";
+		if(field != null) {
+			// 기본이 아이디가 선택되도록
+			field_ = field;
+		}
+
+		String query_ = "";
+		if(query != null) {
+			query_ = query;
+		}
+		
 		String pageNumStr = request.getParameter("pageNum");
 		System.out.println("pageNumStr:"+pageNumStr);
 		int currentPage = 1;
@@ -40,7 +59,16 @@ public class AdminUsInfoListController extends HttpServlet {
 		System.out.println("currentPage:"+currentPage);
 		final int pageSize = 10;
 		final int pageBlock = 2;
-		int totalCnt = countUsMemberInfoList();
+		int totalCnt = 0;
+		
+		if(field == null || query == null) {
+			// 검색결과가 없을 때
+			totalCnt = countUsMemberInfoList();
+		} else {
+			// 검색결과가 있을 때
+			totalCnt = countUsMemberInfoSearchList(field, query);
+		}
+		
 		System.out.println("totalCnt" + totalCnt);
 		
 		// paging 처리
@@ -69,11 +97,16 @@ public class AdminUsInfoListController extends HttpServlet {
 		}
 		
 		ArrayList<AdminUserVo> usMemberInfoList = new AdminService().usMemberInfoList(startRnum, endRnum);
+		ArrayList<AdminUserVo> usMemberInfoSearchList = new AdminService().usMemberInfoSearchList(field, query, startRnum, endRnum);
 		request.setAttribute("usMemberInfoList", usMemberInfoList);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCnt", pageCnt);
 		request.setAttribute("currentPage", currentPage);
+		
+		request.setAttribute("usMemberInfoSearchList", usMemberInfoSearchList);
+		request.setAttribute("field", field);
+		request.setAttribute("query", query);
 		
 		request.getRequestDispatcher("WEB-INF/admin/adminUsInfoList.jsp").forward(request, response);
 	}
@@ -81,6 +114,12 @@ public class AdminUsInfoListController extends HttpServlet {
 	// 사용자 정보 리스트 글 개수
 	public int countUsMemberInfoList() {
 		int result = new AdminService().countUsMemberInfoList();
+		return result;
+	}
+	
+	// 사용자 정보 검색 리스트 글 개수
+	public int countUsMemberInfoSearchList(String field, String query) {
+		int result = new AdminService().countUsMemberInfoSearchList(field, query);
 		return result;
 	}
 
