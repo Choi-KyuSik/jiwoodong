@@ -138,13 +138,16 @@
 			var tdArr = new Array();
 			// 현재 클릭된 행(tr의 td)
 			var tr = $(this);
+			console.log("tr : " + tr);
 			var td = tr.children();
+			console.log("td : " + td);
 
 			// 반복문을 통해 배열에 값을 담아 사용
 			td.each(function(i) {
 				tdArr.push(td.eq(i).text());
 			});
 			// td들이 배열에 담겨있는데 그 중 1번째가 필요
+			console.log("tdArr : " + tdArr);
 			console.log("배열에 담긴 값 : " + tdArr[0]);
 			console.log(typeof (tdArr[0]));
 

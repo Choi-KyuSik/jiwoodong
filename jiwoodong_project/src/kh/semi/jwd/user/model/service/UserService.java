@@ -65,4 +65,15 @@ public class UserService {
 
 		return result;
 	}
+	
+	// 회원 탈퇴 : 손은진
+	public int deleteUmInfo(UserVo uvo) {
+		int result = 0;
+
+		Connection conn = getConnection();
+		result = new UserDao().deleteUmInfo(conn, uvo);
+		close(conn);
+
+		return result;
+	}
 }

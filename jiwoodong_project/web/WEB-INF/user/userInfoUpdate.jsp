@@ -35,54 +35,54 @@
 					<tbody>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none; background-color: var(--bs-table-bg);">아이디</th>
-							<td colspan="3" class="table-light" id="s_us_no">
+							<td colspan="3" class="table-light tb_bg_color" id="s_us_no">
 							<input type="text" class="form-control border_none" name="umId" readonly="readonly"
 								value="${usMemberListInfo.umId }" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">변경할 비밀번호</th>
-							<td class="table-light" id="s_us_pwd">
+							<td class="table-light tb_bg_color" id="s_us_pwd">
 							<input type="password" class="form-control" name="umPwd_1" id="umPwd_1"
 								value="" placeholder="변경할 비밀번호를 입력해주세요."/></td>
-							<td colspan="2" class="table-light" id="s_us_notice_1">
+							<td colspan="2" class="table-light tb_bg_color" id="s_us_notice_1">
 							<span id="s_us_pwd_check_1" style="display: none;"></span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">비밀번호 확인</th>
-							<td class="table-light" id="s_us_pwd_check">
+							<td class="table-light tb_bg_color" id="s_us_pwd_check">
 							<input type="password" class="form-control" name="umPwd_2" id="umPwd_2"
 								value="" placeholder="비밀번호를 한번 더 입력해주세요."/></td>
-							<td colspan="2" class="table-light" id="s_us_notice_2">
+							<td colspan="2" class="table-light tb_bg_color" id="s_us_notice_2">
 							<span id="s_us_pwd_check_2" style="display: none;">현재 비밀번호가 일치하지 않습니다.</span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">이름</th>
-							<td class="table-light" id="s_us_no">
+							<td class="table-light tb_bg_color" id="s_us_no">
 							<input type="text" class="form-control" name="umName"
 								value="${usMemberListInfo.umId }" /></td>
-							<td colspan="2" class="table-light"><span style="display: none;"></span></td>
+							<td colspan="2" class="table-light tb_bg_color"><span style="display: none;"></span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">생년월일</th>
-							<td class="table-light">
+							<td class="table-light tb_bg_color">
 							<input type="text" class="form-control" name="umBirth" value="${usMemberListInfo.umBirth }" /></td>
-							<td colspan="2" class="table-light"><span style="display: none;"></span></td>
+							<td colspan="2" class="table-light tb_bg_color"><span style="display: none;"></span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">전화번호</th>
-							<td class="table-light">
+							<td class="table-light tb_bg_color">
 							<input type="text" class="form-control" name="umTel" value="${usMemberListInfo.umTel }" /></td>
-							<td colspan="2" class="table-light"><span style="display: none;"></span></td>
+							<td colspan="2" class="table-light tb_bg_color"><span style="display: none;"></span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">이메일</th>
-							<td class="table-light">
+							<td class="table-light tb_bg_color">
 							<input type="text" class="form-control" name="umEmail" value="${usMemberListInfo.umEmail }" /></td>
-							<td colspan="2" class="table-light"><span style="display: none;"></span></td>
+							<td colspan="2" class="table-light tb_bg_color"><span style="display: none;"></span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">주소</th>
-								<td class="table-light" colspan="3">
+								<td class="table-light tb_bg_color" colspan="3">
 								<input type="text" class="form-control"
 									style="width: 200px; display: inline-block;" name="umPostcode" value="${usMemberListInfo.umPostode }" /> 
 									<input type="text" class="form-control"
@@ -144,15 +144,24 @@
 	  		location.href="UserMypage";
 	  	});
 	    
+	    $("#s_us_delete_btn").click(function() {
+	    	location.href="UserInfoDelete";
+	    });
+	    
 	    $("#s_us_check_btn").click(function() {
-	    	if (confirm("정말 수정하시겠습니까?") == true) {
-				var frmEl = $("#frm");
-				frmEl.attr("action", "UserUpdateInfoDo");
-				frmEl.attr("method", "post");
-				frmEl.submit();
-			} else {
-				location.href="UserMypage";
-			}
+	    	if($("#umPwd_1").val() == "") {
+	    		alert("변경할 비밀번호를 입력해주세요.");
+	    		$("#umPwd_1").focus();
+	    	} else {
+		    	if (confirm("정말 수정하시겠습니까?") == true) {
+					var frmEl = $("#frm");
+					frmEl.attr("action", "UserUpdateInfoDo");
+					frmEl.attr("method", "post");
+					frmEl.submit();
+				} else {
+					location.href="UserMypage";
+				}
+	    	}
 	    });
     </script>
 </body>

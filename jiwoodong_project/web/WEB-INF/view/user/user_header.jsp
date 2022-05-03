@@ -60,10 +60,6 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu">
                     <li><a class="dropdown-item" id="c_us_info_edit" href="#">내 정보 수정</a></li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" id="c_us_delete" href="#">회원 탈퇴</a></li>
                   </ul>
                 </li>
               </ul>

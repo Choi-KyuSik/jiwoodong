@@ -360,7 +360,7 @@
   		if(txt == '비밀번호가 일치합니다.') {
   			$("#s_us_pwd_check").text('');
   			var frm = $("#frm");
-  			frm.attr("action", "UserUpdateInfo");
+  			frm.attr("action", "UserInfoUpdate");
   			frm.attr("method", "post");
   			frm.submit();
   		} else {

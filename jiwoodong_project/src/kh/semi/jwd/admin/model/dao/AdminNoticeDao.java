@@ -234,7 +234,8 @@ public class AdminNoticeDao {
 
 		AdminNoticeVo adnvo = null;
 
-		String sql = "SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') FROM NOTICE WHERE NT_NO = ?";
+		String sql = "SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') "
+				+ " FROM NOTICE WHERE NT_NO = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

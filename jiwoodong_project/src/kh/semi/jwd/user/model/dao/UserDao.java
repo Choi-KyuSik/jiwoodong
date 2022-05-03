@@ -187,5 +187,27 @@ public class UserDao {
 		System.out.println("UserDao loginUserMember uvo:"+ uvo);
 		return uvo;
 	}
+	
+	// 회원 탈퇴 : 손은진
+	public int deleteUmInfo(Connection conn, UserVo uvo) {
+		
+		int result = 0;
+		
+		String sql = "UPDATE U_MEMBER SET UM_OUT_DATE = SYSTIMESTAMP, UM_USEYN = 'N' WHERE UM_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, uvo.getUmId());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+		  close(pstmt);
+		}
+		
+		return result;
+		
+	}
 }
 
