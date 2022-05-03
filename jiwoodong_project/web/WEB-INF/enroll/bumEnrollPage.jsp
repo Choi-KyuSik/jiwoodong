@@ -74,7 +74,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="bu_id" style="display: block;">아이디</label>
-                    <input type="text" class="form-control" id="bu_id" name="bu_id" onkeyPress="winopen()"  required="required">
+                    <input type="text" class="form-control" id="bu_id" name="bu_id" onkeyPress="winopen()" required="required">
                     <div class="invalid-feedback"> 아이디를 입력해주세요.
                     </div>
                     <input type="button" name="bu_id_check" id="bu_id_check" value="중복확인" onclick="winopen()" >
@@ -108,7 +108,7 @@
                 </div>
                 <br>
 	           
-                <button id="j_bu_enroll_btn" class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+                <button id="j_bu_enroll_btn" class="btn btn-primary btn-lg btn-block" type="submit" >가입 완료</button>
                 <button id="j_cancle_btn" class="btn btn-primary btn-lg btn-block" type="submit">취소하기</button>
             </form>
         </div>
@@ -130,7 +130,74 @@
             //no 
             }
     });
+    function check() {
+		//빈칸 체크
+		 		var f = document.bu_enroll; 
+	    
+		 
+	    if (frm.value == "") {
+	        alert("아이디를 입력해주십시오");
+	        f.bu_id.focus();
+	        return false;
+	    }
+	    else if (f.bu_id_check.value == "") {
+	        alert("아이디 중복체크를 해주십시오");
+	        f.bu_id_check.focus();
+	        return false;
+	    }
+	    else if (f.password.value == "") {
+	        alert("비밀번호를 입력해주십시오");
+	        f.password.focus();
+	        
+	        return false;
+	    }
 
+	    else if (f.name.value == "") {
+	        alert("이름을 입력해주십시오");
+	        f.name.focus();
+	        return false;
+	    }
+
+	    else if (f.birth.value == "") {
+	        alert("생년월일을 입력해주십시오");
+	        f.birth.focus();
+	        return false;
+	    }
+
+	    if (f.phone.value == "") {
+	        alert("핸드폰 번호를 입력해주십시오");
+	        f.phone.focus();
+	        return false;
+	    }
+
+	    if (f.email.value == "") {
+	        alert("이메일을 입력해주십시오");
+	        f.email.focus();
+	        return false;
+	    }
+
+	    if (f.email_check_no.value == "") {
+	        alert("인증번호를 입력해주십시오");
+	        f.email_check_no.focus();
+	        return false;
+	    }
+
+
+	    if (f.clause1.value == "" || f.clause1.length==0) {
+	        alert("이용약관에 동의 해주십시오");
+	        f.clause1.focus();
+	        return false;
+	    }
+
+
+	    if (f.clause2.value == "" || f.clause2.length==0) {
+	        alert("개인정보 수집및 이용약관에 동의해주십시오");
+	        f.clause2.focus();
+	        return false;
+	    }
+		
+	            
+	    } 
     <!--생년월일 하이픈 정규식 DOM  -->
     $("#birth").on("input",function() {
                 var target = document.getElementById("birth");
@@ -148,12 +215,19 @@
                 target.value = target.value.replace(/[^0-9]/g,'').replace(/^(\d{0,3})(\d{0,2})(\d{0,5})$/g, "$1-$2-$3").replace(/(-{1,2})$/g,"");
     }); 
         
-    
-	$("#j_bu_enroll_btn").click(function(){
 	
+	$("#j_bu_enroll_btn").click(function(){
+
 		    
-		   
 	//형식 체크
+	var email = $("#email").val().trim();
+	var emailCheck= /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    if(!emailCheck.test(email)){
+        alert("이메일 형식에 맞지 않습니다 ")
+        check.email.focus();
+        return false;
+    }
+    
 	var bu_num = $("#bu_num").val().trim();
 	var regExpPhone = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/; // 숫자3-숫자3,4-숫자4
 	if(!regExpPhone.test(bu_num)){
@@ -191,74 +265,7 @@
 	frm.submit();
 	});
 	
-	 function check() {
-		//빈칸 체크
-		 
-		var f = document.bu_enroll; 
-		    
-			 
-		    if (frm.value == "") {
-		        alert("아이디를 입력해주십시오");
-		        f.bu_id.focus();
-		        return false;
-		    }
-		    else if (f.bu_id_check.value == "") {
-		        alert("아이디 중복체크를 해주십시오");
-		        f.bu_id_check.focus();
-		        return false;
-		    }
-		    else if (f.password.value == "") {
-		        alert("비밀번호를 입력해주십시오");
-		        f.password.focus();
-		        
-		        return false;
-		    }
-
-		    else if (f.name.value == "") {
-		        alert("이름을 입력해주십시오");
-		        f.name.focus();
-		        return false;
-		    }
-
-		    else if (f.birth.value == "") {
-		        alert("생년월일을 입력해주십시오");
-		        f.birth.focus();
-		        return false;
-		    }
-
-		    if (f.phone.value == "") {
-		        alert("핸드폰 번호를 입력해주십시오");
-		        f.phone.focus();
-		        return false;
-		    }
-
-		    if (f.email.value == "") {
-		        alert("이메일을 입력해주십시오");
-		        f.email.focus();
-		        return false;
-		    }
-
-		    if (f.email_check_no.value == "") {
-		        alert("인증번호를 입력해주십시오");
-		        f.email_check_no.focus();
-		        return false;
-		    }
-
-
-		    if (f.clause1.value == "" || f.clause1.length==0) {
-		        alert("이용약관에 동의 해주십시오");
-		        f.clause1.focus();
-		        return false;
-		    }
-
-
-		    if (f.clause2.value == "" || f.clause2.length==0) {
-		        alert("개인정보 수집및 이용약관에 동의해주십시오");
-		        f.clause2.focus();
-		        return false;
-		    }
-	            
-	    }   
+  
 	 //아이디 중복체크
 <!-- 아이디중복체크 -->
 		function winopen(){
@@ -276,7 +283,19 @@
 			
 			//}
 		}
-	
+		//유효성검사
+		window.addEventListener('load',() => { 
+			const forms = document.getElementsByClassName('validation-form');
+			Array.prototype.filter.call(forms, (form) => {
+				form.addEventListener('submit', function (event) { 
+					if (form.checkValidity() === false) { 
+						event.preventDefault(); 
+						event.stopPropagation(); 
+						} 
+							form.classList.add('was-validated'); 
+						}, 	false); 
+				}); 
+			}, false);
 
 </script>
 </body>

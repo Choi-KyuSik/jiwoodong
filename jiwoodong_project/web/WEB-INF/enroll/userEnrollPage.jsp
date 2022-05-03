@@ -77,10 +77,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="user_id" style="display: block;">아이디</label>
-                    <input type="text" class="form-control" name="user_id" id="user_id" required="required">
+                    <input type="text" class="form-control" name="user_id" id="user_id" onkeyPress="winopen()" required="required">
                     <div class="invalid-feedback"> 아이디를 입력해주세요.
                     </div>
-                    <input type="button" id="user_id_check" value="중복확인">
+                    <input type="button" name="user_id_check" id="user_id_check" value="중복확인" onclick="winopen()">
                 </div>
                 <div class="mb-3"> 
                 	<label for="password">비밀번호</label> 
@@ -310,17 +310,30 @@
 		 		function winopen(){
 		 			//새창을 열어서 페이지를 오픈 후 -> 회원아이디정보를 가지고 중복체크
 		 			//1. 아이디가 없으면 알림창과 진행x
-		 			if(frm.user_id.value =="" || frm.user_id.value.length < 0){
-		 				alert("아이디를 먼저 입력해주세요")
-		 				frm.user_id.focus();
-		 			}else{
+		 			//if(frm.user_id.value =="" || frm.user_id.value.length < 0){
+		 				//alert("아이디를 먼저 입력해주세요")
+		 				//frm.user_id.focus();
+		 			//}else{
 		 				//2. 회원정보아이디를 가지고 있는 지 체크하려면 DB에 접근해야한다.
 		 				//자바스크립트로 어떻게 DB에 접근할까? => 파라미터로 id값을 가져가서 jsp페이지에서 진행하면 된다.
+ 						frm.user_id.value="";	
 		 				window.open("userIdCheck?user_id="+frm.user_id.value,"","width=500, height=300");
 		 			
-		 			
 		 			}
-		 		}
+		 		
+ 		//유효성검사
+		window.addEventListener('load',() => { 
+			const forms = document.getElementsByClassName('validation-form');
+			Array.prototype.filter.call(forms, (form) => {
+				form.addEventListener('submit', function (event) { 
+					if (form.checkValidity() === false) { 
+						event.preventDefault(); 
+						event.stopPropagation(); 
+						} 
+							form.classList.add('was-validated'); 
+						}, 	false); 
+				}); 
+			}, false);
 	</script>
 </body>
 </html>

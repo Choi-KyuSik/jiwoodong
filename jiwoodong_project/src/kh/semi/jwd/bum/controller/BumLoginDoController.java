@@ -70,6 +70,7 @@ public class BumLoginDoController extends HttpServlet {
 		}else {
 			System.out.println("로그인 해주세요");
 			response.sendRedirect("bumLogin");
+			
 		}
 		
 

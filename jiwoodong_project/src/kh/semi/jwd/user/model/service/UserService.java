@@ -23,6 +23,16 @@ public class UserService {
 		}
 			return result;			
 	}
+	//승희 - 아이디 중복 체크
+	public int checkUmId(String umId) {
+		int result;
+		Connection conn = getConnection();
+		result = new UserDao().checkUmId(conn, umId);
+		close(conn);
+		System.out.println("checkUmId result:" + result);
+		return result;
+		
+	}
 	//승희 - 사용자 로그인
 	public UserLoginVo loginUserMember(UserLoginVo vo) {
 		UserLoginVo uvo = new UserLoginVo();

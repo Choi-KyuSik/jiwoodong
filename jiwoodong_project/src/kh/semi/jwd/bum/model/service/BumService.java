@@ -57,7 +57,7 @@ public class BumService {
 
 	}
 
-	// 승희
+	// 승희-회원가입
 	public int insertBuMember(BumVo vo) {
 		int result = 0;
 		Connection conn = getConnection();
@@ -69,11 +69,11 @@ public class BumService {
 		}
 		return result;
 	}
-	
-	public int checkBuId(String bu_id) {
+	//승희 - 아이디 중복 체크
+	public int checkBuId(String buId) {
 		int result;
 		Connection conn = getConnection();
-		result = new BumDao().checkBuId(conn, bu_id);
+		result = new BumDao().checkBuId(conn, buId);
 		close(conn);
 		System.out.println("checkBuId result:" + result);
 		return result;

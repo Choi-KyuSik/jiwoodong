@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,6 @@ import kh.semi.jwd.bum.model.vo.CompanyVo;
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
 public class BumDao {
-	private Statement stmt = null;
 	// DB를 왔다갔다 하는것
 	private PreparedStatement pstmt = null;
 	// DB를 Java용 언어로 바꿔주는것
@@ -204,16 +202,16 @@ public class BumDao {
 	
 	//승희 - 아이디 중복확인
 	
-	public int checkBuId(Connection conn, String bu_id) {
+	public int checkBuId(Connection conn, String buId) {
 		
 		int result = -1;
 		
 		String sql = "select bu_id from b_member where bu_id=?";
-		System.out.println(bu_id);
+		System.out.println(buId);
 		try {
 //			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, bu_id);
+			pstmt.setString(1, buId);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {

@@ -58,6 +58,35 @@ public class UserDao {
 		}
 		return result;
 	}
+	// 승희 - 사용자 아이디 중복체크
+	//승희 - 아이디 중복확인
+	
+	public int checkUmId(Connection conn, String umId) {
+		
+		int result = -1;
+		
+		String sql = "select um_id from u_member where um_id=?";
+		System.out.println(umId);
+		try {
+//			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, umId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = 0;
+			}else {
+				result = 1;
+			}
+			System.out.println("아이디 중복체크 결과: "+result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
+		}
+		return result;
+	}
 	
 	// 내 정보 수정 : 손은진
 	public int updateUmInfo(Connection conn, UserVo uvo) {
