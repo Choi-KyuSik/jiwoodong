@@ -48,6 +48,7 @@
 							<th scope="col" style="width: 150px;">업종</th>
 							<th scope="col">업체명</th>
 							<th scope="col" style="width: 250px;">전화번호</th>
+							<th scope="col" style="width: 150px;">승인날짜</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -59,6 +60,7 @@
 								<td>${i.cpCategory}</td>
 								<td class="s_td_short">${i.cpName}</td>
 								<td>${i.buTel}</td>
+								<td>${i.buApprovalDate}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

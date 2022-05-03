@@ -223,7 +223,7 @@ public class AdminDao {
 
 		int result = 0;
 
-		String sql = "UPDATE COMPANY SET CP_SIGNYN = 'R', CP_REJECT_MSG = ? WHERE BU_NO = ?";
+		String sql = "UPDATE COMPANY SET CP_SIGNYN = 'R', CP_REJECT_DATE = SYSTIMESTAMP, CP_REJECT_MSG = ? WHERE BU_NO = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -244,7 +244,7 @@ public class AdminDao {
 
 		int result = 0;
 
-		String sql = "UPDATE COMPANY SET CP_SIGNYN = 'Y' WHERE BU_NO = ?";
+		String sql = "UPDATE COMPANY SET CP_SIGNYN = 'Y', CP_APPROVAL_DATE = SYSTIMESTAMP WHERE BU_NO = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -264,7 +264,11 @@ public class AdminDao {
 
 	// 승인 거절 리스트
 	public ArrayList<Map<String, Object>> companyAcceptRejectList(Connection conn, int startRnum, int endRnum) {
-		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, CP_REJECT_MSG FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('R', 'r') ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, "
+				+ " BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, CP_REJECT_MSG, TO_CHAR(CP_REJECT_DATE, 'YYYY/MM/DD') FROM COMPANY C "
+				+ " JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('R', 'r') ORDER BY CP_REJECT_DATE DESC) A ) "
+				+ " WHERE RNUM BETWEEN ? AND ?";
+		
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 
 		System.out.println("startRnum ? : " + startRnum + ", endRnum ? : " + endRnum);
@@ -284,6 +288,7 @@ public class AdminDao {
 					map.put("cpWriteDate", rs.getString(6));
 					map.put("buTel", rs.getString(7));
 					map.put("cpRejectMsg", rs.getString(8));
+					map.put("cpRejectDate", rs.getString(9));
 
 					list.add(map);
 
@@ -301,7 +306,11 @@ public class AdminDao {
 
 	// 승인 수락 리스트
 	public ArrayList<Map<String, Object>> companyAcceptApprovalList(Connection conn, int startRnum, int endRnum) {
-		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('Y', 'y') ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, "
+				+ " TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, TO_CHAR(CP_APPROVAL_DATE, 'YYYY/MM/DD') FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) "
+				+ " WHERE CP_SIGNYN IN ('Y', 'y') ORDER BY CP_APPROVAL_DATE DESC) A ) "
+				+ " WHERE RNUM BETWEEN ? AND ?";
+		
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 
 		try {
@@ -319,6 +328,7 @@ public class AdminDao {
 					map.put("buNumber", rs.getString(5));
 					map.put("cpWriteDate", rs.getString(6));
 					map.put("buTel", rs.getString(7));
+					map.put("buApprovalDate", rs.getString(8));
 
 					list.add(map);
 

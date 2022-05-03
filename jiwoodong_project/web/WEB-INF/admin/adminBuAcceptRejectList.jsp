@@ -41,11 +41,12 @@
                         <tr>
                         	<th scope="col" style="width: 50px;">NO</th>
                         	<th scope="col" style="width: 100px;">사업자번호</th>
-                            <th scope="col">사업자 등록 번호</th>
-                            <th scope="col" style="width: 150px;">업종</th>
-                            <th scope="col">업체명</th>
+                            <th scope="col" style="width: 150px;">사업자 등록 번호</th>
+                            <th scope="col" style="width: 70px;">업종</th>
+                            <th scope="col" style="width: 200px;">업체명</th>
                             <th scope="col" style="width: 150px;">전화번호</th>
                             <th scope="col" style="width: 250px;">거절사유</th>
+                            <th scope="col" style="width: 100px;">거절날짜</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,6 +59,7 @@
                                     <td class="s_td_short">${i.cpName}</td>
                                     <td>${i.buTel}</td>
                                     <td class="s_td_short">${i.cpRejectMsg}</td>
+                                    <td class="s_td_short">${i.cpRejectDate}</td>
                                 </tr>
                             	</c:forEach>
                     </tbody>

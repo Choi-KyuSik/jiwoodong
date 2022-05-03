@@ -40,7 +40,7 @@ public class AdminBuAcceptResultController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("여기까지 잘 넘어왔냥?");
+		// System.out.println("여기까지 잘 넘어왔냥?");
 
 		String buNoStr = request.getParameter("buNo");
 		String rejectMsg = request.getParameter("rejectMsg");

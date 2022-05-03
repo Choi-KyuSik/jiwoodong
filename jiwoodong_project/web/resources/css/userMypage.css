@@ -236,3 +236,7 @@ article>div>p {
 	vertical-align: middle;
 	color: red;
 }
+
+.tb_bg_color {
+	background-color: #e9ecef !important;
+}
