@@ -84,31 +84,4 @@ public class BusinessReservationService {
 		return result;
 	}
 
-	public ArrayList<Map<String, Object>> reservationMenuList(int cpNo) {
-		Connection conn = getConnection();
-		ArrayList<Map<String, Object>> result = new  BusinessReservationDao().reservationMenuList(conn, cpNo);
-		close(conn);
-		return result;
-	}
-
-	/*
-	 * public int fileUpload(Map<String, Object> map, int cpNo) { Connection conn =
-	 * getConnection(); int result = new BusinessReservationDao().fileUpload(conn,
-	 * map, cpNo); close(conn); return result; }
-	 */
-
-	public int reservationMenuInsert(Map<String, Object> map, int cpNo) {
-		Connection conn = getConnection();
-		int result = new BusinessReservationDao().reservationMenuInsert(conn,map, cpNo);
-		close(conn);
-		return result;
-	}
-
-	public int reservationMenuDelete(int menuNo) {
-		Connection conn = getConnection();
-		int result = new BusinessReservationDao().reservationMenuDelete(conn,menuNo);
-		close(conn);
-		return result;
-	}
-
 }

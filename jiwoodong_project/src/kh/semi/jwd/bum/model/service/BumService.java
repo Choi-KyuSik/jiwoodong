@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import kh.semi.jwd.bum.model.dao.BumDao;
-import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
 import kh.semi.jwd.bum.model.vo.CompanyVo;
 
@@ -112,13 +111,23 @@ public class BumService {
 
 	}
 	// 우진
-	public int companyDelete(BumVo vo){
+	public int bumDelete(BumVo vo){
 		Connection conn = getConnection();
 		int result = 0;
-		result = new BumDao().companyDelete(conn, vo);
+		result = new BumDao().bumDelete(conn, vo);
+		close(conn);
+		System.out.println("bumDelete result: " + result);
+		return result;
+
+	}	
+	// 우진
+	public int companyDelete(CompanyVo cvo){
+		Connection conn = getConnection();
+		int result = 0;
+		result = new BumDao().companyDelete(conn, cvo);
 		close(conn);
 		System.out.println("companyDelete result: " + result);
 		return result;
-
+		
 	}	
 }

@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.jwd.bum.model.service.BumService;
-import kh.semi.jwd.bum.model.vo.BumVo;
-
 /**
- * Servlet implementation class BusinessCompanyWriteServlet
+ * Servlet implementation class BusinessCompanyDeleteResultServlet
  */
-@WebServlet("/bucompany")
-public class BusinessCompanyWriteServlet extends HttpServlet {
+@WebServlet("/bucpdeleteresult")
+public class BusinessCompanyDeleteResultServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusinessCompanyWriteServlet() {
+    public BusinessCompanyDeleteResultServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +26,7 @@ public class BusinessCompanyWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		int buNo = 29;
-//
-//		BumVo bvo = new BumService().companyCheck(buNo);
-//		request.setAttribute("bvo", bvo);
-		
-		request.getRequestDispatcher("WEB-INF/bum/businessCompanyWritePage.jsp").forward(request, response);
-
+		request.getRequestDispatcher("WEB-INF/bum/bumCompanyDeleteResult.jsp").forward(request, response);
 	}
 
 	/**

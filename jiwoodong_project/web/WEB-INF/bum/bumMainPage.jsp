@@ -17,7 +17,7 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>사업자 메인페이지</title>
 <!--header-->
 <style>
@@ -240,6 +240,54 @@ article>div>p {
 .k_company_info {
 	resize: none;
 }
+
+/* 내 정보 수정 : 손은진 */
+.s_us_th {
+    text-align: center;
+    vertical-align: middle;
+    width: 250px;
+}
+
+.s_row {
+	width: 1200px;
+    margin: 0 auto;
+    padding-top: 30px;
+    margin-top: 30px;
+}
+
+#s_us_info_btn {
+	text-align: center;
+	margin-top: 30px;
+}
+
+.border_none {
+	border: 0;
+}
+
+#s_us_notice {
+	vertical-align: middle;
+	color: red;
+}
+
+#s_us_pwd {
+	width: 500px;
+}
+
+#s_id_style {
+	display: inline-block;
+    color: #0d6efd;
+    font-weight: bold;
+}
+
+#s_us_push_right_btn {
+	display: inline-block;
+    color: gray;
+    font-size: .8em;
+}
+.s_row{
+	border-radius: 15px;
+}
+
 </style>
 </head>
 <script>
@@ -285,7 +333,7 @@ article>div>p {
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
-									id="k_us_info_menu" href="#" role="button"> 회원정보조회 </a></li>
+									id="k_us_info_menu" href="" role="button"> 회원정보 조회 </a></li>
 							</ul>
 						</div>
 					</div>
@@ -303,7 +351,7 @@ article>div>p {
 						사업자님</p>
 					<ul class="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" href="bucpcheck">비밀번호 재설정</a></li>
+						<li><a class="dropdown-item" id="k_pwdinfo">비밀번호 재설정</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
@@ -314,7 +362,8 @@ article>div>p {
 			<div style="clear: both;"></div>
 		</div>
 	</header>
-	<section>
+	
+	<article>
 		<div id="main_box">
 			<div class="nav_tab_div">
 				<div id="booking">
@@ -416,13 +465,56 @@ article>div>p {
 				</div>
 			</div>
 		</div>
-	</section>
-	
+	</article>
+<content>	
+	<article>
+        <div class="s_row">
+      		<div id="c_us_info_edit_info">
+			<form id="frm" method="post" action="">
+				<table class="table table-striped">
+					<thead>						
+						<tr>
+							<td colspan="3"><p id="s_id_style">${bvo.buId}</p>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">아이디</th>
+							<td colspan="2" class="table-light" id="s_us_no">
+							<input type="text" class="form-control border_none" name="buId" maxlength="300" readonly="readonly"
+								value="${bvo.buId}" /></td>
+						</tr>
+						<tr>
+							<th class="table-primary s_us_th" style="vertical-align: middle;">비밀번호</th>
+							<td class="table-light" id="s_us_pwd">
+							<input type="password" class="form-control" name="buPwd" maxlength="300" id="buPwd"
+								value="" placeholder="비밀번호를 입력해주세요."/></td>
+							<td class="table-light" id="s_us_notice">
+							<span id="s_us_pwd_check" style="display: none;">현재 비밀번호가 일치하지 않습니다.</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="s_us_info_btn">
+				<input type="button" id="s_bu_check_btn" class="btn btn-primary pull-right s_ad_nt_btn" value="확인">
+				<input type="button" id="back_btn" class="btn btn-secondary pull-right s_ad_nt_btn" value="취소">
+				</div>
+			</form>
+		</div>
+      </div>
+    </article>
+</content>	
 	
 	<script>
 			$("#k_info_menu").click(function() {
-				location.href="bucpcheck";
+				$("#k_info_content").hide();
+				$(".s_row").show();
+				$("#k_bu_eroll_content").hide();
+				$("#k_re_cu_content").hide();
+				$("#k_us_info_content").hide();
+				$("#k_re_menu_content").hide();
+				$("#main_box").hide();
 			});
+			
 			$("#k_review_menu").click(function() {
 				$("#k_info_content").hide();
 				$("#k_review_content").show();
@@ -432,24 +524,15 @@ article>div>p {
 				$("#k_re_menu_content").hide();
 				$("#main_box").hide();
 			});
-			$("#k_bu_eroll_menu").click(function() {
+			//업체등록
+			$("#k_bu_eroll_menu").click(function() {			
 				location.href="bucompany";
 			});
-			$("#k_re_menu_enroll").click(function() {
-				location.href = "<%=request.getContextPath()%>/burmenu";
-			});
+			
 			$("#k_re_cu_menu").click(function() {
 				location.href = "<%=request.getContextPath()%>/burscheck";
 			});
-			$("#k_us_info_menu").click(function() {
-				$("#k_info_content").hide();
-				$("#k_review_content").hide();
-				$("#k_re_cu_content").hide();
-				$("#k_bu_eroll_content").hide();
-				$("#k_re_menu_content").hide();
-				$("#k_us_info_content").show();
-				$("#main_box").hide();
-			});
+			
 	</script>
 	<script>
 		// Create the chart
@@ -521,9 +604,64 @@ article>div>p {
 			}
 		});
 	</script>
-	<script
+	
+	<script>
+  	$("#buPwd").keyup(function() {
+  		// console.log("db에 있는 pwd 확인" + ${bvo.buPwd});
+  		var db_pwd = "${bvo.buPwd}";
+  		console.log(db_pwd);
+  		var check_pwd = $("#buPwd").val();
+  		
+  		if(db_pwd == "" || check_pwd == "") {
+  			$("#s_us_pwd_check").css('display', 'inline-block');
+  			$("#s_us_pwd_check").text('');
+  		} else if(db_pwd != check_pwd) {
+  			console.log("비밀번호가 일치하지 않습니다.");
+  			$("#s_us_pwd_check").css('display', 'inline-block');
+  			$("#s_us_pwd_check").text('비밀번호가 일치하지 않습니다.');
+			$("#s_us_pwd_check").css('color', 'red');
+  		} else {
+  			console.log("비밀번호가 일치합니다.");
+  			$("#s_us_pwd_check").css('display', 'inline-block');
+  			$("#s_us_pwd_check").text('비밀번호가 일치합니다.');
+  			$("#s_us_pwd_check").css('color', 'green');
+  		}
+  	});
+  	
+  	$("#back_btn").click(function() {
+  		location.href="BumMainPage";
+  	});
+  	
+  	$("#s_bu_check_btn").click(function() {
+  		var txt = $("#s_us_pwd_check").text();
+  		
+  		if(txt == '비밀번호가 일치합니다.') {
+  			$("#s_us_pwd_check").text('');
+  			var frm = $("#frm");
+  			frm.attr("action", "bucpcheck");
+  			frm.attr("method", "post");
+  			frm.submit();
+  		} else {
+  			alert("비밀번호가 일치하지 않습니다.");
+  			$("#s_us_pwd_check").css('display', 'none');
+  			$("#buPwd").val("");
+  			$("#buPwd").focus();
+  		}
+  	});
+  	
+  	$("#k_pwdinfo").click(function() {
+    	var frm = $("#frm");
+			frm.attr("action", "buminfocheck");
+			frm.attr("method", "post");
+			frm.submit();
+	});
+  </script>
+  
+    <script src="https://code.highcharts.com/modules/data.js"></script> 
+	<script>
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"
+	</script>
 </body>
 </html>

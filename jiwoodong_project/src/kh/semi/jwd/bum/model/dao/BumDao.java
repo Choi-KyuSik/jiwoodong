@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -315,18 +316,21 @@ public class BumDao {
 		return bvo;
 	}
 
-	//우진 - 내정보관리 수정
+	//우진 - 내 정보관리 수정
 	public int companyUpdate(Connection conn, int buNo, BumVo vo) {
 		System.out.println("companyUpdate Dao:"+vo);
 		int result = 0;
-		String sql = "update b_member set bu_pwd = ?, bu_email = ?, bu_tel = ? where bu_no = ?";
+		String sql = "update b_member set bu_pwd = ?, bu_email = ?, bu_tel = ?, bu_name = ?, bu_id = ?, bu_birth = ? where bu_no = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getBuPwd());
-			pstmt.setString(2, vo.getBuEmail());
-			pstmt.setString(3, vo.getBuTel());
-			pstmt.setInt(4, buNo);
+			pstmt.setString(1, vo.getBuPwd()); 		//비밀번호
+			pstmt.setString(2, vo.getBuEmail()); 	//이메일
+			pstmt.setString(3, vo.getBuTel());		//핸드폰번호
+			pstmt.setString(4, vo.getBuName());		//이름
+			pstmt.setString(5, vo.getBuId());		//아이디
+			pstmt.setString(6, vo.getBuBirth());	//생년월일
+			pstmt.setInt(7, buNo);
 			result = pstmt.executeUpdate();
 			System.out.println("BoardDao companyUpdate:" + result);
 		} catch (SQLException e) {
@@ -394,11 +398,11 @@ public class BumDao {
 
 	}
 
-	// 우진 - 내정보 삭제
-	public int companyDelete(Connection conn, BumVo vo) {
+	// 우진 - 내 정보 삭제
+	public int bumDelete(Connection conn, BumVo vo) {
 		System.out.println("companyDelete buNo:" + vo);
 		int result = 0;
-		String sql = "update b_member set bu_useyn = 'N' where bu_no = ?";
+		String sql = "update b_member set bu_useyn = 'N', BU_UPDATE_DATE = SYSTIMESTAMP where bu_no = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -413,5 +417,24 @@ public class BumDao {
 		System.out.println("Dao companyUpdate:" + result);
 		return result;
 	}
+	
+	//우진 - 내 업체 삭제
+	public int companyDelete(Connection conn, CompanyVo cvo) {
+		System.out.println("companyDelete buNo:" + cvo);
+		int result = 0;
+		String sql = "update company set CP_SIGNYN = 'N', CP_UPDATE_DATE = SYSTIMESTAMP where bu_no = ?";
 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cvo.getBuNo());
+			result = pstmt.executeUpdate();
+			System.out.println("BoardDao companyDelete:" + result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println("Dao companyDelete:" + result);
+		return result;
+	}
 }

@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.jwd.bum.model.service.BumService;
 import kh.semi.jwd.bum.model.vo.BumVo;
+import kh.semi.jwd.bum.model.vo.CompanyVo;
 
 /**
- * Servlet implementation class BusinessCompanyUpdateServlet
+ * Servlet implementation class BusinessCompanyDeleteDoServlet
  */
-@WebServlet("/bucpupdate")
-public class BusinessCompanyUpdateServlet extends HttpServlet {
+@WebServlet("/bucpdeletedo")
+public class BusinessCompanyDeleteDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public BusinessCompanyUpdateServlet() {
+	public BusinessCompanyDeleteDoServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -31,9 +32,10 @@ public class BusinessCompanyUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		
-//		
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 //	}
 
 	/**
@@ -42,46 +44,41 @@ public class BusinessCompanyUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO: session전까진 'buNo = 5'인 사업자로 바꿔보기
 		int buNo = 5;
-
-		String buNumber = request.getParameter("buNumber");
-		String buId = request.getParameter("buId");
-		String buPwd = request.getParameter("buPwd_2");
-		String buName = request.getParameter("buName");
-		String buBirth = request.getParameter("buBirth");
-		String buEmail = request.getParameter("buEmail");
-		String buTel = request.getParameter("buTel");
+		int result = 0;
+		int result2 = 0;
 
 		BumVo vo = new BumVo();
-		vo.setBuNumber(buNumber);
-		vo.setBuId(buId);
-		vo.setBuPwd(buPwd);
-		vo.setBuName(buName);
-		vo.setBuBirth(buBirth);
-		vo.setBuEmail(buEmail);
-		vo.setBuTel(buTel);
+		vo.setBuNo(buNo);
 
-		int result = new BumService().companyUpdate(buNo, vo);
 
-		if (result < 1) {
-			System.out.println("내 정보 수정 실패!");
+		CompanyVo cvo = new CompanyVo();
+		cvo.setBuNo(buNo);
+
+		result = new BumService().bumDelete(vo);
+		System.out.println("사업자 사용여부:" + vo);
+		
+		
+		if(result < 1) {
+			System.out.println("회원 탈퇴 실패!");
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html; charset=utf-8");
 			out.println("<script language='javascript'>");
-			out.println("alert('수정에 실패하였습니다.'); location.href='BumMainPage");
+			out.println("alert('회원 탈퇴에 실패하였습니다.'); location.href='BumMainPage'");
 			out.println("</script>");
 			out.flush();
 		} else {
-			System.out.println("내 정보 수정 성공!");
+			System.out.println("회원 탈퇴 성공!");
+			result2 = new BumService().companyDelete(cvo);
+			System.out.println("CompanyVo cvo:" + cvo);
+			System.out.println("업체 사용여부:" + result2);
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html; charset=utf-8");
 			out.println("<script language='javascript'>");
-			out.println("alert('정상적으로 수정되었습니다.'); location.href='BumMainPage'");
+			out.println("alert('정상적으로 회원 탈퇴 되었습니다.'); location.href='bucpdeleteresult'");
 			out.println("</script>");
 			out.flush();
 		}
-
+		
 	}
-
 }
