@@ -24,7 +24,7 @@
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3"><strong>사업자 회원가입</strong></h4>
-            <form id="frm" class="validation-form" name="bu_enroll" onsubmit="return check()"  novalidate >
+            <form  id="frm" class="validation-form" name="bu_enroll" onsubmit="return check()"   novalidate >
             
             <div class="row">
                   <div class="mb-3" style="display: inline-block; width: 100%; margin-left: 2%;"> 
@@ -61,10 +61,11 @@
                 </div>
                 <div class="mb-3" style=" margin-bottom: 4px!important;"> 
                     <label for="email">이메일</label> 
-                    <input type="email" class="form-control" id="email" name="email" placeholder="email1@example.com" required="required">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="email1@example.com"  required="required">
                     <div class="invalid-feedback"> 이메일을 입력해주세요. </div>
-                    <input type="button" id="email_btn" value="인증번호 발송">
+                    <input type="button" id="email_btn" value="인증번호 발송" onclick="email()" >
                 </div>
+                 
                 <div class="mb-3" id="email_check" style="margin-left: 51%; margin-bottom: 4px!important;"> 
                     <label for="email_check">인증번호</label> 
                     <input type="email" class="form-control" id="email_check_no" name="email_check_no" required="required">
@@ -283,6 +284,15 @@
 			
 			//}
 		}
+		//이메일..
+		function email(){
+//				window.open("bumemail?email="+frm.email.value,"","width=500, height=300");
+				window.open("bumemail?email"+frm.email.value,"","width=500, height=300");
+		
+		}
+		// /AuthGoogle/bumgmailSendAction?cmd=join
+		
+		
 		//유효성검사
 		window.addEventListener('load',() => { 
 			const forms = document.getElementsByClassName('validation-form');

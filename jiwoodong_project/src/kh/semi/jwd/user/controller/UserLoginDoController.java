@@ -57,7 +57,7 @@ public class UserLoginDoController extends HttpServlet {
 			System.out.println("um_id:"+um_id);
 			System.out.println("password:"+password);
 			System.out.println("로그인 성공한거지 여기가?네네 - 오늘의 명언... 언니 최고...");
-			response.sendRedirect("bumMainPage");
+			response.sendRedirect("UserMypage");
 		}else {
 			System.out.println("로그인 해주세요");
 			response.sendRedirect("userLogin");
