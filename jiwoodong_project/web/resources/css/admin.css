@@ -198,3 +198,7 @@
 .s_center {
 	text-align: center;
 }
+
+.highcharts-credits {
+	display: none !important; 
+}

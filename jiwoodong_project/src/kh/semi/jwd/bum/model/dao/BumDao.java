@@ -51,7 +51,18 @@ public class BumDao {
 	// 우진
 	public ArrayList<Map<String, Object>> mainPageReviewList(Connection conn) {
 
-		String sql = "select * from(select rownum, x.* from (select r.rv_content, to_char(rv_write_date, 'yyyy/mm/dd'), b.um_id, r.rv_score from booking b join review r using(bk_no) where b.cp_no = 14 order by b.bk_write_date desc) x) where rownum between 1 and 7";
+		String sql = "select * from(select rownum, x.* from "
+				+ " (select case r.rv_score "
+				+ "	         when 1 then '💙🤍🤍🤍🤍' "
+				+ "	         when 2 then '💙💙🤍🤍🤍' "
+				+ "	         when 3 then '💙💙💙🤍🤍' "
+				+ "	         when 4 then '💙💙💙💙🤍' "
+				+ "	         when 5 then '💙💙💙💙💙' "
+				+ "	         else '평점이 없습니다.' "
+				+ "	         end 평점, to_char(rv_write_date, 'yyyy/mm/dd'), "
+				+ " b.um_id, r.rv_content from booking b join review r using(bk_no) "
+				+ " where b.cp_no = 14 order by b.bk_write_date desc) x) "
+				+ " where rownum between 1 and 7";
 
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
@@ -61,10 +72,10 @@ public class BumDao {
 			while (rs.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("rownum", rs.getInt(1));
-				map.put("rvContent", rs.getString(2));
+				map.put("rvScore", rs.getString(2));
 				map.put("rvWriteDate", rs.getString(3));
 				map.put("umId", rs.getString(4));
-				map.put("rvScore", rs.getInt(5));
+				map.put("rvContent", rs.getString(5));
 
 				list.add(map);
 				System.out.println("BumDao result:" + sql);

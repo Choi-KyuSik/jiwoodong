@@ -83,7 +83,7 @@ header {
       justify-content: center; */
 	/* float: left; */
 	width: 550px;
-	height: 450px;
+	height: 480px;
 	background-color: white;
 	border-radius: 30px;
 	margin: 0 15px 30px;
@@ -91,8 +91,10 @@ header {
 }
 
 .box_font {
-	margin-top: 10px;
 	font-weight: bold;
+	color: #0D6EFD;
+	margin-bottom: 20px;
+	font-size: large;
 }
 
 .nav_tab_div {
@@ -106,8 +108,11 @@ header {
 }
 
 .statiscics_font {
-	font-weight: bold;
-	margin-top: 22px;
+	margin-top: 20px;
+    font-weight: bold;
+    color: #0D6EFD;
+    margin-bottom: 20px;
+    font-size: large;
 }
 .table{
 	font-size : 15px;
@@ -288,6 +293,14 @@ article>div>p {
 	border-radius: 15px;
 }
 
+.ftsz {
+	font-size: .9em;
+}
+
+.highcharts-credits {
+	display: none !important; 
+}
+
 </style>
 </head>
 <script>
@@ -383,12 +396,12 @@ article>div>p {
 							<tbody>
 								<c:forEach items="${list }" var="list">
 									<tr>
-										<th scope="row"><c:out value="${list.bkName }" /></th>
-										<td>${list.bkPhone }</td>
-										<td>${list.bkNo }</td>
-										<td>${list.bkDate }</td>
-										<td>${list.bkTime }</td>
-										<td><c:out value="${list.bsStatus eq 'R' ? '예약' : '취소' }" /></td>
+										<th class="ftsz" scope="row"><c:out value="${list.bkName }" /></th>
+										<td class="ftsz">${list.bkPhone }</td>
+										<td class="ftsz">${list.bkNo }</td>
+										<td class="ftsz">${list.bkDate }</td>
+										<td class="ftsz">${list.bkTime }</td>
+										<td class="ftsz"><c:out value="${list.bsStatus eq 'R' ? '예약' : '취소' }" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -411,11 +424,11 @@ article>div>p {
 							<tbody>
 								<c:forEach items="${Rlist}" var="list">
 									<tr>
-										<th scope="row">${list.rownum}</th>
-										<td><c:out value="${list.rvContent}" /></td>
-										<td>${list.rvWriteDate}</td>
-										<td>${list.umId}</td>
-										<td>${list.rvScore}</td>
+										<th class="ftsz" scope="row">${list.rownum}</th>
+										<td class="ftsz"><c:out value="${list.rvContent}" /></td>
+										<td class="ftsz">${list.rvWriteDate}</td>
+										<td class="ftsz">${list.umId}</td>
+										<td class="ftsz">${list.rvScore}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
