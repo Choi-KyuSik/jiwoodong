@@ -294,13 +294,15 @@ public class UserDao {
 			
 			ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-			String sql = "select * from(select rownum, A.* "
-					+ "from (select r.rv_content, to_char(rv_write_date, 'yyyy/mm/dd'), b.um_id, r.rv_score"
-					+ "from booking b "
-					+ "join review r using(bk_no) "
-					+ "where b.um_id = 1 "
-					+ "order by b.bk_write_date desc) A) "
-					+ "where rownum between 1 and 5";
+			String sql = "select * from(select rownum rnum, A.*"
+					+ " from (select r.rv_content 리뷰내용, to_char(rv_write_date, 'yyyy/mm/dd') 작성일, c.cp_name 업체명,"
+					+ " replace(replace(replace(replace(replace(r.rv_score,'1','☆'),'2','☆☆'),'3','☆☆☆'),'4','☆☆☆☆'),'5','☆☆☆☆☆') 평점\r\n"
+					+ " from booking b"
+					+ " join review r using(bk_no)"
+					+ " join company c using(cp_no)"
+					+ " where b.um_id = 'apple' "
+					+ " order by b.bk_write_date desc) A)"
+					+ " where rownum between 1 and 7;";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -311,8 +313,8 @@ public class UserDao {
 					map.put("rownum", rs.getInt(1));
 					map.put("rvContent", rs.getString(2));
 					map.put("rvWriteDate", rs.getString(3));
-					map.put("umId", rs.getString(4));
-					map.put("rvScore", rs.getInt(5));
+					map.put("cpName", rs.getString(4));
+					map.put("rvScore", rs.getString(5));
 	
 					list.add(map);
 					System.out.println("UserDao result:" + sql);

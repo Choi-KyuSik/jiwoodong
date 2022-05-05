@@ -22,7 +22,7 @@
 .map_wrap {
 	position: relative;
 	width: 100%;
-	height: 500px;
+	height: 100%;
 }
 
 #menu_wrap {

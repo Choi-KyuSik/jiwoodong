@@ -159,10 +159,31 @@
               </table>
             </div>
             <div id="c_inner_info">
-              <p class="c_info_title">즐겨찾기 리스트</p>
-
+              <p class="c_info_title">리뷰내역</p>
+              <table class="table" style="width: 100%; margin-top: 40px;">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성일자</th>
+                    <th scope="col">업체명</th>
+                    <th scope="col">별점</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${usRvList}" var="i">
+                  <tr>
+                    <th scope="row">${i.rownum}</th>
+                    <td>${i.rvContent}</td>
+                    <td>${i.rvWriteDate}</td>
+                    <td>${i.umId}</td>
+                    <td>${i.rvScore}</td>
+                  </tr>
+                </c:forEach>
+                </tbody>
+              </table>
             </div>
-            <div id="c_inner_info_l" style="margin-bottom: 40px;">
+            <%-- <div id="c_inner_info_l" style="margin-bottom: 40px;">
               <p class="c_info_title">리뷰내역</p>
               <table class="table" style="width: 100%; margin-top: 40px;">
                 <thead>
@@ -184,7 +205,7 @@
                     <td>${i.rvScore}</td>
                   </tr>
                 </c:forEach>
-                  <!-- <tr>
+                  <tr>
                     <th scope="row">2</th>
                     <td>제목</td>
                     <td>리뷰내용</td>
@@ -197,10 +218,10 @@
                     <td>리뷰내용</td>
                     <td>아이디</td>
                     <td>별점</td>
-                  </tr> -->
+                  </tr>
                 </tbody>
               </table>
-            </div>
+            </div> --%>
           </div>
         </div>
 
@@ -209,16 +230,14 @@
 
   <content>
   <!-- 네비 업체조회 -->
-    <article>
-      <div id="c_cplist_info">
-        업체조회페이지로 이동
-      </div>
-    </article>
     
-  <!-- 네비 공지사항 -->
+    
+  <!-- 네비 주변검색 -->
     <article>
       <div id="c_maps_info">
-        <p>주변검색</p>
+        <div style="width:100%; height: 100%;">
+		<%@ include file="../view/map_api.jsp"%>
+		</div>
       </div>
     </article>
     
@@ -352,83 +371,5 @@
     		location.href="uscplist";
     	})
     </script>
-    
-  <!-- <script>
-	$("#p_top_logo").click(function () {
-	 	console.log("찍히냐? mypage");
-	  href="UserMypage"
-	});
-	
-    $("#c_cplist").click(function () {
-    	console.log("찍히냐? mypage");
-      href="uscplist"
-    });
-    $("#c_maps").click(function () {
-    	console.log("찍히냐? c_maps");
-      $("#c_cplist_info").hide();
-      $("#c_maps_info").show();
-      $("#c_bklist_info").hide();
-      $("#c_reviewlist_info").hide();
-      $("#c_us_info_edit_info").hide();
-      $("#main_box").hide();
-      $(".s_row").hide();
-    });
-    $("#c_bklist").click(function () {
-    	console.log("찍히냐? c_bklist");
-      $("#c_cplist_info").hide();
-      $("#c_maps_info").hide();
-      $("#c_bklist_info").show();
-      $("#c_reviewlist_info").hide();
-      $("#c_us_info_edit_info").hide();
-      $("#main_box").hide();
-      $(".s_row").hide();
-    });
-    $("#c_reviewlist").click(function () {
-    	console.log("찍히냐? c_reviewlist");
-      $("#c_cplist_info").hide();
-      $("#c_maps_info").hide();
-      $("#c_bklist_info").hide();
-      $("#c_reviewlist_info").show();
-      $("#c_us_info_edit_info").hide();
-      $("#main_box").hide();
-      $(".s_row").hide();
-    }); 
-    $("#c_us_info_edit").click(function () {
-    	console.log("찍히냐? c_us_info_edit");
-      $("#c_cplist_info").hide();
-      $("#c_maps_info").hide();
-      $("#c_bklist_info").hide();
-      $("#c_reviewlist_info").hide();
-      // $("#c_us_info_edit_info").show();
-      $("#main_box").hide();
-      $(".s_row").show();
-    }); 
-    $("#c_us_delete").click(function () {
-    	console.log("찍히냐? c_us_delete");
-      $("#c_cplist_info").hide();
-      $("#c_maps_info").hide();
-      $("#c_bklist_info").hide();
-      $("#c_reviewlist_info").hide();
-      $("#c_us_info_edit_info").hide();
-      $("#main_box").hide();
-    });
-    $("#s_row").click(function () {
-    	console.log("찍히냐? s_row");
-      $("#c_cplist_info").hide();
-      $("#c_maps_info").hide();
-      $("#c_bklist_info").hide();
-      $("#c_reviewlist_info").hide();
-      $("#c_us_info_edit_info").show();
-      $("#main_box").hide();
-    });
-    $("#c_mypage").click(function () {
-    	console.log("찍히냐? mypage");
-    	location.reload();
-    }); -->
-    
-  </script>
-
-  
- 
 </body>
 </html>
