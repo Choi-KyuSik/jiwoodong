@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import kh.semi.jwd.bum.model.dao.BumDao;
+import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
 import kh.semi.jwd.bum.model.vo.CompanyVo;
 

@@ -48,7 +48,7 @@
                             <th scope="col" style="width: 100px">탈퇴일</th>
                         </tr>
                     </thead>
-                    <tbody style="cursor: pointer;">
+                    <tbody>
                         <c:forEach items="${usMemberDeleteList }" var="i">
                                 <tr class="s_tr_modal s_tr_umInfoList">
                                     <th scope="row" class="s_ntNo">${i.rownum}</th>
