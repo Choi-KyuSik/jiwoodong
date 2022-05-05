@@ -24,7 +24,7 @@
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3"><strong>사업자 회원가입</strong></h4>
-            <form  id="frm" class="validation-form" name="bu_enroll" onsubmit="return check()"   novalidate >
+            <form  id="frm" class="validation-form" name="bu_enroll" onsubmit="return check()" novalidate >
             
             <div class="row">
                   <div class="mb-3" style="display: inline-block; width: 100%; margin-left: 2%;"> 
@@ -61,15 +61,16 @@
                 </div>
                 <div class="mb-3" style=" margin-bottom: 4px!important;"> 
                     <label for="email">이메일</label> 
-                    <input type="email" class="form-control" id="email" name="email" placeholder="email1@example.com"  required="required">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="email1@example.com"  required="required"  maxlength="30">
                     <div class="invalid-feedback"> 이메일을 입력해주세요. </div>
-                    <input type="button" id="email_btn" value="인증번호 발송" onclick="email()" >
+                    <input type="button" id="email_btn" value="인증번호 발송" onsubmit="return email_btn()" onclick="return email_btn()" >
                 </div>
                  
                 <div class="mb-3" id="email_check" style="margin-left: 51%; margin-bottom: 4px!important;"> 
                     <label for="email_check">인증번호</label> 
-                    <input type="email" class="form-control" id="email_check_no" name="email_check_no" required="required">
-                    <input type="button" id="email_check_btn" name="email_check_btn" value="확인">
+                    <input type="email" class="form-control" id="email_check_no" name="email_check_no" required="required" maxlength="10" disabled="disabled">
+                    <input type="button" id="email_check_btn" name="email_check_btn" value="인증" onclick="email_check_btn()"  disabled="disabled">
+                    <input type="hidden" name="authPass" id="authPass" value="false">
                     <div class="invalid-feedback"> 인증번호를 입력해주세요. </div>
                     
                 </div>
@@ -285,12 +286,43 @@
 			//}
 		}
 		//이메일..
-		function email(){
-//				window.open("bumemail?email="+frm.email.value,"","width=500, height=300");
-				window.open("bumemail?email"+frm.email.value,"","width=500, height=300");
-		
+		//onclick="emailAuthentication()" -인증번호발송 +중복확인
+		function email_btn(){
+			if (!emailValCheck()){
+		    	return false;
+		    }
+			//var url = "bumemailcheck.lo?email=" + frm.email.value;
+			//open(url, "confirm","toolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=300,height=200");
+			window.open("bumemailcheck.lo?email="+frm.email.value,"confirm","width=500, height=300");
 		}
-		// /AuthGoogle/bumgmailSendAction?cmd=join
+		
+		//이메일 형식 유효성검사
+		const form = document.bu_enroll;
+
+		function emailValCheck(){
+			var emailPattern= /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			var email = form.email.value;
+			if(!check(emailPattern, email, "유효하지 않은 이메일 주소입니다.")) {
+				return false;
+			}
+		    return true;
+		}
+		
+		function check(pattern, taget, message) {
+			if(pattern.test(taget)) {
+		    	return true;
+		    }
+		    alert(message);
+		    taget.focus();
+		    return false;
+		}
+		
+		//onclick="authCodeCheck()" 인증버튼
+		function authCodeCheck(){
+			var url = "authCodeCheck.jsp?inputedCode=" + frm.email_check_no.value;
+			open(url, "confirm",
+					"toolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=300,height=200");
+		}
 		
 		
 		//유효성검사

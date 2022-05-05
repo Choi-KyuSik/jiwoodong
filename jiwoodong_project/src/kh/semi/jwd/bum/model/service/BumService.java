@@ -70,12 +70,12 @@ public class BumService {
 		return result;
 	}
 	//승희 - 아이디 중복 체크
-	public int checkBuId(String buId) {
-		int result;
+	public String emailDupleCheck(String inputEmail) {
+		String result;
 		Connection conn = getConnection();
-		result = new BumDao().checkBuId(conn, buId);
+		result = new BumDao().emailDupleCheck(conn, inputEmail);
 		close(conn);
-		System.out.println("checkBuId result:" + result);
+		System.out.println("(bum)emailDupleCheck result:" + result);
 		return result;
 		
 	}
@@ -89,6 +89,16 @@ public class BumService {
 		return bvo;
 		
 	}
+	//승희 - 사업자 이메일 중복 체크
+	public int checkBuId(String buId) {
+		int result;
+		Connection conn = getConnection();
+		result = new BumDao().checkBuId(conn, buId);
+		close(conn);
+		System.out.println("checkBuId result:" + result);
+		return result;
+		
+	}	
 	
 
 	// 우진

@@ -276,6 +276,36 @@ public class BumDao {
 		return bvo;
 	}
 	
+	// 승희 - 이메일 중복확인.
+	public String emailDupleCheck(Connection conn,String inputEmail) {
+		String result = "unuseable";
+		String sql = "SELECT bu_email FROM b_member WHERE bu_email = ?";
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, inputEmail);
+			rs = pstmt.executeQuery();
+	
+			if (!rs.next()) {
+				result = "useable";
+				System.out.println("사용가능한 이메일 입니다.");
+			} else {
+				result = "unuseable";
+				System.out.println("존재하는 이메일 입니다");
+			}
+		} catch (Exception e) {
+			System.out.println("이메일 중복확인 실패! 여기는 bumdao다!!!");
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+			}
+		return result;
+		}
+	
+	
+	
 // TODO 우진: 나중에 로그인 구현되면 Session에 담아야함 
 	public BumVo companyCheck(Connection conn, int buNo) {
 		// public return 값이 BumVo이므로 result의 변수값은 null
