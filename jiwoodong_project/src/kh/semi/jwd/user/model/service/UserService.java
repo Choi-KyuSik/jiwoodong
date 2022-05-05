@@ -93,14 +93,23 @@ public class UserService {
 			
 		}
 		
-		// 사용자 마이페이지 - 예약 현황 조회 : 최규식
-		public ArrayList<Map<String, Object>> usBkList() {
-			
-			ArrayList<Map<String, Object>> volist = null;
-			Connection conn = getConnection();
-			volist = new UserDao().usBkList(conn);
-			close(conn);
-			
-			return volist;
-		}
+	// 사용자 마이페이지 - 예약 현황 조회 : 최규식
+	public ArrayList<Map<String, Object>> usBkList() {
+		
+		ArrayList<Map<String, Object>> volist = null;
+		Connection conn = getConnection();
+		volist = new UserDao().usBkList(conn);
+		close(conn);
+		
+		return volist;
+	}
+	// 사용자 마이페이지 - 리뷰 내역 조회 : 최규식
+	public ArrayList<Map<String, Object>> usRvList() {
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> usRvList = new UserDao().usRvList(conn);
+		close(conn);
+		System.out.println("usRvList:" + usRvList);
+		return usRvList;
+	}
+	
 }

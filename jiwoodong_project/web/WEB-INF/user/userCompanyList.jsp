@@ -28,7 +28,10 @@
 </head>
 <body>
 <body>
-	<header>
+	<div>
+		<%@ include file="../view/user/user_header.jsp" %>
+	</div>
+	<!-- <header>
 		<div id="p_main_top">
 			<div id="p_top_logo">
 				<a href="" id="k_logo"><img
@@ -102,7 +105,7 @@
 			<div style="clear: both;"></div>
 		</div>
 	</header>
-
+ -->
 	<section style="height: 100%;">
         <div id="main_box"
             style="width: 1200px; margin: 15px auto 0; background-color: rgb(241, 241, 241); border-radius: 15px;">
@@ -141,7 +144,7 @@
     <script>
     	$("#detailbtn").click(function(){
     		/* location.href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=qbxlvnf11&logNo=221141017820"; */
-    		location.href="/uscpdetail";
+    		location.href="uscpdetail";
     	})
     </script>
 

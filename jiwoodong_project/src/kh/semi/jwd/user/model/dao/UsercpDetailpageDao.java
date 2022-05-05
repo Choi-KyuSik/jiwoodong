@@ -56,6 +56,8 @@ public class UsercpDetailpageDao {
 				vo.setRvWriteDate(rs.getDate("RV_WRITE_DATE"));
 				vo.setBuTel(rs.getString("BU_TEL"));
 				result.add(vo);
+				
+				System.out.println("뭐가들어있니 : " + vo);
 			}
 			
 		} catch (SQLException e) {

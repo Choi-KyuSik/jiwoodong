@@ -20,6 +20,7 @@
 	  <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <!--이용매장 슬라이더-->
+	
 	<script>
         $(document).ready(function () {
             $('.c_company-wrapper').slick({
@@ -51,17 +52,19 @@
                 <div class="fas fa-chevron-left c_prev">〈</div>
                 <div class="fas fa-chevron-right c_next">〉</div>
                 <div class="c_company-wrapper">
+                <c:forEach items="${usCpList }" var="i">
                   <div class="c_company">
                     <a href="#">
                       <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203806155157504/hotel.jpg"
                         class="c_slider-image">
                     </a>
                     <div class="c_company-info">
-                      <h6 style="margin-top: 10px;"><a href="#"> 집 나가면 개고생 호텔 부산점 </a></h6>
-                      <div class="far fa-user" style="height:10%;"> 부산광역시 해운대구 헌팅로 65길 31-2 </div>
+                      <h6 style="margin-top: 10px;"><a href="#"> ${i.cpName } </a></h6>
+                      <div class="far fa-user" style="height:10%;"> ${i.cpAddress } ${i.cpDtaddress } </div>
                     </div>
                   </div>
-                  <div class="c_company">
+                  </c:forEach>
+                  <!-- <div class="c_company">
                     <a href="#">
                       <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805815431238/hair.jpg"
                         class="c_slider-image">
@@ -110,7 +113,7 @@
                       <h6 style="margin-top: 10px;"><a href="#"> 카페 이름이 뭐였지? </a></h6>
                       <div class="far fa-user" style="height:10%;"> 서울특별시 서초구 콜드브루로 1번길 </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -126,13 +129,15 @@
                   </tr>
                 </thead>
                 <tbody>
+                <c:forEach items="${usBkList }" var="i">
                   <tr>
-                    <th scope="row">1</th>
-                    <td>2022-04-01</td>
-                    <td>투썸벅스</td>
-                    <td>이용완료</td>
+                    <th scope="row">${i.rownum }</th>
+                    <td>${i.bkDate }</td>
+                    <td>${i.cpName }</td>
+                    <td>${i.bkStatus }</td>
                   </tr>
-                  <tr>
+                  </c:forEach>
+                  <!-- <tr>
                     <th scope="row">2</th>
                     <td>2022-04-08</td>
                     <td>샴푸 전문점</td>
@@ -149,7 +154,7 @@
                     <td>2022-05-05</td>
                     <td>집 나가면 개고생</td>
                     <td>예약완료</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
@@ -170,14 +175,16 @@
                   </tr>
                 </thead>
                 <tbody>
+                <c:forEach items="${usRvList}" var="i">
                   <tr>
-                    <th scope="row">1</th>
-                    <td>제목</td>
-                    <td>리뷰내용</td>
-                    <td>아이디</td>
-                    <td>별점</td>
+                    <th scope="row">${i.rownum}</th>
+                    <td>${i.rvContent}</td>
+                    <td>${i.rvWriteDate}</td>
+                    <td>${i.umId}</td>
+                    <td>${i.rvScore}</td>
                   </tr>
-                  <tr>
+                </c:forEach>
+                  <!-- <tr>
                     <th scope="row">2</th>
                     <td>제목</td>
                     <td>리뷰내용</td>
@@ -190,7 +197,7 @@
                     <td>리뷰내용</td>
                     <td>아이디</td>
                     <td>별점</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
@@ -201,58 +208,21 @@
     </div>
 
   <content>
+  <!-- 네비 업체조회 -->
     <article>
-      <div id="c_mypage_info">
-        마이페이지 로 이동
+      <div id="c_cplist_info">
+        업체조회페이지로 이동
       </div>
     </article>
+    
+  <!-- 네비 공지사항 -->
     <article>
-      <div id="c_notice_info">
-        <p>공지사항 출력</p>
-        <table class="table table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>merong</td>
-              <td>Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>merong</td>
-              <td>Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>merong</td>
-              <td>Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="c_maps_info">
+        <p>주변검색</p>
       </div>
     </article>
+    
+    <!-- 네비 예약현황 -->
     <article>
       <div id="c_bklist_info">
         <div id="c_inner_info_l" style="height: 920px;">
@@ -271,16 +241,24 @@
               <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger">취소</button></a>
             </div>
           </div>
-
         </div>
       </div>
     </article>
+    
+    <!-- 네비 리뷰 -->
     <article>
       <div id="c_reviewlist_info">
         리뷰 페이지로 이동
       </div>
     </article>
-    <!-- 내 정보 관리 : 손은진 -->
+    
+    <!-- 내 정보 관리 -->
+    <article>
+      <div id="c_mypage_info">
+        마이페이지로 이동
+      </div>
+    </article>
+    <!-- 내 정보 관리(내 정보 수정) : 손은진 -->
     <article>
         <div class="s_row">
       		<div id="c_us_info_edit_info">
@@ -317,11 +295,6 @@
 				</div>
 			</form>
 		</div>
-      </div>
-    </article>
-    <article>
-      <div id="c_us_delet_info">
-        회원 탈퇴 페이지
       </div>
     </article>
   </content>
@@ -371,64 +344,88 @@
   		}
   	});
   </script>
-
-  <script>
-    $("#c_mypage").click(function () {
+  
+  <!-- 네비바 클릭시 페이지 이동 -->
+	<script>
+    	$("#c_cplist").click(function(){
+    		/* location.href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=qbxlvnf11&logNo=221141017820"; */
+    		location.href="uscplist";
+    	})
+    </script>
+    
+  <!-- <script>
+	$("#p_top_logo").click(function () {
+	 	console.log("찍히냐? mypage");
+	  href="UserMypage"
+	});
+	
+    $("#c_cplist").click(function () {
     	console.log("찍히냐? mypage");
-      href=""
+      href="uscplist"
     });
-    $("#c_notice").click(function () {
-    	console.log("찍히냐? c_notice");
-      $("#c_mypage_info").hide();
-      $("#c_notice_info").show();
+    $("#c_maps").click(function () {
+    	console.log("찍히냐? c_maps");
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").show();
       $("#c_bklist_info").hide();
       $("#c_reviewlist_info").hide();
       $("#c_us_info_edit_info").hide();
-      $("#c_us_delet_info").hide();
       $("#main_box").hide();
       $(".s_row").hide();
     });
     $("#c_bklist").click(function () {
-      $("#c_mypage_info").hide();
-      $("#c_notice_info").hide();
+    	console.log("찍히냐? c_bklist");
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").hide();
       $("#c_bklist_info").show();
       $("#c_reviewlist_info").hide();
       $("#c_us_info_edit_info").hide();
-      $("#c_us_delet_info").hide();
       $("#main_box").hide();
       $(".s_row").hide();
     });
     $("#c_reviewlist").click(function () {
-      $("#c_mypage_info").hide();
-      $("#c_notice_info").hide();
+    	console.log("찍히냐? c_reviewlist");
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").hide();
       $("#c_bklist_info").hide();
       $("#c_reviewlist_info").show();
       $("#c_us_info_edit_info").hide();
-      $("#c_us_delet_info").hide();
       $("#main_box").hide();
       $(".s_row").hide();
     }); 
     $("#c_us_info_edit").click(function () {
     	console.log("찍히냐? c_us_info_edit");
-      $("#c_mypage_info").hide();
-      $("#c_notice_info").hide();
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").hide();
       $("#c_bklist_info").hide();
       $("#c_reviewlist_info").hide();
       // $("#c_us_info_edit_info").show();
-      $("#c_us_delet_info").hide();
       $("#main_box").hide();
       $(".s_row").show();
     }); 
     $("#c_us_delete").click(function () {
     	console.log("찍히냐? c_us_delete");
-      $("#c_mypage_info").hide();
-      $("#c_notice_info").hide();
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").hide();
       $("#c_bklist_info").hide();
       $("#c_reviewlist_info").hide();
       $("#c_us_info_edit_info").hide();
-      $("#c_us_delet_info").show();
       $("#main_box").hide();
     });
+    $("#s_row").click(function () {
+    	console.log("찍히냐? s_row");
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").hide();
+      $("#c_bklist_info").hide();
+      $("#c_reviewlist_info").hide();
+      $("#c_us_info_edit_info").show();
+      $("#main_box").hide();
+    });
+    $("#c_mypage").click(function () {
+    	console.log("찍히냐? mypage");
+    	location.reload();
+    }); -->
+    
   </script>
 
   

@@ -24,15 +24,15 @@
             <div class="collapse navbar-collapse">
               <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown" id="c_mypage" href="#" role="button">
+                  <a class="nav-link dropdown" id="c_cplist" href="#" role="button">
                     업체조회
                   </a>
                 </li>
               </ul>
               <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown" id="c_notice" href="#" role="button">
-                    공지사항
+                  <a class="nav-link dropdown" id="c_maps" href="#" role="button">
+                    주변검색
                   </a>
 
                 </li>
@@ -54,11 +54,12 @@
               </ul>
               <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown">
+                  <a class="nav-link dropdown dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                     내 정보 관리
                   </a>
                   <ul class="dropdown-menu dropdown-menu">
+					<li><a class="dropdown-item" id="c_mypage" href="#">마이페이지</a></li>
+					<li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" id="c_us_info_edit" href="#">내 정보 수정</a></li>
                   </ul>
                 </li>
@@ -70,11 +71,11 @@
       <div style="float: right; margin: 0 30px 0 0;">
         <div class="dropdown text-end" id="p_top_profile">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
-            data-bs-toggle="dropdown">
+            data-bs-toggle="dropdown" style="text-align: right">
             <img src="https://media.discordapp.net/attachments/692994434526085184/965630874999730296/1.png" alt="mdo"
               style="width: 60px;">
           </a>
-          <p style="font-size: 12px; width: 115px; margin: 5px;">사용자ID</p>
+          <p style="font-size: 12px; width: 150px; margin: 5px;">${usMemberListInfo.umId } 님 환영합니다.</p>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" href="#">마이페이지</a></li>
             <li>
@@ -87,5 +88,78 @@
       <div style="clear: both;"></div>
     </div>
   </header>
+  
+  
+  
+  <script>
+	$("#c_cplist").click(function () {
+    	console.log("찍히냐? mypage");
+      href="uscplist"
+    });
+    $("#c_maps").click(function () {
+    	console.log("찍히냐? c_maps");
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").show();
+      $("#c_bklist_info").hide();
+      $("#c_reviewlist_info").hide();
+      $("#c_us_info_edit_info").hide();
+      $("#main_box").hide();
+      $(".s_row").hide();
+    });
+    $("#c_bklist").click(function () {
+    	console.log("찍히냐? c_bklist");
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").hide();
+      $("#c_bklist_info").show();
+      $("#c_reviewlist_info").hide();
+      $("#c_us_info_edit_info").hide();
+      $("#main_box").hide();
+      $(".s_row").hide();
+    });
+    $("#c_reviewlist").click(function () {
+    	console.log("찍히냐? c_reviewlist");
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").hide();
+      $("#c_bklist_info").hide();
+      $("#c_reviewlist_info").show();
+      $("#c_us_info_edit_info").hide();
+      $("#main_box").hide();
+      $(".s_row").hide();
+    }); 
+    $("#c_us_info_edit").click(function () {
+    	console.log("찍히냐? c_us_info_edit");
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").hide();
+      $("#c_bklist_info").hide();
+      $("#c_reviewlist_info").hide();
+      // $("#c_us_info_edit_info").show();
+      $("#main_box").hide();
+      $(".s_row").show();
+    }); 
+    $("#c_us_delete").click(function () {
+    	console.log("찍히냐? c_us_delete");
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").hide();
+      $("#c_bklist_info").hide();
+      $("#c_reviewlist_info").hide();
+      $("#c_us_info_edit_info").hide();
+      $("#main_box").hide();
+    });
+    $("#s_row").click(function () {
+    	console.log("찍히냐? s_row");
+      $("#c_cplist_info").hide();
+      $("#c_maps_info").hide();
+      $("#c_bklist_info").hide();
+      $("#c_reviewlist_info").hide();
+      $("#c_us_info_edit_info").show();
+      $("#main_box").hide();
+    });
+    $("#c_mypage").click(function () {
+    	console.log("찍히냐? mypage");
+    	href="UserMypage"
+    });
+    
+  </script>
+  
 </body>
 </html>
