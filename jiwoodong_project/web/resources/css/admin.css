@@ -100,8 +100,10 @@
 }
 
 .p_title_style {
-	margin-top: 10px;
 	font-weight: bold;
+	color: #0D6EFD;
+	margin-bottom: 20px;
+	font-size: large;
 }
 
 .p_content_style {
@@ -191,4 +193,8 @@
 #s_back_list_div {
 	text-align: center;
     margin-top: 20px;
+}
+
+.s_center {
+	text-align: center;
 }

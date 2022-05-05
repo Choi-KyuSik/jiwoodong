@@ -32,7 +32,9 @@
 				</div>
 				<hr>
 				<div id="s_us_ss_delete_box">
-					<img id="s_us_ss_delete_img_2" src="https://cdn.discordapp.com/attachments/958566133752016901/966199476131889172/jigu.png">
+				<!-- 웃는 이미지 -->
+				<!-- https://cdn.discordapp.com/attachments/958566133752016901/966199476131889172/jigu.png  -->
+					<img id="s_us_ss_delete_img_2" src="https://cdn.discordapp.com/attachments/958566133752016901/971224374692679751/dd3347481331069e.png">
 					<div id="s_us_ss_delete_box_ct">그 동안 지우동 서비스를 사용해 주셔서 감사합니다.</div>
 					<div>더 좋은 서비스로 보답하겠습니다.</div>
 					<button type="button" id="s_us_mainpage" class="btn btn-primary">지우동 홈으로 가기</button>

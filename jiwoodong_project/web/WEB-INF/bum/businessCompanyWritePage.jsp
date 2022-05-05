@@ -292,8 +292,7 @@ article>div>p {
 					<!-- hidden input에 주소 url을 value로 받을거여서 같이 만듬 세트로 놔두면 편할 듯, 위에거가 파일등록 버튼 -->
 									<input type="hidden" name="fileUrl" id="fileUrl">
 									</td>
-								<td colspan="2" class="table-light"><span
-									style="display: none;"></span></td>
+								<td colspan="2" class="table-light"><span style="display: none;"></span></td>
 							</tr>
 							<tr>
 								<th class="table-primary s_us_th"

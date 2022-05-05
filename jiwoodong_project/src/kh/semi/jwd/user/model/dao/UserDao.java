@@ -255,7 +255,7 @@ public class UserDao {
 			 
 			 String sql = "select * from"
 			 		+ "    (select rownum rnum, a.*"
-			 		+ "     from (select cp_name,bk_date, bk_status,REPLACE(REPLACE(REPLACE (BK_STATUS,'R','예약완료'),'H','예약대기'),'C','예약취소') as bk_statusC"
+			 		+ "     from (select cp_name,bk_date, substr(bk_time, 1, 5), REPLACE(REPLACE(REPLACE (BK_STATUS,'R','예약완료'),'H','예약대기'),'C','예약취소') as bk_statusC"
 			 		+ "            from booking b"
 			 		+ "            join company c on b.cp_no = c.cp_no) a)"
 			 		+ "where rnum between 1 and 3";
@@ -277,6 +277,7 @@ public class UserDao {
 					map.put("rownum", rs.getInt(1));
 					map.put("cpName", rs.getString(2));
 					map.put("bkDate", rs.getString(3));
+					map.put("bkTime", rs.getString(4));
 					map.put("bkStatus", rs.getString(5));
 					
 					volist.add(map);
@@ -294,15 +295,61 @@ public class UserDao {
 			
 			ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
+			// 파란색하트
 			String sql = "select * from(select rownum rnum, A.*"
-					+ " from (select r.rv_content 리뷰내용, to_char(rv_write_date, 'yyyy/mm/dd') 작성일, c.cp_name 업체명,"
-					+ " replace(replace(replace(replace(replace(r.rv_score,'1','☆'),'2','☆☆'),'3','☆☆☆'),'4','☆☆☆☆'),'5','☆☆☆☆☆') 평점\r\n"
-					+ " from booking b"
-					+ " join review r using(bk_no)"
-					+ " join company c using(cp_no)"
-					+ " where b.um_id = 'apple' "
-					+ " order by b.bk_write_date desc) A)"
-					+ " where rownum between 1 and 7;";
+					+ " from (select r.rv_content 리뷰내용, c.cp_name 업체명 "
+					+ "    , case r.rv_score "
+					+ "           when 1 then '💙🤍🤍🤍🤍' "
+					+ "           when 2 then '💙💙🤍🤍🤍' "
+					+ "           when 3 then '💙💙💙🤍🤍' "
+					+ "           when 4 then '💙💙💙💙🤍' "
+					+ "           when 5 then '💙💙💙💙💙' "
+					+ "           else '평점이 없습니다.' "
+					+ "      end 평점 "
+					+ "    , to_char(rv_write_date, 'yyyy/mm/dd') 작성일 "
+					+ "      from booking b join review r using(bk_no) join company c using (cp_no) "
+					+ "      where b.um_id = 'apple' order by b.bk_write_date desc) A)"
+					+ " where rnum between 1 and 5";
+			
+			// 노란색하트
+//			String sql = "select * from(select rownum rnum, A.*"
+//					+ " from (select r.rv_content 리뷰내용, c.cp_name 업체명 "
+//					+ "    , case r.rv_score "
+//					+ "           when 1 then '💛🤍🤍🤍🤍' "
+//					+ "           when 2 then '💛💛🤍🤍🤍' "
+//					+ "           when 3 then '💛💛💛🤍🤍' "
+//					+ "           when 4 then '💛💛💛💛🤍' "
+//					+ "           when 5 then '💛💛💛💛💛' "
+//					+ "           else '평점이 없습니다.' "
+//					+ "      end 평점 "
+//					+ "    , to_char(rv_write_date, 'yyyy/mm/dd') 작성일 "
+//					+ "      from booking b join review r using(bk_no) join company c using (cp_no) "
+//					+ "      where b.um_id = 'apple' order by b.bk_write_date desc) A)"
+//					+ " where rnum between 1 and 5";
+			
+			// 진한노랑하트 이 아니라 주황색이었음
+//			String sql = "select * from(select rownum rnum, A.*"
+//					+ " from (select r.rv_content 리뷰내용, c.cp_name 업체명 "
+//					+ "    , case r.rv_score "
+//					+ "           when 1 then '🧡🤍🤍🤍🤍' "
+//					+ "           when 2 then '🧡🧡🤍🤍🤍' "
+//					+ "           when 3 then '🧡🧡🧡🤍🤍' "
+//					+ "           when 4 then '🧡🧡🧡🧡🤍' "
+//					+ "           when 5 then '🧡🧡🧡🧡🧡' "
+//					+ "           else '평점이 없습니다.' "
+//					+ "      end 평점 "
+//					+ "    , to_char(rv_write_date, 'yyyy/mm/dd') 작성일 "
+//					+ "      from booking b join review r using(bk_no) join company c using (cp_no) "
+//					+ "      where b.um_id = 'apple' order by b.bk_write_date desc) A)"
+//					+ " where rnum between 1 and 5";
+			
+//			String sql = "select * from(select rownum rnum, A.* "
+//					+ "from (select r.rv_content 리뷰내용, c.cp_name 업체명 "
+//					+ "    , REPLACE(REPLACE(REPLACE(REPLACE(REPLACE (R.RV_SCORE,'1','☆'),'2','☆☆'),'3','☆☆☆'),'4','☆☆☆☆'),'5','☆☆☆☆☆') 평점 "
+//					+ "    , to_char(rv_write_date, 'yyyy/mm/dd') 작성일 "
+//					+ "      from booking b join review r using(bk_no) join company c using (cp_no) "
+//					+ "      where b.um_id = 'apple' order by b.bk_write_date desc) A) "
+//					+ "where rnum between 1 and 5";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -312,9 +359,9 @@ public class UserDao {
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("rownum", rs.getInt(1));
 					map.put("rvContent", rs.getString(2));
-					map.put("rvWriteDate", rs.getString(3));
-					map.put("cpName", rs.getString(4));
-					map.put("rvScore", rs.getString(5));
+					map.put("cpName", rs.getString(3));
+					map.put("rvScore", rs.getString(4));
+					map.put("rvWriteDate", rs.getString(5));
 	
 					list.add(map);
 					System.out.println("UserDao result:" + sql);

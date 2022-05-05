@@ -122,19 +122,21 @@
               <table class="table" style="width: 100%; margin-top: 40px;">
                 <thead>
                   <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">예약날짜</th>
-                    <th scope="col">업체명</th>
-                    <th scope="col">예약상태</th>
+                    <th scope="col" class="c_info_center">No</th>
+                    <th scope="col" class="c_info_center">예약날짜</th>
+                    <th scope="col" class="c_info_center">예약시간</th>
+                    <th scope="col" class="c_info_center">업체명</th>
+                    <th scope="col" class="c_info_center">예약상태</th>
                   </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${usBkList }" var="i">
                   <tr>
-                    <th scope="row">${i.rownum }</th>
-                    <td>${i.bkDate }</td>
-                    <td>${i.cpName }</td>
-                    <td>${i.bkStatus }</td>
+                    <th scope="row" class="c_info_ct_ftsz">${i.rownum }</th>
+                    <td class="c_info_center c_info_ct_ftsz">${i.bkDate }</td>
+                    <td class="c_info_center c_info_ct_ftsz">${i.bkTime }</td>
+                    <td class="c_info_center c_info_ct_ftsz">${i.cpName }</td>
+                    <td class="c_info_center c_info_ct_ftsz">${i.bkStatus }</td>
                   </tr>
                   </c:forEach>
                   <!-- <tr>
@@ -163,21 +165,21 @@
               <table class="table" style="width: 100%; margin-top: 40px;">
                 <thead>
                   <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">제목</th>
-                    <th scope="col">작성일자</th>
-                    <th scope="col">업체명</th>
-                    <th scope="col">별점</th>
+                    <th scope="col" class="c_info_center">No</th>
+                    <th scope="col" class="c_info_center">내용</th>
+                    <th scope="col" class="c_info_center">업체명</th>
+                    <th scope="col" class="c_info_center">별점</th>
+                    <th scope="col" class="c_info_center">작성일</th>
                   </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${usRvList}" var="i">
                   <tr>
-                    <th scope="row">${i.rownum}</th>
-                    <td>${i.rvContent}</td>
-                    <td>${i.rvWriteDate}</td>
-                    <td>${i.umId}</td>
-                    <td>${i.rvScore}</td>
+                    <th scope="row" class="c_info_center short c_info_ct_ftsz">${i.rownum}</th>
+                    <td class="short c_info_ct_ftsz">${i.rvContent}</td>
+                    <td class="c_info_center short c_info_ct_ftsz">${i.cpName}</td>
+                    <td class="c_info_center" style="font-size: .8em;">${i.rvScore}</td>
+                    <td class="c_info_center c_info_ct_ftsz">${i.rvWriteDate}</td>
                   </tr>
                 </c:forEach>
                 </tbody>
@@ -190,9 +192,9 @@
                   <tr>
                     <th scope="col">No</th>
                     <th scope="col">제목</th>
-                    <th scope="col">작성일자</th>
-                    <th scope="col">아이디</th>
+		    <th scope="col">업체명</th>
                     <th scope="col">별점</th>
+                    <th scope="col">작성일자</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -200,9 +202,9 @@
                   <tr>
                     <th scope="row">${i.rownum}</th>
                     <td>${i.rvContent}</td>
-                    <td>${i.rvWriteDate}</td>
-                    <td>${i.umId}</td>
+                    <td>${i.cpName}</td>
                     <td>${i.rvScore}</td>
+                    <td>${i.rvWriteDate}</td>
                   </tr>
                 </c:forEach>
                   <tr>

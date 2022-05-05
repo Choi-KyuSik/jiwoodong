@@ -187,7 +187,7 @@ public class AdminDao {
 
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-		String sql = "SELECT BU_NO, BU_ID, CP_CATEGORY, BU_NUMBER, CP_NAME, CP_EXPLAIN, BU_NAME, BU_TEL, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') AND BU_NO = ?";
+		String sql = "SELECT BU_NO, BU_ID, CP_CATEGORY, BU_NUMBER, CP_NAME, CP_EXPLAIN, BU_NAME, BU_TEL, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, C.FL_GNO FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') AND BU_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, buNo);
@@ -206,6 +206,7 @@ public class AdminDao {
 				map.put("cpPostcode", rs.getString(9)); // 우편번호
 				map.put("cpAddress", rs.getString(10)); // 주소
 				map.put("cpDtaddress", rs.getString(11)); // 상세주소
+				map.put("fileUrl", rs.getString(12)); // 업체 사진
 				list.add(map);
 			}
 		} catch (SQLException e) {

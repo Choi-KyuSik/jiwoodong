@@ -36,21 +36,21 @@
                         <table class="table table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">NO</th>
-                                    <th scope="col">사업자번호</th>
-                      				<th scope="col">업종</th>
-                                    <th scope="col">업체명</th>
-                                    <th scope="col">신청일자</th>
+                                    <th scope="col" class="s_center">NO</th>
+                                    <th scope="col" class="s_center">사업자번호</th>
+                      				<th scope="col" class="s_center">업종</th>
+                                    <th scope="col" class="s_center">업체명</th>
+                                    <th scope="col" class="s_center">신청일자</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <c:forEach items="${cpAccept }" var="i">
                                 <tr>
-                                    <th scope="row">${i.rownum}</th>
-                                    <td>${i.buNumber}</td>
-                                    <td>${i.cpCategory}</td>
-                                    <td>${i.cpName}</td>
-                                    <td>${i.cpWriteDate}</td>
+                                    <th scope="row" class="s_center">${i.rownum}</th>
+                                    <td class="s_center">${i.buNumber}</td>
+                                    <td class="s_center">${i.cpCategory}</td>
+                                    <td class="s_center">${i.cpName}</td>
+                                    <td class="s_center">${i.cpWriteDate}</td>
                                 </tr>
                                 </c:forEach>
                             </tbody>
@@ -75,19 +75,19 @@
                         <table class="table table table-hover" style="clear: both;">
                             <thead>
                                 <tr>
-                                    <th scope="col">글번호</th>
-                                    <th scope="col">제목</th>
-                                    <th scope="col">작성자</th>
-                                    <th scope="col">작성일</th>
+                                    <th scope="col" class="s_center">글번호</th>
+                                    <th scope="col" class="s_center">제목</th>
+                                    <th scope="col" class="s_center">작성자</th>
+                                    <th scope="col" class="s_center">작성일</th>
                                 </tr>
                             </thead>
                             <tbody>
                             	<c:forEach items="${adnolist }" var="i">
                                 <tr>
-                                    <th scope="row">${i.ntNo}</th>
-                                    <td>${i.ntTitle}</td>
-                                    <td>관리자</td>
-                                    <td>${i.ntDate}</td>
+                                    <th scope="row" class="s_center">${i.ntNo}</th>
+                                    <td class="s_center">${i.ntTitle}</td>
+                                    <td class="s_center">관리자</td>
+                                    <td class="s_center">${i.ntDate}</td>
                                 </tr>
                             	</c:forEach>
                             </tbody>

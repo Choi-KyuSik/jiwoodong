@@ -323,3 +323,21 @@ article>div>p {
 	margin-top: 30px;
     width: 300px;
 }
+
+.short {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.c_info_ct_style {
+	padding: 8px 0 !important;
+}
+
+.c_info_ct_ftsz {
+	font-size: .9em;
+}
+
+.c_info_center {
+	text-align: center;
+}

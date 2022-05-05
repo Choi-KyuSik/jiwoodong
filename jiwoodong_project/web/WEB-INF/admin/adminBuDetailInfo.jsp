@@ -34,13 +34,13 @@
 		<div class="row"
 			style="width: 1200px; margin: 0 auto; padding-top: 30px; display: block;">
 			<table class="table">
+					<c:forEach items="${adBuAccept }" var="i">
 				<thead>
 					<tr>
 						<th colspan="2">업체 신청내역 상세보기</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${adBuAccept }" var="i">
 						<tr>
 							<th class="table-primary s_ac_th">사업자 번호</th>
 							<td class="table-light" id="s_url_no">${i.buNo }</td>
@@ -61,6 +61,22 @@
 							<th class="table-primary s_ac_th">사업자 등록 번호</th>
 							<td class="table-light">${i.buNumber }</td>
 						</tr>
+						<c:if test="${empty i.fileUrl }">
+							<tr>
+							<th class="table-primary s_ac_th">업체사진</th>
+							<td class="table-light">
+								<img width="300px;" style="border-radius: 15px;" src="https://media.discordapp.net/attachments/965916528350478386/971797973627437076/-removebg-preview_1.png">
+							</td>
+							</tr>
+						</c:if>
+						<c:if test="${not empty i.fileUrl }">
+							<tr>
+								<th class="table-primary s_ac_th">업체사진</th>
+								<td class="table-light">
+									<img width="300px;" style="border-radius: 15px;" src="${i.fileUrl }">
+								</td>
+							</tr>
+						</c:if>
 						<tr>
 							<th class="table-primary s_ac_th">업체명</th>
 							<td class="table-light">${i.cpName }</td>
