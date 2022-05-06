@@ -17,6 +17,12 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<!-- google font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Noto+Sans+KR:wght@500&display=swap');
+    </style>
+
+
 </head>
 <body style="background: none;">
 <section>
@@ -30,7 +36,7 @@
 						alt="지우동로고"></a>
 				</div>
 				<div id="p_main_bar">
-					<ul class="nav justify-content-end">
+					<ul class="nav justify-content-end" style="font-size: 1.1em;">
 						<li class="nav-item"><a class="nav-link" href="/jwd/#about">About</a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="/jwd/#service">Service</a>

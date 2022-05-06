@@ -51,20 +51,21 @@
         width: 78%;
     }
     
-a:hover {
-	color: #007bff;
-    text-decoration: none;
-}
-
-a {
+    #s_tt {
+    text-align: center;
+    padding-bottom: 20px;
+    color: #337ab7;
+    font-size: 1.5em;
+    }
+    
+    #p_bottom_right a,
+	#p_bottom_left a {
 	text-decoration: none;
     color: white;
+    
 }
-
-#s_tt {
-	text-align: center;
-    padding-top: 30px;
-    font-size: 2em;
-    font-weight: bold;
-    color: #0f7bc3;
+    #p_bottom_right a:hover,
+	#p_bottom_left a:hover {
+	color: #0f7bc3;
+    text-decoration: none;
 }

@@ -1,9 +1,9 @@
-*{
-    padding: 0;
-    margin: 0;
-    font-family: 'Noto Sans KR', sans-serif;
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'Noto Sans KR', sans-serif;
 }
-body { 
+/* body { 
     min-height: 100vh;
      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c)); 
      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
@@ -11,121 +11,131 @@ body {
       background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
       background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
     
-}
-#j_loginform { 
-max-width: 500px;
-margin-top: 100px;
-background: #fff;
--webkit-border-radius: 10px;
--moz-border-radius: 10px; 
-border-radius: 10px; 
--webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
--moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15); 
-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15) 
-
-
-}   
-
-#j_loginform{
-    
-    box-sizing: border-box;
-    width: 600px;
-    height: 500px;
-    margin: 0 auto;
-
-
+} */
+#j_loginform {
+	max-width: 500px;
+	margin-top: 100px;
+	background: #fff;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 
-#j_logo_img{
-    display: block;
-    width: 35%;
-    margin: 0 auto;
+#j_loginform {
+	box-sizing: border-box;
+	width: 600px;
+	height: 500px;
+	margin: 0 auto;
 }
 
-#j_loginform2{
-    display: block;
-    width: 70%;
-    height: 200px;
-    margin: 0 auto;
-
-    position: relative;
-    top: -20px;
+#j_logo_img {
+	display: block;
+	width: 35%;
+	margin: 0 auto;
 }
 
-#j_loginform3{
-    display: block;
-    position: relative;
-
-    left: 20px;
-    
-    width: 300px;
-    height: 160px;
-
-    border-radius: 20px;
-    border: 4px solid #0f7bc3;
+#j_loginform2 {
+	display: block;
+	width: 70%;
+	height: 200px;
+	margin: 0 auto;
+	position: relative;
+	top: -20px;
 }
 
-
-#j_loginform4{
-    display: block;
-    position: relative;
-    top: 20px;
-    left: 70px;
+#j_loginform3 {
+	display: block;
+	position: relative;
+	/* left: 20px; */
+	width: 350px;
+	height: 160px;
+	border-radius: 20px;
+	border: 3px solid #0f7bc3;
 }
-#login_btn,#login_kakao_btn{
-    width: 200px;
-    height: 40px;
-    margin: 4px;
 
-    border: 4px solid #0f7bc3;
-    background-color: rgb(255, 255, 255);
-    font-weight: bolder;
-    color: #0f7bc3;
-    border-radius: 30px;
-
-    
-    
+#j_loginform4 {
+	display: block;
+	position: relative;
+	top: 20px;
+	left: 70px;
 }
-#login_btn:hover,
-#login_kakao_btn:hover{
-    background-color: #3771ae;
-    color: #fff;
 
-    border-radius: 30px;
+#login_btn, #login_kakao_btn {
+	width: 200px;
+	height: 40px;
+	margin: 4px;
+	border: 3px solid #0f7bc3;
+	background-color: rgb(255, 255, 255);
+	font-weight: bolder;
+	color: #0f7bc3;
+	border-radius: 30px;
 }
-#j_id,#j_password{
-    display: inline-block;
-}
-#j_password{
-    position: relative;
 
-    left: -10px;
+#login_btn:hover, #login_kakao_btn:hover {
+	background-color: #3771ae;
+	color: #fff;
+	border-radius: 30px;
 }
-#j_id_div,#j_pw_div{
-    display: inline-block;
-    position: relative;
 
-    top: 30px;
-    left: 30px;
+#j_id, #j_password {
+	display: inline-block;
 }
-#j_pw_div{
-    position: relative;
 
-    top: 50px;
+#j_password {
+	position: relative;
+	left: -10px;
 }
-#bu_id{
-    display: inline-block;
-    position: relative;
 
-    left: 15px;
+#j_id_div, #j_pw_div {
+	display: inline-block;
+	position: relative;
+	/* top: 30px; */
+	left: 25px;
 }
-#bu_id,#password{
-    border-radius: 10px;
-    border: 3px solid #0f7bc3;
 
+#j_pw_div {
+	position: relative;
+	top: 50px;
 }
-#bu_id:hover,#password:hover{
-    border-radius: 10px;
-    border: 4px solid #0f7bc3;
 
+#bu_id {
+	display: inline-block;
+	position: relative;
+	left: 15px;
+	padding: 3px;
+}
+
+#password {
+	padding: 3px;
+}
+
+#bu_id, #password {
+	border-radius: 10px;
+	border: 3px solid #0f7bc3;
+}
+
+#bu_id:hover, #password:hover {
+	border-radius: 10px;
+	border: 4px solid #0f7bc3;
+}
+
+#p_bottom_right a:hover, #p_bottom_left a:hover {
+	color: #0f7bc3;
+	text-decoration: none;
+}
+
+#p_bottom_right a, #p_bottom_left a {
+	text-decoration: none;
+	color: white;
+}
+
+#s_tt {
+	text-align: center;
+	padding-top: 30px;
+	font-size: 2em;
+	font-weight: bold;
+	color: #0f7bc3;
 }

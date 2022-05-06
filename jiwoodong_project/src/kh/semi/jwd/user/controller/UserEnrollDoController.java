@@ -1,6 +1,8 @@
 package kh.semi.jwd.user.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -74,7 +76,12 @@ public class UserEnrollDoController extends HttpServlet {
 			
 		} else {
 			System.out.println("회원가입 성공!");
-			response.sendRedirect(request.getContextPath());
+			PrintWriter out = response.getWriter();
+			out.println("<script language='javascript'>");
+			out.println("alert('지우동에 오신걸 환영합니다.'); location.href='/jwd'");
+			out.println("</script>");
+			out.flush();
+			// response.sendRedirect(request.getContextPath());
 		}
 	}
 

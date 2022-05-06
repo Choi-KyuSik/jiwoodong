@@ -19,11 +19,7 @@ public class UserService {
 		int result = 0;
 		Connection conn = getConnection();
 		result = new UserDao().insertUserMember(conn, vo);
-		if(result > 0) {
-			commit(conn);
-		}else {
 			close(conn);
-		}
 			return result;			
 	}
 	//승희 - 아이디 중복 체크

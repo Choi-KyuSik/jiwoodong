@@ -446,5 +446,12 @@ a:hover {
 		var data2 = '${adnolist}';
 		console.log("data2 ? : " + data2);
 	</script>
+	
+	<script>
+	
+		$("#login_btn").click(function() {
+			location.href="loginMain";
+		});
+	</script>
 </body>
 </html>
