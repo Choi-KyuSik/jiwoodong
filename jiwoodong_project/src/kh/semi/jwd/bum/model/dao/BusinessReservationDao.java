@@ -29,7 +29,9 @@ public class BusinessReservationDao {
 			
 			while(rs.next()) {
 				BumReservationVo vo = new BumReservationVo();
+				vo.setBkTotalPrice(rs.getInt("bk_total_price"));
 				vo.setBkNo(rs.getInt("bk_no"));
+				vo.setCpNo(rs.getInt("cp_no"));
 				vo.setUmId(rs.getString("um_id"));
 				vo.setBkName(rs.getString("bk_name"));
 				vo.setBkPhone(rs.getString("bk_phone"));
@@ -349,6 +351,26 @@ public class BusinessReservationDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, menuNo);
 			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public String cpCatecoryCheck(Connection conn, int cpNo) {
+		String result = "";
+		String sql = "select cp_category from company where cp_no=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				result = rs.getString("cp_category");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

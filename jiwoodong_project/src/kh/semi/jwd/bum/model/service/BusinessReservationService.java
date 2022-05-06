@@ -111,4 +111,11 @@ public class BusinessReservationService {
 		return result;
 	}
 
+	public String cpCatecoryCheck(int cpNo) {
+		Connection conn = getConnection();
+		String result = new BusinessReservationDao().cpCatecoryCheck(conn,cpNo);
+		close(conn);
+		return result;
+	}
+
 }

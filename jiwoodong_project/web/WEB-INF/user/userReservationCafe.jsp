@@ -13,6 +13,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -142,7 +144,7 @@
                     <div style="margin: 30px;">
 	                    <form action="UserReservationInsert" method="post" id="frmrsinsert">
 	                    <div style="float: left">
-	                    	<label style="font-size: 20px;">날짜선택 : <input type="date" id="rsdate"  name="rsdate" required></label><br>
+	                    	<label style="font-size: 20px;">날짜선택 : <input type="text" id="datepicker"  name="rsdate" required></label><br>
 	                    	<label style="font-size: 20px; margin-top: 20px">시간선택 : </label>
 	                    	<div id="timemenu">
 		            			<h4 style="margin-top: 30px; color: rgb(241, 77, 12)">★날짜를 선택해 주세요★</h4>
@@ -191,6 +193,48 @@
             </ul>
         </div>
     </section>
+    <!-- 데이더픽커  -->
+     <script>
+     // 데이터픽커 선언
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+        
+     //데이터필커 설정(운영구분 비교)
+		if('${CpInfo[0].cpClassify}' == 'B'){
+        $.datepicker.setDefaults({
+        	  dateFormat: 'yy-mm-dd',
+        	  prevText: '이전 달',
+        	  nextText: '다음 달',
+        	  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        	  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        	  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        	  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        	  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        	  showMonthAfterYear: true,
+        	  yearSuffix: '년', 
+        	  minDate: 0,
+        	  beforeShowDay: function(date){
+      			var day = date.getDay();
+      			return [(day != 0 && day != 6)];
+      		}
+        });
+		} else {
+			$.datepicker.setDefaults({
+	        	  dateFormat: 'yy-mm-dd',
+	        	  prevText: '이전 달',
+	        	  nextText: '다음 달',
+	        	  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        	  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        	  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+	        	  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+	        	  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	        	  showMonthAfterYear: true,
+	        	  yearSuffix: '년', 
+	        	  minDate: 0,
+	        });
+		}
+    </script>
     <script>
     	var totalprice = '';
     	$("#rsmenu").change(function(){
@@ -214,7 +258,7 @@
     			}
     		})
     	});
-	    $("#rsdate").change( function(){
+	    $("#datepicker").change( function(){
 	    	$("#timemenu").html('');
 	    	/* 운영시간에 맞춰 시간 선택 창 출력 */
 	    	var opentime = ${fn:substring(CpInfo[0].cpOpenTime, 0, 2)};
@@ -250,11 +294,10 @@
 					}
 			}
 			$("#timemenu").append('</div">');
-	    	
 			$.ajax({
 				type : "post",
 				url : "userReservationTimeCheck",
-				data : {"rsdate" : $("#rsdate").val()},
+				data : {"rsdate" : $("#datepicker").val()},
 				dataType : "json",
 				success : function(list){
 					for(var i=0; i<list.length; i++){
@@ -284,9 +327,8 @@
 			}
 			var today = year +"-"+month+ "-" +day;
 
-			if($("#rsdate").val() == today){
+			if($("#datepicker").val() == today){
 			var time = date.getHours()+""+date.getMinutes();
-			console.log(time);
 			$(".rstime").each(function(){
 				if($(this).text().replace(":","") < time){
 					$(this).text("불가");

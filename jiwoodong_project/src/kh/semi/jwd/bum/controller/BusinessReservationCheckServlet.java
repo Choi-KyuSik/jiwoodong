@@ -37,7 +37,13 @@ public class BusinessReservationCheckServlet extends HttpServlet {
 		ArrayList<Map<String, Object>> menulist = new  BusinessReservationService().menuList(cpNo);
 		request.setAttribute("reservation", reservation);
 		request.setAttribute("menulist", menulist);
+		
+		String category = new BusinessReservationService().cpCatecoryCheck(cpNo);
+		if(category.equals("카페")) {
+			request.getRequestDispatcher("WEB-INF/bum/bumBookingListCafe.jsp").forward(request, response);
+		} else {
 		request.getRequestDispatcher("WEB-INF/bum/bumBookingList.jsp").forward(request, response);
+		}
 	}
 
 	/**
