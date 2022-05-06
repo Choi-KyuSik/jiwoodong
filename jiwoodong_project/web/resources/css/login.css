@@ -101,18 +101,18 @@
 	top: 50px;
 }
 
-#um_id, #bu_id {
+#um_id, #bu_id, #ad_id {
 	display: inline-block;
 	position: relative;
 	left: 15px;
 	padding: 3px;
 }
 
-#password, #bu_id {
+#password, #bu_id, #ad_id {
 	padding: 3px;
 }
 
-#um_id, #password, #bu_id {
+#um_id, #password, #bu_id, #ad_id {
 	border-radius: 10px;
 	border: 3px solid #0f7bc3;
 }

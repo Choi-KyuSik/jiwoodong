@@ -357,7 +357,7 @@ article>div>p {
 					<a href="#"
 						class="d-block link-dark text-decoration-none dropdown-toggle"
 						id="dropdownUser1" data-bs-toggle="dropdown"> <img
-						src="https://media.discordapp.net/attachments/692994434526085184/965630874999730296/1.png"
+						src="https://cdn.discordapp.com/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png"
 						alt="mdo" width="60px">
 					</a>
 					<p style="font-size: 12px; width: 115px; margin: 5px;">

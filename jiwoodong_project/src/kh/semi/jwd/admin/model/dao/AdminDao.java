@@ -1038,6 +1038,37 @@ public class AdminDao {
 		return result;
 		
 	}
+	//관리자 로그인
+	public AdminVo loginAdmin(Connection conn, AdminVo vo) {
+		AdminVo avo = new AdminVo();
+		String sql = "SELECT * FROM admin WHERE AD_ID = ? AND AD_PW= ?";
+		
+		try {
+			System.out.println("vo.getAdId() :"+ vo.getAdId());
+			System.out.println("vo.getAdPw() : "+ vo.getAdPw());
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getAdId());
+			pstmt.setString(2, vo.getAdPw());
+			rs = pstmt.executeQuery(); // 괄호안에 작성X
+			
+			if(rs.next()) {
+				avo.setAdId(rs.getString("ad_id"));
+				avo.setAdPw(rs.getString("ad_pw")); 
+				avo.setAdNo(rs.getInt(1)); //관리자 번호 저장
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("로그인 오류");
+		}finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		System.out.println("AdminVo loginAdmin avo:"+ avo);
+		return avo;
+	}
 
 
 }

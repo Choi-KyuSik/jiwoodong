@@ -24,7 +24,7 @@
 						<li class="nav-item"><a class="nav-link" href="#notice">공지사항</a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="enrollMain">회원가입</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">관리자로그인</a>
+						<li class="nav-item"><a class="nav-link" href="AdminLogin">관리자로그인</a>
 						</li>
 					</ul>
 				</div>
@@ -36,16 +36,14 @@
 				<div id="p_small_text">Welcome To JIWOODONG!</div>
 				<div id="p_big_text">IT'S NICE TO MEET YOU</div>
 				<div id="p_login_btn">
+					<button type="button" class="btn btn-primary btn-lg">
 					 <!-- 로그인 여부에 따른 메뉴 변화 -->
-        			<% if (session.getAttribute("buId") == null) { %>
-						<button type="button" id="login_btn" class="btn btn-primary btn-lg">
-							<a href="loginMain">로그인</a>
-						</button>
+        			<% if (session.getAttribute("password") == null) { %>
+						<a href="loginMain">로그인</a>
 					<% } else { %>
-						<button type="button" id="logout_btn" class="btn btn-primary btn-lg">
-						 	<a href="bumlogout">로그아웃</a>
-						 </button>
+						 <a href="logout">로그아웃</a>
       				 <% } %>
+						</button>
 					<br>
 					<button type="button" class="btn btn-secondary btn-sm">아이디/비밀번호찾기</button>
 				</div>

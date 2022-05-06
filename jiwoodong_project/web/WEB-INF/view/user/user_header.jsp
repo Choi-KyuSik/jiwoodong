@@ -68,7 +68,7 @@
         <div class="dropdown text-end" id="p_top_profile">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
             data-bs-toggle="dropdown" style="text-align: right">
-            <img src="https://media.discordapp.net/attachments/692994434526085184/965630874999730296/1.png" alt="mdo"
+            <img src="https://cdn.discordapp.com/attachments/958682757230366780/969684968735404133/23ff6546daa743f1.png" alt="mdo"
               style="width: 60px;">
           </a>
           <p style="font-size: 12px; width: 150px; margin: 5px;">${usMemberListInfo.umId } 님 환영합니다.</p>

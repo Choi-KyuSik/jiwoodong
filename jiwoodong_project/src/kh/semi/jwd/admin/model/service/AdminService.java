@@ -7,7 +7,9 @@ import java.util.Map;
 import kh.semi.jwd.admin.model.dao.AdminDao;
 import kh.semi.jwd.admin.model.vo.AdminVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
+import kh.semi.jwd.user.model.dao.UserDao;
 import kh.semi.jwd.user.model.vo.AdminUserVo;
+import kh.semi.jwd.user.model.vo.UserLoginVo;
 
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
@@ -312,5 +314,15 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
-
+	//관리자 로그인 
+	
+	public AdminVo loginAdmin(AdminVo vo) {
+		AdminVo avo = new AdminVo();
+		Connection conn = getConnection();
+		avo = new AdminDao().loginAdmin(conn, vo);
+		close(conn);
+		// System.out.println("loginBuMember bvo:" + bvo);
+		return avo;
+		
+	}
 }

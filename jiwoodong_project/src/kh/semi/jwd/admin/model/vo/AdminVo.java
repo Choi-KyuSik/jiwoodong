@@ -38,6 +38,15 @@ public class AdminVo {
 	public void setAdPw(String adPw) {
 		this.adPw = adPw;
 	}
+
+	
+
+	public AdminVo(int adNo, String adId, String adPw) {
+		super();
+		this.adNo = adNo;
+		this.adId = adId;
+		this.adPw = adPw;
+	}
 	
 	
 	
