@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import kh.semi.jwd.bum.model.vo.CompanyVo;
+import kh.semi.jwd.user.model.vo.UserBookingListVo;
 import kh.semi.jwd.user.model.vo.UserLoginVo;
 import kh.semi.jwd.user.model.vo.UserVo;
 
@@ -370,6 +371,72 @@ public class UserDao {
 				e.printStackTrace();
 			}
 			return list;
+		}
+		
+		// 사용자 마이페이지 - 예약 현황(대기/h) 조회 : 최규식
+		public ArrayList<UserBookingListVo> usBkList_h(Connection conn) {
+			
+			ArrayList<UserBookingListVo> bklist_h = null;
+			
+			String sql = "select um_id, cp_name, cp_address, bk_date, bk_status from booking b join company c using (cp_no) where bk_status in ('h','H');";
+			
+			bklist_h = new ArrayList<UserBookingListVo>();
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					UserBookingListVo usbklist_h = new UserBookingListVo();
+					usbklist_h.setUmId(rs.getString("UM_ID"));
+					usbklist_h.setCpName(rs.getString("CP_NAME"));
+					usbklist_h.setCpAddress(rs.getString("CP_ADDRESS"));
+					usbklist_h.setBkDate(rs.getString("BK_DATE"));
+					usbklist_h.setBkStatus(rs.getString("BK_TATUS"));
+					
+					bklist_h.add(usbklist_h);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return bklist_h;
+		}
+		
+		// 사용자 마이페이지 - 예약 현황(완료/r) 조회 : 최규식
+		public ArrayList<UserBookingListVo> usBkList_r(Connection conn) {
+			
+			ArrayList<UserBookingListVo> bklist_r = null;
+			
+			String sql = "select um_id, cp_name, cp_address, bk_date, bk_status from booking b join company c using (cp_no) where bk_status in ('r','R');";
+			
+			bklist_r = new ArrayList<UserBookingListVo>();
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					UserBookingListVo usbklist_r = new UserBookingListVo();
+					usbklist_r.setUmId(rs.getString("UM_ID"));
+					usbklist_r.setCpName(rs.getString("CP_NAME"));
+					usbklist_r.setCpAddress(rs.getString("CP_ADDRESS"));
+					usbklist_r.setBkDate(rs.getString("BK_DATE"));
+					usbklist_r.setBkStatus(rs.getString("BK_TATUS"));
+					
+					bklist_r.add(usbklist_r);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return bklist_r;
 		}
 }
 

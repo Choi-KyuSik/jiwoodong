@@ -52,16 +52,12 @@
                   </a>
                 </li>
               </ul>
+              
               <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                    내 정보 관리
+                  <a class="nav-link dropdown" id="c_mypage" href="#" role="button">
+                    마이페이지
                   </a>
-                  <ul class="dropdown-menu dropdown-menu">
-					<li><a class="dropdown-item" id="c_mypage" href="#">마이페이지</a></li>
-					<li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" id="c_us_info_edit" href="#">내 정보 수정</a></li>
-                  </ul>
                 </li>
               </ul>
             </div>
@@ -77,7 +73,7 @@
           </a>
           <p style="font-size: 12px; width: 150px; margin: 5px;">${usMemberListInfo.umId } 님 환영합니다.</p>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">마이페이지</a></li>
+            <li><a class="dropdown-item" id="c_us_info_edit" href="#">내 정보 수정</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -158,6 +154,12 @@
     	console.log("찍히냐? mypage");
     	href="UserMypage"
     });
+    $("#c_mypage").click(function () {
+    	console.log("찍히냐? mypage");
+    	href="UserMypage"
+    	/* location.reload(); */
+    });
+    
     
   </script>
   

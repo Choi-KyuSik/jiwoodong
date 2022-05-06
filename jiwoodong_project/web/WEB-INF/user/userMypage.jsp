@@ -245,7 +245,67 @@
     
     <!-- 네비 예약현황 -->
     <article>
-      <div id="c_bklist_info">
+    <div id="c_bklist_info">
+    <div style="width: 100%; height: 100%; padding: 30px; border-radius: 15px; background-color: white;">
+      <div class="d-flex align-items-start">
+  		<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    		<button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">예약대기</button>
+    		<button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">예약완료</button>
+    		<button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">예약취소</button>
+  		</div>
+  	  <div class="tab-content" id="v-pills-tabContent">
+		<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+		<!-- 예약 대기 -->
+          <%-- <c:forEach items="${usBkList_h }" var="i"> --%>
+    		<div class="card" style="width: 250px; display: inline-block; float: left; margin: 10px;">
+            	<img src="https://cdn.discordapp.com/attachments/958566133752016903/966709570334523402/hotel7.jpg" class="card-img-top" alt="...">
+	            <div class="card-body">
+	              <h5 class="card-title"> ${bklist_h.cpName} </h5>
+	              <p class="card-text">${bklist_h.cpAddress}</p>
+	            </div>
+	            <ul class="list-group list-group-flush">
+	              <li class="list-group-item">${bklist_h.bkDate}</li>
+	              <li class="list-group-item">${bklist_h.bkStatus}</li>
+	            </ul>
+	            <div class="card-body">
+	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
+	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a>
+	            </div>
+         	</div>
+         	<%-- </c:forEach> --%>
+    	 </div>
+    	 <!-- 예약 완료 -->
+	     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+	     	<%-- <c:forEach items="${usBkList_r }" var="i"> --%>
+    		<div class="card" style="width: 250px; display: inline-block; float: left; margin: 10px;">
+            	<img src="https://cdn.discordapp.com/attachments/958566133752016903/966709570334523402/hotel7.jpg" class="card-img-top" alt="...">
+	            <div class="card-body">
+	              <h5 class="card-title"> ${bklist_r.cpName} </h5>
+	              <p class="card-text">${bklist_r.cpAddress}</p>
+	            </div>
+	            <ul class="list-group list-group-flush">
+	              <li class="list-group-item">${bklist_r.bkDate}</li>
+	              <li class="list-group-item">${bklist_r.bkStatus}</li>
+	            </ul>
+	            <div class="card-body">
+	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
+	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a>
+	            </div>
+         	</div>
+         	<%-- </c:forEach> --%>
+	     </div>
+	     
+	     <!-- 예약 취소 -->
+	     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+  	  </div>
+	</div>
+	</div>	  
+	</div>
+	</article>
+	
+    
+    
+      <!-- <div id="c_bklist_info">
         <div id="c_inner_info_l" style="height: 920px;">
           <div class="card" style="width: 250px; display: inline-block; float: left; margin: 10px;">
             <img src="https://cdn.discordapp.com/attachments/958566133752016903/966709570334523402/hotel7.jpg" class="card-img-top" alt="...">
@@ -263,8 +323,8 @@
             </div>
           </div>
         </div>
-      </div>
-    </article>
+      </div> -->
+    
     
     <!-- 네비 리뷰 -->
     <article>
@@ -364,6 +424,19 @@
   			$("#umPwd").focus();
   		}
   	});
+  	
+  	
+  	/* 예약변경 버튼 클릭시 */
+  	$("#bkupdata_btn").click(function() {
+  		location.href="";
+  	});
+  	
+  	/* 예약취소 버튼 클릭시 */
+  	$("#bkcancle_btn").click(function() {
+  		location.href="";
+  	});
+  	
+  	
   </script>
   
   <!-- 네비바 클릭시 페이지 이동 -->
@@ -372,6 +445,11 @@
     		/* location.href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=qbxlvnf11&logNo=221141017820"; */
     		location.href="uscplist";
     	})
+    	$("#c_mypage").click(function () {
+    	console.log("찍히냐? mypage");
+    	location.reload();
+    });
+    	
     </script>
 </body>
 </html>

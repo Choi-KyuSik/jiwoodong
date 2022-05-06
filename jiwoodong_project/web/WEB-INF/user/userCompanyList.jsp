@@ -151,6 +151,135 @@
                 </div>
             </ul>
         </div>
+        
+        <content>
+  <!-- 네비 업체조회 -->
+    
+    
+  <!-- 네비 주변검색 -->
+    <article>
+      <div id="c_maps_info">
+        <div style="width:100%; height: 100%;">
+		<%@ include file="../view/map_api.jsp"%>
+		</div>
+      </div>
+    </article>
+    
+    <!-- 네비 예약현황 -->
+    <article>
+    <div id="c_bklist_info">
+    <div style="width: 100%; height: 100%; padding: 30px; border-radius: 15px; background-color: white;">
+      <div class="d-flex align-items-start">
+  		<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    		<button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">예약대기</button>
+    		<button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">예약완료</button>
+    		<button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">예약취소</button>
+  		</div>
+  	  <div class="tab-content" id="v-pills-tabContent">
+		<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+		<!-- 네비 예약현황 : 예약 대기 -->
+          <%-- <c:forEach items="${usBkList_h }" var="i"> --%>
+    		<div class="card" style="width: 250px; display: inline-block; float: left; margin: 10px;">
+            	<img src="https://cdn.discordapp.com/attachments/958566133752016903/966709570334523402/hotel7.jpg" class="card-img-top" alt="...">
+	            <div class="card-body">
+	              <h5 class="card-title"> ${bklist_h.cpName} </h5>
+	              <p class="card-text">${bklist_h.cpAddress}</p>
+	            </div>
+	            <ul class="list-group list-group-flush">
+	              <li class="list-group-item">${bklist_h.bkDate}</li>
+	              <li class="list-group-item">${bklist_h.bkStatus}</li>
+	            </ul>
+	            <div class="card-body">
+	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
+	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a>
+	            </div>
+         	</div>
+         	<%-- </c:forEach> --%>
+    	 </div>
+    	 <!-- 네비 예약현황 : 예약 완료 -->
+	     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+	     	<%-- <c:forEach items="${usBkList_r }" var="i"> --%>
+    		<div class="card" style="width: 250px; display: inline-block; float: left; margin: 10px;">
+            	<img src="https://cdn.discordapp.com/attachments/958566133752016903/966709570334523402/hotel7.jpg" class="card-img-top" alt="...">
+	            <div class="card-body">
+	              <h5 class="card-title"> ${bklist_r.cpName} </h5>
+	              <p class="card-text">${bklist_r.cpAddress}</p>
+	            </div>
+	            <ul class="list-group list-group-flush">
+	              <li class="list-group-item">${bklist_r.bkDate}</li>
+	              <li class="list-group-item">${bklist_r.bkStatus}</li>
+	            </ul>
+	            <div class="card-body">
+	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
+	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a>
+	            </div>
+         	</div>
+         	<%-- </c:forEach> --%>
+	     </div>
+	     
+	     <!-- 네비 예약현황 : 예약 취소 -->
+	     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+  	  </div>
+	</div>
+	</div>	  
+	</div>
+	</article>
+	
+    
+    
+    <!-- 네비 리뷰 -->
+    <article>
+      <div id="c_reviewlist_info">
+        리뷰 페이지로 이동
+      </div>
+    </article>
+    
+    <!-- 내 정보 관리 -->
+    <article>
+      <div id="c_mypage_info">
+        마이페이지로 이동
+      </div>
+    </article>
+    <!-- 내 정보 관리(내 정보 수정) : 손은진 -->
+    <article>
+        <div class="s_row">
+      		<div id="c_us_info_edit_info">
+			<form id="frm" method="post" action="">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th colspan="3" style="font-size: 2em;">회원정보확인</th>
+						</tr>
+						<tr>
+							<td colspan="3"><p id="s_id_style">${usMemberListInfo.umId }</p>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">아이디</th>
+							<td colspan="2" class="table-light" id="s_us_no">
+							<input type="text" class="form-control border_none" name="umId" readonly="readonly"
+								value="${usMemberListInfo.umId }" /></td>
+						</tr>
+						<tr>
+							<th class="table-primary s_us_th" style="vertical-align: middle;">비밀번호</th>
+							<td class="table-light" id="s_us_pwd">
+							<input type="password" class="form-control" name="umPwd" id="umPwd"
+								value="" placeholder="비밀번호를 입력해주세요."/></td>
+							<td class="table-light" id="s_us_notice">
+							<span id="s_us_pwd_check" style="display: none;">현재 비밀번호가 일치하지 않습니다.</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="s_us_info_btn">
+				<input type="button" id="s_us_check_btn" class="btn btn-primary pull-right s_ad_nt_btn" value="확인">
+				<input type="button" id="back_btn" class="btn btn-secondary pull-right s_ad_nt_btn" value="취소">
+				</div>
+			</form>
+		</div>
+      </div>
+    </article>
+  </content>
     </section>
     
     <script>

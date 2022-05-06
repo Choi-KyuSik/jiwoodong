@@ -9,6 +9,7 @@ import java.util.Map;
 
 import kh.semi.jwd.bum.model.vo.CompanyVo;
 import kh.semi.jwd.user.model.dao.UserDao;
+import kh.semi.jwd.user.model.vo.UserBookingListVo;
 import kh.semi.jwd.user.model.vo.UserLoginVo;
 import kh.semi.jwd.user.model.vo.UserVo;
 
@@ -107,5 +108,26 @@ public class UserService {
 		System.out.println("usRvList:" + usRvList);
 		return usRvList;
 	}
+	
+	// 사용자 마이페이지 - 예약 현황(대기/h) 조회 : 최규식
+	public ArrayList<UserBookingListVo> usBkList_h() {
+		
+		ArrayList<UserBookingListVo> bklist_h = null;
+		Connection conn	= getConnection();
+		bklist_h = new UserDao().usBkList_h(conn);
+		close(conn);
+		
+		return bklist_h;
+	}
+	// 사용자 마이페이지 - 예약 현황(완료/r) 조회 : 최규식
+		public ArrayList<UserBookingListVo> usBkList_r() {
+			
+			ArrayList<UserBookingListVo> bklist_r = null;
+			Connection conn	= getConnection();
+			bklist_r = new UserDao().usBkList_r(conn);
+			close(conn);
+			
+			return bklist_r;
+		}
 	
 }
