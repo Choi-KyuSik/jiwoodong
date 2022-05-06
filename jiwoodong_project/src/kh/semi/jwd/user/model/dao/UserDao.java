@@ -64,7 +64,6 @@ public class UserDao {
 		return result;
 	}
 	// 승희 - 사용자 아이디 중복체크
-	//승희 - 아이디 중복확인
 	
 	public int checkUmId(Connection conn, String umId) {
 		
@@ -164,7 +163,7 @@ public class UserDao {
 
 	//승희 - 사용자 로그인
 	public UserLoginVo loginUserMember(Connection conn,UserLoginVo vo) {
-		UserLoginVo uvo = null;
+		UserLoginVo uvo = new UserLoginVo();
 		String sql = "SELECT * FROM u_member WHERE UM_ID = ? AND UM_PWD= ?";
 		
 		try {
@@ -177,13 +176,14 @@ public class UserDao {
 			rs = pstmt.executeQuery(); // 괄호안에 작성X
 			
 			if(rs.next()) {
-				uvo = new UserLoginVo();
 				uvo.setUmId(rs.getString("um_Id"));
 				uvo.setUmPwd(rs.getString("um_Pwd")); 
+				uvo.setUmName(rs.getString(3)); //사용자 이름 저장.
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("로그인 오류");
 		}finally {
 			close(rs);
 			close(pstmt);

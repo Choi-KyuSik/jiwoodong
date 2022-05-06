@@ -1,6 +1,8 @@
-package kh.semi.jwd.bum.controller;
+package kh.semi.jwd.main.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,14 +13,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class BumLogoutController
  */
-@WebServlet("/bumlogout")
-public class BumLogoutController extends HttpServlet {
+@WebServlet("/logout")
+public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BumLogoutController() {
+    public LogoutController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,10 +30,16 @@ public class BumLogoutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		// 방법 2: 모든 속성 한꺼번에 삭제 
+		//  모든 속성 한꺼번에 삭제 
 		session.invalidate();
 		
-		request.getRequestDispatcher("loginMain").forward(request, response);
+		System.out.println("로그아웃 완료");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script>alert('로그아웃 되었습니다! 빠빠이~!! '); location.href='loginMain';</script>");
+		
+		//request.getRequestDispatcher("loginMain").forward(request, response);
+		
 	}
 
 	/**

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/bulogin.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/login.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mainpage.css"> 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,8 +12,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Noto+Sans+KR:wght@500&display=swap');
     </style>
-
-
 </head>
 <body style="background: none;">
 	<div id="bgcolor" style="background-image: url(https://cdn.discordapp.com/attachments/692994434526085184/970185730959749120/34234234324.png);">
@@ -45,13 +43,13 @@
         <p><img id="j_logo_img" alt="지우동 로고" src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"></p>
         <form action="bumLogin.lo" method="post" name="loginFrm" onsubmit="return validateForm(this);">
             <div id="j_loginform2">
-                <fieldset id="j_loginform3" >
+                <fieldset id="j_loginform3">
                     <legend style="color: #0f7bc3; font-size: large; font-weight: bolder; text-align: center; padding: 0 5px; width: 130px;">사업자 로그인</legend>
                     <div style="position: relative; height: 150px;">
 							<div id="j_id_div" style="position: absolute; line-height: 30px; margin-top: 10px;">
 								<label id="j_id" for="bu_id"
 									style="display: inline- block; color: #0f7bc3;"><strong>아이디</strong></label>
-								<input type="text" id="bu_id" name="bu_id" /><br />
+								<input type="text" id="bu_id" name="bu_id"/><br />
 							</div>
 							<div id="j_pw_div" style="position: absolute; line-height: 30px; margin-top: 10px;">
 								<label id="j_password" for="password"

@@ -368,7 +368,7 @@ article>div>p {
 						<li>
 							<hr class="dropdown-divider">
 						</li>
-						<li><a class="dropdown-item" href="bumlogout">로그아웃</a></li>
+						<li><a class="dropdown-item" href="logout">로그아웃</a></li>
 					</ul>
 				</div>
 			</div>

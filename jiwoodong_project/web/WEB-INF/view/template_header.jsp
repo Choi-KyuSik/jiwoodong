@@ -41,7 +41,7 @@
         			<% if (session.getAttribute("buId") == null) { %>
 						<a href="loginMain">로그인</a>
 					<% } else { %>
-						 <a href="bumlogout">로그아웃</a>
+						 <a href="logout">로그아웃</a>
       				 <% } %>
 						</button>
 					<br>
