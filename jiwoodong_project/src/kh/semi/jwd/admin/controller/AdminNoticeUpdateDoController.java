@@ -1,6 +1,8 @@
 package kh.semi.jwd.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +43,8 @@ public class AdminNoticeUpdateDoController extends HttpServlet {
 		String ntContent = request.getParameter("ntContent");
 		String ntNoStr = request.getParameter("ntNo");
 		int ntNo = Integer.parseInt(ntNoStr);
+		String flGno = request.getParameter("fileUrl");
+		// System.out.println("파일지앤오야!!!!! : " + flGno);
 		
 		System.out.println("제목 : " + ntTitle + ", 내용 : " + ntContent + ", 글번호 : " + ntNo);
 		
@@ -48,15 +52,24 @@ public class AdminNoticeUpdateDoController extends HttpServlet {
 		adnvo.setNtTitle(ntTitle);
 		adnvo.setNtContent(ntContent);
 		adnvo.setNtNo(ntNo);
+		adnvo.setFlGno(flGno);
 		int result = new AdminNoticeService().updateNotice(adnvo);
 		if(result < 1) {
 			System.out.println("글수정 실패!");
-			request.getRequestDispatcher("AdminNoticeList").forward(request, response);
+			PrintWriter out = response.getWriter();
+			out.println("<script language='javascript'>");
+			out.println("alert('글 수정에 실패하였습니다.'); location.href='AdminNoticeList'");
+			out.println("</script>");
+			// request.getRequestDispatcher("AdminNoticeList").forward(request, response);
 //			response.sendRedirect("AdminMainPage");
 		} else {
 			System.out.println("글수정 성공!");
-			request.getSession().setAttribute("tabMenu", "1");
-			response.sendRedirect("AdminNoticeList");
+			PrintWriter out = response.getWriter();
+			out.println("<script language='javascript'>");
+			out.println("alert('글이 수정되었습니다.'); location.href='AdminNoticeList'");
+			out.println("</script>");
+			// request.getSession().setAttribute("tabMenu", "1");
+			// response.sendRedirect("AdminNoticeList");
 		}
 	}
 

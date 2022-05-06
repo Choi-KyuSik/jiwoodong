@@ -1,6 +1,8 @@
 package kh.semi.jwd.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,11 +49,19 @@ public class AdminUmInfoDeleteDoController extends HttpServlet {
 		
 		if(result < 1) {
 			System.out.println("사용자 회원 탈퇴 실패!");
-			request.getRequestDispatcher("AdminUsInfoList").forward(request, response);
+			PrintWriter out = response.getWriter();
+			out.println("<script language='javascript'>");
+			out.println("alert('사용자 회원 탈퇴에 실패하였습니다.'); location.href='AdminUsInfoList'");
+			out.println("</script>");
+			// request.getRequestDispatcher("AdminUsInfoList").forward(request, response);
 		} else {
 			System.out.println("사용자 회원 탈퇴 성공!");
+			PrintWriter out = response.getWriter();
+			out.println("<script language='javascript'>");
+			out.println("alert('사용자 회원 탈퇴가 정상 처리되었습니다.'); location.href='AdminUsInfoList'");
+			out.println("</script>");
 			// request.getSession().setAttribute("tabMenu", "3");
-			response.sendRedirect("AdminUsInfoList");
+			// response.sendRedirect("AdminUsInfoList");
 		}
 		
 	}

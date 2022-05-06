@@ -48,7 +48,7 @@ public class AdminMainPageController extends HttpServlet {
 		
 		// request.setAttribute("tabMenu", tabMenu);
 		request.setAttribute("adnolist", adnolist);
-		request.setAttribute("cpAccept", cpaclist);
+		request.setAttribute("cpaclist", cpaclist);
 		request.setAttribute("bookingCnt", bookingCnt);
 		
 		// System.out.println("controller다. 담겼니?" + adnolist);

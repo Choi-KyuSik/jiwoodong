@@ -67,7 +67,7 @@ public class AdminUmInfoUpdateDoController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html; charset=utf-8");
 			out.println("<script language='javascript'>");
-			out.println("alert('수정에 실패하였습니다.'); location.href='AdminUsInfoList'");
+			out.println("alert('사용자 정보 수정에 실패하였습니다.'); location.href='AdminUsInfoList'");
 			out.println("</script>");
 			out.flush();
 			// request.getRequestDispatcher("AdminMainPage").forward(request, response);
@@ -77,7 +77,7 @@ public class AdminUmInfoUpdateDoController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html; charset=utf-8");
 			out.println("<script language='javascript'>");
-			out.println("alert('정상적으로 수정되었습니다.'); location.href='AdminUsInfoList'");
+			out.println("alert('사용자 정보 수정이 정상처리되었습니다.'); location.href='AdminUsInfoList'");
 			out.println("</script>");
 			out.flush();
 			// response.sendRedirect("AdminMainPage");

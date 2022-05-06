@@ -22,6 +22,7 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.min.js"></script>
 </head>
 <body>
 	<div>
@@ -44,7 +45,7 @@
 								required="required" value="${adnvoList.ntNo}" /></td>
 						</tr>
 						<tr>
-							<td><input type="text" class="form-control"
+							<td style="width: 100%;"><input type="text" class="form-control"
 								placeholder="글 제목" name="ntTitle" maxlength="300"
 								required="required" value="${adnvoList.ntTitle}" /></td>
 						</tr>
@@ -64,6 +65,16 @@
 									style="height: 350px; resize: none; float: left; width: 800px;" required="required">${adnvoList.ntContent}</textarea></td>
 						</tr>
 							</c:if>
+						<tr>
+								<td class="table-light" id="s_us_no"><input type="hidden"
+									role="uploadcare-uploader"
+									data-public-key="c545e991d9de45462444"
+									data-tabs="file camera url facebook gdrive gphotos" />
+					<!-- hidden input에 주소 url을 value로 받을거여서 같이 만듬 세트로 놔두면 편할 듯, 위에거가 파일등록 버튼 -->
+									<input type="hidden" name="fileUrl" id="fileUrl">
+									</td>
+								<!-- <td colspan="2" class="table-light"><span style="display: none;"></span></td> -->
+							</tr>
 					</tbody>
 				</table>
 				<input type="button" id="s_delete_btn"
@@ -73,6 +84,16 @@
 			</form>
 		</div>
 	</div>
+	
+	<script>
+		/* 이미지등록 */
+		var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
+	
+		singleWidget.onUploadComplete(function(info) {
+			$("#fileUrl").val(info.cdnUrl);
+		});
+	</script>
+	
 	<script>
 		$("#back_btn").click(function() {
 			history.back();

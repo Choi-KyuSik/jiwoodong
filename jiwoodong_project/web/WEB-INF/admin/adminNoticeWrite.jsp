@@ -67,12 +67,12 @@
 	</script>
 	
 	<script>
-	/* 이미지등록 */
-	var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
-
-	singleWidget.onUploadComplete(function(info) {
-		$("#fileUrl").val(info.cdnUrl);
-	});sss
+		/* 이미지등록 */
+		var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
+	
+		singleWidget.onUploadComplete(function(info) {
+			$("#fileUrl").val(info.cdnUrl);
+		});
 	</script>
 	
 	<!-- 메뉴버튼 눌렀을 때 이동할 페이지 -->

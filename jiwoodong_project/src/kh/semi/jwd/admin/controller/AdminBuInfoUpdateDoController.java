@@ -1,6 +1,8 @@
 package kh.semi.jwd.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,11 +57,19 @@ public class AdminBuInfoUpdateDoController extends HttpServlet {
 		
 		if(result < 1) {
 			System.out.println("사업자 정보 수정 실패!");
+			PrintWriter out = response.getWriter();
+			out.println("<script language='javascript'>");
+			out.println("alert('사업자 수정에 실패하였습니다.'); location.href='AdminBuInfoList'");
+			out.println("</script>");
 			request.getRequestDispatcher("AdminBuInfoList").forward(request, response);
 		} else {
 			System.out.println("사업자 정보 수정 성공!");
+			PrintWriter out = response.getWriter();
+			out.println("<script language='javascript'>");
+			out.println("alert('사업자 정보 수정이 정상 처리되었습니다.'); location.href='AdminBuInfoList'");
+			out.println("</script>");
 			// request.getSession().setAttribute("tabMenu", "3");
-			response.sendRedirect("AdminBuInfoList");
+			// response.sendRedirect("AdminBuInfoList");
 		}
 		
 	}

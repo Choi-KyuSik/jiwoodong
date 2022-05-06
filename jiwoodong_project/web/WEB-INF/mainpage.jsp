@@ -440,16 +440,17 @@ a:hover {
 		}
 	</script>
 	<script>
-		var data = '<c:out value="${adnolist}"/>';
+		/* var data = '<c:out value="${adnolist}"/>';
 		console.log("data ? : " + data);
 		
 		var data2 = '${adnolist}';
-		console.log("data2 ? : " + data2);
+		console.log("data2 ? : " + data2); */
 	</script>
 	
 	<script>
 	
 		$("#login_btn").click(function() {
+			console.log("안눌려?");
 			location.href="loginMain";
 		});
 	</script>

@@ -67,7 +67,7 @@ public class AdminDao {
 	// 업체등록요청 현황 조회
 	public ArrayList<Map<String, Object>> companyAcceptList(Connection conn) {
 
-		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN 1 AND 9";
+		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, CP_NO FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN 1 AND 9";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 
 		try {
@@ -83,6 +83,7 @@ public class AdminDao {
 					map.put("buNumber", rs.getString(5));
 					map.put("cpWriteDate", rs.getString(6));
 					map.put("buTel", rs.getString(7));
+					map.put("cpNo", rs.getInt(8));
 
 					list.add(map);
 

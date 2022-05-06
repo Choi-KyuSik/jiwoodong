@@ -43,14 +43,15 @@
                                     <th scope="col" class="s_center">신청일자</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <c:forEach items="${cpAccept }" var="i">
-                                <tr>
+                            <tbody style="cursor: pointer;">
+                                <c:forEach items="${cpaclist }" var="i">
+                                <tr class="s_tr_readBuList">
                                     <th scope="row" class="s_center">${i.rownum}</th>
                                     <td class="s_center">${i.buNumber}</td>
                                     <td class="s_center">${i.cpCategory}</td>
                                     <td class="s_center">${i.cpName}</td>
                                     <td class="s_center">${i.cpWriteDate}</td>
+                                    <td class="s_center" style="display: none;">${i.cpNo}</td>
                                 </tr>
                                 </c:forEach>
                             </tbody>
@@ -81,9 +82,9 @@
                                     <th scope="col">작성일</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="cursor: pointer;">
                             	<c:forEach items="${adnolist }" var="i">
-                                <tr>
+                                <tr class="s_tr_readList">
                                     <th scope="row">${i.ntNo}</th>
                                     <td class="s_td_short">${i.ntTitle}</td>
                                     <td>관리자</td>
@@ -194,6 +195,50 @@
                 }
             ]
         });
+    </script>
+    
+    <script>
+        $(".s_tr_readBuList").click(function() {
+    		// 배열 선언
+    		var tdArr = new Array();
+    		// 현재 클릭된 행(tr의 td)
+    		var tr = $(this);
+    		var td = tr.children();
+    		
+    		// 반복문을 통해 배열에 값을 담아 사용
+    		td.each(function(i) {
+    			tdArr.push(td.eq(i).text());
+    		});
+    		// td들이 배열에 담겨있는데 그 중 6번째가 필요
+    		console.log("배열에 담긴 값 : " + tdArr);
+    		console.log("배열에 담긴 값 : " + tdArr[5]);
+    		console.log(typeof(tdArr[5]));
+    		location.href="AdminBuDetailInfo?cpNo=" + tdArr[5];
+    	});
+    </script>
+    
+    <script>
+	    $(".s_tr_readList").click(function() {
+			// 배열 선언
+			var tdArr = new Array();
+			// 현재 클릭된 행(tr의 td)
+			var tr = $(this);
+			console.log("tr : " + tr);
+			var td = tr.children();
+			console.log("td : " + td);
+	
+			// 반복문을 통해 배열에 값을 담아 사용
+			td.each(function(i) {
+				tdArr.push(td.eq(i).text());
+			});
+			// td들이 배열에 담겨있는데 그 중 1번째가 필요
+			console.log("tdArr : " + tdArr);
+			console.log("배열에 담긴 값 : " + tdArr[0]);
+			console.log(typeof (tdArr[0]));
+	
+			// 링크로 넘기기
+			location.href = "AdminNoticeDetailRead?ntNo=" + tdArr[0];
+	    });
     </script>
     
     <!-- 메뉴버튼 눌렀을 때 이동할 페이지 -->

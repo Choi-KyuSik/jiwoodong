@@ -1,6 +1,8 @@
 package kh.semi.jwd.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,11 +49,19 @@ public class AdminNoticeDeleteDoController extends HttpServlet {
 		
 		if(result < 1) {
 			System.out.println("글삭제 실패!");
-			request.getRequestDispatcher("AdminNoticeList").forward(request, response);
+			PrintWriter out = response.getWriter();
+			out.println("<script language='javascript'>");
+			out.println("alert('글 삭제에 실패하였습니다.'); location.href='AdminNoticeList'");
+			out.println("</script>");
+			// request.getRequestDispatcher("AdminNoticeList").forward(request, response);
 		} else {
 			System.out.println("글삭제 성공!");
-			request.getSession().setAttribute("tabMenu", "1");
-			response.sendRedirect("AdminNoticeList");
+			// request.getSession().setAttribute("tabMenu", "1");
+			PrintWriter out = response.getWriter();
+			out.println("<script language='javascript'>");
+			out.println("alert('글이 삭제되었습니다.'); location.href='AdminNoticeList'");
+			out.println("</script>");
+			// response.sendRedirect("AdminNoticeList");
 		}
 	}
 

@@ -190,18 +190,15 @@ public class AdminNoticeDao {
 		//			NT_WRITE_DATE NOT NULL TIMESTAMP(6)   
 		//			NT_COUNT      NOT NULL NUMBER         
 
-		String sql = "UPDATE NOTICE SET NT_TITLE = ?, NT_CONTENT = ? WHERE NT_NO = ?";
+		String sql = "UPDATE NOTICE SET NT_TITLE = ?, NT_CONTENT = ?, FL_GNO = ? WHERE NT_NO = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, adnvo.getNtTitle());
-			// System.out.println("update SQL문 실행중? 글제목 : " + adnvo.getNtTitle());
 			pstmt.setString(2, adnvo.getNtContent());
-			// System.out.println("update SQL문 실행중? 글내용 : " + adnvo.getNtContent());
-			pstmt.setInt(3, adnvo.getNtNo());
-			// System.out.println("update SQL문 실행중? 글번호 : " + adnvo.getNtNo());
+			pstmt.setString(3, adnvo.getFlGno());
+			pstmt.setInt(4, adnvo.getNtNo());
 			result = pstmt.executeUpdate();
-			// System.out.println("update SQL문 실행중? DAO : " + result);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

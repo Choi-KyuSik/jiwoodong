@@ -70,7 +70,7 @@
 					<div class="col-md-6 mb-3" style="margin-bottom: 20px;">
                         <label for="birth">생년월일</label> 
                         <input type="date" class="form-control" id="birth" name="birth" placeholder="YYYY/MM/DD" required="required">
-                        <div class="invalid-feedback"> 생년월일를 입력해주세요. </div>
+                        <div class="invalid-feedback"> 생년월일을 입력해주세요. </div>
                     </div>
                     <div class="col-md-8 mb-3" style="margin-bottom: 20px;"> 
                         <label for="gender">성별</label> 
