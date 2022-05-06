@@ -36,9 +36,9 @@ public class AdminNoticeDetailReadController extends HttpServlet {
 //		int ntNo = anvo.getNtNo();
 		System.out.println("ntNo의 값은?" + ntNo);
 		
-		AdminNoticeVo adnvo = new AdminNoticeService().readNotice(ntNo);
+		AdminNoticeVo adnvoList = new AdminNoticeService().readNotice(ntNo);
 		
-		request.setAttribute("adnvoList", adnvo);
+		request.setAttribute("adnvoList", adnvoList);
 		
 		request.getRequestDispatcher("WEB-INF/admin/adminNoticeDetailRead.jsp").forward(request, response);
 	}

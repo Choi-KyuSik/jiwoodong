@@ -95,8 +95,3 @@
     font-weight: bold;
     color: #0f7bc3;
 }
-
-#p_main_bar>ul>li>a:hover {
-	color: yellow;
-	font-weight: bold;
-}

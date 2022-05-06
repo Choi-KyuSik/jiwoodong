@@ -97,22 +97,22 @@
     <script>
     //일반적인 회원가입
     $("#join_bu_btn").click(function() {
-        var result = confirm('사용자 회원가입을 원하시나요??'); 
-        if(result) { 
+        // var result = confirm('사용자 회원가입을 원하시나요??'); 
+        // if(result) { 
             //yes 
             location.href="bumenroll";
-            } else { 
+            // } else { 
             //no 
-            }
+            // }
     });
     $("#join_u_btn").click(function() {
-        var result = confirm('사업자 회원가입을 원하시나요??'); 
-        if(result) { 
+        // var result = confirm('사업자 회원가입을 원하시나요??'); 
+        // if(result) { 
             //yes 
             location.href="userenroll";
-            } else { 
+            // } else { 
             //no 
-            }
+            // }
     });
     </script>
 </body>

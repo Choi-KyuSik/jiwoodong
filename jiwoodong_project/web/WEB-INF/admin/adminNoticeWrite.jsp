@@ -19,6 +19,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.min.js"></script>
 </head>
 <body>
 
@@ -29,19 +30,29 @@
 	<div class="container">
 		<div class="row" style="width: 1200px; margin: 0 auto; padding-top: 30px;">
 			<form method="post" action="AdminNoticeWriteDo">
-				<table class="table table-striped">
+				<table class="table">
 					<thead>
 						<tr>
-							<th colspan="2">공지사항 작성</th>
+							<th colspan="3">공지사항 작성</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="text" class="form-control" placeholder="글 제목" name="ntTitle" maxlength="300" required="required"></td>
+							<td width="100%;"><input type="text" class="form-control" placeholder="글 제목" name="ntTitle" maxlength="300" required="required"></td>
 						</tr>
 						<tr>	
 							<td><textarea class="form-control" placeholder="글 내용" name="ntContent" maxlength="4000" style="height: 350px; resize: none;" required="required"></textarea></td>
 						</tr>
+						<tr>
+								<td class="table-light" id="s_us_no"><input type="hidden"
+									role="uploadcare-uploader"
+									data-public-key="c545e991d9de45462444"
+									data-tabs="file camera url facebook gdrive gphotos" />
+					<!-- hidden input에 주소 url을 value로 받을거여서 같이 만듬 세트로 놔두면 편할 듯, 위에거가 파일등록 버튼 -->
+									<input type="hidden" name="fileUrl" id="fileUrl">
+									</td>
+								<td colspan="2" class="table-light"><span style="display: none;"></span></td>
+							</tr>
 					</tbody>
 				</table>
 				<input type="submit" class="btn btn-primary pull-right" style="float: right; margin-right: 10px;" value="글쓰기">
@@ -53,6 +64,15 @@
 		$("#back_btn").click(function() {
 			history.back();
 		});
+	</script>
+	
+	<script>
+	/* 이미지등록 */
+	var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
+
+	singleWidget.onUploadComplete(function(info) {
+		$("#fileUrl").val(info.cdnUrl);
+	});sss
 	</script>
 	
 	<!-- 메뉴버튼 눌렀을 때 이동할 페이지 -->

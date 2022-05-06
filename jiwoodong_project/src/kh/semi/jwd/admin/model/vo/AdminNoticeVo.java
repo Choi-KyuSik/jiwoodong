@@ -22,6 +22,7 @@ public class AdminNoticeVo {
 	// TO_CHAR 이용하여 담는 변수
 	private String ntDate;
 	
+	
 	public AdminNoticeVo() {
 		super();
 	}

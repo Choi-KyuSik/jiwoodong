@@ -45,9 +45,8 @@ public class AdminNoticeWriteDoController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String ntTitle = request.getParameter("ntTitle");
 		String ntContent = request.getParameter("ntContent");
-		Timestamp ntWriteDate = new Timestamp(System.currentTimeMillis());
+		String flGno = request.getParameter("fileUrl");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 		
 		System.out.println("제목 : " + ntTitle + ", 내용 : " + ntContent);
 		
@@ -60,6 +59,7 @@ public class AdminNoticeWriteDoController extends HttpServlet {
 //		adnvo.setNtNo(10);
 		adnvo.setNtTitle(ntTitle);
 		adnvo.setNtContent(ntContent);
+		adnvo.setFlGno(flGno);
 //		adnvo.setNtWriteDate(ntWriteDate);
 //		adnvo.setNtCount(0);
 //		adnvo.setFlGno(null);

@@ -21,6 +21,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 </head>
 <body>
 	<div>
@@ -47,11 +48,22 @@
 								placeholder="글 제목" name="ntTitle" maxlength="300"
 								required="required" value="${adnvoList.ntTitle}" /></td>
 						</tr>
+							<c:if test="${empty adnvoList.flGno}">
 						<tr>
 							<td><textarea class="form-control" placeholder="글 내용"
 									name="ntContent" maxlength="4000"
 									style="height: 350px; resize: none;" required="required">${adnvoList.ntContent}</textarea></td>
 						</tr>
+							</c:if>
+							<c:if test="${not empty adnvoList.flGno}">
+						<tr>
+							<td>
+							<img style="border-radius: 5px; float: right; width: 350px; height: 350px;" src="${adnvoList.flGno }">
+							<textarea class="form-control" placeholder="글 내용"
+									name="ntContent" maxlength="4000"
+									style="height: 350px; resize: none; float: left; width: 800px;" required="required">${adnvoList.ntContent}</textarea></td>
+						</tr>
+							</c:if>
 					</tbody>
 				</table>
 				<input type="button" id="s_delete_btn"

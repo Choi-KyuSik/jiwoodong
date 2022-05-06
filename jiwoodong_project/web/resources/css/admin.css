@@ -202,3 +202,7 @@
 .highcharts-credits {
 	display: none !important; 
 }
+
+.container {
+	margin-bottom: 30px;
+}

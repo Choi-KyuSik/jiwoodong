@@ -26,12 +26,13 @@ public class AdminNoticeDao {
 		//		NT_WRITE_DATE NOT NULL TIMESTAMP(6)   
 		//		NT_COUNT      NOT NULL NUMBER         
 
-		String sql = "INSERT INTO NOTICE VALUES (ADMIN_SEQ.NEXTVAL, ?, ?, DEFAULT, DEFAULT, NULL)";
+		String sql = "INSERT INTO NOTICE VALUES (ADMIN_SEQ.NEXTVAL, ?, ?, DEFAULT, DEFAULT, ?)";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, adnvo.getNtTitle());
 			pstmt.setString(2, adnvo.getNtContent());
+			pstmt.setString(3, adnvo.getFlGno());
 			result = pstmt.executeUpdate();
 			return result; // 성공 시 result 반환
 		} catch (SQLException e) {
@@ -234,7 +235,7 @@ public class AdminNoticeDao {
 
 		AdminNoticeVo adnvo = null;
 
-		String sql = "SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD') "
+		String sql = "SELECT NT_NO, NT_TITLE, NT_CONTENT, TO_CHAR(NT_WRITE_DATE, 'YYYY/MM/DD'), FL_GNO "
 				+ " FROM NOTICE WHERE NT_NO = ?";
 
 		try {
@@ -248,6 +249,7 @@ public class AdminNoticeDao {
 				adnvo.setNtTitle(rs.getString(2));
 				adnvo.setNtContent(rs.getString(3));
 				adnvo.setNtDate(rs.getString(4));
+				adnvo.setFlGno(rs.getString(5));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

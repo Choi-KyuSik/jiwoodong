@@ -62,11 +62,7 @@ public class BumService {
 		int result = 0;
 		Connection conn = getConnection();
 		result = new BumDao().insertBuMember(conn, vo);
-		if (result > 0) {
-			commit(conn);
-		} else {
-			close(conn);
-		}
+		close(conn);
 		return result;
 	}
 	//승희 - 아이디 중복 체크
