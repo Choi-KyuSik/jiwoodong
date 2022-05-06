@@ -51,12 +51,12 @@ public class AdminNoticeUpdateDoController extends HttpServlet {
 		int result = new AdminNoticeService().updateNotice(adnvo);
 		if(result < 1) {
 			System.out.println("글수정 실패!");
-			request.getRequestDispatcher("AdminMainPage").forward(request, response);
+			request.getRequestDispatcher("AdminNoticeList").forward(request, response);
 //			response.sendRedirect("AdminMainPage");
 		} else {
 			System.out.println("글수정 성공!");
 			request.getSession().setAttribute("tabMenu", "1");
-			response.sendRedirect("AdminMainPage");
+			response.sendRedirect("AdminNoticeList");
 		}
 	}
 

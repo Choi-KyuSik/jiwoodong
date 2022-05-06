@@ -89,9 +89,9 @@
 	background: #f1f7ff;
 }
 
-.s_tr_modal:hover {
+/* .s_tr_modal:hover {
 	cursor: pointer;
-}
+} */
 
 .short {
 	text-overflow: ellipsis;

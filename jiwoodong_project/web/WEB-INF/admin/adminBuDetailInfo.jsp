@@ -95,7 +95,7 @@
 							<td class="table-light">(${i.cpPostcode }) ${i.cpAddress }
 								${i.cpDtaddress }</td>
 						</tr>
-						<input type="hidden" name="buNo" value="${i.buNo }"/>
+						<input type="hidden" name="cpNo" value="${i.cpNo }"/>
 					</c:forEach>
 				</tbody>
 			</table>

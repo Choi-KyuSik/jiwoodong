@@ -47,11 +47,11 @@ public class AdminUmInfoDeleteDoController extends HttpServlet {
 		
 		if(result < 1) {
 			System.out.println("사용자 회원 탈퇴 실패!");
-			request.getRequestDispatcher("AdminMainPage").forward(request, response);
+			request.getRequestDispatcher("AdminUsInfoList").forward(request, response);
 		} else {
 			System.out.println("사용자 회원 탈퇴 성공!");
 			// request.getSession().setAttribute("tabMenu", "3");
-			response.sendRedirect("AdminMainPage");
+			response.sendRedirect("AdminUsInfoList");
 		}
 		
 	}

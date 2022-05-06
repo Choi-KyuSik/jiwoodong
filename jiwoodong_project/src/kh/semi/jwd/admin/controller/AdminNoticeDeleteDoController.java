@@ -47,11 +47,11 @@ public class AdminNoticeDeleteDoController extends HttpServlet {
 		
 		if(result < 1) {
 			System.out.println("글삭제 실패!");
-			request.getRequestDispatcher("AdminMainPage").forward(request, response);
+			request.getRequestDispatcher("AdminNoticeList").forward(request, response);
 		} else {
 			System.out.println("글삭제 성공!");
 			request.getSession().setAttribute("tabMenu", "1");
-			response.sendRedirect("AdminMainPage");
+			response.sendRedirect("AdminNoticeList");
 		}
 	}
 

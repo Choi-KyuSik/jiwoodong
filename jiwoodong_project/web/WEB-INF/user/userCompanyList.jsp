@@ -127,10 +127,22 @@
 	                        <div class="card">
 	                            <img src="https://cdn.discordapp.com/attachments/958566133752016903/966709567109095484/hotel.jpg"
 	                                class="card-img-top" alt="...">
-	                            <div class="card-body"  style=" height: 190px;">
-	                                <h6 class="card-title" style=font-weight:700;>${i.cpName}</h6>
-	                                <p class="card-text" style="font-size: small;  padding-top: 5px;">${i.cpAddress} ${i.cpDTAddress}</p>
-	                                <button id="detailbtn" class="btn btn-primary" style="position: absolute; right: 15px; bottom: 15px;">자세히 〉</button>
+	                            <table style="margin-top: 20px; margin-left: 10px;">
+	                            	<tr>
+	                            		<th colspan="3">
+	                            			${i.cpName}
+	                            		</th>
+	                            	</tr>
+	                            	<tr class="tr_list">
+	                            		<td style="font-size: small;  padding-top: 15px;">${i.cpAddress} ${i.cpDTAddress} 
+	                            		</td>
+	                            		<td style="display: none;">${i.cpNo }</td>
+	                            		<td>
+                        			<input type="button" id="detailbtn" onclick="movepage()" class="btn btn-primary detailbtn" style="position: absolute; right: 15px; bottom: 15px;" value="자세히"/>
+                        </td>
+	                            	</tr>
+	                            </table>
+	                            <div class="card-body"  style=" height: 150px;">
 	                            </div>
 	                        </div>
 	                    </li>
@@ -142,10 +154,34 @@
     </section>
     
     <script>
-    	$("#detailbtn").click(function(){
+    function movepage() {
+    	
+    	$(".tr_list").on("click", function(e){
     		/* location.href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=qbxlvnf11&logNo=221141017820"; */
-    		location.href="uscpdetail";
-    	})
+
+    		// 배열 선언
+    		var arr = new Array();
+    		// 현재 클릭된 행(tr의 td)
+    		var tr = $(this);
+			console.log("tr : " + JSON.stringify(tr));
+			console.log(tr);
+			var td = tr.children();
+			console.log("td : " + td.innertext);
+			console.log(td);
+			
+    		
+			// 반복문을 통해 배열에 값을 담아 사용
+			td.each(function(i) {
+				arr.push(td.eq(i).text().trim());
+			});
+			
+			// td들이 배열에 담겨있는데 그 중 2번째가 필요
+			console.log("arr : " + arr);
+			console.log("arr[1] : " + arr[1]);
+    		
+			location.href="uscpdetail?cpNo=" + arr[1];
+    	});
+    }
     </script>
 
 </body>

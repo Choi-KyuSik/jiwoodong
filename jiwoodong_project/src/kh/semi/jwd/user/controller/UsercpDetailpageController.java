@@ -31,7 +31,12 @@ public class UsercpDetailpageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<UsercpDetailpageVo> uscpdetail = new UsercpDetailpageService().companyDetail();
+		
+		String cpNoStr = request.getParameter("cpNo");
+		int cpNo = Integer.parseInt(cpNoStr);
+		System.out.println("cpNo : " + cpNo);
+		
+		ArrayList<UsercpDetailpageVo> uscpdetail = new UsercpDetailpageService().companyDetail(cpNo);
 		request.setAttribute("uscpdetail", uscpdetail);
 		request.getRequestDispatcher("WEB-INF/user/userCompanyDetail.jsp").forward(request, response);
 	}

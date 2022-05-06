@@ -32,13 +32,16 @@ public class AdminBuInfoDetailListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String buNoStr = request.getParameter("buNo");
-		int buNo = Integer.parseInt(buNoStr);
+		String cpNoStr = request.getParameter("cpNo");
+		int cpNo = Integer.parseInt(cpNoStr);
 		
-		System.out.println("사업자정보번호 내놔 : " + buNo);
+		System.out.println("업체등록번호 내놔 : " + cpNo);
 		
-		BumVo buMemberDetail = new AdminService().buMemberDetailInfo(buNo);
+		BumVo buMemberDetail = new AdminService().buMemberDetailInfo(cpNo);
 		// ArrayList<BumVo> buMemberDeleteList = new AdminService().buMemberDeleteList();
+		
+		System.out.println("======================");
+		System.out.println("buMemberDetail : " + buMemberDetail);
 		
 		request.setAttribute("buMemberDetail", buMemberDetail);
 		// request.setAttribute("buMemberDeleteList", buMemberDeleteList);

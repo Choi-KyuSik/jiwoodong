@@ -15,13 +15,16 @@ public class UsercpDetailpageDao {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	public ArrayList<UsercpDetailpageVo> companyDetail(Connection conn) {
+	public ArrayList<UsercpDetailpageVo> companyDetail(Connection conn, int cpNo) {
 		ArrayList<UsercpDetailpageVo> result = new ArrayList<UsercpDetailpageVo>();
 		
-		String sql = "SELECT c.CP_NO, c.FL_GNO, c.CP_NAME, c.CP_ADDRESS, c.CP_DTADDRESS, c.CP_OPEN_TIME, c.CP_CLOSE_TIME, c.CP_EXPLAIN, r.RV_NO, r.RV_CONTENT, r.RV_WRITE_DATE, r.RV_SCORE, b.BU_TEL FROM COMPANY C FULL OUTER JOIN REVIEW R ON (c.FL_GNO=r.FL_GNO) LEFT JOIN B_MEMBER B ON (c.FL_GNO=B.FL_GNO)";
+		String sql = "SELECT C.CP_NO, C.FL_GNO, C.CP_NAME, C.CP_ADDRESS, C.CP_DTADDRESS, C.CP_OPEN_TIME, C.CP_CLOSE_TIME, C.CP_EXPLAIN, "
+				+ " R.RV_NO, R.RV_CONTENT, R.RV_WRITE_DATE, R.RV_SCORE, B.BU_TEL FROM COMPANY C FULL OUTER JOIN REVIEW R "
+				+ " ON (C.FL_GNO=R.FL_GNO) LEFT JOIN B_MEMBER B ON (C.FL_GNO=B.FL_GNO) WHERE CP_NO = ? ";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

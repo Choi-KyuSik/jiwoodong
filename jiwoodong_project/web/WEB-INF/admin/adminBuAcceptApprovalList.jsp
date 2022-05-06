@@ -37,7 +37,7 @@
 				style="display: block;">
 				<p class="p_content_style">업체 승인 수락 리스트</p>
 				<div style="height: 60px;"></div>
-				<table class="table table table-hover"
+				<table class="table table table-hover s_center"
 					style="clear: both; table-layout: fixed;">
 					<thead>
 						<!-- cpacApproval -->
@@ -45,6 +45,7 @@
 							<th scope="col" style="width: 50px;">NO</th>
 							<th scope="col" style="width: 100px;">사업자번호</th>
 							<th scope="col">사업자 등록 번호</th>
+							<th scope="col">사업자명</th>
 							<th scope="col" style="width: 150px;">업종</th>
 							<th scope="col">업체명</th>
 							<th scope="col" style="width: 250px;">전화번호</th>
@@ -57,6 +58,7 @@
 								<th scope="row" class="s_ntNo">${i.buNo}</th>
 								<td>${i.rownum}</td>
 								<td>${i.buNumber}</td>
+								<td>${i.buName}</td>
 								<td>${i.cpCategory}</td>
 								<td class="s_td_short">${i.cpName}</td>
 								<td>${i.buTel}</td>

@@ -51,16 +51,16 @@
                         </form>
                     </div>
                 </nav>
-                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
+                <table class="table table table-hover s_center" style="clear: both; table-layout: fixed;">
                     <thead>
                         <tr>
                         	<th scope="col" style="width: 50px;">NO</th>
                         	<th scope="col" style="width: 100px;">사업자번호</th>
-                            <th scope="col">아이디</th>
-                            <th scope="col">이름</th>
+                            <th scope="col" style="width: 150px;">아이디</th>
+                            <th scope="col" style="width: 150px;">이름</th>
                             <th scope="col" style="width: 100px">생년월일</th>
-                            <th scope="col">전화번호</th>
-                            <th scope="col">이메일</th>
+                            <th scope="col" style="width: 200px;">전화번호</th>
+                            <th scope="col" style="width: 250px;">이메일</th>
                             <th scope="col" style="width: 100px">가입일</th>
                         </tr>
                     </thead>
@@ -68,7 +68,7 @@
 						<c:if test="${empty query }">
 							<c:forEach items="${buMemberInfoList }" var="i">
 								<tr class="s_tr_modal s_tr_buInfoList">
-									<th scope="row" class="s_ntNo">${i.rownum}</th>
+									<th class="" scope="row" class="s_ntNo">${i.rownum}</th>
 									<td>${i.buNo}</td>
 									<td>${i.buId}</td>
 									<td>${i.buName}</td>

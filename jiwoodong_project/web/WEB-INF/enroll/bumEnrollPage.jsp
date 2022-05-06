@@ -136,8 +136,9 @@
 		//빈칸 체크
 		 		var f = document.bu_enroll; 
 	    
+		console.log("f.bu_id_check.value : " + f.bu_id_check.value);
 		 
-	    if (frm.value == "") {
+	    if ($("#name").val() == "") {
 	        alert("아이디를 입력해주십시오");
 	        f.bu_id.focus();
 	        return false;
@@ -166,33 +167,33 @@
 	        return false;
 	    }
 
-	    if (f.phone.value == "") {
+	    else if (f.phone.value == "") {
 	        alert("핸드폰 번호를 입력해주십시오");
 	        f.phone.focus();
 	        return false;
 	    }
 
-	    if (f.email.value == "") {
+	    else if (f.email.value == "") {
 	        alert("이메일을 입력해주십시오");
 	        f.email.focus();
 	        return false;
 	    }
 
-	    if (f.email_check_no.value == "") {
+	    else if (f.email_check_no.value == "") {
 	        alert("인증번호를 입력해주십시오");
 	        f.email_check_no.focus();
 	        return false;
 	    }
 
 
-	    if (f.clause1.value == "" || f.clause1.length==0) {
+	    else if (f.clause1.value == "" || f.clause1.length==0) {
 	        alert("이용약관에 동의 해주십시오");
 	        f.clause1.focus();
 	        return false;
 	    }
 
 
-	    if (f.clause2.value == "" || f.clause2.length==0) {
+	    else if (f.clause2.value == "" || f.clause2.length==0) {
 	        alert("개인정보 수집및 이용약관에 동의해주십시오");
 	        f.clause2.focus();
 	        return false;
@@ -222,14 +223,6 @@
 
 		    
 	//형식 체크
-	var email = $("#email").val().trim();
-	var emailCheck= /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-    if(!emailCheck.test(email)){
-        alert("이메일 형식에 맞지 않습니다 ")
-        check.email.focus();
-        return false;
-    }
-    
 	var bu_num = $("#bu_num").val().trim();
 	var regExpPhone = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/; // 숫자3-숫자3,4-숫자4
 	if(!regExpPhone.test(bu_num)){
@@ -237,6 +230,21 @@
 		$("#bu_num").focus();
 		return false;
 	}
+	
+	if($("#name").val() == '') {
+		alert("이름 미작성");
+		$("#name").focus();
+		return false;
+	}
+	
+	var email = $("#email").val().trim();
+	var emailCheck= /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    if(!emailCheck.test(email)){
+        alert("이메일 형식에 맞지 않습니다 ")
+        $("#email").focus();
+        return false;
+    }
+    
 	
 	var phone = $("#phone").val().trim();
 	var regExpPhone = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/; // 숫자3-숫자3,4-숫자4

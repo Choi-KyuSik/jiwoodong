@@ -55,11 +55,11 @@ public class AdminBuInfoUpdateDoController extends HttpServlet {
 		
 		if(result < 1) {
 			System.out.println("사업자 정보 수정 실패!");
-			request.getRequestDispatcher("AdminMainPage").forward(request, response);
+			request.getRequestDispatcher("AdminBuInfoList").forward(request, response);
 		} else {
 			System.out.println("사업자 정보 수정 성공!");
 			// request.getSession().setAttribute("tabMenu", "3");
-			response.sendRedirect("AdminMainPage");
+			response.sendRedirect("AdminBuInfoList");
 		}
 		
 	}

@@ -53,13 +53,14 @@
 						</form>
 					</div>
 				</nav>
-				<table class="table table table-hover"
+				<table class="table table table-hover s_center" 
 					style="clear: both; table-layout: fixed;">
 					<thead>
 						<tr>
 							<th scope="col" style="width: 50px;">NO</th>
-							<th scope="col" style="width: 100px;">사업자번호</th>
+							<th scope="col" style="width: 150px;">등록신청번호</th>
 							<th scope="col">사업자 등록 번호</th>
+							<th scope="col">사업자명</th>
 							<th scope="col" style="width: 150px;">업종</th>
 							<th scope="col">업체명</th>
 							<th scope="col" style="width: 250px;">전화번호</th>
@@ -71,8 +72,9 @@
 						<c:forEach items="${cpacDetailList }" var="i">
 							<tr class="s_tr_modal s_tr_readBuList">
 								<th scope="row" class="s_ntNo">${i.rownum}</th>
-								<td>${i.buNo}</td>
+								<td>${i.cpNo}</td>
 								<td>${i.buNumber}</td>
+								<td>${i.buName}</td>
 								<td>${i.cpCategory}</td>
 								<td class="s_td_short">${i.cpName}</td>
 								<td>${i.buTel}</td>
@@ -84,8 +86,9 @@
 						<c:forEach items="${cpacDetailSearchList }" var="i">
 							<tr class="s_tr_modal s_tr_readBuList">
 								<th scope="row" class="s_ntNo">${i.rownum}</th>
-								<td>${i.buNo}</td>
+								<td>${i.cpNo}</td>
 								<td>${i.buNumber}</td>
+								<td>${i.buName}</td>
 								<td>${i.cpCategory}</td>
 								<td class="s_td_short">${i.cpName}</td>
 								<td>${i.buTel}</td>
@@ -152,7 +155,7 @@
     		console.log("배열에 담긴 값 : " + tdArr);
     		console.log("배열에 담긴 값 : " + tdArr[1]);
     		console.log(typeof(tdArr[1]));
-    		location.href="AdminBuDetailInfo?buNo=" + tdArr[1];
+    		location.href="AdminBuDetailInfo?cpNo=" + tdArr[1];
     	});
         
 		$("#s_back_list").click(function() {

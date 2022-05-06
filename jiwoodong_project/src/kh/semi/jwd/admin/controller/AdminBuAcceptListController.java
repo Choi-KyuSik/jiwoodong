@@ -56,8 +56,8 @@ public class AdminBuAcceptListController extends HttpServlet {
 		if(pageNumStr != null && !pageNumStr.equals(""))
 		  currentPage = Integer.parseInt(pageNumStr);
 		System.out.println("currentPage:"+currentPage);
-		final int pageSize = 3;
-		final int pageBlock = 3;
+		final int pageSize = 10;
+		final int pageBlock = 2;
 		int totalCnt = 0;
 		
 		if(field == null || query == null) {
@@ -100,7 +100,8 @@ public class AdminBuAcceptListController extends HttpServlet {
 		ArrayList<Map<String, Object>> cpacDetailList = new AdminService().companyAcceptDetailList(startRnum, endRnum);
 		ArrayList<Map<String, Object>> cpacDetailSearchList = new AdminService().companyAcceptDetailSearchList(field, query, startRnum, endRnum);
 		
-		System.out.println("cpacDetailSearchList : " + cpacDetailSearchList);
+		// System.out.println("cpacDetailSearchList : " + cpacDetailSearchList);
+		System.out.println("cpacDetailList : " + cpacDetailList);
 		
 		// ArrayList<Map<String, Object>> cpaclist = new AdminService().companyAcceptList();
 		// request.setAttribute("cpAccept", cpaclist);

@@ -56,31 +56,31 @@ public class AdminService {
 	}
 
 	// 업체등록요청 세부 1개 조회
-	public ArrayList<Map<String, Object>> companyAcceptDetailRead(int buNo) {
+	public ArrayList<Map<String, Object>> companyAcceptDetailRead(int cpNo) {
 		Connection conn = getConnection();
-		ArrayList<Map<String, Object>> result = dao.companyAcceptDetailRead(conn, buNo);
+		ArrayList<Map<String, Object>> result = dao.companyAcceptDetailRead(conn, cpNo);
 		close(conn);
 		return result;
 	}
 
 	// 승인 거절 시
-	public int companyAcceptReject(String rejectMsg, int buNo) {
+	public int companyAcceptReject(String rejectMsg, int cpNo) {
 		int result = 0;
 
 		Connection conn = getConnection();
-		result = dao.companyAcceptReject(conn, rejectMsg, buNo);
+		result = dao.companyAcceptReject(conn, rejectMsg, cpNo);
 		close(conn);
 
 		return result;
 	}
 
 	// 승인 시
-	public int companyAcceptApproval(int buNo) {
+	public int companyAcceptApproval(int cpNo) {
 
 		int result = 0;
 
 		Connection conn = getConnection();
-		result = dao.companyAcceptApproval(conn, buNo);
+		result = dao.companyAcceptApproval(conn, cpNo);
 		close(conn);
 
 		return result;
@@ -129,10 +129,10 @@ public class AdminService {
 	}
 
 	// 사업자 정보 상세 조회
-	public BumVo buMemberDetailInfo(int buNo) {
+	public BumVo buMemberDetailInfo(int cpNo) {
 
 		Connection conn = getConnection();
-		BumVo result = dao.buMemberDetailInfo(conn, buNo);
+		BumVo result = dao.buMemberDetailInfo(conn, cpNo);
 		close(conn);
 		return result; 
 	}

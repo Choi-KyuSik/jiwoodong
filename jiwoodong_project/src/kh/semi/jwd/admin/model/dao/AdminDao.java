@@ -105,8 +105,8 @@ public class AdminDao {
 	public ArrayList<Map<String, Object>> companyAcceptDetailList(Connection conn, int startRnum, int endRnum) {
 
 		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM "
-				+ " (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), "
-				+ " BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') ORDER BY CP_WRITE_DATE DESC) A )"
+				+ " (SELECT CP_NO, BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), "
+				+ " BU_TEL, BU_NAME FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') ORDER BY CP_WRITE_DATE DESC) A )"
 				+ "  WHERE RNUM BETWEEN ? AND ?";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		try {
@@ -120,12 +120,14 @@ public class AdminDao {
 				do {
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("rownum", rs.getString(1));
-					map.put("buNo", rs.getString(2));
-					map.put("cpCategory", rs.getString(3));
-					map.put("cpName", rs.getString(4));
-					map.put("buNumber", rs.getString(5));
-					map.put("cpWriteDate", rs.getString(6));
-					map.put("buTel", rs.getString(7));
+					map.put("cpNo", rs.getInt(2));
+					map.put("buNo", rs.getString(3));
+					map.put("cpCategory", rs.getString(4));
+					map.put("cpName", rs.getString(5));
+					map.put("buNumber", rs.getString(6));
+					map.put("cpWriteDate", rs.getString(7));
+					map.put("buTel", rs.getString(8));
+					map.put("buName", rs.getString(9));
 					list.add(map);
 
 				} while (rs.next());
@@ -183,31 +185,33 @@ public class AdminDao {
 	}
 
 	// 업체등록요청 세부 1개 조회
-	public ArrayList<Map<String, Object>> companyAcceptDetailRead(Connection conn, int buNo) {
+	public ArrayList<Map<String, Object>> companyAcceptDetailRead(Connection conn, int cpNo) {
 
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-		String sql = "SELECT BU_NO, BU_ID, CP_CATEGORY, BU_NUMBER, CP_NAME, CP_EXPLAIN, BU_NAME, BU_TEL, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, C.FL_GNO FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') AND BU_NO = ?";
+		String sql = "SELECT CP_NO, BU_NO, BU_ID, CP_CATEGORY, BU_NUMBER, CP_NAME, CP_EXPLAIN, BU_NAME, BU_TEL, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, C.FL_GNO FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') AND CP_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, buNo);
+			pstmt.setInt(1, cpNo);
 			rs = pstmt.executeQuery();
 
 			while(rs.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("buNo", rs.getInt(1)); // 사업자의 가입번호
-				map.put("buId", rs.getString(2)); // 사업자 아이디
-				map.put("cpCategory", rs.getString(3)); // 업종
-				map.put("buNumber", rs.getString(4)); // 사업자등록번호
-				map.put("cpName", rs.getString(5)); // 업체명
-				map.put("cpExplain", rs.getString(6)); // 업체 상세설명
-				map.put("buName", rs.getString(7)); // 사업자 이름
-				map.put("buTel", rs.getString(8)); // 사업자 전화번호
-				map.put("cpPostcode", rs.getString(9)); // 우편번호
-				map.put("cpAddress", rs.getString(10)); // 주소
-				map.put("cpDtaddress", rs.getString(11)); // 상세주소
-				map.put("fileUrl", rs.getString(12)); // 업체 사진
+				map.put("cpNo", rs.getInt(1)); // 등록번호
+				map.put("buNo", rs.getInt(2)); // 등록번호
+				map.put("buId", rs.getString(3)); // 사업자 아이디
+				map.put("cpCategory", rs.getString(4)); // 업종
+				map.put("buNumber", rs.getString(5)); // 사업자등록번호
+				map.put("cpName", rs.getString(6)); // 업체명
+				map.put("cpExplain", rs.getString(7)); // 업체 상세설명
+				map.put("buName", rs.getString(8)); // 사업자 이름
+				map.put("buTel", rs.getString(9)); // 사업자 전화번호
+				map.put("cpPostcode", rs.getString(10)); // 우편번호
+				map.put("cpAddress", rs.getString(11)); // 주소
+				map.put("cpDtaddress", rs.getString(12)); // 상세주소
+				map.put("fileUrl", rs.getString(13)); // 업체 사진
 				list.add(map);
+				System.out.println("list : " + list);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -220,16 +224,16 @@ public class AdminDao {
 	}
 
 	// 승인 거절 시
-	public int companyAcceptReject(Connection conn, String rejectMsg, int buNo) {
+	public int companyAcceptReject(Connection conn, String rejectMsg, int cpNo) {
 
 		int result = 0;
 
-		String sql = "UPDATE COMPANY SET CP_SIGNYN = 'R', CP_REJECT_DATE = SYSTIMESTAMP, CP_REJECT_MSG = ? WHERE BU_NO = ?";
+		String sql = "UPDATE COMPANY SET CP_SIGNYN = 'R', CP_REJECT_DATE = SYSTIMESTAMP, CP_REJECT_MSG = ? WHERE CP_NO = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, rejectMsg);
-			pstmt.setInt(2, buNo);
+			pstmt.setInt(2, cpNo);
 			result = pstmt.executeUpdate();
 			System.out.println("승인 거절 결과 : " + result);
 		} catch (SQLException e) {
@@ -241,15 +245,15 @@ public class AdminDao {
 	}
 
 	// 승인 수락 시
-	public int companyAcceptApproval(Connection conn, int buNo) {
+	public int companyAcceptApproval(Connection conn, int cpNo) {
 
 		int result = 0;
 
-		String sql = "UPDATE COMPANY SET CP_SIGNYN = 'Y', CP_APPROVAL_DATE = SYSTIMESTAMP WHERE BU_NO = ?";
+		String sql = "UPDATE COMPANY SET CP_SIGNYN = 'Y', CP_APPROVAL_DATE = SYSTIMESTAMP WHERE CP_NO = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, buNo);
+			pstmt.setInt(1, cpNo);
 			result = pstmt.executeUpdate();
 
 			System.out.println("승인 수락 결과 : " + result);
@@ -266,7 +270,7 @@ public class AdminDao {
 	// 승인 거절 리스트
 	public ArrayList<Map<String, Object>> companyAcceptRejectList(Connection conn, int startRnum, int endRnum) {
 		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, "
-				+ " BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, CP_REJECT_MSG, TO_CHAR(CP_REJECT_DATE, 'YYYY/MM/DD') FROM COMPANY C "
+				+ " BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, CP_REJECT_MSG, TO_CHAR(CP_REJECT_DATE, 'YYYY/MM/DD'), BU_NAME FROM COMPANY C "
 				+ " JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('R', 'r') ORDER BY CP_REJECT_DATE DESC) A ) "
 				+ " WHERE RNUM BETWEEN ? AND ?";
 		
@@ -290,6 +294,7 @@ public class AdminDao {
 					map.put("buTel", rs.getString(7));
 					map.put("cpRejectMsg", rs.getString(8));
 					map.put("cpRejectDate", rs.getString(9));
+					map.put("buName", rs.getString(10));
 
 					list.add(map);
 
@@ -308,7 +313,7 @@ public class AdminDao {
 	// 승인 수락 리스트
 	public ArrayList<Map<String, Object>> companyAcceptApprovalList(Connection conn, int startRnum, int endRnum) {
 		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, "
-				+ " TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, TO_CHAR(CP_APPROVAL_DATE, 'YYYY/MM/DD') FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) "
+				+ " TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), BU_TEL, TO_CHAR(CP_APPROVAL_DATE, 'YYYY/MM/DD'), BU_NAME FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) "
 				+ " WHERE CP_SIGNYN IN ('Y', 'y') ORDER BY CP_APPROVAL_DATE DESC) A ) "
 				+ " WHERE RNUM BETWEEN ? AND ?";
 		
@@ -330,6 +335,7 @@ public class AdminDao {
 					map.put("cpWriteDate", rs.getString(6));
 					map.put("buTel", rs.getString(7));
 					map.put("buApprovalDate", rs.getString(8));
+					map.put("buName", rs.getString(9));
 
 					list.add(map);
 
@@ -426,11 +432,11 @@ public class AdminDao {
 	}
 
 	// 사업자 정보 상세 리스트
-	public BumVo buMemberDetailInfo(Connection conn, int buNo) {
+	public BumVo buMemberDetailInfo(Connection conn, int cpNo) {
 
 		BumVo vo = null;
 
-		String sql = "SELECT BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_WRITE_DATE,'YYYY/MM/DD') FROM B_MEMBER WHERE BU_NO = " + buNo;
+		String sql = "SELECT CP_NO, BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_WRITE_DATE,'YYYY/MM/DD') FROM B_MEMBER WHERE CP_NO = " + cpNo;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -438,6 +444,7 @@ public class AdminDao {
 
 			if(rs.next()) {
 				vo = new BumVo();
+				vo.setCpNo(rs.getInt("CP_NO")); // 등록신청번호
 				vo.setBuNo(rs.getInt("BU_NO")); // 사업자번호
 				vo.setBuId(rs.getString("BU_ID")); // 아이디
 				vo.setBuName(rs.getString("BU_NAME")); // 이름

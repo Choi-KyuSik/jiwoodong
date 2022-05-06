@@ -57,11 +57,11 @@
 					style="clear: both; table-layout: fixed;">
 					<thead>
 						<tr>
-							<th scope="col" style="width: 100px;">글번호</th>
-							<th scope="col" style="width: 300px;">제목</th>
-							<th scope="col" style="width: 450px;">내용</th>
-							<th scope="col">작성자</th>
-							<th scope="col">작성일</th>
+							<th scope="col" class="s_center" style="width: 100px;">글번호</th>
+							<th scope="col" class="s_center" style="width: 300px;">제목</th>
+							<th scope="col" class="s_center" style="width: 450px;">내용</th>
+							<th scope="col" class="s_center">작성자</th>
+							<th scope="col" class="s_center">작성일</th>
 						</tr>
 					</thead>
 
@@ -69,22 +69,22 @@
 					<c:if test="${empty query}">
 						<c:forEach items="${noticeListDetailPaging }" var="i">
 							<tr class="s_tr_readList s_tr_modal">
-								<th scope="row" class="s_ntNo">${i.ntNo}</th>
+								<th class="s_center" scope="row" class="s_ntNo">${i.ntNo}</th>
 								<td class="s_td_short">${i.ntTitle}</td>
 								<td class="s_td_short">${i.ntContent}</td>
-								<td>관리자</td>
-								<td>${i.ntDate}</td>
+								<td class="s_center">관리자</td>
+								<td class="s_center">${i.ntDate}</td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					<c:if test="${not empty query}">
 						<c:forEach items="${noticeListSearch }" var="i">
 							<tr class="s_tr_readList s_tr_modal">
-								<th scope="row" class="s_ntNo">${i.ntNo}</th>
+								<th class="s_center" scope="row" class="s_ntNo">${i.ntNo}</th>
 								<td class="s_td_short">${i.ntTitle}</td>
 								<td class="s_td_short">${i.ntContent}</td>
-								<td>관리자</td>
-								<td>${i.ntDate}</td>
+								<td class="s_center">관리자</td>
+								<td class="s_center">${i.ntDate}</td>
 							</tr>
 						</c:forEach>
 					</c:if>

@@ -31,13 +31,13 @@ public class AdminBuDetailInfoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String buNoStr = request.getParameter("buNo");
-		int buNo = Integer.parseInt(buNoStr);
+		String cpNoStr = request.getParameter("cpNo");
+		int cpNo = Integer.parseInt(cpNoStr);
 //		AdminNoticeVo anvo = new AdminNoticeVo();
 //		int ntNo = anvo.getNtNo();
-		System.out.println("buNumber의 값은?" + buNo);
+		System.out.println("cpNo의 값은?" + cpNo);
 		
-		ArrayList<Map<String, Object>> adBuAccept = new AdminService().companyAcceptDetailRead(buNo);
+		ArrayList<Map<String, Object>> adBuAccept = new AdminService().companyAcceptDetailRead(cpNo);
 		
 		request.setAttribute("adBuAccept", adBuAccept);
 		System.out.println("adBuAccept" + adBuAccept);

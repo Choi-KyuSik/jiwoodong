@@ -94,7 +94,9 @@
 							</a>
 						</div>
 						<div style="margin-bottom: 20px; text-align: center;">
-							<h4>집 나가면 개고생 호텔 부산점</h4>
+							<c:forEach items="${uscpdetail }" var="i">
+						
+							<h4>${i.cpName }</h4>
 							<div>
 								<span>☆ 4.8 / 5.0</span>
 							</div>
@@ -105,6 +107,7 @@
 									autocomplete="off"> <label
 									class="btn btn-outline-primary" for="btncheck2">☆</label> </span>
 							</div>
+							</c:forEach>
 						</div>
 
 						<hr style="margin: 0;">

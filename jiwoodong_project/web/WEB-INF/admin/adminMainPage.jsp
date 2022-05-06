@@ -72,22 +72,22 @@
                 <div id="s_ad_notice">
                     <p class="p_title_style">공지사항</p>
                     <div>
-                        <table class="table table table-hover" style="clear: both;">
+                        <table class="table table table-hover s_center" style="clear: both;">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="s_center">글번호</th>
-                                    <th scope="col" class="s_center">제목</th>
-                                    <th scope="col" class="s_center">작성자</th>
-                                    <th scope="col" class="s_center">작성일</th>
+                                    <th scope="col">글번호</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">작성자</th>
+                                    <th scope="col">작성일</th>
                                 </tr>
                             </thead>
                             <tbody>
                             	<c:forEach items="${adnolist }" var="i">
                                 <tr>
-                                    <th scope="row" class="s_center">${i.ntNo}</th>
-                                    <td class="s_center">${i.ntTitle}</td>
-                                    <td class="s_center">관리자</td>
-                                    <td class="s_center">${i.ntDate}</td>
+                                    <th scope="row">${i.ntNo}</th>
+                                    <td class="s_td_short">${i.ntTitle}</td>
+                                    <td>관리자</td>
+                                    <td>${i.ntDate}</td>
                                 </tr>
                             	</c:forEach>
                             </tbody>

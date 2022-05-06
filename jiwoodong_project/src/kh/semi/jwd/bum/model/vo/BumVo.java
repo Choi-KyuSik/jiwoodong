@@ -42,6 +42,9 @@ public class BumVo {
 	// rownum용 변수 : 손은진
 	private int rownum;
 	
+	// cpNo 변수 : 손은진
+	private int cpNo;
+	
 	
 	@Override
 	public String toString() {
@@ -79,6 +82,16 @@ public class BumVo {
 
 	public void setRownum(int rownum) {
 		this.rownum = rownum;
+	}
+	
+	// cpNo getter, setter : 손은진
+	public int getCpNo() {
+		return cpNo;
+	}
+
+
+	public void setCpNo(int cpNo) {
+		this.cpNo = cpNo;
 	}
 
 

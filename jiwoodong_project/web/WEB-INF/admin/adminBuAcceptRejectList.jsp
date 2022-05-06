@@ -33,19 +33,20 @@
 	<section>
 		<!-- 업체승인 거절 Content : 손은진 -->
         <div>
-            <div id="s_accept_result_reject_content" class="tab_menu s_content" style="display: block;">
+            <div id="s_accept_result_reject_content" class="s_content" style="display: block;">
                 <p class="p_content_style">업체 승인 거절 리스트</p>
                 <div style="height: 60px;"></div>
-                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
+                <table class="table table table-hover s_center" style="clear: both; table-layout: fixed;">
                     <thead>
                         <tr>
                         	<th scope="col" style="width: 50px;">NO</th>
                         	<th scope="col" style="width: 100px;">사업자번호</th>
                             <th scope="col" style="width: 150px;">사업자 등록 번호</th>
+                            <th scope="col" style="width: 100px;">사업자명</th>
                             <th scope="col" style="width: 70px;">업종</th>
                             <th scope="col" style="width: 200px;">업체명</th>
                             <th scope="col" style="width: 150px;">전화번호</th>
-                            <th scope="col" style="width: 250px;">거절사유</th>
+                            <th scope="col" style="width: 200px;">거절사유</th>
                             <th scope="col" style="width: 100px;">거절날짜</th>
                         </tr>
                     </thead>
@@ -55,6 +56,7 @@
                                     <th scope="row" class="s_ntNo">${i.buNo}</th>
                                     <td>${i.rownum}</td>
                                     <td>${i.buNumber}</td>
+                                    <td>${i.buName}</td>
                                     <td>${i.cpCategory}</td>
                                     <td class="s_td_short">${i.cpName}</td>
                                     <td>${i.buTel}</td>

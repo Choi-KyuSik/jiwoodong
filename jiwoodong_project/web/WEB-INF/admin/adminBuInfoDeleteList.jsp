@@ -36,7 +36,7 @@
         <div id="s_bu_delete_content" class="tab_menu s_content" style="display: block;">
                 <p class="p_content_style">사업자 탈퇴 회원 조회</p>
                 <div style="height: 60px;"></div>
-                <table class="table table table-hover" style="clear: both; table-layout: fixed;">
+                <table class="table table table-hover s_center" style="clear: both; table-layout: fixed;">
                     <thead>
                         <tr>
                         	<th scope="col" style="width: 50px;">NO</th>

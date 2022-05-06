@@ -38,8 +38,8 @@ public class AdminBuAcceptApprovalListController extends HttpServlet {
 		if(pageNumStr != null && !pageNumStr.equals(""))
 		  currentPage = Integer.parseInt(pageNumStr);
 		System.out.println("currentPage:"+currentPage);
-		final int pageSize = 3;
-		final int pageBlock = 3;
+		final int pageSize = 10;
+		final int pageBlock = 2;
 		int totalCnt = countBuAcceptApprovalList();
 		System.out.println("totalCnt" + totalCnt);
 		

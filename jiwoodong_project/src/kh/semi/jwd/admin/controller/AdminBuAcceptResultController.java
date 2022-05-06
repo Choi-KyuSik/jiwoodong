@@ -42,14 +42,14 @@ public class AdminBuAcceptResultController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// System.out.println("여기까지 잘 넘어왔냥?");
 
-		String buNoStr = request.getParameter("buNo");
+		String cpNoStr = request.getParameter("cpNo");
 		String rejectMsg = request.getParameter("rejectMsg");
-		int buNo = Integer.parseInt(buNoStr);
+		int cpNo = Integer.parseInt(cpNoStr);
 
-		System.out.println("buNo뭐야?" + buNo + ", 거절메세지 뭐야?" + rejectMsg);
+		System.out.println("cpNo뭐야?" + cpNo + ", 거절메세지 뭐야?" + rejectMsg);
 
 		if(rejectMsg == "" || rejectMsg == " ") {
-			int cpacApproval = new AdminService().companyAcceptApproval(buNo);
+			int cpacApproval = new AdminService().companyAcceptApproval(cpNo);
 			// request.setAttribute("cpacApproval", cpacApproval);
 			if(cpacApproval < 1) {
 				System.out.println("승인 수락 실패");
@@ -69,7 +69,7 @@ public class AdminBuAcceptResultController extends HttpServlet {
 				out.flush();
 			}
 		} else {
-			int cpacReject = new AdminService().companyAcceptReject(rejectMsg, buNo);
+			int cpacReject = new AdminService().companyAcceptReject(rejectMsg, cpNo);
 			// request.setAttribute("cpacReject", cpacReject);
 			if(cpacReject < 1) {
 				System.out.println("승인 거절 실패");
