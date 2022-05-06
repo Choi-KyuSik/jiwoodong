@@ -36,7 +36,14 @@
 				<div id="p_small_text">Welcome To JIWOODONG!</div>
 				<div id="p_big_text">IT'S NICE TO MEET YOU</div>
 				<div id="p_login_btn">
-					<button type="button" class="btn btn-primary btn-lg" id="login_btn">로그인</button>
+					<button type="button" class="btn btn-primary btn-lg">
+					 <!-- 로그인 여부에 따른 메뉴 변화 -->
+        			<% if (session.getAttribute("buId") == null) { %>
+						<a href="loginMain">로그인</a>
+					<% } else { %>
+						 <a href="bumlogout">로그아웃</a>
+      				 <% } %>
+						</button>
 					<br>
 					<button type="button" class="btn btn-secondary btn-sm">아이디/비밀번호찾기</button>
 				</div>

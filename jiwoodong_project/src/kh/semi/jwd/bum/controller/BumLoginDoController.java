@@ -38,7 +38,7 @@ public class BumLoginDoController extends HttpServlet {
 //		PrintWriter out = response.getWriter();
 //		out.println("<h1>잘못된 요청 방법입니다.</h>");
 //		out.println("<a href='WEB-INF/login/bumLogin.jsp'>다시 로그인</a>");
-//    	request.getRequestDispatcher("WEB-INF/login/bumLogin.jsp").forward(request, response);
+   	//request.getRequestDispatcher("WEB-INF/login/loginProcess.jsp").forward(request, response);
 	}
 
 	/**
@@ -54,22 +54,30 @@ public class BumLoginDoController extends HttpServlet {
 		BumLoginVo vo = new BumLoginVo();
 		vo.setBuId(bu_id);
 		vo.setBuPwd(password);
+		vo.setBuName(vo.getBuName());
 		BumLoginVo result = new BumService().loginBuMember(vo);
 		System.out.println("controller BumLoginVo : " + result);
 		
 		if(result != null && result.getBuId() !=null) {
+			HttpSession session = request.getSession();
 			
-			
-			request.setAttribute("bu_id", result.getBuId());
-			request.setAttribute("password", result.getBuPwd());
+			session.setAttribute("bu_id", result.getBuId());
+			session.setAttribute("password", result.getBuPwd());
+			session.setAttribute("buName", result.getBuName());
 			
 			System.out.println("bu_id:"+bu_id);
 			System.out.println("password:"+password);
+			System.out.println("name:"+result.getBuName());
+			
 			System.out.println("로그인 성공한거지 여기가?네네 - 오늘의 명언... 언니 최고...");
-			response.sendRedirect("bumMainPage");
+			response.sendRedirect("BumMainPage");
 		}else {
+			 // 로그인 실패
 			System.out.println("로그인 해주세요");
-			response.sendRedirect("bumLogin");
+			response.sendRedirect("bumLogin.lo");
+			 
+		   // request.setAttribute("LoginErrMsg", "로그인 오류입니다."); 
+		   // request.getRequestDispatcher("bumLogin").forward(request, response);
 			
 		}
 		

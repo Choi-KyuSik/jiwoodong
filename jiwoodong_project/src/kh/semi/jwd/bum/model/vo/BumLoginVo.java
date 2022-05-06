@@ -20,10 +20,17 @@ public class BumLoginVo {
 		this.buPwd = buPwd;
 	}
 
+	public String getBuName() {
+		return buName;
+	}
+	public void setBuName(String buName) {
+		this.buName = buName;
+	}
 	@Override
 	public String toString() {
 		return "BumLoginVo [buId=" + buId + ", buPwd=" + buPwd + "]";
 	}
+	
 	public BumLoginVo() {
 		super();
 	}
@@ -32,6 +39,13 @@ public class BumLoginVo {
 		this.buId = buId;
 		this.buPwd = buPwd;
 	}
+	public BumLoginVo(String buId, String buPwd, String buName) {
+		super();
+		this.buId = buId;
+		this.buPwd = buPwd;
+		this.buName = buName;
+	}
+	
 	
 	
 	

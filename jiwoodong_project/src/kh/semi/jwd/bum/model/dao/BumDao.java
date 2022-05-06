@@ -247,21 +247,22 @@ public class BumDao {
 
 	public BumLoginVo loginBuMember(Connection conn,BumLoginVo vo) {
 		String sql = "";
-		BumLoginVo bvo = null;
+		BumLoginVo bvo = new BumLoginVo();
 		
 		sql = "SELECT * FROM b_member WHERE BU_ID = ? AND BU_PWD= ?";
 		try {
 			System.out.println("vo.getBuId()" + vo.getBuId());
 			System.out.println("vo.getBuPwd()" + vo.getBuPwd());
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getBuId());
 			pstmt.setString(2, vo.getBuPwd());
 			rs=pstmt.executeQuery();
 			//id와 pwd 가 일치하는 것이 나올때만 rs에 값이 있다.
 			if(rs.next()) {
-				bvo = new BumLoginVo();
 				bvo.setBuId(rs.getString("bu_id"));
 				bvo.setBuPwd(rs.getString("bu_pwd")); // 여기 컬럼명 썼어야했어
+				bvo.setBuName(rs.getString(5)); //사업자이름 저장.
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
