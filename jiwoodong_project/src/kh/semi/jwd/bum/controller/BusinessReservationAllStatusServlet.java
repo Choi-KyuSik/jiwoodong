@@ -59,7 +59,7 @@ public class BusinessReservationAllStatusServlet extends HttpServlet {
 		  json = new JSONObject();
 
 		  BumReservationVo vo = (BumReservationVo) list.get(i);
-
+		  json.put("bkTotalPrice", vo.getBkTotalPrice());
 		   json.put("bkNo",vo.getBkNo());
 		   json.put("umId",vo.getUmId());
 		   json.put("bkName",vo.getBkName());
@@ -68,10 +68,11 @@ public class BusinessReservationAllStatusServlet extends HttpServlet {
 		   json.put("bkTime",vo.getBkTime());
 		   json.put("menuName",vo.getMenuName());
 		   json.put("menuNo",vo.getMenuNo());
+		   json.put("menuCount", vo.getMenuCount());
 		   json.put("menuPrice",vo.getMenuPrice());
 		   json.put("bkRequire",vo.getBkRequire());
 		   json.put("bkStatus",vo.getBkStatus());
-
+		   json.put("bkmCount", vo.getBkmCount());
 		  jsonArray.add(json);
 
 		}

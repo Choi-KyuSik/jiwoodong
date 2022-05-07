@@ -22,14 +22,27 @@ public class BumReservationVo {
 	private String menuName;
 	private int menuPrice;
 	private int menuNo;
+	private int menuCount;
+	private int bkmCount;
 	
+	@Override
+	public String toString() {
+		return "BumReservationVo [bkNo=" + bkNo + ", cpNo=" + cpNo + ", umId=" + umId + ", bkName=" + bkName
+				+ ", bkPhone=" + bkPhone + ", bkRequire=" + bkRequire + ", bkDate=" + bkDate + ", bkTime=" + bkTime
+				+ ", bkCdate=" + bkCdate + ", bkStatus=" + bkStatus + ", bkTotalPrice=" + bkTotalPrice + ", bkPay="
+				+ bkPay + ", bkVisit=" + bkVisit + ", bkWriteDate=" + bkWriteDate + ", bkUpdateDate=" + bkUpdateDate
+				+ ", menuName=" + menuName + ", menuPrice=" + menuPrice + ", menuNo=" + menuNo + ", menuCount="
+				+ menuCount + ", bkmCount=" + bkmCount + "]";
+	}
+
 	public BumReservationVo() {
 		super();
 	}
 
 	public BumReservationVo(int bkNo, int cpNo, String umId, String bkName, String bkPhone, String bkRequire,
 			String bkDate, String bkTime, Timestamp bkCdate, String bkStatus, int bkTotalPrice, String bkPay,
-			String bkVisit, Timestamp bkWriteDate, Timestamp bkUpdateDate) {
+			String bkVisit, Timestamp bkWriteDate, Timestamp bkUpdateDate, String menuName, int menuPrice, int menuNo,
+			int menuCount, int bkmCount) {
 		super();
 		this.bkNo = bkNo;
 		this.cpNo = cpNo;
@@ -46,6 +59,27 @@ public class BumReservationVo {
 		this.bkVisit = bkVisit;
 		this.bkWriteDate = bkWriteDate;
 		this.bkUpdateDate = bkUpdateDate;
+		this.menuName = menuName;
+		this.menuPrice = menuPrice;
+		this.menuNo = menuNo;
+		this.menuCount = menuCount;
+		this.bkmCount = bkmCount;
+	}
+	
+	public int getBkmCount() {
+		return bkmCount;
+	}
+
+	public void setBkmCount(int bkmCount) {
+		this.bkmCount = bkmCount;
+	}
+
+	public int getMenuCount() {
+		return menuCount;
+	}
+
+	public void setMenuCount(int menuCount) {
+		this.menuCount = menuCount;
 	}
 
 	public int getBkNo() {

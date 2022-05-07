@@ -54,6 +54,43 @@ public class BusinessReservationDao {
 		return result;
 	}
 	
+public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn, int cpNo){
+		
+		String sql = "select * from booking join (select bk_no, count(bk_no) menu_count, bkm_count from b_menu group by bk_no, bkm_count) using(bk_no) join (select bk_no, min(menu_name) menu_name from b_menu join menu using(menu_no) group by bk_no) using(bk_no) where cp_no = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(sysdate,'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
+		ArrayList<BumReservationVo> result = new ArrayList<BumReservationVo>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BumReservationVo vo = new BumReservationVo();
+				vo.setBkTotalPrice(rs.getInt("bk_total_price"));
+				vo.setBkNo(rs.getInt("bk_no"));
+				vo.setCpNo(rs.getInt("cp_no"));
+				vo.setUmId(rs.getString("um_id"));
+				vo.setBkName(rs.getString("bk_name"));
+				vo.setBkPhone(rs.getString("bk_phone"));
+				vo.setBkDate(rs.getString("bk_date"));
+				vo.setBkTime(rs.getString("bk_time"));
+				vo.setMenuName(rs.getString("menu_name"));
+				vo.setMenuCount(rs.getInt("menu_count"));
+				vo.setBkRequire(rs.getString("bk_require"));
+				vo.setBkStatus(rs.getString("bk_status"));
+				vo.setBkmCount(rs.getInt("bkm_count"));
+				result.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	public ArrayList<Map<String, Object>> menuList(Connection conn, int cpNo) {
 		
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
@@ -145,7 +182,7 @@ public class BusinessReservationDao {
 		return result;
 	}
 
-	public int reservationAddMenu(Connection conn, String bkNo) {
+	public int reservationCancle(Connection conn, String bkNo) {
 		int result = 0;
 		String sql = "update booking set bk_status = 'C' where bk_no = to_number(?)";
 		try {
@@ -160,23 +197,36 @@ public class BusinessReservationDao {
 		
 		return result;
 	}
-//	map.put("bkNo", request.getParameter("bkno"));
-//	map.put("umId", request.getParameter("umid"));
-//	map.put("bkName", request.getParameter("bkname"));
-//	map.put("bkPhone", request.getParameter("bkphone"));
-//	map.put("bkDate", request.getParameter("bkdate"));
-//	map.put("bkTime", request.getParameter("bktime"));
-//	map.put("bkRequire", request.getParameter("bkrequire"));
+	
 	public int reservationUpdate(Connection conn, Map<String, Object> map, int cpNo) {
 		int result = 0;
-		String sql = "update booking set bk_name = ?, bk_phone = ?, bk_require = ?, bk_date =  REPLACE(?, '-', '/'), bk_time = ? where cp_no = ? and bk_no = to_number(?)";
+		String sql = "update booking set bk_date =  REPLACE(?, '-', '/'), bk_time = ? where cp_no = ? and bk_no = to_number(?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, (String) map.get("bkName"));
-			pstmt.setString(2, (String)map.get("bkPhone"));
-			pstmt.setString(3, (String)map.get("bkRequire"));
-			pstmt.setString(4, (String)map.get("bkDate"));
-			pstmt.setString(5, (String)map.get("bkTime"));
+			pstmt.setString(1, (String)map.get("bkDate"));
+			pstmt.setString(2, (String)map.get("bkTime"));
+			pstmt.setInt(3, cpNo);
+			pstmt.setString(4, (String)map.get("bkNo"));
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int reservationUpdateCafe(Connection conn, Map<String, Object> map, int cpNo) {
+		int result = 0;
+		String sql = "update booking set bk_date =  REPLACE(?, '-', '/'), bk_time = ?, bk_name = ?, bk_phone =?, bk_require=? where cp_no = ? and bk_no = to_number(?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String)map.get("bkDate"));
+			pstmt.setString(2, (String)map.get("bkTime"));
+			pstmt.setString(3, (String)map.get("bkName"));
+			pstmt.setString(4, (String)map.get("bkPhone"));
+			pstmt.setString(5, (String)map.get("bkRequire"));
 			pstmt.setInt(6, cpNo);
 			pstmt.setString(7, (String)map.get("bkNo"));
 			result = pstmt.executeUpdate();
@@ -224,9 +274,44 @@ public class BusinessReservationDao {
 				vo.setBkDate(rs.getString("bk_date"));
 				vo.setBkTime(rs.getString("bk_time"));
 				vo.setMenuName(rs.getString("menu_name"));
-				vo.setMenuPrice(rs.getInt("menu_price"));
 				vo.setBkRequire(rs.getString("bk_require"));
 				vo.setBkStatus(rs.getString("bk_status"));
+				result.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public ArrayList<BumReservationVo> AllStatusCafe(Connection conn, String date, int cpNo) {
+		String sql = "select * from booking join (select bk_no, count(bk_no) menu_count, bkm_count from b_menu group by bk_no, bkm_count) using(bk_no) join (select bk_no, min(menu_name) menu_name from b_menu join menu using(menu_no) group by bk_no) using(bk_no) where cp_no = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(to_date(?, 'yy/mm/dd'),'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
+		ArrayList<BumReservationVo> result = new ArrayList<BumReservationVo>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			pstmt.setString(2, date);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BumReservationVo vo = new BumReservationVo();
+				vo.setBkTotalPrice(rs.getInt("bk_total_price"));
+				vo.setBkNo(rs.getInt("bk_no"));
+				vo.setUmId(rs.getString("um_id"));
+				vo.setBkName(rs.getString("bk_name"));
+				vo.setBkPhone(rs.getString("bk_phone"));
+				vo.setBkDate(rs.getString("bk_date"));
+				vo.setBkTime(rs.getString("bk_time"));
+				vo.setMenuCount(rs.getInt("menu_count"));
+				vo.setMenuName(rs.getString("menu_name"));
+				vo.setBkRequire(rs.getString("bk_require"));
+				vo.setBkStatus(rs.getString("bk_status"));
+				vo.setBkmCount(rs.getInt("bkm_count"));
 				result.add(vo);
 			}
 			
@@ -271,6 +356,52 @@ public class BusinessReservationDao {
 				vo.setMenuPrice(rs.getInt("menu_price"));
 				vo.setBkRequire(rs.getString("bk_require"));
 				vo.setBkStatus(rs.getString("bk_status"));
+				result.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public ArrayList<BumReservationVo> selectStatusCafe(Connection conn, String date, int cpNo, String status) {
+		String sql = "select * from booking join (select bk_no, count(bk_no) menu_count, bkm_count from b_menu group by bk_no, bkm_count) using(bk_no) join (select bk_no, min(menu_name) menu_name from b_menu join menu using(menu_no) group by bk_no) using(bk_no) where cp_no = ? and bk_status = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(to_date(?, 'yy/mm/dd'),'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
+		ArrayList<BumReservationVo> result = new ArrayList<BumReservationVo>();
+		if(status.equals("예약")) {
+			status = "R";
+		} else if(status.equals("취소")) {
+			status = "C";
+		} else if(status.equals("매장예약")) {
+			status = "M";
+		} else {
+			status = "?";
+		}
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			pstmt.setString(2, status);
+			pstmt.setString(3, date);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BumReservationVo vo = new BumReservationVo();
+				vo.setBkTotalPrice(rs.getInt("bk_total_price"));
+				vo.setBkNo(rs.getInt("bk_no"));
+				vo.setUmId(rs.getString("um_id"));
+				vo.setBkName(rs.getString("bk_name"));
+				vo.setBkPhone(rs.getString("bk_phone"));
+				vo.setBkDate(rs.getString("bk_date"));
+				vo.setBkTime(rs.getString("bk_time"));
+				vo.setMenuCount(rs.getInt("menu_count"));
+				vo.setMenuName(rs.getString("menu_name"));
+				vo.setBkRequire(rs.getString("bk_require"));
+				vo.setBkStatus(rs.getString("bk_status"));
+				vo.setBkmCount(rs.getInt("bkm_count"));
 				result.add(vo);
 			}
 			
@@ -378,5 +509,28 @@ public class BusinessReservationDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Map<String, Object>> bmenuList(Connection conn, String bkno) {
+		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		String sql = "select menu_name, bkm_count from b_menu join menu using(menu_no) where bk_no = to_number(?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bkno);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("menuName", rs.getString("menu_name"));
+				map.put("bkmCount", rs.getString("bkm_count"));
+				list.add(map);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return list;
 	}
 }

@@ -211,7 +211,7 @@ td, th {
 						<th scope="col">예약상태</th>
 						<th scope="col">예약날짜</th>
 						<th scope="col">예약시간</th>
-						<th scope="col">메뉴</th>
+						<th scope="col">주문정보</th>
 						<th scope="col">금액</th>
 						<th scope="col">요청사항</th>
 					</tr>
@@ -238,7 +238,12 @@ td, th {
 								</c:choose></td>
 							<td class="l5"><c:out value="${reservation.bkDate}" /></td>
 							<td class="l6"><c:out value="${reservation.bkTime }" /></td>
-							<td class="l7"><c:out value="${reservation.menuName }" /></td>
+							<c:if test="${reservation.menuCount > 1}">
+							<td class="l7" style="font-size:14px"><c:out value="${reservation.menuName } ${reservation.bkmCount }개 외 ${reservation.menuCount -1}건" /></td>
+							</c:if>
+							<c:if test="${reservation.menuCount == 1}">
+							<td class="l7"><c:out value="${reservation.menuName } ${reservation.bkmCount }개 " /></td>
+							</c:if>
 							<td class="l8"><c:out value="${reservation.bkTotalPrice }" />
 								원</td>
 
@@ -282,17 +287,15 @@ td, th {
 							style="margin: 10px;">예약날짜 :</label><input type="date"
 							id="bkdate" name="bkdate"><br> <label for="bktime"
 							style="margin: 10px;">예약시간 :</label><input type="time"
-							id="bktime" name="bktime"><br> <label for="bkMenuNo"
-							style="margin: 10px;">메뉴 :</label>
-							 <select id="bkMenuNo"
-							onchange="bkPriceChange()" name="bkMenuNo">
-							<c:forEach items="${menulist }" var="menulist">
-								<option value="${menulist.menuNo }">${menulist.menuName }</option>
-							</c:forEach>
-						</select> <label for="bkPrice" style="margin: 10px;">금액 :</label><input
-							type="text" id="bkPrice" name="bkPrice" readonly="readonly" /> <label
+							id="bktime" name="bktime"><br> 
+							<div id="menuName_Count">
+							<label for="bkMenuNo" style="margin: 10px;">메뉴 :</label>
+							<input type="text" readonly value="메뉴1"><span> 수량 : </span><input type="text" readonly value="수량" style="width: 80px">
+							</div>
+							<label for="bkPrice" style="margin: 10px;">총 금액 :</label><input
+							type="text" id="bkPrice" name="bkPrice" readonly="readonly" /><br> <label
 							for="bkrequire" style="margin: 10px;">요청사항 :</label>
-						<textarea cols="55" rows="10" id="bkrequire"
+						<textarea cols="55" rows="5" id="bkrequire"
 							style="padding: 10px;" name="bkrequire"></textarea>
 					</form>
 				</div>
@@ -325,6 +328,21 @@ td, th {
     			$("#umid").prev().hide();
     			$("#umid").next().hide();
     			$("#umid").hide();
+    			$("#menuName_Count").html("");
+    			var html = '';
+				html += '<label for="bkMenuName" style="margin: 10px;">메뉴 :</label>';
+    			html += '<select id="bkMenuNo" name="bkMenuNo" style="width:190px;">';
+				html +=	'<c:forEach items="${menulist }" var="menulist">';
+				html +=	'<option value="${menulist.menuNo }">${menulist.menuName }</option>';
+				html += '</c:forEach></select><span> 수량 : </span>';
+				html += '<select name="menuCount" id="menuCount">';
+	        	html += '<c:forEach var="index" begin="1" end="10">'
+	        	html +=	'<option value="${index }">${index }</option>'
+	        	html += '</c:forEach>'
+	       		html += '</select>'
+				html += '<input type="button" id="btnAddMenu" style="width:30px; margin-left:20px;" value="+">'
+				html += '<input type="button" id="btnMinusMenu" style="width:30px; margin-left:10px;" value="-">'
+				$("#menuName_Count").append(html);
     			/* 버튼 반전*/
     			$("#booking_delete").hide();
     			$("#booking_update").hide();
@@ -352,12 +370,26 @@ td, th {
     			$("#bkphone").val($(this).children('.l4').html());
     			$("#bkdate").val($(this).children('.l5').html().replaceAll("/","-").trim());
     			$("#bktime").val($(this).children('.l6').html());
-    			$("#bkMenuNo option").each(function (i,item){
-    				if($("#bkMenuNo option").eq(i).text() == bkMenuName){
-    					$("#bkMenuNo option").eq(i).attr("selected","selected");
-    				}
-    			});
     			$("#bkPrice").val($(this).children('.l8').html());
+    			var html = "";
+    			$.ajax({
+    				type : "post",
+    				url : "bmenulistAjax",
+    				data : {"bkno" : $("#bkno").val()},
+    				dataType : "json",
+    				success : function(data){
+    					$.each(data, function(i, items){
+    						console.log(items.menuName);
+    						$("#menuName_Count").html("");
+    						html += '<label for="bkMenuName" style="margin: 10px;">메뉴 :</label>';
+							html += '<input type="text" id="bkMenuName" name="menuName" readonly value="'+items.menuName+'"><span> 수량 : </span><input type="text" readonly name="menuCount" value="'+items.bkmCount+'" style="width: 80px"><br>';
+    						$("#menuName_Count").append(html);
+    						
+    						
+    					})
+    				}
+    			})
+    			
 
     			if(bkrequire == 'O'){
     				$("#bkrequire").val($(this).children('.l10').html());
@@ -376,7 +408,28 @@ td, th {
         			$("#booking_insert").hide();
     			}
     	});
-    	/* 사업자 해당 메뉴 가격 불러오기 */
+    	// 예약 추가시 +버튼 클릭
+    	$(document).on('click', '#btnAddMenu', function(){
+    		var html = '';
+    		html += '<div class="minusdiv">'
+    		html += '<label for="bkMenuName" style="margin: 10px;">메뉴 :</label>';
+    		html += '<select id="bkMenuNo" name="bkMenuNo" style="width:190px;">';
+			html +=	'<c:forEach items="${menulist }" var="menulist">';
+			html +=	'<option value="${menulist.menuNo }">${menulist.menuName }</option>';
+			html += '</c:forEach></select><span> 수량 : </span>';
+			html += '<select name="menuCount" id="menuCount">';
+        	html += '<c:forEach var="index" begin="1" end="10">'
+        	html +=	'<option value="${index }">${index }</option>'
+        	html += '</c:forEach>'
+       		html += '</select>'
+			html += '</div>'
+			$("#menuName_Count").append(html);
+    	})
+    	// 예약 추가시 -버튼 클릭
+    	$(document).on('click','#btnMinusMenu', function(){
+    		$(".minusdiv:last").remove();
+    	})
+/*     //사업자 해당 메뉴 가격 불러오기
     	function bkPriceChange(){
     		$.ajax({
    				type :'post' ,
@@ -389,10 +442,10 @@ td, th {
    					alert("통신오류");
    				}
    			})
-    	};
+    	}; */
     	/* 사업자 예약 직접 추가 ajax */
     	function fnBookingAdd(){
-    		if (confirm("추가하시겠습니까?")){    //확인
+    		if (confirm("매장 예약 추가시 직접 결제를 받아 주세요. 추가하기겠습니까??")){    //확인
     			/* 정규표현식 */
         		var phoneReg = /^[0-9]{3}[-]+[0-9]{4}[-]+[0-9]{4}$/;
         		/* 추가시 입력 체크 */
@@ -466,7 +519,7 @@ td, th {
             	}
     			$.ajax({
         			type : 'post',
-        			url : 'bursupdate ',
+        			url : 'bursupdateCafe',
         			data : $("#bookingForm").serialize(),
         			success : function(data){
         				alert(data);
@@ -482,11 +535,10 @@ td, th {
 		/* 상단 예약상태 select 부분 선택 시 */
     	$("#bkStatus").change(function(){
     		var status = $(this).val();
-    		console.log(status);
     		if($(this).val() == '전체'){
     			$.ajax({
     				type : 'post',
-        			url : 'allStatus ',
+        			url : 'allStatusCafe',
         			data : {"day": $("#todayDate").val()},
         			dataType : "json",
     				success : function(list){
@@ -508,8 +560,12 @@ td, th {
                             html += '</td>'
                             html += '<td class="l5">'+list[i].bkDate+'</td>'
                             html += '<td class="l6">'+list[i].bkTime+'</td>'
-                            html += '<td class="l7">'+list[i].menuName+'</td>'
-                            html += '<td class="l8">'+list[i].menuPrice+'원</td>'
+                            if(list[i].menuCount == 1){
+                            	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
+                            } else {
+                            	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' '+list[i].bkmCount+'개 외 '+(list[i].menuCount-1)+'건'+'</td>'
+                            }
+                            html += '<td class="l8">'+list[i].bkTotalPrice+'원</td>'
                             html += '<td class="l9">'
                             if(list[i].bkRequire == null){
                             	 html +="X"
@@ -520,7 +576,7 @@ td, th {
                             html += '<td  class="l10" style="display: none">'+list[i].bkRequire+'</td>'
                             html += ' <td  class="l11"   style="display: none">'+list[i].bkStatus+'</td>'
                             html += '</tr>'
-    					}
+    					};
     					$("#reservationListTbody").children().remove()
     					$("#reservationListTbody").append(html);
     				}
@@ -528,40 +584,44 @@ td, th {
     		} else {
     			$.ajax({
     				type : 'post',
-        			url : 'selectStatusDay ',
+        			url : 'selectStatusDayCafe ',
         			data : {"day": $("#todayDate").val(), "status": $("#bkStatus").val()},
         			dataType : "json",
-    				success : function(data){
+    				success : function(list){
     					var html = '';
-    					for(var i =0 ;  i <data.length;i++){
-    						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo'  style='cursor: pointer'>"
-                            html += "<td class='l1'>"+data[i].bkNo+"</td>"
-                            html += "<td class='l2'>"+data[i].umId+"</td>"
-                            html += '<td class="l3">'+data[i].bkName+'</td>'
-                            html += '<td class="l4">'+data[i].bkPhone +'</td>'
-                            html += '<td>'
-                           	if(data[i].bkStatus == 'R'){
-                           		html +="예약"
-                            } else if(data[i].bkStatus == 'C'){
-                            	html +="취소"
-                            } else if(data[i].bkStatus == 'M'){
-                            	html +="매장예약"
-                            }
-                            html += '</td>'
-                            html += '<td class="l5">'+data[i].bkDate+'</td>'
-                            html += '<td class="l6">'+data[i].bkTime+'</td>'
-                            html += '<td class="l7">'+data[i].menuName+'</td>'
-                            html += '<td class="l8">'+data[i].menuPrice+'원</td>'
-                            html += '<td class="l9">'
-                            if(data[i].bkRequire == null){
-                            	 html +="X"
-                            } else {
-                            	 html +="O"
-                            }
-                            html += '</td>'
-                            html += '<td  class="l10" style="display: none">'+data[i].bkRequire+'</td>'
-                            html += ' <td  class="l11"   style="display: none">'+data[i].bkStatus+'</td>'
-                            html += '</tr>'
+    					for(var i =0 ;  i <list.length;i++){
+    							html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo'  style='cursor: pointer''>"
+                                html += "<td class='l1'>"+list[i].bkNo+"</td>"
+                                html += "<td class='l2'>"+list[i].umId+"</td>"
+                                html += '<td class="l3">'+list[i].bkName+'</td>'
+                                html += '<td class="l4">'+list[i].bkPhone +'</td>'
+                                html += '<td>'
+                               if(list[i].bkStatus == 'R'){
+                            	   html +="예약"
+                                } else if(list[i].bkStatus == 'C'){
+                                	 html +="취소"
+                                } else if(list[i].bkStatus == 'M'){
+                                	 html +="매장예약"
+                                }
+                                html += '</td>'
+                                html += '<td class="l5">'+list[i].bkDate+'</td>'
+                                html += '<td class="l6">'+list[i].bkTime+'</td>'
+                                if(list[i].menuCount == 1){
+                                	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
+                                } else {
+                                	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' '+list[i].bkmCount+'개 외 '+(list[i].menuCount-1)+'건'+'</td>'
+                                }
+                                html += '<td class="l8">'+list[i].bkTotalPrice+'원</td>'
+                                html += '<td class="l9">'
+                                if(list[i].bkRequire == null){
+                                	 html +="X"
+                                } else {
+                                	 html +="O"
+                                }
+                                html += '</td>'
+                                html += '<td  class="l10" style="display: none">'+list[i].bkRequire+'</td>'
+                                html += ' <td  class="l11"   style="display: none">'+list[i].bkStatus+'</td>'
+                                html += '</tr>'
     					}
     					$("#reservationListTbody").children().remove()
     					$("#reservationListTbody").append(html);
@@ -574,13 +634,59 @@ td, th {
     		if($("#bkStatus").val() == '전체'){
     			$.ajax({
     				type : 'post',
-        			url : 'allStatus',
+        			url : 'allStatusCafe',
         			data : {"day": $("#todayDate").val()},
         			dataType : "json",
     				success : function(list){
     					var html = '';
     					for(var i =0 ;  i <list.length;i++){
-    						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo' style='cursor: pointer'>"
+    						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo'  style='cursor: pointer''>"
+                                html += "<td class='l1'>"+list[i].bkNo+"</td>"
+                                html += "<td class='l2'>"+list[i].umId+"</td>"
+                                html += '<td class="l3">'+list[i].bkName+'</td>'
+                                html += '<td class="l4">'+list[i].bkPhone +'</td>'
+                                html += '<td>'
+                               if(list[i].bkStatus == 'R'){
+                            	   html +="예약"
+                                } else if(list[i].bkStatus == 'C'){
+                                	 html +="취소"
+                                } else if(list[i].bkStatus == 'M'){
+                                	 html +="매장예약"
+                                }
+                                html += '</td>'
+                                html += '<td class="l5">'+list[i].bkDate+'</td>'
+                                html += '<td class="l6">'+list[i].bkTime+'</td>'
+                                if(list[i].menuCount == 1){
+                                	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
+                                } else {
+                                	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' '+list[i].bkmCount+'개 외 '+(list[i].menuCount-1)+'건'+'</td>'
+                                }
+                                html += '<td class="l8">'+list[i].bkTotalPrice+'원</td>'
+                                html += '<td class="l9">'
+                                if(list[i].bkRequire == null){
+                                	 html +="X"
+                                } else {
+                                	 html +="O"
+                                }
+                                html += '</td>'
+                                html += '<td  class="l10" style="display: none">'+list[i].bkRequire+'</td>'
+                                html += ' <td  class="l11"   style="display: none">'+list[i].bkStatus+'</td>'
+                                html += '</tr>'
+    					}
+    					$("#reservationListTbody").children().remove()
+    					$("#reservationListTbody").html(html);
+    				}
+    			})
+    		} else {
+    		$.ajax({
+				type : 'post',
+    			url : 'selectStatusDayCafe',
+    			data : {"day": $("#todayDate").val(), "status": $("#bkStatus").val()},
+    			dataType : "json",
+				success : function(list){
+					var html = '';
+					for(var i =0 ;  i <list.length;i++){
+						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo'  style='cursor: pointer''>"
                             html += "<td class='l1'>"+list[i].bkNo+"</td>"
                             html += "<td class='l2'>"+list[i].umId+"</td>"
                             html += '<td class="l3">'+list[i].bkName+'</td>'
@@ -596,8 +702,12 @@ td, th {
                             html += '</td>'
                             html += '<td class="l5">'+list[i].bkDate+'</td>'
                             html += '<td class="l6">'+list[i].bkTime+'</td>'
-                            html += '<td class="l7">'+list[i].menuName+'</td>'
-                            html += '<td class="l8">'+list[i].menuPrice+'원</td>'
+                            if(list[i].menuCount == 1){
+                            	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
+                            } else {
+                            	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' '+list[i].bkmCount+'개 외 '+(list[i].menuCount-1)+'건'+'</td>'
+                            }
+                            html += '<td class="l8">'+list[i].bkTotalPrice+'원</td>'
                             html += '<td class="l9">'
                             if(list[i].bkRequire == null){
                             	 html +="X"
@@ -608,48 +718,6 @@ td, th {
                             html += '<td  class="l10" style="display: none">'+list[i].bkRequire+'</td>'
                             html += ' <td  class="l11"   style="display: none">'+list[i].bkStatus+'</td>'
                             html += '</tr>'
-    					}
-    					$("#reservationListTbody").children().remove()
-    					$("#reservationListTbody").html(html);
-    				}
-    			})
-    		} else {
-    		$.ajax({
-				type : 'post',
-    			url : 'selectStatusDay ',
-    			data : {"day": $("#todayDate").val(), "status": $("#bkStatus").val()},
-    			dataType : "json",
-				success : function(data){
-					var html = '';
-					for(var i =0 ;  i <data.length;i++){
-						html += "<tr class='bookingList' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo' style='cursor: pointer'>"
-                        html += "<td class='l1'>"+data[i].bkNo+"</td>"
-                        html += "<td class='l2'>"+data[i].umId+"</td>"
-                        html += '<td class="l3">'+data[i].bkName+'</td>'
-                        html += '<td class="l4">'+data[i].bkPhone +'</td>'
-                        html += '<td>'
-                       	if(data[i].bkStatus == 'R'){
-                       		html +="예약"
-                        } else if(data[i].bkStatus == 'C'){
-                        	html +="취소"
-                        } else if(data[i].bkStatus == 'M'){
-                        	html +="매장예약"
-                        }
-                        html += '</td>'
-                        html += '<td class="l5">'+data[i].bkDate+'</td>'
-                        html += '<td class="l6">'+data[i].bkTime+'</td>'
-                        html += '<td class="l7">'+data[i].menuName+'</td>'
-                        html += '<td class="l8">'+data[i].menuPrice+'원</td>'
-                        html += '<td class="l9">'
-                        if(data[i].bkRequire == null){
-                        	 html +="X"
-                        } else {
-                        	 html +="O"
-                        }
-                        html += '</td>'
-                        html += '<td  class="l10" style="display: none">'+data[i].bkRequire+'</td>'
-                        html += ' <td  class="l11"   style="display: none">'+data[i].bkStatus+'</td>'
-                        html += '</tr>'
 					}
 					$("#reservationListTbody").children().remove()
 					$("#reservationListTbody").html(html);

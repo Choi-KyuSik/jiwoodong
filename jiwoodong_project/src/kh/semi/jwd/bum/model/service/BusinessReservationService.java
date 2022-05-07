@@ -21,6 +21,13 @@ public class BusinessReservationService {
 		return result;
 	}
 	
+	public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(int cpNo){
+		Connection conn = getConnection();
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().BusinessReservationCheckCafe(conn, cpNo);
+		close(conn);
+		return result;
+	}
+	
 	public ArrayList<Map<String, Object>> menuList(int cpNo) {
 		Connection conn = getConnection();
 		ArrayList<Map<String, Object>> result = new  BusinessReservationDao().menuList(conn, cpNo);
@@ -51,7 +58,7 @@ public class BusinessReservationService {
 
 	public int reservationCancle(String bkNo) {
 		Connection conn = getConnection();
-		int result = new BusinessReservationDao().reservationAddMenu(conn, bkNo);
+		int result = new BusinessReservationDao().reservationCancle(conn, bkNo);
 		close(conn);
 		return result;
 	}
@@ -63,9 +70,9 @@ public class BusinessReservationService {
 		return result;
 	}
 
-	public int reservationUpdateMenu(Map<String, Object> map, int cpNo) {
+	public int reservationUpdateCafe(Map<String, Object> map, int cpNo) {
 		Connection conn = getConnection();
-		int result = new BusinessReservationDao().reservationUpdateMenu(conn, map, cpNo);
+		int result = new BusinessReservationDao().reservationUpdateCafe(conn, map, cpNo);
 		close(conn);
 		return result;
 	}
@@ -76,10 +83,24 @@ public class BusinessReservationService {
 		close(conn);
 		return result;
 	}
+	
+	public ArrayList<BumReservationVo> AllStatusCafe(String date, int cpNo) {
+		Connection conn = getConnection();
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().AllStatusCafe(conn, date, cpNo);
+		close(conn);
+		return result;
+	}
 
 	public ArrayList<BumReservationVo> selectStatus(String date, int cpNo, String status) {
 		Connection conn = getConnection();
 		ArrayList<BumReservationVo> result = new  BusinessReservationDao().selectStatus(conn, date, cpNo, status);
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<BumReservationVo> selectStatusCafe(String date, int cpNo, String status) {
+		Connection conn = getConnection();
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().selectStatusCafe(conn, date, cpNo, status);
 		close(conn);
 		return result;
 	}
@@ -114,6 +135,13 @@ public class BusinessReservationService {
 	public String cpCatecoryCheck(int cpNo) {
 		Connection conn = getConnection();
 		String result = new BusinessReservationDao().cpCatecoryCheck(conn,cpNo);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Map<String, Object>> bmenuList(String bkno) {
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> result = new BusinessReservationDao().bmenuList(conn,bkno);
 		close(conn);
 		return result;
 	}

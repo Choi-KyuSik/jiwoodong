@@ -33,15 +33,18 @@ public class BusinessReservationCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int cpNo = 14;
-		ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheck(cpNo);
+	
 		ArrayList<Map<String, Object>> menulist = new  BusinessReservationService().menuList(cpNo);
-		request.setAttribute("reservation", reservation);
 		request.setAttribute("menulist", menulist);
 		
 		String category = new BusinessReservationService().cpCatecoryCheck(cpNo);
 		if(category.equals("카페")) {
+			ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheckCafe(cpNo);
+			request.setAttribute("reservation", reservation);
 			request.getRequestDispatcher("WEB-INF/bum/bumBookingListCafe.jsp").forward(request, response);
 		} else {
+		ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheck(cpNo);
+		request.setAttribute("reservation", reservation);
 		request.getRequestDispatcher("WEB-INF/bum/bumBookingList.jsp").forward(request, response);
 		}
 	}
