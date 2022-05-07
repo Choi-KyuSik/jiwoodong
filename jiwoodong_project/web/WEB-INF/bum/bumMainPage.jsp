@@ -91,6 +91,7 @@ header {
 }
 
 .box_font {
+	margin-top: 10px;
 	font-weight: bold;
 	color: #0D6EFD;
 	margin-bottom: 20px;
@@ -327,7 +328,7 @@ article>div>p {
 									id="k_review_menu" href="#" role="button"> 리뷰관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
-								<li class="nav-item dropdown"><a class="nav-link dropdown"
+								<li class="nav-item dropdown"><a class="nav-link dropdown" data-value="cpSignYn"
 									id="k_bu_eroll_menu" href="#" role="button"> 업체등록 </a></li>
 							</ul>
 							<ul class="navbar-nav">
@@ -357,18 +358,18 @@ article>div>p {
 					<a href="#"
 						class="d-block link-dark text-decoration-none dropdown-toggle"
 						id="dropdownUser1" data-bs-toggle="dropdown"> <img
-						src="https://cdn.discordapp.com/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png"
+						src="https://media.discordapp.net/attachments/692994434526085184/965630874999730296/1.png"
 						alt="mdo" width="60px">
 					</a>
-					<p style="font-size: 12px; width: 115px; margin: 5px;">
-						<%= session.getAttribute("buName") %> 님 안녕하세요.</p>
+					<p style="font-size: 12px; width: 115px; margin: 5px;">환영합니다
+						${bvo.buName}님</p>
 					<ul class="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1">
 						<li><a class="dropdown-item" id="k_pwdinfo">비밀번호 재설정</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
-						<li><a class="dropdown-item" href="logout">로그아웃</a></li>
+						<li><a class="dropdown-item" href="#">로그아웃</a></li>
 					</ul>
 				</div>
 			</div>
@@ -516,6 +517,14 @@ article>div>p {
       </div>
     </article>
 </content>	
+	<script>
+	$(function(){
+		console.log(${msg});
+		/* if('${msg}' != ''){
+			alert('됬나?');
+		} */
+	})
+	</script>
 	
 	<script>
 			$("#k_info_menu").click(function() {
@@ -526,6 +535,10 @@ article>div>p {
 				$("#k_us_info_content").hide();
 				$("#k_re_menu_content").hide();
 				$("#main_box").hide();
+				/* var frm = $("#frm");
+				frm.attr("action", "buminfocheck");
+				frm.attr("method", "post");
+				frm.submit(); */
 			});
 			
 			$("#k_review_menu").click(function() {
@@ -541,6 +554,7 @@ article>div>p {
 			$("#k_bu_eroll_menu").click(function() {			
 				location.href="bucompany";
 			});
+			
 			
 			$("#k_re_cu_menu").click(function() {
 				location.href = "<%=request.getContextPath()%>/burscheck";
@@ -670,11 +684,10 @@ article>div>p {
 	});
   </script>
   
-    <script src="https://code.highcharts.com/modules/data.js"></script> 
-	<script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"
-	</script>
+		crossorigin="anonymous"></script>  
 </body>
 </html>

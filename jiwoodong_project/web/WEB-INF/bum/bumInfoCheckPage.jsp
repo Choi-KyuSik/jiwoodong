@@ -260,14 +260,14 @@ article>div>p {
 						alt="mdo" width="60px">
 					</a>
 					<p style="font-size: 12px; width: 115px; margin: 5px;">환영합니다
-						<%= session.getAttribute("buName") %>님</p>
+						${bvo.buName}님</p>
 					<ul class="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1">
 						<li><a class="dropdown-item" id="k_pwdinfo">비밀번호 재설정</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
-						<li><a class="dropdown-item" href="logout">로그아웃</a></li>
+						<li><a class="dropdown-item" href="#">로그아웃</a></li>
 					</ul>
 				</div>
 			</div>
@@ -378,10 +378,9 @@ article>div>p {
 		</script>
 	
 		<script src="https://code.highcharts.com/modules/data.js"></script>
-		<script>
-			src = "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-			integrity = "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-			crossorigin = "anonymous"
-		</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
 	</body>
 </html>

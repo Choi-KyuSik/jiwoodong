@@ -136,5 +136,14 @@ public class BumService {
 		System.out.println("companyDelete result: " + result);
 		return result;
 		
-	}	
+	}
+	
+	// 우진
+		public String companyWriteCheck(int buNo) {
+			Connection conn = getConnection();
+			String result2 = new BumDao().companyWriteCheck(conn, buNo);
+			close(conn);
+			System.out.println("companyCheck result" + result2);
+			return result2;
+		}
 }

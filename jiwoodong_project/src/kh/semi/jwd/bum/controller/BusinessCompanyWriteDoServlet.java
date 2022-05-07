@@ -49,7 +49,8 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		
 		int result = 0;
-		int buNo = 29;
+		int result2 = 0;
+		int buNo = 32;
 
 //		PrintWriter out = response.getWriter();
 //		// 파일 저장 경로
@@ -78,20 +79,21 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 		String cpName = request.getParameter("cpName");
 		String cpCategory = request.getParameter("cpCategory");
 		String cpExplain = request.getParameter("cpExplain");
-		// String flGno
 		String cpClassify = request.getParameter("cpClassify");
-//		System.out.println(cpClassify);
 		String cpOpenDate = request.getParameter("cpOpenDate");
-//		System.out.println(cpOpenDate);
 		String cpCloseDate = request.getParameter("cpCloseDate");
-//		System.out.println(cpCloseDate);
 		String cpOpenTime = request.getParameter("cpOpenTime");
-//		System.out.println(cpOpenTime);
 		String cpCloseTime = request.getParameter("cpCloseTime");
 		String cpPostcode = request.getParameter("cpPostcode");
-//		System.out.println("cpPostcode:" + cpPostcode);
 		String cpAddress = request.getParameter("cpAddress");
 		String cpDtaddress = request.getParameter("cpDtaddress");
+		String flGno = request.getParameter("fileUrl1");
+		String flGno2 = request.getParameter("fileUrl2");
+		String flGno3 = request.getParameter("fileUrl3");
+		
+		
+//		//업체등록 가능여부 확인
+//		String cpSignYn = request.getParameter("cpSignYn");
 
 		CompanyVo cvo = new CompanyVo();
 		cvo.setBuNo(buNo);
@@ -106,10 +108,14 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 		cvo.setCpPostcode(cpPostcode);
 		cvo.setCpAddress(cpAddress);
 		cvo.setCpDtaddress(cpDtaddress);
+		cvo.setFlGno(flGno);
+		cvo.setFlGno2(flGno2);
+		cvo.setFlGno3(flGno3);
+				
 		System.out.println("cvo:" + cvo);
 
 		result = new BumService().companyWrite(cvo);
-
+		
 		System.out.println("Controller result" + result);
 
 		if(result < 1) {
@@ -129,5 +135,29 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 			out1.println("</script>");
 			out1.flush();
 		}
+		/*
+		result2 = new BumService().companyWriteCheck(buNo);
+		
+		//업체등록 중복여부 확인
+		if(cpSignYn == "Y") {
+			PrintWriter out2 = response.getWriter();
+			response.setContentType("text/html; charset=utf-8");
+			out2.println("<script language='javascript'>");
+			out2.println("alert('계정당 업체는 하나씩만 등록 가능합니다.'); location.href='BumMainPage'");
+			out2.println("</script>");
+			out2.flush();			
+		}else {
+			if(cpSignYn =="R") {
+				PrintWriter out2 = response.getWriter();
+				response.setContentType("text/html; charset=utf-8");
+				out2.println("<script language='javascript'>");
+				out2.println("alert('이미 업체등록을 신청하셨습니다.'); location.href='BumMainPage'");
+				out2.println("</script>");
+				out2.flush();
+			}else {
+				
+			}
+		}
+		*/
 	}
 }

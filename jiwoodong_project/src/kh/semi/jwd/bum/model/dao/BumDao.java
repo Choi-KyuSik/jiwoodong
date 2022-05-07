@@ -16,6 +16,7 @@ import kh.semi.jwd.bum.model.vo.CompanyVo;
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
 public class BumDao {
+	private Statement stmt = null;
 	// DB를 왔다갔다 하는것
 	private PreparedStatement pstmt = null;
 	// DB를 Java용 언어로 바꿔주는것
@@ -305,9 +306,7 @@ public class BumDao {
 		return result;
 		}
 	
-	
-	
-// TODO 우진: 나중에 로그인 구현되면 Session에 담아야함 
+// TODO 우진 :내 정보 조회
 	public BumVo companyCheck(Connection conn, int buNo) {
 		// public return 값이 BumVo이므로 result의 변수값은 null
 		BumVo bvo = null;
@@ -409,8 +408,8 @@ public class BumDao {
 //	FL_GNO                  VARCHAR2(4000) 
 //	CP_REJECT_MSG           VARCHAR2(200) 
 
-		String sql = "INSERT INTO company(CP_NO, BU_NO, CP_NAME, CP_CATEGORY, CP_CLASSIFY , CP_OPEN_DATE , CP_CLOSE_DATE, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, CP_OPEN_TIME, CP_CLOSE_TIME ,CP_EXPLAIN)"
-				+ " VALUES(COMPANY_SEQ.NEXTVAL,?,?,?,?,REPLACE(?, '-', '/'),REPLACE(?, '-', '/'),?,?,?,?,?,?)";
+		String sql = "INSERT INTO company(CP_NO, BU_NO, CP_NAME, CP_CATEGORY, CP_CLASSIFY , CP_OPEN_DATE , CP_CLOSE_DATE, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, CP_OPEN_TIME, CP_CLOSE_TIME ,CP_EXPLAIN, FL_GNO, FL_GNO2, FL_GNO3)"
+				+ " VALUES(COMPANY_SEQ.NEXTVAL,?,?,?,?,REPLACE(?, '-', '/'),REPLACE(?, '-', '/'),?,?,?,?,?,?,?,?,?)";
 		try {
 
 			pstmt = conn.prepareStatement(sql);
@@ -426,6 +425,9 @@ public class BumDao {
 			pstmt.setString(10, cvo.getCpOpenTime());
 			pstmt.setString(11, cvo.getCpCloseTime());
 			pstmt.setString(12, cvo.getCpExplain());
+			pstmt.setString(13, cvo.getFlGno());
+			pstmt.setString(14, cvo.getFlGno2());
+			pstmt.setString(15, cvo.getFlGno3());
 
 			result = pstmt.executeUpdate();
 			System.out.println("companyWrite Dao result:" + result);
@@ -478,5 +480,28 @@ public class BumDao {
 		}
 		System.out.println("Dao companyDelete:" + result);
 		return result;
+	}
+	
+	//우진 - 업체등록 여부 확인
+	public String companyWriteCheck(Connection conn, int buNo) {
+		System.out.println("companyWriteCheck buNo:"+ buNo);
+		String result2 = "";
+		
+		String sql = "select cp_signyn from company where bu_no = ?";
+		try {
+//			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, buNo);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+			result2 = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		System.out.println("companyWriteCheck 값 담겼나?:" + result2);
+		return result2;
 	}
 }

@@ -16,7 +16,7 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<title>회원 탈퇴 성공 페이지</title>
+<title>회원 탈퇴 완료 페이지</title>
 </head>
 <body>
 	
