@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kh.semi.jwd.user.model.service.UserService;
 import kh.semi.jwd.user.model.vo.UserVo;
@@ -58,6 +59,9 @@ public class UserInfoDeleteDoController extends HttpServlet {
 			out.flush();
 		} else {
 			System.out.println("회원 탈퇴 성공!");
+			HttpSession session = request.getSession();
+			//  모든 속성 한꺼번에 삭제 
+			session.invalidate();
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html; charset=utf-8");
 			out.println("<script language='javascript'>");

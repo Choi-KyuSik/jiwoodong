@@ -30,7 +30,8 @@ public class UserInfoDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String umId = "apple";
+		// String umId = "apple";
+		String umId = (String) request.getSession().getAttribute("um_id");
 		
 		UserVo usMemberListInfo = new UserService().usMemberListInfo(umId);
 		request.setAttribute("usMemberListInfo", usMemberListInfo);

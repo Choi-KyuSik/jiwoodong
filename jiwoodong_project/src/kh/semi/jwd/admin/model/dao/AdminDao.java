@@ -674,7 +674,7 @@ public class AdminDao {
 
 		int result = 0;
 		String umId = '%' + uvo.getUmId() + '%'; 
-		String sql = "UPDATE U_MEMBER SET UM_USEYN = 'N', UM_OUT_DATE = SYSTIMESTAMP WHERE UM_ID LIKE ?";
+		String sql = "UPDATE U_MEMBER SET UM_USEYN = 'N', UM_OUT_DATE = SYSTIMESTAMP WHERE UM_ID = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
