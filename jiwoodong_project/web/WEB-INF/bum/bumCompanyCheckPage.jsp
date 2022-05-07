@@ -310,7 +310,7 @@ article>div>p {
 						alt="mdo" width="60px">
 					</a>
 					<p style="font-size: 12px; width: 115px; margin: 5px;">환영합니다
-						사업자님</p>
+						<%= session.getAttribute("buName") %>님</p>
 					<ul class="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1">
 						<li><a class="dropdown-item" href="bucpcheck">비밀번호 재설정</a></li>
