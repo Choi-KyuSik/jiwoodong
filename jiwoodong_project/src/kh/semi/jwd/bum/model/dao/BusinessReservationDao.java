@@ -56,7 +56,7 @@ public class BusinessReservationDao {
 	
 public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn, int cpNo){
 		
-		String sql = "select * from booking join (select bk_no, count(bk_no) menu_count, bkm_count from b_menu group by bk_no, bkm_count) using(bk_no) join (select bk_no, min(menu_name) menu_name from b_menu join menu using(menu_no) group by bk_no) using(bk_no) where cp_no = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(sysdate,'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
+		String sql = "select * from booking join (select bk_no, count(bk_no) menu_count from b_menu group by bk_no) using(bk_no) join (select bk_no, min(menu_name) menu_name from b_menu join menu using(menu_no) group by bk_no) using(bk_no) where cp_no = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(sysdate,'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
 		ArrayList<BumReservationVo> result = new ArrayList<BumReservationVo>();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -77,7 +77,6 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 				vo.setMenuCount(rs.getInt("menu_count"));
 				vo.setBkRequire(rs.getString("bk_require"));
 				vo.setBkStatus(rs.getString("bk_status"));
-				vo.setBkmCount(rs.getInt("bkm_count"));
 				result.add(vo);
 			}
 			

@@ -64,7 +64,7 @@ public class UserReservationInsertServlet extends HttpServlet {
 		int result = new UserReservationService().reservationInsertCafe(map);
 		
 		for(int i=0; i < menuno.length; i++) {
-			int result2 = new UserReservationService().reservationInsertCafemenu(map, menuno[i], menucount[0]);
+			int result2 = new UserReservationService().reservationInsertCafemenu(map, menuno[i], menucount[i]);
 		}
 		response.sendRedirect(request.getContextPath()+"/UserMypage");
 	}

@@ -239,7 +239,7 @@ td, th {
 							<td class="l5"><c:out value="${reservation.bkDate}" /></td>
 							<td class="l6"><c:out value="${reservation.bkTime }" /></td>
 							<c:if test="${reservation.menuCount > 1}">
-							<td class="l7" style="font-size:14px"><c:out value="${reservation.menuName } ${reservation.bkmCount }개 외 ${reservation.menuCount -1}건" /></td>
+							<td class="l7" style="font-size:14px"><c:out value="${reservation.menuName } 외 ${reservation.menuCount -1}건" /></td>
 							</c:if>
 							<c:if test="${reservation.menuCount == 1}">
 							<td class="l7"><c:out value="${reservation.menuName } ${reservation.bkmCount }개 " /></td>
@@ -563,7 +563,7 @@ td, th {
                             if(list[i].menuCount == 1){
                             	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
                             } else {
-                            	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' '+list[i].bkmCount+'개 외 '+(list[i].menuCount-1)+'건'+'</td>'
+                            	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' 외 '+(list[i].menuCount-1)+'건'+'</td>'
                             }
                             html += '<td class="l8">'+list[i].bkTotalPrice+'원</td>'
                             html += '<td class="l9">'
@@ -609,7 +609,7 @@ td, th {
                                 if(list[i].menuCount == 1){
                                 	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
                                 } else {
-                                	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' '+list[i].bkmCount+'개 외 '+(list[i].menuCount-1)+'건'+'</td>'
+                                	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' 외 '+(list[i].menuCount-1)+'건'+'</td>'
                                 }
                                 html += '<td class="l8">'+list[i].bkTotalPrice+'원</td>'
                                 html += '<td class="l9">'
@@ -659,7 +659,7 @@ td, th {
                                 if(list[i].menuCount == 1){
                                 	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
                                 } else {
-                                	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' '+list[i].bkmCount+'개 외 '+(list[i].menuCount-1)+'건'+'</td>'
+                                	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' 외 '+(list[i].menuCount-1)+'건'+'</td>'
                                 }
                                 html += '<td class="l8">'+list[i].bkTotalPrice+'원</td>'
                                 html += '<td class="l9">'
@@ -705,7 +705,7 @@ td, th {
                             if(list[i].menuCount == 1){
                             	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
                             } else {
-                            	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' '+list[i].bkmCount+'개 외 '+(list[i].menuCount-1)+'건'+'</td>'
+                            	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' 외 '+(list[i].menuCount-1)+'건'+'</td>'
                             }
                             html += '<td class="l8">'+list[i].bkTotalPrice+'원</td>'
                             html += '<td class="l9">'

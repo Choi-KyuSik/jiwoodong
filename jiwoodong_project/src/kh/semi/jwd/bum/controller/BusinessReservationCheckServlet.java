@@ -43,7 +43,7 @@ public class BusinessReservationCheckServlet extends HttpServlet {
 			request.setAttribute("reservation", reservation);
 			request.getRequestDispatcher("WEB-INF/bum/bumBookingListCafe.jsp").forward(request, response);
 		} else {
-		ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheck(cpNo);
+		ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheckCafe(cpNo);
 		request.setAttribute("reservation", reservation);
 		request.getRequestDispatcher("WEB-INF/bum/bumBookingList.jsp").forward(request, response);
 		}

@@ -328,7 +328,11 @@
 			var today = year +"-"+month+ "-" +day;
 
 			if($("#datepicker").val() == today){
-			var time = date.getHours()+""+date.getMinutes();
+			var hours = date.getHours();
+			if(hours < 10){
+				hours = '0'+hours;
+			}
+			var time = hours+""+date.getMinutes();
 			$(".rstime").each(function(){
 				if($(this).text().replace(":","") < time){
 					$(this).text("불가");
