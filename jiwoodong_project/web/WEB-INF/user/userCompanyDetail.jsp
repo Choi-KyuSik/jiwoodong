@@ -89,6 +89,7 @@
 			style="background-color: rgb(241, 241, 241); border-radius: 15px;">
 			<div style="padding: 10px 0 10px 0;">
 				<div class="c_company_info" style="border-radius: 15px;">
+					
 					<div>
 						<div style="text-align: center;">
 							<a href="#" style="text-align: center;"> <img
@@ -96,8 +97,8 @@
 								alt="" style="width: 400px; height: 300px; margin: 30px;">
 							</a>
 						</div>
+						<c:forEach items="${uscpdetail }" var="i">
 						<div style="margin-bottom: 20px; text-align: center;">
-							<c:forEach items="${uscpdetail }" var="i">
 						
 							<h4>${i.cpName }</h4>
 							<div>
@@ -110,8 +111,8 @@
 									autocomplete="off"> <label
 									class="btn btn-outline-primary" for="btncheck2">☆</label> </span>
 							</div>
-							</c:forEach>
 						</div>
+						</c:forEach>
 
 						<hr style="margin: 0;">
 
@@ -122,12 +123,12 @@
 										data-bs-toggle="tab" data-bs-target="#c_home" type="button"
 										role="tab" aria-controls="c_home" aria-selected="true">홈</button>
 								</li>
-								<li class="nav-item" role="presentation">
+								<!-- <li class="nav-item" role="presentation">
 									<button class="nav-link" id="c_notice_t-tab"
 										data-bs-toggle="tab" data-bs-target="#c_notice_t"
 										type="button" role="tab" aria-controls="c_notice_t"
 										aria-selected="false">소식</button>
-								</li>
+								</li> -->
 								<li class="nav-item" role="presentation">
 									<button class="nav-link" id="c_riview-tab" data-bs-toggle="tab"
 										data-bs-target="#c_riview" type="button" role="tab"
@@ -148,31 +149,33 @@
 								<!--홈 탭 내용-->
 								<div class="tab-pane fade show active" id="c_home"
 									role="tabpanel" aria-labelledby="c_home-tab">
+								<c:forEach items="${uscpdetail }" var="i">
 									<table style="width: 900px; margin-top: 30px;">
 										<tr>
 											<th class="c_home_info">업체명</th>
-											<td class="c_home_info_td">집 나가면 개고생 부산점</td>
+											<td class="c_home_info_td">${i.cpName }</td>
 										</tr>
 										<tr>
 											<th class="c_home_info">주소</th>
-											<td class="c_home_info_td">부산광역시 해운대구 헌팅로 65길 31-2</td>
+											<td class="c_home_info_td">${i.cpAddress } ${i.cpDTAddress }</td>
 										</tr>
 										<tr>
 											<th class="c_home_info">전화번호</th>
-											<td class="c_home_info_td">070-0000-1234</td>
+											<td class="c_home_info_td">${i.buTel }</td>
 										</tr>
 										<tr>
 											<th class="c_home_info">운영시간</th>
-											<td class="c_home_info_td">00:00 ~ 24:00</td>
+											<td class="c_home_info_td">${i.cpOpenTime } ~ ${i.cpCloseTime }</td>
 										</tr>
 									</table>
 									<hr style="margin-top: 30px; margin-bottom: 30px;">
 
+								</c:forEach>
 								</div>
 
 								<!-- 소식 탭 내용 -->
-								<div class="tab-pane fade" id="c_notice_t" role="tabpanel"
-									aria-labelledby="c_notice-tab">...</div>
+								<!-- <div class="tab-pane fade" id="c_notice_t" role="tabpanel"
+									aria-labelledby="c_notice-tab">...</div> -->
 								<!--리뷰 탭 내용-->
 								<div class="tab-pane fade" id="c_riview" role="tabpanel"
 									aria-labelledby="c_riview-tab">
@@ -188,15 +191,18 @@
 													<th scope="col">별점</th>
 												</tr>
 											</thead>
+											<c:forEach items="${uscpdetail }" var="i">
 											<tbody>
 												<tr>
-													<th scope="row">1</th>
-													<td>제목</td>
-													<td>리뷰내용</td>
-													<td>아이디</td>
-													<td>별점</td>
+													<th scope="row">${i.rvNo}</th>
+													<td>${i.rvContent }</td>
+													<td>${i.rvWriteDate }</td>
+													<!-- TO DO -->
+													<td>작성자 ID </td>
+													<td>${i.rvScore }</td>
 												</tr>
-												<tr>
+												
+												<!-- <tr>
 													<th scope="row">2</th>
 													<td>제목</td>
 													<td>리뷰내용</td>
@@ -209,8 +215,9 @@
 													<td>리뷰내용</td>
 													<td>아이디</td>
 													<td>별점</td>
-												</tr>
+												</tr> -->
 											</tbody>
+											</c:forEach>
 										</table>
 									</div>
 								</div>
@@ -329,11 +336,12 @@
 								</div>
 							</div>
 						</div>
+
 					</div>
+					
 				</div>
 			</div>
 		</div>
-
 
 		<content>
   <!-- 네비 업체조회 -->
@@ -488,7 +496,7 @@
 
 	<script>
 		/* 네비 선택시 */
-		$("#c_mypage").click(function() {
+		/* $("#c_mypage").click(function() {
 			$("#c_mypage_info").show();
 			$("#c_cplist_info").hide();
 			$("#c_mapsc_info").hide();
@@ -515,7 +523,7 @@
 			$("#c_cplist_info").hide();
 			$("#c_mapsc_info").show();
 			$("#main_box").hide();
-		});
+		}); */
 
 		
 	</script>

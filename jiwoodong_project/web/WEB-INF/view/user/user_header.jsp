@@ -55,7 +55,7 @@
               
               <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown" id="c_mypage" href="#" role="button">
+                  <a class="nav-link dropdown" id="c_mypage" href="/jwd/UserMypage" role="button">
                     마이페이지
                   </a>
                 </li>
@@ -149,15 +149,6 @@
       $("#c_reviewlist_info").hide();
       $("#c_us_info_edit_info").show();
       $("#main_box").hide();
-    });
-    $("#c_mypage").click(function () {
-    	console.log("찍히냐? mypage");
-    	href="UserMypage"
-    });
-    $("#c_mypage").click(function () {
-    	console.log("찍히냐? mypage");
-    	href="UserMypage"
-    	/* location.reload(); */
     });
     
     

@@ -30,17 +30,21 @@ public class UsercpDetailpageVo {
 	private Date rvWriteDate;
 	private String buTel;
 	private String flGno;
+	private String umId;
+
 
 	public UsercpDetailpageVo() {
 		super();
+		
 	}
 
+	
 	@Override
 	public String toString() {
 		return "UsercpDetailpageVo [cpNo=" + cpNo + ", cpName=" + cpName + ", cpAddress=" + cpAddress + ", cpDTAddress="
 				+ cpDTAddress + ", cpOpenTime=" + cpOpenTime + ", cpCloseTime=" + cpCloseTime + ", cpExplain="
 				+ cpExplain + ", rvNo=" + rvNo + ", rvScore=" + rvScore + ", rvContent=" + rvContent + ", rvWriteDate="
-				+ rvWriteDate + ", buTel=" + buTel + ", flGno=" + flGno + "]";
+				+ rvWriteDate + ", buTel=" + buTel + ", flGno=" + flGno + ", umId=" + umId + "]";
 	}
 
 	public int getCpNo() {
@@ -146,4 +150,11 @@ public class UsercpDetailpageVo {
 		this.flGno = flGno;
 	}
 
+	public String getUmId() {
+		return umId;
+	}
+
+	public void setUmId(String umId) {
+		this.umId = umId;
+	}
 }
