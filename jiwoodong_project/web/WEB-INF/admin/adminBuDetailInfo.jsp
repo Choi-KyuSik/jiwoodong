@@ -73,7 +73,13 @@
 							<tr>
 								<th class="table-primary s_ac_th">업체사진</th>
 								<td class="table-light">
-									<img width="300px;" style="border-radius: 15px;" src="${i.fileUrl }">
+									<img width="300px;" height="200px;" style="border-radius: 15px;" src="${i.fileUrl }">
+									<c:if test="${not empty i.fileUrl2 }">
+											<img width="300px;" height="200px;" style="border-radius: 15px;" src="${i.fileUrl2 }">
+										<c:if test="${not empty i.fileUrl3 }">
+											<img width="300px;" height="200px;" style="border-radius: 15px;" src="${i.fileUrl3 }">
+										</c:if>
+									</c:if>
 								</td>
 							</tr>
 						</c:if>

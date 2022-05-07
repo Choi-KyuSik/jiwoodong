@@ -150,7 +150,7 @@ public class AdminDao {
 		
 		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM "
 				+ " (SELECT BU_NO, CP_CATEGORY, CP_NAME, BU_NUMBER, TO_CHAR(CP_WRITE_DATE, 'YYYY/MM/DD'), "
-				+ " BU_TEL FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') AND " + field + " LIKE ? "
+				+ " BU_TEL, CP_NO, BU_NAME FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') AND " + field + " LIKE ? "
 				+ " ORDER BY CP_WRITE_DATE DESC) A ) WHERE RNUM BETWEEN ? AND ?";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		try {
@@ -171,6 +171,8 @@ public class AdminDao {
 					map.put("buNumber", rs.getString(5));
 					map.put("cpWriteDate", rs.getString(6));
 					map.put("buTel", rs.getString(7));
+					map.put("cpNo", rs.getInt(8));
+					map.put("buName", rs.getString(9));
 					list.add(map);
 
 				} while (rs.next());
@@ -190,7 +192,7 @@ public class AdminDao {
 
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-		String sql = "SELECT CP_NO, BU_NO, BU_ID, CP_CATEGORY, BU_NUMBER, CP_NAME, CP_EXPLAIN, BU_NAME, BU_TEL, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, C.FL_GNO FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') AND CP_NO = ?";
+		String sql = "SELECT CP_NO, BU_NO, BU_ID, CP_CATEGORY, BU_NUMBER, CP_NAME, CP_EXPLAIN, BU_NAME, BU_TEL, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, C.FL_GNO, C.FL_GNO2, C.FL_GNO3 FROM COMPANY C JOIN B_MEMBER B USING(BU_NO) WHERE CP_SIGNYN IN ('N', 'n') AND CP_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cpNo);
@@ -211,6 +213,8 @@ public class AdminDao {
 				map.put("cpAddress", rs.getString(11)); // 주소
 				map.put("cpDtaddress", rs.getString(12)); // 상세주소
 				map.put("fileUrl", rs.getString(13)); // 업체 사진
+				map.put("fileUrl2", rs.getString(14)); // 업체 사진2
+				map.put("fileUrl3", rs.getString(15)); // 업체 사진3
 				list.add(map);
 				System.out.println("list : " + list);
 			}
@@ -433,11 +437,11 @@ public class AdminDao {
 	}
 
 	// 사업자 정보 상세 리스트
-	public BumVo buMemberDetailInfo(Connection conn, int cpNo) {
+	public BumVo buMemberDetailInfo(Connection conn, int buNo) {
 
 		BumVo vo = null;
 
-		String sql = "SELECT CP_NO, BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_WRITE_DATE,'YYYY/MM/DD') FROM B_MEMBER WHERE CP_NO = " + cpNo;
+		String sql = "SELECT BU_NO, BU_ID, BU_NAME, BU_BIRTH, BU_TEL, BU_EMAIL, TO_CHAR(BU_WRITE_DATE,'YYYY/MM/DD') FROM B_MEMBER WHERE BU_NO = " + buNo;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -445,7 +449,6 @@ public class AdminDao {
 
 			if(rs.next()) {
 				vo = new BumVo();
-				vo.setCpNo(rs.getInt("CP_NO")); // 등록신청번호
 				vo.setBuNo(rs.getInt("BU_NO")); // 사업자번호
 				vo.setBuId(rs.getString("BU_ID")); // 아이디
 				vo.setBuName(rs.getString("BU_NAME")); // 이름

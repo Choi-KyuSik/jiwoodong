@@ -213,7 +213,7 @@
     		console.log("배열에 담긴 값 : " + tdArr);
     		console.log("배열에 담긴 값 : " + tdArr[5]);
     		console.log(typeof(tdArr[5]));
-    		location.href="AdminBuDetailInfo?cpNo=" + tdArr[5];
+    		location.href="AdminBuAcceptDetailInfo?cpNo=" + tdArr[5];
     	});
     </script>
     

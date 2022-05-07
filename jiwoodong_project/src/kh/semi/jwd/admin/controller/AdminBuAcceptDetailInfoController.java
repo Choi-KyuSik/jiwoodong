@@ -14,14 +14,14 @@ import kh.semi.jwd.admin.model.service.AdminService;
 /**
  * Servlet implementation class AdminNoticeDetailReadController
  */
-@WebServlet("/AdminBuDetailInfo")
-public class AdminBuDetailInfoController extends HttpServlet {
+@WebServlet("/AdminBuAcceptDetailInfo")
+public class AdminBuAcceptDetailInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminBuDetailInfoController() {
+    public AdminBuAcceptDetailInfoController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +31,13 @@ public class AdminBuDetailInfoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String buNoStr = request.getParameter("buNo");
-		int buNo = Integer.parseInt(buNoStr);
+		String cpNoStr = request.getParameter("cpNo");
+		int cpNo = Integer.parseInt(cpNoStr);
 //		AdminNoticeVo anvo = new AdminNoticeVo();
 //		int ntNo = anvo.getNtNo();
-		System.out.println("buNo의 값은?" + buNo);
+		System.out.println("cpNo의 값은?" + cpNo);
 		
-		ArrayList<Map<String, Object>> adBuAccept = new AdminService().companyAcceptDetailRead(buNo);
+		ArrayList<Map<String, Object>> adBuAccept = new AdminService().companyAcceptDetailRead(cpNo);
 		
 		request.setAttribute("adBuAccept", adBuAccept);
 		System.out.println("adBuAccept" + adBuAccept);

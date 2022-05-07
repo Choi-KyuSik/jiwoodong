@@ -131,10 +131,10 @@ public class AdminService {
 	}
 
 	// 사업자 정보 상세 조회
-	public BumVo buMemberDetailInfo(int cpNo) {
+	public BumVo buMemberDetailInfo(int buNo) {
 
 		Connection conn = getConnection();
-		BumVo result = dao.buMemberDetailInfo(conn, cpNo);
+		BumVo result = dao.buMemberDetailInfo(conn, buNo);
 		close(conn);
 		return result; 
 	}

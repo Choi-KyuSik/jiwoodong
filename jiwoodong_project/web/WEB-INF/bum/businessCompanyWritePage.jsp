@@ -221,7 +221,7 @@ article>div>p {
                   src="https://media.discordapp.net/attachments/692994434526085184/965630874999730296/1.png"
                   alt="mdo" width="60px">
                </a>
-               <p style="font-size: 12px; width: 115px; margin: 5px;">환영합니다
+               <p style="font-size: 12px; margin: 5px;">환영합니다
                   <%= session.getAttribute("buName") %>님</p>
                <ul class="dropdown-menu text-small"
                   aria-labelledby="dropdownUser1">
