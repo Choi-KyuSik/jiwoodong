@@ -51,7 +51,7 @@ public class AdminBuInfoDeleteDoController extends HttpServlet {
 			System.out.println("사업자 회원 탈퇴 실패!");
 			PrintWriter out = response.getWriter();
 			out.println("<script language='javascript'>");
-			out.println("alert('사업자 회원 탈퇴에 실패하였습니다.'); location.href='AdminMainPage'");
+			out.println("alert('사업자 회원 탈퇴에 실패하였습니다.'); location.href='AdminBuInfoList'");
 			out.println("</script>");
 			// request.getRequestDispatcher("AdminMainPage").forward(request, response);
 		} else {
@@ -59,7 +59,7 @@ public class AdminBuInfoDeleteDoController extends HttpServlet {
 			// request.getSession().setAttribute("tabMenu", "3");
 			PrintWriter out = response.getWriter();
 			out.println("<script language='javascript'>");
-			out.println("alert('사업자 회원 탈퇴가 정상 처리되었습니다.'); location.href='AdminMainPage'");
+			out.println("alert('사업자 회원 탈퇴가 정상 처리되었습니다.'); location.href='AdminBuInfoList'");
 			out.println("</script>");
 			// response.sendRedirect("AdminMainPage");
 		}

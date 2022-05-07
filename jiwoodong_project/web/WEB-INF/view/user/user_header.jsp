@@ -71,7 +71,7 @@
             <img src="https://cdn.discordapp.com/attachments/958682757230366780/969684968735404133/23ff6546daa743f1.png" alt="mdo"
               style="width: 60px;">
           </a>
-          <p style="font-size: 12px; width: 150px; margin: 5px;">${usMemberListInfo.umId } 님 환영합니다.</p>
+          <p style="font-size: 12px; width: 150px; margin: 5px;"><%= session.getAttribute("um_id") %>님 환영합니다.</p>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" id="c_us_info_edit" href="#">내 정보 수정</a></li>
             <li>

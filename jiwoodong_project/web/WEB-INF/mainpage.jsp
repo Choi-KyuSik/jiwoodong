@@ -27,7 +27,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<title>메인페이지</title>
+<title>지우동(지금 우리 동네는)</title>
 
 <!-- google font -->
 <style>

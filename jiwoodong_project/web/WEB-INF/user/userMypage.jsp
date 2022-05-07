@@ -350,7 +350,7 @@
 							<th colspan="3" style="font-size: 2em;">회원정보확인</th>
 						</tr>
 						<tr>
-							<td colspan="3"><p id="s_id_style">${usMemberListInfo.umId }</p>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</td>
+							<td colspan="3"><p id="s_id_style">${um_id }</p>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -358,7 +358,7 @@
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">아이디</th>
 							<td colspan="2" class="table-light" id="s_us_no">
 							<input type="text" class="form-control border_none" name="umId" readonly="readonly"
-								value="${usMemberListInfo.umId }" /></td>
+								value="${um_id }" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="vertical-align: middle;">비밀번호</th>
@@ -384,7 +384,7 @@
   <script>
   	$("#umPwd").keyup(function() {
   		// console.log("db에 있는 pwd 확인" + ${uvo.umPwd});
-  		var db_pwd = "${usMemberListInfo.umPwd}";
+  		var db_pwd = "${password}";
   		console.log(db_pwd);
   		var check_pwd = $("#umPwd").val();
   		

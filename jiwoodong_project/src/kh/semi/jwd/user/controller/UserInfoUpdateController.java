@@ -38,7 +38,7 @@ public class UserInfoUpdateController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String umId = "apple";
+		String umId = request.getParameter("umId");
 		
 		UserVo usMemberListInfo = new UserService().usMemberListInfo(umId);
 		request.setAttribute("usMemberListInfo", usMemberListInfo);
