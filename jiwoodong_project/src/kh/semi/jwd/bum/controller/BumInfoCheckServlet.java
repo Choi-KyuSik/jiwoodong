@@ -40,7 +40,7 @@ public class BumInfoCheckServlet extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			   
-			   //°¡Á®¿Â ¼¼¼Ç¿¡¼­ ¼Ó¼º¸íÀ» ÅëÇØ µ¥ÀÌÅÍ °ªÀ» °¡Á®¿Í¼­ String º¯¼ö¿¡ ÀúÀå
+			   //ê°€ì ¸ì˜¨ ì„¸ì…˜ì—ì„œ ì†ì„±ëª…ì„ í†µí•´ ë°ì´í„° ê°’ì„ ê°€ì ¸ì™€ì„œ String ë³€ìˆ˜ì— ì €ì¥
 			   String bu_id = (String)session.getAttribute("bu_id");
 			   String password = (String)session.getAttribute("password");
 
