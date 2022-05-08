@@ -403,7 +403,7 @@ public class BumDao {
 	}
 
 	// 우진 - 업체등록
-	public int companyWrite(Connection conn, CompanyVo cvo) {
+	public int companyWrite(Connection conn, CompanyVo cvo, int buNo) {
 
 		int result = 0;
 
@@ -522,5 +522,26 @@ public class BumDao {
 		}
 		System.out.println("companyWriteCheck 값 담겼나?:" + result2);
 		return result2;
+	}
+	
+	//우진 - buNo 뽑아오기
+	public int getBuno(Connection conn, String bu_id) {
+		int list = 0;
+		String sql = "select bu_no from b_member where bu_id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bu_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return list;
 	}
 }

@@ -48,7 +48,7 @@ public class BumLoginDoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String bu_id = request.getParameter("bu_id");
 		String password = request.getParameter("password");
-		String buNo = request.getParameter("buNo");
+		
 		
 		System.out.println("bu_id : " + bu_id);
 		System.out.println("password : " + password);
@@ -57,10 +57,10 @@ public class BumLoginDoController extends HttpServlet {
 		vo.setBuId(bu_id);
 		vo.setBuPwd(password);
 		vo.setBuName(vo.getBuName());
-		vo.setBuNo(vo.getBuNo());
 		
 		BumLoginVo result = new BumService().loginBuMember(vo);
 		System.out.println("controller BumLoginVo : " + result);
+		int buNo = new BumService().getBuno(bu_id);
 		// 사업자번호 뽑아서 세션에넣기
 		int cpno = new BusinessReservationService().getCpno(result.getBuId());
 		if(result != null && result.getBuId() !=null) {
@@ -70,7 +70,7 @@ public class BumLoginDoController extends HttpServlet {
 			session.setAttribute("password", result.getBuPwd());
 			session.setAttribute("buName", result.getBuName());
 			session.setAttribute("cpNo", cpno);
-			session.setAttribute("buNo", result.getBuNo());
+			session.setAttribute("buNo", buNo);
 			System.out.println("bu_id:"+bu_id);
 			System.out.println("password:"+password);
 			System.out.println("name:"+result.getBuName());
@@ -89,8 +89,5 @@ public class BumLoginDoController extends HttpServlet {
 		   // request.getRequestDispatcher("bumLogin").forward(request, response);
 			
 		}
-		
-
 	}
-
 }

@@ -162,7 +162,7 @@ td, th {
 						<%= session.getAttribute("buName") %>님</p>
 					<ul class="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" id="k_pwdinfo">비밀번호 재설정</a></li>
+						<li><a class="dropdown-item" id="k_pwdinfo" href="">비밀번호 재설정</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>

@@ -40,7 +40,6 @@ public class BumMainPage extends HttpServlet {
 	   
 	   //가져온 세션에서 속성명을 통해 데이터 값을 가져와서 String 변수에 저장
 	   String bu_id = (String)session.getAttribute("bu_id");
-	   String password = (String)session.getAttribute("password");
 	   
 	  // System.out.println("session담겼나?:"+ bu_id+ "님 비밀번호는"  + password);
 	   

@@ -310,7 +310,8 @@ article>div>p {
                         </tr>
                         <tr>
                            <th class="table-primary s_us_th"
-                              style="-bs-table-accent-bg: none;">운영 구분</th>
+                              style="-bs-table-accent-bg: none;">운영 구분<span
+                              class="k_essential_info">*필수</span></th>
                            <td class="table-light"><input type="radio"
                               class="form-check-input" id="k_everyday" value="B"
                               name="cpClassify"> <label class="form-check-label"

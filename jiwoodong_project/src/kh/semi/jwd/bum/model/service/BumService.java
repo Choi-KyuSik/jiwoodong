@@ -109,9 +109,9 @@ public class BumService {
 	}
 
 	// 우진
-	public int companyWrite(CompanyVo cvo) {
+	public int companyWrite(CompanyVo cvo, int buNo) {
 		Connection conn = getConnection();
-		int result = new BumDao().companyWrite(conn, cvo);
+		int result = new BumDao().companyWrite(conn, cvo, buNo);
 		close(conn);
 		System.out.println("companyWriteService result: " + result);
 		return result;
@@ -145,5 +145,12 @@ public class BumService {
 			close(conn);
 			System.out.println("companyCheck result" + result2);
 			return result2;
+		}
+	//우진
+		public int getBuno(String bu_id) {
+			Connection conn = getConnection();
+			int list = new BumDao().getBuno(conn,bu_id);
+			close(conn);
+			return list;
 		}
 }

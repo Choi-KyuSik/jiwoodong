@@ -336,12 +336,12 @@ article>div>p {
 									class="nav-link dropdown-toggle" href="#" role="button"
 									data-bs-toggle="dropdown"> 예약관리 </a>
 									<ul class="dropdown-menu dropdown-menu">
-										<li><a class="dropdown-item" id="k_re_menu_enroll" href="#"
+										<li><a class="dropdown-item" id="k_re_menu_enroll" href=""
 											>예약메뉴등록</a></li>
 										<li>
 											<hr class="dropdown-divider">
 										</li>
-										<li><a class="dropdown-item" id="k_re_cu_menu" href="#">예약
+										<li><a class="dropdown-item" id="k_re_cu_menu" href="">예약
 												조회/수정</a></li>
 									</ul></li>
 							</ul>
@@ -365,7 +365,7 @@ article>div>p {
 						<%= session.getAttribute("buName") %>님</p>
 					<ul class="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" id="k_pwdinfo">비밀번호 재설정</a></li>
+						<li><a class="dropdown-item" id="k_pwdinfo" href="">비밀번호 재설정</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>

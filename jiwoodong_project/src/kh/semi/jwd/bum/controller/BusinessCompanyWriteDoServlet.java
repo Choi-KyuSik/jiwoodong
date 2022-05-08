@@ -51,12 +51,11 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 		
 		int result = 0;
 		int result2 = 0;
+			   
+		int buNo = (int) request.getSession().getAttribute("buNo");
 		
-		 HttpSession session = request.getSession();
-		   
-		   //가져온 세션에서 속성명을 통해 데이터 값을 가져와서 String 변수에 저장
-		 int buNo = (int)session.getAttribute("buNo");
-		   
+		
+		System.out.println("buNo 담기는거 맞아?:" + buNo );
 		
 		String cpName = request.getParameter("cpName");
 		String cpCategory = request.getParameter("cpCategory");
@@ -71,11 +70,9 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 		String cpDtaddress = request.getParameter("cpDtaddress");
 		String flGno = request.getParameter("fileUrl1");
 		String flGno2 = request.getParameter("fileUrl2");
-		String flGno3 = request.getParameter("fileUrl3");
-		
-		
-//		//업체등록 가능여부 확인
-//		String cpSignYn = request.getParameter("cpSignYn");
+		String flGno3 = request.getParameter("fileUrl3");		
+		//업체등록여부 확인
+		String cpSignYn = request.getParameter("cpSignYn");
 
 		CompanyVo cvo = new CompanyVo();
 		cvo.setBuNo(buNo);
@@ -95,8 +92,11 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 		cvo.setFlGno3(flGno3);
 				
 		System.out.println("cvo:" + cvo);
+		//가져온 세션에서 속성명을 통해 데이터 값을 가져와서 String 변수에 저장
+		 
+		 
 
-		result = new BumService().companyWrite(cvo);
+		result = new BumService().companyWrite(cvo, buNo);
 		
 		System.out.println("Controller result" + result);
 
@@ -117,8 +117,8 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 			out1.println("</script>");
 			out1.flush();
 		}
-		/*
-		result2 = new BumService().companyWriteCheck(buNo);
+		
+/*		result2 = new BumService().companyWriteCheck(buNo);
 		
 		//업체등록 중복여부 확인
 		if(cpSignYn == "Y") {
@@ -139,7 +139,6 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 			}else {
 				
 			}
-		}
-		*/
+		} */
 	}
 }
