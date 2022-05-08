@@ -38,8 +38,8 @@ public class UserMypageController extends HttpServlet {
 		
 		UserVo usMemberListInfo = new UserService().usMemberListInfo(umId);
 		ArrayList<CompanyVo> usCpList = new UserService().usCpList();
-		ArrayList<Map<String, Object>> usBkList = new UserService().usBkList();
-		ArrayList<Map<String, Object>> usRvList = new UserService().usRvList();
+		ArrayList<Map<String, Object>> usBkList = new UserService().usBkList(umId);
+		ArrayList<Map<String, Object>> usRvList = new UserService().usRvList(umId);
 		
 		// System.out.println("usCpList : " + usCpList);
 		

@@ -27,6 +27,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<!-- 결제 API : iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <title>지우동 예약</title>
 <style>
 	.rstime{
@@ -179,6 +181,53 @@
             </ul>
         </div>
     </section>
+    <!-- 결제API : 손은진 -->
+    <script>
+       var IMP = window.IMP; // 생략 가능
+      IMP.init("imp39204315") // 지우동 가맹점 식별코드
+      
+      function requestPay() {
+            // IMP.request_pay(param, callback) 결제창 호출
+            IMP.request_pay({ // param
+                pg: "html5_inicis", // 이니시스 웹표준 결제창
+                pay_method: "card", // 결제 방법
+                /* TODO : 예약번호로 넣기 */
+                merchant_uid: new Date().getTime() + "jwd", // 주문번호
+                name: $("#rsmenu option:selected").text(), // 상품명
+                amount: $("#rsmenuprice").val(), // 가격
+                buyer_email: "dms102336@gmail.com", // 이메일
+                /* TODO : 구매자 이름, 전화번호, 주소, 우편번호 로그인 한 사용자 정보로 가져오기 */
+                buyer_name: $("#rsname").val(), // 이름
+                buyer_tel: "010-1111-1111", // 전화번호
+                buyer_addr: "서울특별시 강남구", // 주소
+                buyer_postcode: "01181" // 우편번호
+            }, function (rsp) { // callback
+               if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+            	   var frmEl = $("#frmrsinsert");
+                   alert("결제가 완료되었습니다.");
+                   alert("예약이 완료되었습니다.");
+                   frmEl.attr("action", "UserReservationInsertSalon");
+                   frmEl.attr("method", "post");
+                   frmEl.submit();
+
+            	   /* let response = fetch("/payment", {
+                       method: "post",
+                       body : JSON.stringify(rsp),
+                       headers: {
+                          "Content-Type" : "application/json; charset=utf-8"
+                       }
+                    }); */
+                } else {
+                	alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+                	if(rsp.error_msg == "사용자가 결제를 취소하셨습니다") {
+                		alert("결제가 취소되었습니다. 메인페이지로 돌아갑니다.");
+                		location.href="UserMypage";
+                	}
+                }
+            });
+          }
+    </script>
+    
     <!-- 데이더픽커  -->
      <script>
      // 데이터픽커 선언
@@ -355,26 +404,36 @@
     	});
 	    $("#btnsubmit").click(function(){
     		if($("#rsdate").val() == ""){
-    			alert('날짜를 선택해주세요')
+    			alert('날짜를 선택해주세요');
+    			$("#rsdate").focus();
     			return;
     		} 
     		if($("#rstime").val() == ""){
-    			alert('시간을 선택해주세요')
+    			alert('시간을 선택해주세요');
+    			$("#rstime").focus();
     			return;
     		} 
     		if($("#rsname").val() == ""){
-    			alert('이름을 입력해주세요')
+    			alert('이름을 입력해주세요');
+    			$("#rsname").focus();
     			return;
     		} 
     		if($("#rsphone").val() == ""){
-    			alert('전화번호를 입력해주세요')
+    			alert('전화번호를 입력해주세요');
+    			$("#rsphone").focus();
     			return;
     		} 
     		if($("#rsmenu").val() == "none"){
-    			alert('메뉴를 선택해주세요')
+    			alert('메뉴를 선택해주세요');
+    			$("#rsmenu").focus();
     			return;
     		} 
-	    	$("#frmrsinsert").submit();
+    		
+    		console.log("찍힘? ");
+    		if($("#rsmenu").val() != "none" && $("#rsmenucount").val() != "none" && $("#rsdate").val() != "" && $("#rstime").val() != "" && $("#rsname").val() != "" && $("#rsphone").val() != "") {
+                requestPay();
+             }
+	    	// $("#frmrsinsert").submit();
 	    })
     </script>
     <script>

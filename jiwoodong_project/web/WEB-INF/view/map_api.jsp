@@ -20,8 +20,12 @@
 }
 
 .map_wrap {
+/* 	position: relative;
+	width: 100%;
+	height: 100%; */
 	position: relative;
 	width: 100%;
+	margin: 0 auto;
 	height: 100%;
 }
 
@@ -195,15 +199,16 @@
 </style>
 </head>
 <body>
+
 	<div class="map_wrap">
 		<div id="map"
-			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+			style="height: 100%; position: relative; overflow: hidden;"></div>
 
 		<div id="menu_wrap" class="bg_white">
 			<div class="option">
 				<div>
 					<form onsubmit="searchPlaces(); return false;">
-						키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15">
+						키워드 : <input type="text" value="이태원" id="keyword" size="15">
 						<button type="submit">검색하기</button>
 					</form>
 				</div>
@@ -216,6 +221,8 @@
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56f933d730edd6925940403e2568524b&libraries=services"></script>
+		
+<!-- 지도 API : 구식 -->
 	<script>
 		// 마커를 담을 배열입니다
 		var markers = [];

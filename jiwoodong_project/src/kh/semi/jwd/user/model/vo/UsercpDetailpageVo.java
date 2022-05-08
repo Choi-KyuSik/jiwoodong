@@ -30,6 +30,8 @@ public class UsercpDetailpageVo {
 	private Date rvWriteDate;
 	private String buTel;
 	private String flGno;
+	private String flGno2;
+	private String flGno3;
 	private String umId;
 
 
@@ -46,6 +48,28 @@ public class UsercpDetailpageVo {
 				+ cpExplain + ", rvNo=" + rvNo + ", rvScore=" + rvScore + ", rvContent=" + rvContent + ", rvWriteDate="
 				+ rvWriteDate + ", buTel=" + buTel + ", flGno=" + flGno + ", umId=" + umId + "]";
 	}
+
+	
+	
+	public String getFlGno2() {
+		return flGno2;
+	}
+
+
+	public void setFlGno2(String flGno2) {
+		this.flGno2 = flGno2;
+	}
+
+
+	public String getFlGno3() {
+		return flGno3;
+	}
+
+
+	public void setFlGno3(String flGno3) {
+		this.flGno3 = flGno3;
+	}
+
 
 	public int getCpNo() {
 		return cpNo;

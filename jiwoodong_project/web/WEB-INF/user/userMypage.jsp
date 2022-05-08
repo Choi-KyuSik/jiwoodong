@@ -55,11 +55,17 @@
                 <c:forEach items="${usCpList }" var="i">
                   <div class="c_company">
                     <a href="#">
-                      <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203806155157504/hotel.jpg"
+                    	<c:if test="${empty i.flGno }">
+                      <img src="https://media.discordapp.net/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png?width=1358&height=1358"
                         class="c_slider-image">
+                        </c:if>
+                        <c:if test="${not empty i.flGno }">
+                      <img style="border-radius: 10px;" src="${i.flGno }"
+                        class="c_slider-image">
+                        </c:if>
                     </a>
                     <div class="c_company-info">
-                      <h6 style="margin-top: 10px;"><a href="#"> ${i.cpName } </a></h6>
+                      <p style="margin-top: 20px; font-weight: bold; font-size: 1.5em">${i.cpName }</p>
                       <div class="far fa-user" style="height:10%;"> ${i.cpAddress } ${i.cpDtaddress } </div>
                     </div>
                   </div>
@@ -236,12 +242,12 @@
     
   <!-- 네비 주변검색 -->
     <article>
-      <div id="c_maps_info">
+       <div id="c_maps_info">
         <div style="width:100%; height: 100%;">
 		<%@ include file="../view/map_api.jsp"%>
 		</div>
       </div>
-    </article>
+ </article>
     
     <!-- 네비 예약현황 -->
     <article>

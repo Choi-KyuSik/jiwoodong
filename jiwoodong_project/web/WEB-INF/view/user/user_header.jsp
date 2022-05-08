@@ -24,7 +24,7 @@
             <div class="collapse navbar-collapse">
               <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown" id="c_cplist" href="#" role="button">
+                  <a class="nav-link dropdown" id="c_cplist" href="uscplist" role="button">
                     업체조회
                   </a>
                 </li>
@@ -101,6 +101,9 @@
       $("#c_us_info_edit_info").hide();
       $("#main_box").hide();
       $(".s_row").hide();
+      
+      $("#c_maps_info").load("UserMapAPI");
+      // location.href="UserMapAPI";
     });
     $("#c_bklist").click(function () {
     	console.log("찍히냐? c_bklist");

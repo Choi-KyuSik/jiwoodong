@@ -22,7 +22,10 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56f933d730edd6925940403e2568524b&libraries=services"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <title>업체 상세 페이지</title>
 </head>
@@ -91,16 +94,21 @@
 				<div class="c_company_info" style="border-radius: 15px;">
 					
 					<div>
+						<c:forEach items="${uscpdetail }" var="i">
 						<div style="text-align: center;">
-							<a href="#" style="text-align: center;"> <img
-								src="https://cdn.discordapp.com/attachments/958566133752016903/966709567109095484/hotel.jpg"
+							<a href="#" style="text-align: center;"> 
+							<c:if test="${empty i.flGno }">
+							<img src="https://hk-clean.co.kr/images/no_image.jpg"
 								alt="" style="width: 400px; height: 300px; margin: 30px;">
+								</c:if>
+							<c:if test="${not empty i.flGno }">
+							<img src="${i.flGno }" alt="" style="width: 400px; height: 300px; margin: 30px;">
+							</c:if>
 							</a>
 						</div>
-						<c:forEach items="${uscpdetail }" var="i">
 						<div style="margin-bottom: 20px; text-align: center;">
 						
-							<h4>${i.cpName }</h4>
+							<p style="font-weight: bold; font-size: 1.5em;">${i.cpName }</p>
 							<div>
 								<span>☆ 4.8 / 5.0</span>
 							</div>
@@ -116,7 +124,7 @@
 
 						<hr style="margin: 0;">
 
-						<div style="width: 900px;">
+						<div id="s_us_content_box" style="width: 900px;">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
 								<li class="nav-item" role="presentation">
 									<button class="nav-link active" id="c_home-tab"
@@ -226,15 +234,27 @@
 									aria-labelledby="c_img-tab">
 									<ul class="c_img_list">
 										<div style="margin: 30px 0;">
+										<c:forEach items="${uscpdetail }" var="i">
 											<li class="c_img_box">
-												<div>
-													<a href="#"> <img
-														src="https://cdn.discordapp.com/attachments/958566133752016903/966709567696285696/hotel1.jpg"
-														class="c_img" alt="">
-													</a>
-												</div>
+												<!-- <div> -->
+											<c:if test="${empty i.flGno }">
+												<img
+													src="https://economist.co.kr/resources/images/error/noimage.gif"
+													class="c_img" alt="">
+											</c:if>
+											<c:if test="${not empty i.flGno }">
+												<img src="${i.flGno }" class="c_img" alt="">
+													<c:if test="${not empty i.flGno2 }">
+														<img src="${i.flGno2 }" class="c_img" alt="">
+													</c:if>
+													<c:if test="${not empty i.flGno3 }">
+														<img src="${i.flGno3 }" class="c_img" alt="">
+													</c:if>
+											</c:if>
+												<!-- </div> -->
 											</li>
-											<li class="c_img_box">
+											</c:forEach>
+											<!-- <li class="c_img_box">
 												<div>
 													<a href="#"> <img
 														src="https://cdn.discordapp.com/attachments/958566133752016903/966709568396730439/hotel2.jpg"
@@ -289,7 +309,7 @@
 														class="c_img" alt="">
 													</a>
 												</div>
-											</li>
+											</li> -->
 										</div>
 									</ul>
 								</div>
@@ -297,10 +317,10 @@
 								<!--지도 탭 내용-->
 								<div class="tab-pane fade" id="c_map" role="tabpanel"
 									aria-labelledby="c_map-tab">
-									<div style="padding: 50px 0 50px 0">
-										<div id="map" style="width: 100%; height: 350px;"></div>
-
-										<script type="text/javascript"
+									<div id="u_map_content" style="padding: 50px 0 50px 0; height: 700px; margin-top: 30px; width: 900px;">
+										<!-- <div id="u_map_content2" style="width: 100%; height: 350px;"></div> -->
+	
+										<!-- <script type="text/javascript"
 											src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56f933d730edd6925940403e2568524b"></script>
 										<script>
 											var mapContainer = document
@@ -330,7 +350,7 @@
 
 											// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 											// marker.setMap(null);
-										</script>
+										</script> -->
 										<%-- <%@ include file="../view/map_api.jsp"%> --%>
 									</div>
 								</div>
@@ -488,11 +508,19 @@
 			</div>
 		</article>
 		<article>
-			<div id="c_mapsc_info" class="c_info_bgcolor">
+			<%-- <div id="c_mapsc_info" class="c_info_bgcolor">
 				<%@ include file="../view/map_api.jsp"%>
-			</div>
+			</div> --%>
 		</article>
 	</section>
+
+
+	<script>
+		$("#c_map-tab").click(function() {
+			$("#u_map_content").load("UserMapAPI");
+			// $("#s_us_content_box").load("UserMapAPI");
+		});
+	</script>
 
 	<script>
 		/* 네비 선택시 */

@@ -220,7 +220,7 @@ public class UserDao {
 			
 			ArrayList<CompanyVo> volist = null;
 			
-			String sql = "SELECT CP_NAME, CP_ADDRESS, CP_DTADDRESS FROM COMPANY WHERE CP_SIGNYN IN ('Y','y')";
+			String sql = "SELECT CP_NAME, CP_ADDRESS, CP_DTADDRESS, FL_GNO FROM COMPANY WHERE CP_SIGNYN IN ('Y','y')";
 			
 			volist = new ArrayList<CompanyVo>();
 			
@@ -233,6 +233,7 @@ public class UserDao {
 					cvo.setCpName(rs.getString("CP_NAME"));
 					cvo.setCpAddress(rs.getString("CP_ADDRESS"));
 					cvo.setCpDtaddress(rs.getString("CP_DTADDRESS"));
+					cvo.setFlGno(rs.getString("FL_GNO"));
 					
 					volist.add(cvo);
 				}
@@ -250,7 +251,7 @@ public class UserDao {
 		}
 		
 		// 사용자 마이페이지 - 예약 현황 조회 : 최규식
-		public ArrayList<Map<String, Object>> usBkList(Connection conn) {
+		public ArrayList<Map<String, Object>> usBkList(Connection conn, String umId) {
 			
 			 ArrayList<Map<String, Object>> volist = null;
 			 
@@ -258,7 +259,7 @@ public class UserDao {
 			 		+ "    (select rownum rnum, a.*"
 			 		+ "     from (select cp_name,bk_date, substr(bk_time, 1, 5), REPLACE(REPLACE(REPLACE (BK_STATUS,'R','예약완료'),'H','예약대기'),'C','예약취소') as bk_statusC"
 			 		+ "            from booking b"
-			 		+ "            join company c on b.cp_no = c.cp_no) a)"
+			 		+ "            join company c on b.cp_no = c.cp_no where um_id = ?) a)"
 			 		+ "where rnum between 1 and 3";
 					 
 					/* "select * from "
@@ -270,6 +271,7 @@ public class UserDao {
 			 
 			 try {
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, umId);
 				rs = pstmt.executeQuery();
 				
 				volist = new ArrayList<Map<String,Object>>();
@@ -292,7 +294,7 @@ public class UserDao {
 			 return volist;
 		}
 		// 사용자 마이페이지 - 리뷰리스트 : 최규식
-		public ArrayList<Map<String, Object>> usRvList(Connection conn) {
+		public ArrayList<Map<String, Object>> usRvList(Connection conn, String umId) {
 			
 			ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
@@ -309,7 +311,7 @@ public class UserDao {
 					+ "      end 평점 "
 					+ "    , to_char(rv_write_date, 'yyyy/mm/dd') 작성일 "
 					+ "      from booking b join review r using(bk_no) join company c using (cp_no) "
-					+ "      where b.um_id = 'apple' order by b.bk_write_date desc) A)"
+					+ "      where b.um_id = ? order by b.bk_write_date desc) A)"
 					+ " where rnum between 1 and 5";
 			
 			// 노란색하트
@@ -354,6 +356,7 @@ public class UserDao {
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, umId);
 				rs = pstmt.executeQuery();
 				
 				while (rs.next()) {

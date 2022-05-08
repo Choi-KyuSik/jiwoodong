@@ -17,7 +17,7 @@ public class UsercpSearchpageDao {
 	public ArrayList<UsercpSearchpageVo> listCompany(Connection conn) {
 		ArrayList<UsercpSearchpageVo> result = new ArrayList<UsercpSearchpageVo>();
 		
-		String sql = "select * from company";
+		String sql = "select * from company where cp_signyn in ('y', 'Y')";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -31,6 +31,7 @@ public class UsercpSearchpageDao {
 				vo.setCpCloseTime(rs.getString("CP_CLOSE_TIME"));
 				vo.setCpAddress(rs.getString("CP_ADDRESS"));
 				vo.setCpDTAddress(rs.getString("CP_DTADDRESS"));
+				vo.setFlGno(rs.getString("FL_GNO"));
 				result.add(vo);
 			}
 			

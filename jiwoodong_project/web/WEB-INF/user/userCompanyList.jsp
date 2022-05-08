@@ -109,8 +109,8 @@
 	<section style="height: 100%;">
         <div id="main_box"
             style="width: 1200px; margin: 15px auto 0; background-color: rgb(241, 241, 241); border-radius: 15px;">
-            <ul style="padding-top: 20px;">
-                <div style="width: 95%; background-color: white; border-radius: 15px; margin-left: 12px;">
+            <ul style="padding-top: 20px; height: 100%; padding-bottom: 20px;">
+                <div style="width: 95%; background-color: white; border-radius: 15px; margin-left: 12px; height: 100%;">
                     <div style="padding: 45px 0 10px 40px; border-bottom: 2px solid silver;">
                         <h3 style="font-weight: 600;">지금 우리 동네는</h3>
                     </div>
@@ -125,8 +125,14 @@
 						<c:forEach items="${uscplist }" var="i">
 	                    <li style="display: inline-block; width: 22%; margin: 20px 10px 40px 10px;">
 	                        <div class="card">
-	                            <img src="https://cdn.discordapp.com/attachments/958566133752016903/966709567109095484/hotel.jpg"
+	                        <c:if test="${empty i.flGno }">
+	                            <img width="235px;" height="200px;" src="https://economist.co.kr/resources/images/error/noimage.gif"
 	                                class="card-img-top" alt="...">
+	                         </c:if>
+	                         <c:if test="${not empty i.flGno }">
+	                            <img width="235px;" height="200px;" src="${i.flGno }"
+	                                class="card-img-top" alt="...">
+	                         </c:if>
 	                            <table style="margin-top: 20px; margin-left: 10px;">
 	                            	<tr>
 	                            		<th colspan="3">
@@ -139,7 +145,7 @@
 	                            		<td style="display: none;">${i.cpNo }</td>
 	                            		<td>
                         			<input type="button" id="detailbtn" onclick="movepage()" class="btn btn-primary detailbtn" style="position: absolute; right: 15px; bottom: 15px;" value="자세히"/>
-                        </td>
+                       		 </td>
 	                            	</tr>
 	                            </table>
 	                            <div class="card-body"  style=" height: 150px;">

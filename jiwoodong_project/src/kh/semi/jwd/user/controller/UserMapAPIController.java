@@ -1,28 +1,23 @@
 package kh.semi.jwd.user.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.jwd.user.model.service.UsercpDetailpageService;
-import kh.semi.jwd.user.model.vo.UsercpDetailpageVo;
-
 /**
- * Servlet implementation class UsercpDetailpageServlet
+ * Servlet implementation class UserMapAPIController
  */
-@WebServlet("/uscpdetail")
-public class UsercpDetailpageController extends HttpServlet {
+@WebServlet("/UserMapAPI")
+public class UserMapAPIController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UsercpDetailpageController() {
+    public UserMapAPIController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +26,14 @@ public class UsercpDetailpageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String cpNoStr = request.getParameter("cpNo");
-		int cpNo = Integer.parseInt(cpNoStr);
-		System.out.println("cpNo : " + cpNo);
-		
-		ArrayList<UsercpDetailpageVo> uscpdetail = new UsercpDetailpageService().companyDetail(cpNo);
-		System.out.println("uscpdetail : " + uscpdetail);
-		request.setAttribute("uscpdetail", uscpdetail);
-		request.getRequestDispatcher("WEB-INF/user/userCompanyDetail.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/map_api.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		 TODO Auto-generated method stub
+//		// TODO Auto-generated method stub
 //		doGet(request, response);
 //	}
 
