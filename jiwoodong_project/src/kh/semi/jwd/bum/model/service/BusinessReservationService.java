@@ -160,4 +160,11 @@ public class BusinessReservationService {
 		return result;
 	}
 
+	public int getCpno(String bu_id) {
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().getCpno(conn,bu_id);
+		close(conn);
+		return result;
+	}
+
 }

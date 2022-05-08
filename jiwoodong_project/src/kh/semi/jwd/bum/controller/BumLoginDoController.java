@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import kh.semi.jwd.bum.model.dao.BumDao;
 import kh.semi.jwd.bum.model.service.BumService;
+import kh.semi.jwd.bum.model.service.BusinessReservationService;
 import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
 
@@ -57,14 +58,15 @@ public class BumLoginDoController extends HttpServlet {
 		vo.setBuName(vo.getBuName());
 		BumLoginVo result = new BumService().loginBuMember(vo);
 		System.out.println("controller BumLoginVo : " + result);
-		
+		// 사업자번호 뽑아서 세션에넣기
+		int cpno = new BusinessReservationService().getCpno(bu_id);
 		if(result != null && result.getBuId() !=null) {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("bu_id", result.getBuId());
 			session.setAttribute("password", result.getBuPwd());
 			session.setAttribute("buName", result.getBuName());
-			
+			session.setAttribute("cpNo", cpno);
 			System.out.println("bu_id:"+bu_id);
 			System.out.println("password:"+password);
 			System.out.println("name:"+result.getBuName());

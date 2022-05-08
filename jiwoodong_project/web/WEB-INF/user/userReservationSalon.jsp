@@ -142,18 +142,18 @@
                         <h3>${CpInfo[0].cpName } 예약</h3>
                     </div>
                     <div style="margin: 30px;">
-	                    <form action="UserReservationInsert" method="post" id="frmrsinsert">
+	                    <form action="UserReservationInsertSalon" method="post" id="frmrsinsert">
 	                    <div style="float: left">
 	                    	<label style="font-size: 20px;">날짜선택 : <input type="text" id="datepicker"  name="rsdate" required></label><br>
-	                    	<label style="font-size: 20px; margin-top: 20px">시간선택 : </label>
-	                    	<div id="timemenu">
-		            			<h4 style="margin-top: 30px; color: rgb(241, 77, 12)">★날짜를 선택해 주세요★</h4>
+	                    	<label style="font-size: 20px; margin-top: 20px; float: left">시간선택 : </label>
+	                    	<div id="timemenu" style="width: 200px; float:left; clear: both">
+		            			<h4 style="margin-top: 30px; color: rgb(241, 77, 12)">★날짜 선택★</h4>
 		                    </div>
-		                    <div>
-		                    <label style="font-size: 20px; margin-top: 20px">예약자명 : <input type="text" id="rsname"  name="rsname" required></label>
+		                    <div style="float: left; padding-left: 70px;">
+		                    <label style="font-size: 20px;">예약자명 : <input type="text" id="rsname"  name="rsname" required></label><br>
 		                    <label style="font-size: 20px; margin-top: 20px">전화번호 : <input type="text" id="rsphone"  name="rsphone" required></label><br>
 		                    <label style="font-size: 20px; margin-top: 10px;">요청사항 : </label><br>
-		                    <textarea rows="3" cols="50"  style="width: 640px; margin: 10px 0 0 10px; resize: none; padding: 5px" id="rsrequire" name="rsrequire"></textarea><br>
+		                    <textarea rows="10" cols="30"  style="width:310px; margin: 10px 0 0 10px; resize: none; padding: 5px" id="rsrequire" name="rsrequire"></textarea><br>
 		                    </div>
 		                  </div>
 		                  <div style="float: right; margin-right: 20px">
@@ -168,21 +168,7 @@
 		                    		<option value="${menu.menuNo }">${menu.menuName }</option>
 		                    	</c:forEach>
 		                    	</select><br>
-		                    	<label style="font-size: 20px; margin-top: 20px"">메뉴가격 : <input type="text" id="rsmenuprice"  name="rsmenuprice" readonly></label><br>
-		                    	<label style="font-size: 20px; margin-top: 20px"">메뉴수량 : </label>
-		                    	<select style="font-size: 20px; width: 225px" id="rsmenucount">
-		                    			<option value="none">수량을 선택해주세요</option>
-		                    		<c:forEach var="index" begin="1" end="10">
-		                    			<option value="${index }">${index }</option>
-		                    		</c:forEach>
-		                    	</select><br>
-		                    	<textarea ows="2" cols="50"  style="width: 332px; resize: none; padding: 5px ; margin: 15px 0 " readonly id="menuinfo"></textarea><br>
-	                   	<span>
-	                   		총 : 
-		                   	<sapn id="totalprice" style="font-weight : bold;">
-		                   	</span>
-		                   원
-	                   	</span>
+		                    	<label style="font-size: 20px; margin-top: 20px; margin-bottom:20px">메뉴가격 : <input type="text" id="rsmenuprice"  name="rsmenuprice" readonly></label><br>
 	                   	<input type="button" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
 	                   	</div>
 	                   	<div id="h_menu" style="clear: both"></div>
@@ -266,7 +252,7 @@
 	    	$("#timemenu").append('<div class="timerow">');
 	    		opentime = '0'+opentime;
 	    	}
-			for(var o=  ${fn:substring(CpInfo[0].cpOpenTime, 3, 5)}; o < 60 ; o=o+10){
+			for(var o=  ${fn:substring(CpInfo[0].cpOpenTime, 3, 5)}; o < 60 ; o=o+30){
 				if(o==0){
 					$("#timemenu").append('<label  class="rstime">'+opentime+':00<input type="radio" value="'+opentime+':00" name="rstime" style="margin:10px"></label>');
 				} else {
@@ -276,7 +262,7 @@
 			$("#timemenu").append('</div">');
 			for(var i = ${fn:substring(CpInfo[0].cpOpenTime, 0, 2)}+1; i < ${fn:substring(CpInfo[0].cpCloseTime, 0, 2)}; i++){
 				$("#timemenu").append('<div class="timerow">');
-				for(var j = 0; j < 60 ; j=j+10){
+				for(var j = 0; j < 60 ; j=j+30){
 					if(j==0){
 						$("#timemenu").append('<label  class="rstime">'+i+':00<input type="radio" value="'+i+':00" name="rstime" style="margin:10px"></label>');
 					} else {
@@ -286,7 +272,7 @@
 				$("#timemenu").append('</div">');
 			}
 			$("#timemenu").append('<div class="timerow">');
-			 for(var k = 0 ; k <= ${fn:substring(CpInfo[0].cpCloseTime, 3, 5)} ; k=k+10){
+			 for(var k = 0 ; k <= ${fn:substring(CpInfo[0].cpCloseTime, 3, 5)} ; k=k+30){
 				 if(${fn:substring(CpInfo[0].cpCloseTime, 3, 5)}==0){
 						$("#timemenu").append('<label  class="rstime">'+${fn:substring(CpInfo[0].cpCloseTime, 0, 2)}+':00<input type="radio" value="'+${fn:substring(CpInfo[0].cpCloseTime, 0, 2)}+':00" name="rstime" style="margin:10px"></label>');
 					} else {
@@ -386,10 +372,6 @@
     		} 
     		if($("#rsmenu").val() == "none"){
     			alert('메뉴를 선택해주세요')
-    			return;
-    		} 
-    		if($("#rsmenucount").val() == "none"){
-    			alert('개수를 선택해주세요')
     			return;
     		} 
 	    	$("#frmrsinsert").submit();

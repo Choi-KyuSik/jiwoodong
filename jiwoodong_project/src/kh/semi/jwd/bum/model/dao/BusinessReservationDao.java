@@ -570,4 +570,24 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 		
 		return list;
 	}
+
+	public int getCpno(Connection conn, String bu_id) {
+		int list = 0;
+		String sql = "select cp_no from company where bu_id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bu_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return list;
+	}
 }

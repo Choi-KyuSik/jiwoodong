@@ -17,13 +17,13 @@ import kh.semi.jwd.user.model.service.UserReservationService;
  * Servlet implementation class UserReservationInsertServlet
  */
 @WebServlet("/UserReservationInsert")
-public class UserReservationInsertServlet extends HttpServlet {
+public class UserReservationInsertCafeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserReservationInsertServlet() {
+    public UserReservationInsertCafeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

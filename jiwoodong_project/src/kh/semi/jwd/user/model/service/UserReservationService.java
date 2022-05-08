@@ -52,5 +52,12 @@ public class UserReservationService {
 		close(conn);
 		return result;
 	}
+	
+	public int reservationInsertSalonmenu(Map<String, Object> map) {
+		Connection conn = getConnection();
+		int result = new UserReservationDao().reservationInsertSalonmenu(conn, map);
+		close(conn);
+		return result;
+	}
 
 }

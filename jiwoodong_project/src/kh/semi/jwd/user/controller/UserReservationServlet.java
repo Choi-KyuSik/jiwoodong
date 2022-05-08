@@ -32,7 +32,7 @@ public class UserReservationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cpNo = 14;
+		int cpNo = 12;
 		ArrayList<CompanyVo> result = new UserReservationService().cpInfo(cpNo);
 		ArrayList<Map<String, Object>> menu = new UserReservationService().cpmenu(cpNo);
 		request.setAttribute("CpInfo", result);
@@ -40,6 +40,8 @@ public class UserReservationServlet extends HttpServlet {
 		System.out.println(result);
 		if(result.get(0).getCpCategory().equals("카페")) {
 		request.getRequestDispatcher("WEB-INF/user/userReservationCafe.jsp").forward(request, response);
+		} else if(result.get(0).getCpCategory().equals("미용실")) {
+			request.getRequestDispatcher("WEB-INF/user/userReservationSalon.jsp").forward(request, response);
 		}
 	}
 	/**

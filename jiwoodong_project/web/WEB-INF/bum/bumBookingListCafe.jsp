@@ -681,7 +681,7 @@ td, th {
                                 html += '<td class="l5">'+list[i].bkDate+'</td>'
                                 html += '<td class="l6">'+list[i].bkTime+'</td>'
                                 if(list[i].menuCount == 1){
-                                	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
+                                	html += '<td class="l7">'+list[i].menuName+'</td>'
                                 } else {
                                 	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' 외 '+(list[i].menuCount-1)+'건'+'</td>'
                                 }

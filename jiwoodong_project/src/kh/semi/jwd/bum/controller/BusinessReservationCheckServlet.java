@@ -32,7 +32,7 @@ public class BusinessReservationCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cpNo = 14;
+		int cpNo = 12;
 	
 		ArrayList<Map<String, Object>> menulist = new  BusinessReservationService().menuList(cpNo);
 		request.setAttribute("menulist", menulist);
@@ -43,7 +43,7 @@ public class BusinessReservationCheckServlet extends HttpServlet {
 			request.setAttribute("reservation", reservation);
 			request.getRequestDispatcher("WEB-INF/bum/bumBookingListCafe.jsp").forward(request, response);
 		} else {
-		ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheckCafe(cpNo);
+		ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheck(cpNo);
 		request.setAttribute("reservation", reservation);
 		request.getRequestDispatcher("WEB-INF/bum/bumBookingList.jsp").forward(request, response);
 		}
