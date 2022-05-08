@@ -43,7 +43,8 @@ public class UserReservationInsertSalonServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String umid = "orange";
+		
+		String umid = (String) request.getSession().getAttribute("um_id");
 		int cpno = 18;
 		System.out.println(request.getParameter("rsdate"));
 		

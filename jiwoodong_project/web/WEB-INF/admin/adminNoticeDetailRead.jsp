@@ -59,7 +59,7 @@
 							<c:if test="${not empty adnvoList.flGno}">
 						<tr>
 							<td>
-							<img style="border-radius: 5px; float: right; width: 350px; height: 350px;" src="${adnvoList.flGno }">
+							<img style="border-radius: 5px; float: right; width: 350px; height: 350px; border: 1px solid #ced4da;" src="${adnvoList.flGno }">
 							<textarea class="form-control" placeholder="글 내용"
 									name="ntContent" maxlength="4000"
 									style="height: 350px; resize: none; float: left; width: 800px;" required="required">${adnvoList.ntContent}</textarea></td>
