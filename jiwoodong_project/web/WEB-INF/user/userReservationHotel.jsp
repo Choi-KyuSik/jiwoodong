@@ -146,6 +146,7 @@
                     </div>
                     <div style="margin: 30px;">
 	                    <form action="UserReservationInsertSalon" method="post" id="frmrsinsert">
+	                     <input type="hidden" value="${cpNo }" name="cpNo">
 	                    <div style="float: left">
 	                    	<label style="font-size: 20px;">날짜선택 : <input type="text" id="datepicker"  name="rsdate" required></label><br>
 	                    	<label style="font-size: 20px; margin-top: 20px; float: left">시간선택 : </label>

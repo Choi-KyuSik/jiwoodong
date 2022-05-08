@@ -45,7 +45,7 @@ public class UserReservationInsertSalonServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String umid = (String) request.getSession().getAttribute("um_id");
-		int cpno = 18;
+		int cpno = Integer.parseInt(request.getParameter("cpNo"));
 		System.out.println(request.getParameter("rsdate"));
 		
 		Map<String, Object> map = new HashMap<String, Object>();

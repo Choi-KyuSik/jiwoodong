@@ -148,6 +148,7 @@
                     </div>
                     <div style="margin: 30px;">
 	                    <form action="#" id="frmrsinsert">
+	                    <input type="hidden" value="${cpNo }" name="cpNo">
 	                    <div style="float: left">
 	                    	<label style="font-size: 20px;">날짜선택 : <input type="text" id="datepicker"  name="rsdate" required></label><br>
 	                    	<label style="font-size: 20px; margin-top: 20px">시간선택 : </label>
@@ -223,7 +224,7 @@
             	   var frmEl = $("#frmrsinsert");
                    alert("결제가 완료되었습니다.");
                    alert("예약이 완료되었습니다.");
-                   frmEl.attr("action", "UserReservationInsert");
+                   frmEl.attr("action", "UserReservationInsertCafe");
                    frmEl.attr("method", "post");
                    frmEl.submit();
 

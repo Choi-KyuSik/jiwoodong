@@ -16,7 +16,7 @@ import kh.semi.jwd.user.model.service.UserReservationService;
 /**
  * Servlet implementation class UserReservationInsertServlet
  */
-@WebServlet("/UserReservationInsert")
+@WebServlet("/UserReservationInsertCafe")
 public class UserReservationInsertCafeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,7 +44,7 @@ public class UserReservationInsertCafeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String umid = (String) request.getSession().getAttribute("um_id");
-		int cpno = 18;
+		int cpno = Integer.parseInt(request.getParameter("cpNo"));
 		String[] menuno = request.getParameterValues("menuno");
 		String[] menucount = request.getParameterValues("menucount");
 		System.out.println(menuno[0]);

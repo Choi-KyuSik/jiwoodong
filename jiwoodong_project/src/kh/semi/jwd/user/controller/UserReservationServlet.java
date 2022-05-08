@@ -34,6 +34,7 @@ public class UserReservationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cpNoStr = request.getParameter("cpNo");
 		int cpNo = Integer.parseInt(cpNoStr);
+		request.setAttribute("cpNo", cpNo);
 		// System.out.println("===========cpNo값 확인========== : " + cpNo);
 		
 		ArrayList<CompanyVo> result = new UserReservationService().cpInfo(cpNo);
