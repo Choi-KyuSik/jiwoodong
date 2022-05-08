@@ -51,7 +51,7 @@ public class BusinessReservationUpdateCafeServlet extends HttpServlet {
 			map.put("bkDate", request.getParameter("bkdate"));
 			map.put("bkTime", request.getParameter("bktime"));
 			map.put("bkRequire", request.getParameter("bkrequire"));
-			int cpNo = 14;
+			int cpNo = (int) request.getSession().getAttribute("cpNo");
 			int result = new BusinessReservationService().reservationUpdateCafe(map, cpNo);
 			if(result < 0) {
 				msg = "예약 수정 실패";

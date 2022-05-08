@@ -42,7 +42,7 @@ public class BusinessReservationMenuAddServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cpNo = 14;
+		int cpNo = (int) request.getSession().getAttribute("cpNo");
 		/*
 		 * String directory = "C:/z_workspace/z_java/jiwoodong_project/web/upload"; int
 		 * sizeLimit = 100*1024*1024; //100MB 제한

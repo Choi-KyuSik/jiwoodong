@@ -62,7 +62,7 @@ public class BumLoginDoController extends HttpServlet {
 		BumLoginVo result = new BumService().loginBuMember(vo);
 		System.out.println("controller BumLoginVo : " + result);
 		// 사업자번호 뽑아서 세션에넣기
-		int cpno = new BusinessReservationService().getCpno(bu_id);
+		int cpno = new BusinessReservationService().getCpno(result.getBuId());
 		if(result != null && result.getBuId() !=null) {
 			HttpSession session = request.getSession();
 			
@@ -75,6 +75,7 @@ public class BumLoginDoController extends HttpServlet {
 			System.out.println("password:"+password);
 			System.out.println("name:"+result.getBuName());
 			
+			System.out.println(request.getSession().getAttribute("cpNo"));
 			System.out.println("로그인 성공한거지 여기가?네네 - 오늘의 명언... 언니 최고...");
 			response.sendRedirect("BumMainPage");
 		}else {

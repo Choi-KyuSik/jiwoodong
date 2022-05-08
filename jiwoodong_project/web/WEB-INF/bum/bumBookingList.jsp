@@ -657,34 +657,34 @@ td, th {
 			})
     		}
     	})
-      
+    
 		</script>
 		
 		<script>
 		/* 내정보 관리 이동 */
-	    $("#k_info_menu").click(function() {
-	    location.href="buminfocheck";
-	    });		
-					
-		/* 업체등록 */
-		$("#k_bu_eroll_menu").click(function() {			
-			location.href="bucompany";
-		});
-		
-		//예약관리 - 예약 조회/수정
-		$("#k_re_cu_menu").click(function() {
-			location.href = "<%=request.getContextPath()%>/burscheck";
-		});
-		
-		/* 예약관리 - 예약 메뉴 등록 */
-		$("#k_re_menu_enroll").click(function() {
-			location.href = "<%=request.getContextPath()%>/burmenu";
-		});
-		
-		/* 토글 - 비밀번호 변경 */
-	  	$("#k_pwdinfo").click(function() {
-	  		location.href="buminfocheck";
-		});
+    	$("#k_info_menu").click(function() {
+    	location.href="buminfocheck";
+    	});		
+				
+	/* 업체등록 */
+	$("#k_bu_eroll_menu").click(function() {			
+		location.href="bucompany";
+	});
+	
+	//예약관리 - 예약 조회/수정
+	$("#k_re_cu_menu").click(function() {
+		location.href = "<%=request.getContextPath()%>/burscheck";
+	});
+	
+	/* 예약관리 - 예약 메뉴 등록 */
+	$("#k_re_menu_enroll").click(function() {
+		location.href = "<%=request.getContextPath()%>/burmenu";
+	});
+	
+	/* 토글 - 비밀번호 변경 */
+  	$("#k_pwdinfo").click(function() {
+  		location.href="buminfocheck";
+	});
 		</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

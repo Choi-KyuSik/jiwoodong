@@ -38,19 +38,19 @@ public class BumMainPage extends HttpServlet {
 	 	   	   
 	   HttpSession session = request.getSession();
 	   
-	   //°¡Á®¿Â ¼¼¼Ç¿¡¼­ ¼Ó¼º¸íÀ» ÅëÇØ µ¥ÀÌÅÍ °ªÀ» °¡Á®¿Í¼­ String º¯¼ö¿¡ ÀúÀå
+	   //ê°€ì ¸ì˜¨ ì„¸ì…˜ì—ì„œ ì†ì„±ëª…ì„ í†µí•´ ë°ì´í„° ê°’ì„ ê°€ì ¸ì™€ì„œ String ë³€ìˆ˜ì— ì €ì¥
 	   String bu_id = (String)session.getAttribute("bu_id");
 	   String password = (String)session.getAttribute("password");
 	   
-	  // System.out.println("session´ã°å³ª?:"+ bu_id+ "´Ô ºñ¹Ğ¹øÈ£´Â"  + password);
+	  // System.out.println("sessionë‹´ê²¼ë‚˜?:"+ bu_id+ "ë‹˜ ë¹„ë°€ë²ˆí˜¸ëŠ”"  + password);
 	   
 	   
-	  //¿¹¾à¸®½ºÆ®
-	  ArrayList<Map<String,Object>> list = new BumService().mainPageBookingList();
-	  //¸®ºä¸®½ºÆ®
-	  ArrayList<Map<String, Object>> result = new BumService().mainPageReviewList();
-	  ArrayList<Map<String,Object>> statiscicsVisit = new BumService().mainPageStatisticsVisit();
-	  ArrayList<Map<String,Object>> statiscicsReview = new BumService().mainPageStatisticsReview();
+	   int cpNo = (int) request.getSession().getAttribute("cpNo");
+	   System.out.println(cpNo);
+	  ArrayList<Map<String,Object>> list = new BumService().mainPageBookingList(cpNo);
+	  ArrayList<Map<String, Object>> result = new BumService().mainPageReviewList(cpNo);
+	  ArrayList<Map<String,Object>> statiscicsVisit = new BumService().mainPageStatisticsVisit(cpNo);
+	  ArrayList<Map<String,Object>> statiscicsReview = new BumService().mainPageStatisticsReview(cpNo);
 	  BumVo bvo = new BumService().companyCheck(bu_id);
 	  
 	 

@@ -32,8 +32,8 @@ public class BusinessReservationCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cpNo = 12;
-	
+		int cpNo = (int) request.getSession().getAttribute("cpNo");
+		System.out.println(request.getSession().getAttribute("cpNo"));
 		ArrayList<Map<String, Object>> menulist = new  BusinessReservationService().menuList(cpNo);
 		request.setAttribute("menulist", menulist);
 		

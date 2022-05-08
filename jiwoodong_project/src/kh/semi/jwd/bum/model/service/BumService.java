@@ -13,35 +13,35 @@ import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
 public class BumService {
 	// 재우
-	public ArrayList<Map<String, Object>> mainPageBookingList() {
+	public ArrayList<Map<String, Object>> mainPageBookingList(int cpNo) {
 		Connection conn = getConnection();
-		ArrayList<Map<String, Object>> list = new BumDao().mainPageBookingList(conn);
+		ArrayList<Map<String, Object>> list = new BumDao().mainPageBookingList(conn, cpNo);
 		close(conn);
 
 		return list;
 	}
 
 	// 우진
-	public ArrayList<Map<String, Object>> mainPageReviewList() {
+	public ArrayList<Map<String, Object>> mainPageReviewList(int cpNo) {
 		Connection conn = getConnection();
-		ArrayList<Map<String, Object>> result = new BumDao().mainPageReviewList(conn);
+		ArrayList<Map<String, Object>> result = new BumDao().mainPageReviewList(conn, cpNo);
 		close(conn);
 		System.out.println("BumService result:" + result);
 		return result;
 	}
 
 	// 재우
-	public ArrayList<Map<String, Object>> mainPageStatisticsVisit() {
+	public ArrayList<Map<String, Object>> mainPageStatisticsVisit(int cpNo) {
 		Connection conn = getConnection();
-		ArrayList<Map<String, Object>> list = new BumDao().mainPageStatisticsVisit(conn);
+		ArrayList<Map<String, Object>> list = new BumDao().mainPageStatisticsVisit(conn, cpNo);
 		close(conn);
 		return list;
 	}
 
 	// 재우
-	public ArrayList<Map<String, Object>> mainPageStatisticsReview() {
+	public ArrayList<Map<String, Object>> mainPageStatisticsReview(int cpNo) {
 		Connection conn = getConnection();
-		ArrayList<Map<String, Object>> list = new BumDao().mainPageStatisticsReview(conn);
+		ArrayList<Map<String, Object>> list = new BumDao().mainPageStatisticsReview(conn, cpNo);
 		close(conn);
 		return list;
 	}

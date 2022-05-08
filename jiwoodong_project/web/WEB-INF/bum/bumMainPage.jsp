@@ -336,7 +336,7 @@ article>div>p {
 									class="nav-link dropdown-toggle" href="#" role="button"
 									data-bs-toggle="dropdown"> 예약관리 </a>
 									<ul class="dropdown-menu dropdown-menu">
-										<li><a class="dropdown-item" id="k_re_menu_enroll"
+										<li><a class="dropdown-item" id="k_re_menu_enroll" href="#"
 											>예약메뉴등록</a></li>
 										<li>
 											<hr class="dropdown-divider">

@@ -51,7 +51,7 @@ public class BusinessReservationSelectStatusDayCafeServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 		String date = request.getParameter("day");
 		String status = request.getParameter("status");
-		int cpNo = 14;
+		int cpNo = (int) request.getSession().getAttribute("cpNo");
 		ArrayList<BumReservationVo> list = new BusinessReservationService().selectStatusCafe(date, cpNo, status);
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

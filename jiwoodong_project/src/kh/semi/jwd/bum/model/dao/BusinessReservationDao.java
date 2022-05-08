@@ -573,8 +573,9 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 
 	public int getCpno(Connection conn, String bu_id) {
 		int list = 0;
-		String sql = "select cp_no from company where bu_id = ?";
+		String sql = "select cp_no from company where bu_no in (select bu_no from b_member where bu_id = ?)";
 		try {
+			System.out.println(bu_id);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bu_id);
 			rs = pstmt.executeQuery();

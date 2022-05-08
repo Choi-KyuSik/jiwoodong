@@ -44,7 +44,7 @@ public class UserReservationInsertCafeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String umid = "orange";
-		int cpno = 14;
+		int cpno = 18;
 		String[] menuno = request.getParameterValues("menuno");
 		String[] menucount = request.getParameterValues("menucount");
 		System.out.println(menuno[0]);

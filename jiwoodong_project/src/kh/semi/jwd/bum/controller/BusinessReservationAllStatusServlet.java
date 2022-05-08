@@ -47,7 +47,7 @@ public class BusinessReservationAllStatusServlet extends HttpServlet {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		String date = request.getParameter("day");
-		int cpNo = 14;
+		int cpNo = (int) request.getSession().getAttribute("cpNo");
 		ArrayList<BumReservationVo> list = new BusinessReservationService().AllStatus(date, cpNo);
 		
 		JSONArray jsonArray = new JSONArray ();

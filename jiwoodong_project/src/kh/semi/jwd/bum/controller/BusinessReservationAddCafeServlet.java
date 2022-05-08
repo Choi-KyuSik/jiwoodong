@@ -60,7 +60,8 @@ public class BusinessReservationAddCafeServlet extends HttpServlet {
          map.put("bkTime", request.getParameter("bktime"));
          map.put("bkPrice", request.getParameter("bkPrice"));
          map.put("bkRequire", request.getParameter("bkrequire"));
-         int cpNo = 14;
+         System.out.println(request.getSession().getAttribute("cpNo"));
+         int cpNo = (int) request.getSession().getAttribute("cpNo");
          int result = new BusinessReservationService().reservationAdd(map, cpNo);
          if(result < 0) {
             msg = "예약 등록 실패";

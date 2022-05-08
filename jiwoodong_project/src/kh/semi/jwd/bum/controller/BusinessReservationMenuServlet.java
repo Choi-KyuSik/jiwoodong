@@ -31,7 +31,7 @@ public class BusinessReservationMenuServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cpNo = 14;
+		int cpNo = (int) request.getSession().getAttribute("cpNo");
 		ArrayList<Map<String, Object>> list = new BusinessReservationService().reservationMenuList(cpNo);
 		request.setAttribute("MenuList", list);
 		request.getRequestDispatcher("WEB-INF/bum/bumBookingMenuList.jsp").forward(request, response);

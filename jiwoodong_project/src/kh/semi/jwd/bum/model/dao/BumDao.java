@@ -23,12 +23,13 @@ public class BumDao {
 	private ResultSet rs = null;
 
 	// 재우
-	public ArrayList<Map<String, Object>> mainPageBookingList(Connection conn) {
+	public ArrayList<Map<String, Object>> mainPageBookingList(Connection conn, int cpNo) {
 
-		String sql = "select * from(select rownum,x.* from (select a.* from booking a order by a.bk_write_date desc) x) where rownum between 1 and 7 and cp_no = 14";
+		String sql = "select * from(select rownum,x.* from (select a.* from booking a order by a.bk_write_date desc) x) where rownum between 1 and 7 and cp_no = ?";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
@@ -50,7 +51,7 @@ public class BumDao {
 	}
 
 	// 우진
-	public ArrayList<Map<String, Object>> mainPageReviewList(Connection conn) {
+	public ArrayList<Map<String, Object>> mainPageReviewList(Connection conn, int cpNo) {
 
 		String sql = "select * from(select rownum, x.* from "
 				+ " (select case r.rv_score "
@@ -62,13 +63,14 @@ public class BumDao {
 				+ "	         else '평점이 없습니다.' "
 				+ "	         end 평점, to_char(rv_write_date, 'yyyy/mm/dd'), "
 				+ " b.um_id, r.rv_content from booking b join review r using(bk_no) "
-				+ " where b.cp_no = 14 order by b.bk_write_date desc) x) "
+				+ " where b.cp_no = ? order by b.bk_write_date desc) x) "
 				+ " where rownum between 1 and 7";
 
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
@@ -89,36 +91,46 @@ public class BumDao {
 	}
 
 	// 재우
-	public ArrayList<Map<String, Object>> mainPageStatisticsVisit(Connection conn) {
+	public ArrayList<Map<String, Object>> mainPageStatisticsVisit(Connection conn, int cpNo) {
 
 		String sql = "select \r\n"
-				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -4),'mm') and cp_no=14) 취소내역, \r\n"
-				+ "(select count(*) from booking where (bk_status = 'R' or bk_status = 'M') and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -4),'mm') and cp_no=14) 예약내역, \r\n"
+				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -4),'mm') and cp_no=?) 취소내역, \r\n"
+				+ "(select count(*) from booking where (bk_status = 'R' or bk_status = 'M') and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -4),'mm') and cp_no=?) 예약내역, \r\n"
 				+ "to_char(add_months(sysdate, -4),'mm') 몇월 from dual\r\n"
 				+ "union all\r\n"
 				+ "select \r\n"
-				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -3),'mm') and cp_no=14) 취소내역, \r\n"
-				+ "(select count(*) from booking where (bk_status = 'R' or bk_status = 'M') and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -3),'mm') and cp_no=14) 예약내역, \r\n"
+				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -3),'mm') and cp_no=?) 취소내역, \r\n"
+				+ "(select count(*) from booking where (bk_status = 'R' or bk_status = 'M') and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -3),'mm') and cp_no=?) 예약내역, \r\n"
 				+ "to_char(add_months(sysdate, -3),'mm') 몇월 from dual\r\n"
 				+ "union all\r\n"
 				+ "select \r\n"
-				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -2),'mm') and cp_no=14) 취소내역, \r\n"
-				+ "(select count(*) from booking where (bk_status = 'R' or bk_status = 'M') and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -2),'mm') and cp_no=14) 예약내역, \r\n"
+				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -2),'mm') and cp_no=?) 취소내역, \r\n"
+				+ "(select count(*) from booking where (bk_status = 'R' or bk_status = 'M') and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -2),'mm') and cp_no=?) 예약내역, \r\n"
 				+ "to_char(add_months(sysdate, -2),'mm') 몇월 from dual\r\n"
 				+ "union all\r\n"
 				+ "select \r\n"
-				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -1),'mm') and cp_no=14) 취소내역, \r\n"
-				+ "(select count(*) from booking where (bk_status = 'R' or bk_status = 'M') and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -1),'mm') and cp_no=14) 예약내역, \r\n"
+				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -1),'mm') and cp_no=?) 취소내역, \r\n"
+				+ "(select count(*) from booking where (bk_status = 'R' or bk_status = 'M') and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(add_months(sysdate, -1),'mm') and cp_no=?) 예약내역, \r\n"
 				+ "to_char(add_months(sysdate, -1),'mm') 몇월 from dual\r\n"
 				+ "union all\r\n"
 				+ "select \r\n"
-				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(sysdate,'mm') and cp_no=14) 취소내역, \r\n"
-				+ "(select count(*) from booking where (bk_status = 'R' or bk_status = 'M') and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(sysdate,'mm') and cp_no=14) 예약내역, \r\n"
+				+ "(select count(*) from booking where bk_status = 'C' and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(sysdate,'mm') and cp_no=?) 취소내역, \r\n"
+				+ "(select count(*) from booking where (bk_status = 'R' or bk_status = 'M') and to_char(TO_date(bk_date, 'yy/mm/dd'),'mm') in to_char(sysdate,'mm') and cp_no=?) 예약내역, \r\n"
 				+ "to_char(sysdate, 'mm') 몇월 from dual";
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			pstmt.setInt(2, cpNo);
+			pstmt.setInt(3, cpNo);
+			pstmt.setInt(4, cpNo);
+			pstmt.setInt(5, cpNo);
+			pstmt.setInt(6, cpNo);
+			pstmt.setInt(7, cpNo);
+			pstmt.setInt(8, cpNo);
+			pstmt.setInt(9, cpNo);
+			pstmt.setInt(10, cpNo);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
@@ -138,20 +150,25 @@ public class BumDao {
 	}
 
 	// 재우
-	public ArrayList<Map<String, Object>> mainPageStatisticsReview(Connection conn) {
+	public ArrayList<Map<String, Object>> mainPageStatisticsReview(Connection conn, int cpNo) {
 		ArrayList<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		String sql = "select count(*) from review join booking using (bk_no) where rv_score = 1 and cp_no = 14\r\n"
+		String sql = "select count(*) from review join booking using (bk_no) where rv_score = 1 and cp_no = ?\r\n"
 				+ "union all\r\n"
-				+ "select count(*) from review join booking using (bk_no) where rv_score = 2 and cp_no = 14\r\n"
+				+ "select count(*) from review join booking using (bk_no) where rv_score = 2 and cp_no = ?\r\n"
 				+ "union all\r\n"
-				+ "select count(*) from review join booking using (bk_no) where rv_score = 3 and cp_no = 14\r\n"
+				+ "select count(*) from review join booking using (bk_no) where rv_score = 3 and cp_no = ?\r\n"
 				+ "union all\r\n"
-				+ "select count(*) from review join booking using (bk_no) where rv_score = 4 and cp_no = 14\r\n"
+				+ "select count(*) from review join booking using (bk_no) where rv_score = 4 and cp_no = ?\r\n"
 				+ "union all\r\n"
-				+ "select count(*) from review join booking using (bk_no) where rv_score = 5 and cp_no = 14";
+				+ "select count(*) from review join booking using (bk_no) where rv_score = 5 and cp_no = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			pstmt.setInt(2, cpNo);
+			pstmt.setInt(3, cpNo);
+			pstmt.setInt(4, cpNo);
+			pstmt.setInt(5, cpNo);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();

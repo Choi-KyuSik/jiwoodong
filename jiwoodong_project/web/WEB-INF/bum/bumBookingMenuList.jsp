@@ -110,7 +110,7 @@ article>div>p {
 						<div class="collapse navbar-collapse">
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
-									id="k_info_menu" role="button"> 내정보 관리 </a></li>
+									id="k_info_menu" href="#" role="button"> 내정보 관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
@@ -266,35 +266,30 @@ article>div>p {
 		}
 	})
 	
-		/* 내정보 관리 이동 */
-      $("#k_info_menu").click(function() {
-         var frm = $("#frmMenuDelete");
-         frm.attr("action", "buminfocheck");
-         frm.attr("method", "post");
-         frm.submit();
-      });
-    	//업체등록
-		$("#k_bu_eroll_menu").click(function() {			
-			location.href="bucompany";
-		});
-		
-		//예약관리 - 예약 조회/수정
-		$("#k_re_cu_menu").click(function() {
-			location.href = "<%=request.getContextPath()%>/burscheck";
-		});
-		
-		/* 예약관리 - 예약 메뉴 등록 */
-		$("#k_re_menu_enroll").click(function() {
-			location.href = "<%=request.getContextPath()%>/burmenu";
-		});
-		
-		/* 토글 - 비밀번호 변경 */
-	  	$("#k_pwdinfo").click(function() {
-	    	var frm = $("#frmMenuDelete");
-				frm.attr("action", "buminfocheck");
-				frm.attr("method", "post");
-				frm.submit();
-		});
+			/* 내정보 관리 이동 */
+		    	$("#k_info_menu").click(function() {
+		    	location.href="buminfocheck";
+		    	});		
+						
+			/* 업체등록 */
+			$("#k_bu_eroll_menu").click(function() {			
+				location.href="bucompany";
+			});
+			
+			//예약관리 - 예약 조회/수정
+			$("#k_re_cu_menu").click(function() {
+				location.href = "<%=request.getContextPath()%>/burscheck";
+			});
+			
+			/* 예약관리 - 예약 메뉴 등록 */
+			$("#k_re_menu_enroll").click(function() {
+				location.href = "<%=request.getContextPath()%>/burmenu";
+			});
+			
+			/* 토글 - 비밀번호 변경 */
+		  	$("#k_pwdinfo").click(function() {
+		  		location.href="buminfocheck";
+			});
 	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

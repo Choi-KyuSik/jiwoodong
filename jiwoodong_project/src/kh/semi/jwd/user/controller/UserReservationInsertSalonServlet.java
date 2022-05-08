@@ -44,7 +44,7 @@ public class UserReservationInsertSalonServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String umid = "orange";
-		int cpno = 12;
+		int cpno = 18;
 		System.out.println(request.getParameter("rsdate"));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -56,11 +56,12 @@ public class UserReservationInsertSalonServlet extends HttpServlet {
 		map.put("rsname",request.getParameter("rsname"));
 		map.put("rsphone",request.getParameter("rsphone"));
 		map.put("rsrequire",request.getParameter("rsrequire"));
-		map.put("menuNo", request.getParameterValues("menuno"));
+		map.put("menuNo", request.getParameter("rsmenu"));
 		
 		int result = new UserReservationService().reservationInsertCafe(map);
 		
 		int result2 = new UserReservationService().reservationInsertSalonmenu(map);
+		System.out.println(result2);
 		response.sendRedirect(request.getContextPath()+"/UserMypage");
 	}
 }
