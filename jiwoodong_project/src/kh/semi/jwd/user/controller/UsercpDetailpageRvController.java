@@ -2,6 +2,7 @@ package kh.semi.jwd.user.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.jwd.user.model.service.UserService;
-import kh.semi.jwd.user.model.vo.UserBookingListVo;
+import kh.semi.jwd.user.model.service.UsercpDetailpageService;
 
 /**
- * Servlet implementation class UserBookingList_h_Controller
+ * Servlet implementation class UsercpDetailpageRvController
  */
-@WebServlet("/UserBookingList_r")
-public class UserBookingList_r_Controller extends HttpServlet {
+@WebServlet("/usercpdetailreview")
+public class UsercpDetailpageRvController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserBookingList_r_Controller() {
+    public UsercpDetailpageRvController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +31,16 @@ public class UserBookingList_r_Controller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String umId = (String) request.getSession().getAttribute("um_id");
 		
-		ArrayList<UserBookingListVo> bklist_r = new UserService().usBkList_r(umId);
-		request.setAttribute("bklist_r", bklist_r);
+//		String cpNoStr = request.getParameter("cpNo");
+//		int cpNo = Integer.parseInt(cpNoStr);
+		int cpNo = (int) request.getSession().getAttribute("cpNo");
+		System.out.println("cpNo : " + cpNo);
+		
+		ArrayList<Map<String, Object>> uscpRvList = new UsercpDetailpageService().uscpRvList(cpNo);
+		request.setAttribute("uscprvlist", uscpRvList);
+		System.out.println("리뷰 리스트 어디갔니 " + uscpRvList);
 		request.getRequestDispatcher("WEB-INF/user/userCompanyDetail.jsp").forward(request, response);
-//		request.getRequestDispatcher("WEB-INF/user/userCompanyList.jsp").forward(request, response);
-//		request.getRequestDispatcher("WEB-INF/user/userMypage.jsp").forward(request, response);
 	}
 
 	/**

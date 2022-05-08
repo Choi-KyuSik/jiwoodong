@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import kh.semi.jwd.bum.model.vo.CompanyVo;
 import kh.semi.jwd.user.model.vo.UserBookingListVo;
 import kh.semi.jwd.user.model.vo.UserLoginVo;
@@ -395,7 +397,7 @@ public class UserDao {
 					usbklist_h.setCpName(rs.getString("CP_NAME"));
 					usbklist_h.setCpAddress(rs.getString("CP_ADDRESS"));
 					usbklist_h.setBkDate(rs.getString("BK_DATE"));
-					usbklist_h.setBkStatus(rs.getString("BK_TATUS"));
+					usbklist_h.setBkStatus(rs.getString("BK_STATUS"));
 					
 					bklist_h.add(usbklist_h);
 				}
@@ -410,14 +412,19 @@ public class UserDao {
 		}
 		
 		// 사용자 마이페이지 - 예약 현황(완료/r) 조회 : 최규식
-		public ArrayList<UserBookingListVo> usBkList_r(Connection conn) {
+		public ArrayList<UserBookingListVo> usBkList_r(Connection conn, String umId) {
 			
 			ArrayList<UserBookingListVo> bklist_r = new ArrayList<UserBookingListVo>();
 			
-			String sql = "select um_id, cp_name, cp_address, bk_date, bk_status from booking b join company c using (cp_no) where bk_status in ('r','R');";
+			String sql = "select bk_no, um_id, cp_name, cp_address, bk_date, substr(bk_time,1,5) bk_status "
+					+ " from booking b"
+					+ " join company c using (cp_no) "
+					+ " where bk_status in ('r','R') and um_id = ? "
+					+ " order by um_id, bk_date desc";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1,umId);
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()) {
@@ -426,7 +433,8 @@ public class UserDao {
 					usbklist_r.setCpName(rs.getString("CP_NAME"));
 					usbklist_r.setCpAddress(rs.getString("CP_ADDRESS"));
 					usbklist_r.setBkDate(rs.getString("BK_DATE"));
-					usbklist_r.setBkStatus(rs.getString("BK_TATUS"));
+					usbklist_r.setBkStatus(rs.getString("BK_STATUS"));
+					
 					
 					bklist_r.add(usbklist_r);
 				}

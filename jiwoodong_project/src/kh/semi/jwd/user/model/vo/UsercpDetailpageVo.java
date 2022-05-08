@@ -33,11 +33,13 @@ public class UsercpDetailpageVo {
 	private String flGno2;
 	private String flGno3;
 	private String umId;
+	private String cpClassify;
+	private String cpCategory;
+	
 
 
 	public UsercpDetailpageVo() {
 		super();
-		
 	}
 
 	
@@ -46,11 +48,33 @@ public class UsercpDetailpageVo {
 		return "UsercpDetailpageVo [cpNo=" + cpNo + ", cpName=" + cpName + ", cpAddress=" + cpAddress + ", cpDTAddress="
 				+ cpDTAddress + ", cpOpenTime=" + cpOpenTime + ", cpCloseTime=" + cpCloseTime + ", cpExplain="
 				+ cpExplain + ", rvNo=" + rvNo + ", rvScore=" + rvScore + ", rvContent=" + rvContent + ", rvWriteDate="
-				+ rvWriteDate + ", buTel=" + buTel + ", flGno=" + flGno + ", umId=" + umId + "]";
+				+ rvWriteDate + ", buTel=" + buTel + ", flGno=" + flGno + ", flGno2=" + flGno2 + ", flGno3=" + flGno3
+				+ ", umId=" + umId + ", cpClassify=" + cpClassify + ", cpCategory=" + cpCategory + "]";
 	}
 
-	
-	
+
+
+
+	public String getCpClassify() {
+		return cpClassify;
+	}
+
+
+	public void setCpClassify(String cpClassify) {
+		this.cpClassify = cpClassify;
+	}
+
+
+	public String getCpCategory() {
+		return cpCategory;
+	}
+
+
+	public void setCpCategory(String cpCategory) {
+		this.cpCategory = cpCategory;
+	}
+
+
 	public String getFlGno2() {
 		return flGno2;
 	}

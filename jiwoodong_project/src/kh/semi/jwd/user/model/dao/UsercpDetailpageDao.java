@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import kh.semi.jwd.user.model.vo.UsercpDetailpageVo;
 
@@ -62,7 +64,9 @@ public class UsercpDetailpageDao {
 //				BU_TEL         NOT NULL VARCHAR2(20) 
 				
 				vo.setCpNo(rs.getInt(1));
+				vo.setCpCategory(rs.getString(2));
 				vo.setCpName(rs.getString(3));
+				vo.setCpClassify(rs.getString(4));
 				vo.setCpOpenTime(rs.getString(5));
 				vo.setCpCloseTime(rs.getString(6));
 				vo.setCpAddress(rs.getString(7));
@@ -98,5 +102,50 @@ public class UsercpDetailpageDao {
 		}
 		
 		return result;
+	}
+	
+	public ArrayList<Map<String, Object>> uscpRvList(Connection conn, int cpNo) {
+		
+		ArrayList<Map<String, Object>> rvlist = null;
+
+		String sql = "select * from(select rownum rnum, A.*"
+				+ " from (select r.rv_content 리뷰내용, to_char(rv_write_date, 'yyyy/mm/dd') 작성일, b.um_id 작성자,  case r.rv_score "
+				+ " when 1 then '💙🤍🤍🤍🤍' "
+				+ "           when 2 then '💙💙🤍🤍🤍' "
+				+ "           when 3 then '💙💙💙🤍🤍' "
+				+ "           when 4 then '💙💙💙💙🤍' "
+				+ "           when 5 then '💙💙💙💙💙' "
+				+ " else '평점이 없습니다.' "
+				+ " end 평점 "
+				+ " from booking b join review r using(bk_no) "
+				+ " where b.cp_no = ? order by b.bk_write_date desc) A)"
+				+ " where rnum between 1 and 10;";
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			rs = pstmt.executeQuery();
+			
+			rvlist = new ArrayList<Map<String, Object>>();
+			while (rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("rownum", rs.getInt(1));
+				map.put("rvContent", rs.getString(2));
+				map.put("rvWriteDate", rs.getString(3));
+				map.put("umId", rs.getString(4));
+				map.put("rvScore", rs.getString(5));
+
+				rvlist.add(map);
+				
+				System.out.println("리뷰들아 어디갔어?ㅠ :" + sql);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return rvlist;
 	}
 }
