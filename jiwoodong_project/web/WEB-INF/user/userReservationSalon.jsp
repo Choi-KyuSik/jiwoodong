@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <!-- 결제 API : iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
-<title>지우동 예약</title>
+<title>지우동 미용실 예약</title>
 <style>
 	.rstime{
 		border: 1px solid black; 
@@ -61,7 +61,10 @@
     </script>
 </head>
 <body>
-	<header>
+	<div>
+		<%@ include file="../view/user/user_header.jsp"%>
+	</div>
+	<!-- <header>
 		<div id="p_main_top">
 			<div id="p_top_logo">
 				<a href="" id="k_logo"><img
@@ -134,14 +137,14 @@
 			</div>
 			<div style="clear: both;"></div>
 		</div>
-	</header>
+	</header> -->
 	<section>
         <div id="main_box"
             style="width: 1200px; margin: 15px auto; background-color: rgb(241, 241, 241); border-radius: 15px;">
             <ul style="padding-top: 20px; padding-bottom: .5px;">
                 <div style="width: 95%; background-color: white; border-radius: 15px; margin-left: 12px;">
                     <div style="padding: 45px 0 10px 40px; border-bottom: 2px solid silver;">
-                        <h3>${CpInfo[0].cpName } 예약</h3>
+                        <p style="font-size: 1.7em; font-weight: bold;">${CpInfo[0].cpName } 예약</p>
                     </div>
                     <div style="margin: 30px;">
 	                    <form action="UserReservationInsertSalon" method="post" id="frmrsinsert">

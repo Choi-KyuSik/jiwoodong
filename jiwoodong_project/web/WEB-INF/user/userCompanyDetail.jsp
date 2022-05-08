@@ -112,9 +112,10 @@
 							<div>
 								<span>☆ 4.8 / 5.0</span>
 							</div>
+							<input type="hidden" id="cpNo" name="cpNo" value="${i.cpNo }"/>
 							<div>
-								<span><a class="btn btn-primary" href="#" role="button"
-									style="width: 300px;">예약하기</a></span> <span><input
+								<span><button id="s_us_reservation_btn" class="btn btn-primary" href="#"
+									style="width: 300px;">예약하기</button></span> <span><input
 									type="checkbox" class="btn-check" id="btncheck2"
 									autocomplete="off"> <label
 									class="btn btn-outline-primary" for="btncheck2">☆</label> </span>
@@ -519,6 +520,17 @@
 		$("#c_map-tab").click(function() {
 			$("#u_map_content").load("UserMapAPI");
 			// $("#s_us_content_box").load("UserMapAPI");
+		});
+	</script>
+	
+	<script>
+		$("#s_us_reservation_btn").click(function() {
+			// TODO
+			// 1. cpNo 값에 따라 UserReservation페이지 cpNo에 맞게 띄우기
+			var cpNo = $("#cpNo").val();
+			console.log(cpNo);
+			// 2. 업종 값 가져와서 업종이 어떤거냐에 따라 들어가는 jsp가 다름
+			location.href="UserReservation?cpNo=" + cpNo;
 		});
 	</script>
 
