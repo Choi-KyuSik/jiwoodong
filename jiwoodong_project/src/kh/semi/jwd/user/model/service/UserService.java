@@ -122,9 +122,9 @@ public class UserService {
 	// 사용자 마이페이지 - 예약 현황(완료/r) 조회 : 최규식
 		public ArrayList<UserBookingListVo> usBkList_r() {
 			
-			ArrayList<UserBookingListVo> bklist_r = null;
 			Connection conn	= getConnection();
-			bklist_r = new UserDao().usBkList_r(conn);
+			ArrayList<UserBookingListVo> bklist_r = new UserDao().usBkList_r(conn);
+//			bklist_r = new UserDao().usBkList_r(conn);
 			close(conn);
 			
 			return bklist_r;

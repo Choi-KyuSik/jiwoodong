@@ -33,7 +33,9 @@ public class UserBookingList_r_Controller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<UserBookingListVo> bklist_r = new UserService().usBkList_r();
 		request.setAttribute("bklist_r", bklist_r);
-		request.getRequestDispatcher("WEB-INF/user/userMypage.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/user/userCompanyDetail.jsp").forward(request, response);
+//		request.getRequestDispatcher("WEB-INF/user/userCompanyList.jsp").forward(request, response);
+//		request.getRequestDispatcher("WEB-INF/user/userMypage.jsp").forward(request, response);
 	}
 
 	/**

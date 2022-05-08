@@ -33,7 +33,8 @@ public class UserMypageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String umId = "apple";
+//		String umId = "apple";
+		String umId = (String) request.getSession().getAttribute("um_id");
 		
 		UserVo usMemberListInfo = new UserService().usMemberListInfo(umId);
 		ArrayList<CompanyVo> usCpList = new UserService().usCpList();

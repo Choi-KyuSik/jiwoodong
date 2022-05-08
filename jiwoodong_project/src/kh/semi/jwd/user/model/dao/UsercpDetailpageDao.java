@@ -18,18 +18,20 @@ public class UsercpDetailpageDao {
 	public ArrayList<UsercpDetailpageVo> companyDetail(Connection conn, int cpNo) {
 		ArrayList<UsercpDetailpageVo> result = new ArrayList<UsercpDetailpageVo>();
 		
-		String sql = "SELECT C.CP_NO, C.FL_GNO, C.CP_NAME, C.CP_ADDRESS, C.CP_DTADDRESS, C.CP_OPEN_TIME, C.CP_CLOSE_TIME, C.CP_EXPLAIN, "
-				+ " NVL(R.RV_NO,'') AS RV_NO, NVL(R.RV_CONTENT,'SA') AS RV_CONTENT, R.RV_WRITE_DATE, NVL(R.RV_SCORE,'') AS RV_SCORE, B.BU_TEL "
-				+ " FROM COMPANY C FULL OUTER JOIN REVIEW R "
-				+ " ON (C.FL_GNO=R.FL_GNO) LEFT JOIN B_MEMBER B ON (C.FL_GNO=B.FL_GNO) WHERE CP_NO = ? ";
-		/*
-		 * String sql =
-		 * "SELECT DISTINCT C.CP_NO, C.FL_GNO, C.CP_NAME, C.CP_ADDRESS, C.CP_DTADDRESS, C.CP_OPEN_TIME, C.CP_CLOSE_TIME, C.CP_EXPLAIN, "
-		 * + " NVL(r.RV_NO,'') AS RV_NO, NVL(R.RV_CONTENT,'등록된 리뷰가 없습니다.') AS RV_CONTENT, R.RV_WRITE_DATE, NVL(r.RV_SCORE,'') AS RV_SCORE, NVL(B.BU_TEL,'등록된 정보가 없습니다.') AS BU_TEL, NVL(BK.UM_ID,'') AS UM_ID "
-		 * + " FROM COMPANY C " + " FULL OUTER JOIN REVIEW R ON (C.FL_GNO=R.FL_GNO) " +
-		 * " LEFT JOIN B_MEMBER B ON (C.FL_GNO=B.FL_GNO) " +
-		 * " JOIN BOOKING BK ON (c.CP_NO = BK.CP_NO) WHERE CP_NO = ? ";
-		 */		
+//		String sql = "SELECT C.CP_NO, C.FL_GNO, C.CP_NAME, C.CP_ADDRESS, C.CP_DTADDRESS, C.CP_OPEN_TIME, C.CP_CLOSE_TIME, C.CP_EXPLAIN, "
+//				+ " NVL(R.RV_NO,'') AS RV_NO, NVL(R.RV_CONTENT,'SA') AS RV_CONTENT, R.RV_WRITE_DATE, NVL(R.RV_SCORE,'') AS RV_SCORE, B.BU_TEL "
+//				+ " FROM COMPANY C FULL OUTER JOIN REVIEW R "
+//				+ " ON (C.FL_GNO=R.FL_GNO) LEFT JOIN B_MEMBER B ON (C.FL_GNO=B.FL_GNO) WHERE c.CP_NO = ? ";
+		
+		  String sql = "SELECT DISTINCT C.CP_NO, C.FL_GNO, C.CP_NAME, C.CP_ADDRESS, C.CP_DTADDRESS, C.CP_OPEN_TIME, C.CP_CLOSE_TIME, C.CP_EXPLAIN, "
+		  + " NVL(r.RV_NO,'') AS RV_NO, NVL(R.RV_CONTENT,'등록된 리뷰가 없습니다.') AS RV_CONTENT, R.RV_WRITE_DATE, NVL(r.RV_SCORE,'') AS RV_SCORE, NVL(B.BU_TEL,'등록된 정보가 없습니다.') AS BU_TEL, NVL(BK.UM_ID,'') AS UM_ID "
+		  + " FROM COMPANY C " 
+		  + " FULL OUTER JOIN REVIEW R ON (C.FL_GNO=R.FL_GNO) " 
+		  + " LEFT JOIN B_MEMBER B ON (C.FL_GNO=B.FL_GNO) " 
+		  + " JOIN BOOKING BK ON (c.CP_NO = BK.CP_NO) "
+		  + " WHERE c.CP_NO = ? ";
+//		  + " AND BK.UM_ID = ? ";
+		 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cpNo);

@@ -198,7 +198,7 @@
 													<td>${i.rvContent }</td>
 													<td>${i.rvWriteDate }</td>
 													<!-- TO DO -->
-													<td>작성자 ID </td>
+													<td>${i.umId }</td>
 													<td>${i.rvScore }</td>
 												</tr>
 												
@@ -524,7 +524,8 @@
 			$("#c_mapsc_info").show();
 			$("#main_box").hide();
 		}); */
-
+		
+		
 		
 	</script>
 

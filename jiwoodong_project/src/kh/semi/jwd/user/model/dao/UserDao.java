@@ -409,11 +409,9 @@ public class UserDao {
 		// 사용자 마이페이지 - 예약 현황(완료/r) 조회 : 최규식
 		public ArrayList<UserBookingListVo> usBkList_r(Connection conn) {
 			
-			ArrayList<UserBookingListVo> bklist_r = null;
+			ArrayList<UserBookingListVo> bklist_r = new ArrayList<UserBookingListVo>();
 			
 			String sql = "select um_id, cp_name, cp_address, bk_date, bk_status from booking b join company c using (cp_no) where bk_status in ('r','R');";
-			
-			bklist_r = new ArrayList<UserBookingListVo>();
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
