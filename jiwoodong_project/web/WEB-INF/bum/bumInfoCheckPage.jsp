@@ -321,10 +321,28 @@ article>div>p {
 		
 		<script>
 				
-				//업체등록
-				$("#k_bu_eroll_menu").click(function() {			
-					location.href="bucompany";
-				});
+		//업체등록
+		$("#k_bu_eroll_menu").click(function() {			
+			location.href="bucompany";
+		});
+		
+		//예약관리 - 예약 조회/수정
+		$("#k_re_cu_menu").click(function() {
+			location.href = "<%=request.getContextPath()%>/burscheck";
+		});
+		
+		/* 예약관리 - 예약 메뉴 등록 */
+		$("#k_re_menu_enroll").click(function() {
+			location.href = "<%=request.getContextPath()%>/burmenu";
+		});
+		
+		/* 토글 - 비밀번호 변경 */
+	  	$("#k_pwdinfo").click(function() {
+	    	var frm = $("#frm");
+				frm.attr("action", "buminfocheck");
+				frm.attr("method", "post");
+				frm.submit();
+		});
 	
 			$("#buPwd").keyup(function() {
 				// console.log("db에 있는 pwd 확인" + ${bvo.buPwd});

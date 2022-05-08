@@ -7,6 +7,9 @@ public class BumLoginVo {
 	private String buId;
 	private String buPwd;
 	private String buName;
+	private int buNo;
+	
+	
 	public String getBuId() {
 		return buId;
 	}
@@ -26,9 +29,16 @@ public class BumLoginVo {
 	public void setBuName(String buName) {
 		this.buName = buName;
 	}
+	
+	public int getBuNo() {
+		return buNo;
+	}
+	public void setBuNo(int buNo) {
+		this.buNo = buNo;
+	}	
 	@Override
 	public String toString() {
-		return "BumLoginVo [buId=" + buId + ", buPwd=" + buPwd + "]";
+		return "BumLoginVo [buId=" + buId + ", buPwd=" + buPwd + ", buName=" + buName + ", buNo=" + buNo + "]";
 	}
 	
 	public BumLoginVo() {

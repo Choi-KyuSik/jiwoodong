@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kh.semi.jwd.bum.model.dao.BumDao;
 import kh.semi.jwd.bum.model.service.BumService;
@@ -34,14 +35,25 @@ public class BumMainPage extends HttpServlet {
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	 
-	   int buNo = 5;
+	 	   	   
+	   HttpSession session = request.getSession();
 	   
+	   //가져온 세션에서 속성명을 통해 데이터 값을 가져와서 String 변수에 저장
+	   String bu_id = (String)session.getAttribute("bu_id");
+	   String password = (String)session.getAttribute("password");
+	   
+	  // System.out.println("session담겼나?:"+ bu_id+ "님 비밀번호는"  + password);
+	   
+	   
+	  //예약리스트
 	  ArrayList<Map<String,Object>> list = new BumService().mainPageBookingList();
+	  //리뷰리스트
 	  ArrayList<Map<String, Object>> result = new BumService().mainPageReviewList();
 	  ArrayList<Map<String,Object>> statiscicsVisit = new BumService().mainPageStatisticsVisit();
 	  ArrayList<Map<String,Object>> statiscicsReview = new BumService().mainPageStatisticsReview();
-	  BumVo bvo = new BumService().companyCheck(buNo);
+	  BumVo bvo = new BumService().companyCheck(bu_id);
+	  
+	 
 	  
 	  request.setAttribute("list", list);
 	  request.setAttribute("Rlist", result);

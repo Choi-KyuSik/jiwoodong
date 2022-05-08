@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kh.semi.jwd.bum.model.service.BumService;
 import kh.semi.jwd.bum.model.vo.BumVo;
@@ -42,8 +43,12 @@ public class BusinessCompanyUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO: session전까진 'buNo = 5'인 사업자로 바꿔보기
-		int buNo = 5;
+		
+		HttpSession session = request.getSession();
+		   
+		   //가져온 세션에서 속성명을 통해 데이터 값을 가져와서 String 변수에 저장
+		   String bu_id = (String)session.getAttribute("bu_id");
+		   String password = (String)session.getAttribute("password");
 
 		String buNumber = request.getParameter("buNumber");
 		String buId = request.getParameter("buId");
@@ -62,7 +67,7 @@ public class BusinessCompanyUpdateServlet extends HttpServlet {
 		vo.setBuEmail(buEmail);
 		vo.setBuTel(buTel);
 
-		int result = new BumService().companyUpdate(buNo, vo);
+		int result = new BumService().companyUpdate(bu_id, vo);
 
 		if (result < 1) {
 			System.out.println("내 정보 수정 실패!");

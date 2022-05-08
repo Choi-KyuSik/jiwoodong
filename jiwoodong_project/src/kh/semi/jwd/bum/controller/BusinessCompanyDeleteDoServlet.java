@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kh.semi.jwd.bum.model.service.BumService;
 import kh.semi.jwd.bum.model.vo.BumVo;
@@ -69,6 +70,9 @@ public class BusinessCompanyDeleteDoServlet extends HttpServlet {
 			out.flush();
 		} else {
 			System.out.println("회원 탈퇴 성공!");
+			HttpSession session = request.getSession();
+			//  모든 속성 한꺼번에 삭제 
+			session.invalidate();
 			result2 = new BumService().companyDelete(cvo);
 			System.out.println("CompanyVo cvo:" + cvo);
 			System.out.println("업체 사용여부:" + result2);

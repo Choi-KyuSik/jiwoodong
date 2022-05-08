@@ -162,7 +162,7 @@ td, th {
 						<%= session.getAttribute("buName") %>님</p>
 					<ul class="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" href="#">비밀번호 재설정</a></li>
+						<li><a class="dropdown-item" id="k_pwdinfo">비밀번호 재설정</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
@@ -749,6 +749,35 @@ td, th {
 			})
     		}
     	})
+    	
+    	/* 내정보 관리 이동 */
+		    $("#k_info_menu").click(function() {
+		    	location.href="buminfocheck";
+		    });		
+			
+			
+			/* 업체등록 */
+			$("#k_bu_eroll_menu").click(function() {			
+				location.href="bucompany";
+			});
+			
+			//예약관리 - 예약 조회/수정
+			$("#k_re_cu_menu").click(function() {
+				location.href = "<%=request.getContextPath()%>/burscheck";
+			});
+			
+			/* 예약관리 - 예약 메뉴 등록 */
+			$("#k_re_menu_enroll").click(function() {
+				location.href = "<%=request.getContextPath()%>/burmenu";
+			});
+			
+			/* 토글 - 비밀번호 변경 */
+		  	$("#k_pwdinfo").click(function() {
+		    	var frm = $("#frm");
+					frm.attr("action", "buminfocheck");
+					frm.attr("method", "post");
+					frm.submit();
+			});
     
 		</script>
 	<script

@@ -29,9 +29,13 @@ public class BusinessCompanyWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int buNo = 32;
+		HttpSession session = request.getSession();		   
+		   //가져온 세션에서 속성명을 통해 데이터 값을 가져와서 String 변수에 저장
+		   String bu_id = (String)session.getAttribute("bu_id");
+		   String password = (String)session.getAttribute("password");
+		
 		response.setContentType("text/html; charset=utf-8");
-		BumVo bvo = new BumService().companyCheck(buNo);
+		BumVo bvo = new BumService().companyCheck(bu_id);
 		request.setAttribute("bvo", bvo);
 		request.getRequestDispatcher("WEB-INF/bum/businessCompanyWritePage.jsp").forward(request, response);
 		

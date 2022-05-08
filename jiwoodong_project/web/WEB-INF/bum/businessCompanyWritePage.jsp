@@ -24,7 +24,7 @@
    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
    crossorigin="anonymous">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<title>사업자 업체등록 페이지</title>
+<title>사업자 업체등록</title>
 <!--header-->
 <style>
 header {
@@ -383,7 +383,7 @@ article>div>p {
       </div>
    </article>
 
-   <content>
+   <%-- <content>
    <article>
       <div class="s_row">
          <div id="c_us_info_edit_info">
@@ -425,7 +425,7 @@ article>div>p {
          </div>
       </div>
    </article>
-   </content>
+   </content> --%>
 
 
    <script>
@@ -558,13 +558,28 @@ article>div>p {
          frm.attr("method", "post");
          frm.submit();
       });
-
-      $("#k_pwdinfo").click(function() {
-         var frm = $("#frm");
-         frm.attr("action", "buminfocheck");
-         frm.attr("method", "post");
-         frm.submit();
-      });
+    	//업체등록
+		$("#k_bu_eroll_menu").click(function() {			
+			location.href="bucompany";
+		});
+		
+		//예약관리 - 예약 조회/수정
+		$("#k_re_cu_menu").click(function() {
+			location.href = "<%=request.getContextPath()%>/burscheck";
+		});
+		
+		/* 예약관리 - 예약 메뉴 등록 */
+		$("#k_re_menu_enroll").click(function() {
+			location.href = "<%=request.getContextPath()%>/burmenu";
+		});
+		
+		/* 토글 - 비밀번호 변경 */
+	  	$("#k_pwdinfo").click(function() {
+	    	var frm = $("#frm");
+				frm.attr("action", "buminfocheck");
+				frm.attr("method", "post");
+				frm.submit();
+		});
    </script>
 
    <script src="https://code.highcharts.com/modules/data.js"></script>

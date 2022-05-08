@@ -47,10 +47,10 @@ public class BumService {
 	}
 
 	// 우진
-	public BumVo companyCheck(int buNo) {
+	public BumVo companyCheck(String buId) {
 		Connection conn = getConnection();
 		BumVo vo = null;
-		vo = new BumDao().companyCheck(conn, buNo);
+		vo = new BumDao().companyCheck(conn, buId);
 		close(conn);
 		System.out.println("companyCheck result" + vo);
 		return vo;
@@ -98,10 +98,10 @@ public class BumService {
 	
 
 	// 우진
-	public int companyUpdate(int buNo, BumVo vo) {
+	public int companyUpdate(String buId, BumVo vo) {
 		Connection conn = getConnection();
 		int result = 0;
-		result = new BumDao().companyUpdate(conn, buNo, vo);
+		result = new BumDao().companyUpdate(conn, buId, vo);
 		close(conn);
 		System.out.println("companyCheckService result: " + result);
 		return result;

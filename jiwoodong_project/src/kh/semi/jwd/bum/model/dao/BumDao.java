@@ -307,19 +307,20 @@ public class BumDao {
 		}
 	
 // TODO 우진 :내 정보 조회
-	public BumVo companyCheck(Connection conn, int buNo) {
+	public BumVo companyCheck(Connection conn, String buId) {
 		// public return 값이 BumVo이므로 result의 변수값은 null
 		BumVo bvo = null;
 		// sql문 작성
 		// sql문 실행, 변수에 담기
 		String sql = "select bu_number, bu_name, bu_birth, bu_id, bu_pwd, bu_pwd, bu_email, bu_tel "
-				+ "from b_member where bu_no = ?";
+				+ "from b_member where bu_id = ?";
 		// try-catch문
 		// where절에 ?가 있으므로 stmt가 아닌 pstmt 사용
 		try {
 			pstmt = conn.prepareStatement(sql);
 			// list의 값을 담아서 DB로 보낸다.
-			pstmt.setInt(1, buNo);
+			pstmt.setString(1, buId);
+		
 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -358,10 +359,10 @@ public class BumDao {
 	}
 
 	//우진 - 내 정보관리 수정
-	public int companyUpdate(Connection conn, int buNo, BumVo vo) {
+	public int companyUpdate(Connection conn, String buId, BumVo vo) {
 		System.out.println("companyUpdate Dao:"+vo);
 		int result = 0;
-		String sql = "update b_member set bu_pwd = ?, bu_email = ?, bu_tel = ?, bu_name = ?, bu_id = ?, bu_birth = ? where bu_no = ?";
+		String sql = "update b_member set bu_pwd = ?, bu_email = ?, bu_tel = ?, bu_name = ?, bu_id = ?, bu_birth = ? where BU_ID=?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -371,7 +372,8 @@ public class BumDao {
 			pstmt.setString(4, vo.getBuName());		//이름
 			pstmt.setString(5, vo.getBuId());		//아이디
 			pstmt.setString(6, vo.getBuBirth());	//생년월일
-			pstmt.setInt(7, buNo);
+			pstmt.setString(7, buId);
+			
 			result = pstmt.executeUpdate();
 			System.out.println("BoardDao companyUpdate:" + result);
 		} catch (SQLException e) {

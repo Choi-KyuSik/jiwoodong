@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
@@ -50,32 +51,13 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 		
 		int result = 0;
 		int result2 = 0;
-		int buNo = 32;
-
-//		PrintWriter out = response.getWriter();
-//		// 파일 저장 경로
-//		String fileSavePath = "upload";
-//		// 파일 크기 10M 제한
-//		int uploadSizeLimit = 10 * 1024 * 1024;
-//		String encType = "UTF-8";
-//		ServletContext context = getServletContext();
-//		String uploadPath = context.getRealPath(fileSavePath);
-//
-//		MultipartRequest multi = new MultipartRequest(request, // request 객체
-//				uploadPath, // 서버 상 업로드 될 디렉토리
-//				uploadSizeLimit, // 업로드 파일 크기 제한
-//				encType, // 인코딩 방법
-//				new DefaultFileRenamePolicy() // 동일 이름 존재 시 새로운 이름 부여 방식
-//		);
-//		Enumeration files = multi.getFileNames();
-//		out.println("<h2>멀티 파일 업로드 구현하기</h2>");
-//		while (files.hasMoreElements()) {
-//			// 업로드 된 파일 이름 얻어오기
-//			String file = (String) files.nextElement();
-//			String fileName = multi.getFilesystemName(file);
-//			out.println("<br> 첨부파일명 : " + fileName);
-//		}
-
+		
+		 HttpSession session = request.getSession();
+		   
+		   //가져온 세션에서 속성명을 통해 데이터 값을 가져와서 String 변수에 저장
+		 int buNo = (int)session.getAttribute("buNo");
+		   
+		
 		String cpName = request.getParameter("cpName");
 		String cpCategory = request.getParameter("cpCategory");
 		String cpExplain = request.getParameter("cpExplain");
