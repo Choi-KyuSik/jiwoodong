@@ -242,7 +242,7 @@ td, th {
 							<td class="l7" style="font-size:14px"><c:out value="${reservation.menuName } 외 ${reservation.menuCount -1}건" /></td>
 							</c:if>
 							<c:if test="${reservation.menuCount == 1}">
-							<td class="l7"><c:out value="${reservation.menuName } ${reservation.bkmCount }개 " /></td>
+							<td class="l7"><c:out value="${reservation.menuName } " /></td>
 							</c:if>
 							<td class="l8"><c:out value="${reservation.bkTotalPrice }" />
 								원</td>
@@ -335,7 +335,8 @@ td, th {
 				html +=	'<c:forEach items="${menulist }" var="menulist">';
 				html +=	'<option value="${menulist.menuNo }">${menulist.menuName }</option>';
 				html += '</c:forEach></select><span> 수량 : </span>';
-				html += '<select name="menuCount" id="menuCount">';
+				html += '<select name="menuCount" class="menuCount">';
+				html +=	'<option value="none"></option>'
 	        	html += '<c:forEach var="index" begin="1" end="10">'
 	        	html +=	'<option value="${index }">${index }</option>'
 	        	html += '</c:forEach>'
@@ -417,7 +418,8 @@ td, th {
 			html +=	'<c:forEach items="${menulist }" var="menulist">';
 			html +=	'<option value="${menulist.menuNo }">${menulist.menuName }</option>';
 			html += '</c:forEach></select><span> 수량 : </span>';
-			html += '<select name="menuCount" id="menuCount">';
+			html += '<select name="menuCount" class="menuCount">';
+			html +=	'<option value="none"></option>'
         	html += '<c:forEach var="index" begin="1" end="10">'
         	html +=	'<option value="${index }">${index }</option>'
         	html += '</c:forEach>'
@@ -425,6 +427,28 @@ td, th {
 			html += '</div>'
 			$("#menuName_Count").append(html);
     	})
+    	// 예약 추가 수량 선택 시
+    	$(document).on('change', '.menuCount', function(){
+    		var menuNo = new Array;
+    		var menuCount  = new Array;
+    		$(".menuCount").each(function(i, item){
+    			menuNo.push($(item).prev().prev().val());
+    			menuCount.push($(item).val());
+    			})
+    			console.log(menuNo, menuCount);
+    			
+    			$.ajax({
+    				type : "post",
+    				url : "bursSelectMenuAjax",
+    				traditional : true,
+    				data : {"menuNo" : menuNo, "menuCount" : menuCount},
+    				dataType : "json",
+    				success : function(data){
+    					$("#bkPrice").val(data);
+    				}
+    			})
+    		})
+    		
     	// 예약 추가시 -버튼 클릭
     	$(document).on('click','#btnMinusMenu', function(){
     		$(".minusdiv:last").remove();
@@ -468,7 +492,7 @@ td, th {
             	}
     			$.ajax({
        				type :'post' ,
-       				url :'bursaddAjax' ,
+       				url :'bursaddAjaxCafe' ,
        				data : $("#bookingForm").serialize(),
        				success : function(data){
        					alert(data); 
@@ -561,7 +585,7 @@ td, th {
                             html += '<td class="l5">'+list[i].bkDate+'</td>'
                             html += '<td class="l6">'+list[i].bkTime+'</td>'
                             if(list[i].menuCount == 1){
-                            	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
+                            	html += '<td class="l7">'+list[i].menuName+'</td>'
                             } else {
                             	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' 외 '+(list[i].menuCount-1)+'건'+'</td>'
                             }
@@ -607,7 +631,7 @@ td, th {
                                 html += '<td class="l5">'+list[i].bkDate+'</td>'
                                 html += '<td class="l6">'+list[i].bkTime+'</td>'
                                 if(list[i].menuCount == 1){
-                                	html += '<td class="l7">'+list[i].menuName+' '+list[i].bkmCount+'개'+'</td>'
+                                	html += '<td class="l7">'+list[i].menuName+'</td>'
                                 } else {
                                 	html += '<td class="l7"  style="font-size:14px">'+list[i].menuName+' 외 '+(list[i].menuCount-1)+'건'+'</td>'
                                 }

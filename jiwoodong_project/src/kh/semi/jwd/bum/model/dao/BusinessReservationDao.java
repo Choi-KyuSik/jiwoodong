@@ -144,7 +144,7 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 	
 	public int reservationAdd(Connection conn, Map<String, Object> map, int cpNo){
 		int result = 0;
-		String sql = "insert into booking(bk_no, cp_no, um_id, bk_name, bk_phone, bk_require, bk_date, bk_time, bk_status) values(booking_seq.nextval, ?, '직접추가', ?, ?, ?, REPLACE(?, '-', '/'), ?, 'M')";
+		String sql = "insert into booking(bk_no, cp_no, um_id, bk_name, bk_phone, bk_require, bk_date, bk_time, bk_status, bk_total_price) values(booking_seq.nextval, ?, '직접추가', ?, ?, ?, REPLACE(?, '-', '/'), ?, 'M', to_number(?))";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cpNo);
@@ -153,6 +153,7 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 			pstmt.setString(4, (String)map.get("bkRequire"));
 			pstmt.setString(5, (String)map.get("bkDate"));
 			pstmt.setString(6, (String)map.get("bkTime"));
+			pstmt.setString(7, (String)map.get("bkPrice"));
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -171,6 +172,25 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 			pstmt.setInt(1, cpNo);
 			pstmt.setString(2, (String)map.get("bkName"));
 			pstmt.setString(3, (String)map.get("bkMenuNo"));
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int reservationAddMenuCafe(Connection conn, Map<String, Object> map, String menuNo, String menuCount , int cpNo) {
+		int result = 0;
+		String sql = "insert into b_menu(bk_no, menu_no, bkm_count) values((select max(bk_no) from booking where cp_no = ? and bk_name = ?), to_number(?), to_number(?))";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			pstmt.setString(2, (String)map.get("bkName"));
+			pstmt.setString(3,menuNo);
+			pstmt.setString(4, menuCount);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -289,7 +309,7 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 	}
 	
 	public ArrayList<BumReservationVo> AllStatusCafe(Connection conn, String date, int cpNo) {
-		String sql = "select * from booking join (select bk_no, count(bk_no) menu_count, bkm_count from b_menu group by bk_no, bkm_count) using(bk_no) join (select bk_no, min(menu_name) menu_name from b_menu join menu using(menu_no) group by bk_no) using(bk_no) where cp_no = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(to_date(?, 'yy/mm/dd'),'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
+		String sql = "select * from booking join (select bk_no, count(bk_no) menu_count from b_menu group by bk_no) using(bk_no) join (select bk_no, min(menu_name) menu_name from b_menu join menu using(menu_no) group by bk_no) using(bk_no) where cp_no = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(to_date(?, 'yy/mm/dd'),'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
 		ArrayList<BumReservationVo> result = new ArrayList<BumReservationVo>();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -310,7 +330,6 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 				vo.setMenuName(rs.getString("menu_name"));
 				vo.setBkRequire(rs.getString("bk_require"));
 				vo.setBkStatus(rs.getString("bk_status"));
-				vo.setBkmCount(rs.getInt("bkm_count"));
 				result.add(vo);
 			}
 			
@@ -369,7 +388,7 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 	}
 	
 	public ArrayList<BumReservationVo> selectStatusCafe(Connection conn, String date, int cpNo, String status) {
-		String sql = "select * from booking join (select bk_no, count(bk_no) menu_count, bkm_count from b_menu group by bk_no, bkm_count) using(bk_no) join (select bk_no, min(menu_name) menu_name from b_menu join menu using(menu_no) group by bk_no) using(bk_no) where cp_no = ? and bk_status = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(to_date(?, 'yy/mm/dd'),'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
+		String sql = "select * from booking join (select bk_no, count(bk_no) menu_count from b_menu group by bk_no) using(bk_no) join (select bk_no, min(menu_name) menu_name from b_menu join menu using(menu_no) group by bk_no) using(bk_no) where cp_no = ? and bk_status = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(to_date(?, 'yy/mm/dd'),'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
 		ArrayList<BumReservationVo> result = new ArrayList<BumReservationVo>();
 		if(status.equals("예약")) {
 			status = "R";
@@ -400,7 +419,6 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 				vo.setMenuName(rs.getString("menu_name"));
 				vo.setBkRequire(rs.getString("bk_require"));
 				vo.setBkStatus(rs.getString("bk_status"));
-				vo.setBkmCount(rs.getInt("bkm_count"));
 				result.add(vo);
 			}
 			
@@ -523,6 +541,26 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 				map.put("menuName", rs.getString("menu_name"));
 				map.put("bkmCount", rs.getString("bkm_count"));
 				list.add(map);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int reservationMenuPrice(Connection conn, String string) {
+		int list = 0;
+		String sql = "select menu_price from menu where menu_no = to_number(?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, string);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list = rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

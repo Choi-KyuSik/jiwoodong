@@ -49,9 +49,16 @@ public class BusinessReservationService {
 		return result;
 	}
 	
-	public int reservationAddMenu(Map<String, Object> map, int cpNo) {
+	public int reservationAddMenu(Map<String, Object> map , int cpNo) {
 		Connection conn = getConnection();
 		int result = new BusinessReservationDao().reservationAddMenu(conn, map, cpNo);
+		close(conn);
+		return result;
+	}
+	
+	public int reservationAddMenuCafe(Map<String, Object> map, String menuNo, String menuCount , int cpNo) {
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationAddMenuCafe(conn, map, menuNo, menuCount, cpNo);
 		close(conn);
 		return result;
 	}
@@ -142,6 +149,13 @@ public class BusinessReservationService {
 	public ArrayList<Map<String, Object>> bmenuList(String bkno) {
 		Connection conn = getConnection();
 		ArrayList<Map<String, Object>> result = new BusinessReservationDao().bmenuList(conn,bkno);
+		close(conn);
+		return result;
+	}
+
+	public int reservationMenuPrice(String string) {
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationMenuPrice(conn,string);
 		close(conn);
 		return result;
 	}
