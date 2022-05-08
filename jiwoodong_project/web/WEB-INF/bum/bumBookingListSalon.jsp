@@ -176,7 +176,7 @@ td, th {
 	<content>
 	<article>
 		<div id="k_us_info_content">
-			<p>예약 조회</p>
+			<p>미용실 예약 조회</p>
 			<!-- 예약상태 선택-->
 			<select style="width: 100px; height: 30px;" id="bkStatus">
 				<option value="전체" selected>전체</option>

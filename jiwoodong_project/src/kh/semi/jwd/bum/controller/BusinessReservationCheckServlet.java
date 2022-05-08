@@ -48,6 +48,10 @@ public class BusinessReservationCheckServlet extends HttpServlet {
 						ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheckCafe(cpNo);
 						request.setAttribute("reservation", reservation);
 						request.getRequestDispatcher("WEB-INF/bum/bumBookingListCafe.jsp").forward(request, response);
+					} else if(category.equals("미용실")) {
+						ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheck(cpNo);
+						request.setAttribute("reservation", reservation);
+						request.getRequestDispatcher("WEB-INF/bum/bumBookingListSalon.jsp").forward(request, response);
 					} else {
 						ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheck(cpNo);
 						request.setAttribute("reservation", reservation);

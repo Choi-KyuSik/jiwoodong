@@ -316,6 +316,21 @@ td, th {
     	/* 날짜선택 오늘날짜 */
     	var date = new Date();
     	$("#todayDate").val(date.getFullYear() + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" + ("0"+date.getDate()).slice(-2));
+    	//현재시간
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = (date.getMonth() + 1);
+		var day = date.getDate();
+		// 10이하 앞에 0 붙여주기
+		if(month < 10){
+			month = "0"+month;
+		}
+		if(day < 10){
+			day = "0"+day;
+		}
+		var today = year +"-"+month+ "-" +day;
+		
+		$("#bkdate").attr("min", today);
     });
 		/* 예약 추가 버튼  클릭시*/
     	$("#booking_add").click(function(){
