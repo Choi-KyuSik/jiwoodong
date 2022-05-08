@@ -110,7 +110,7 @@ article>div>p {
 						<div class="collapse navbar-collapse">
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
-									id="k_info_menu" href="bucpcheck" role="button"> 내정보 관리 </a></li>
+									id="k_info_menu" role="button"> 내정보 관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"

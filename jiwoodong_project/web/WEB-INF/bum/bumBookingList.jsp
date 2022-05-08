@@ -657,19 +657,15 @@ td, th {
 			})
     		}
     	})
-    
+      
 		</script>
 		
 		<script>
 		/* 내정보 관리 이동 */
 	    $("#k_info_menu").click(function() {
-	       var frm = $("#frm");
-	       frm.attr("action", "buminfocheck");
-	       frm.attr("method", "post");
-	       frm.submit();
+	    location.href="buminfocheck";
 	    });		
-		
-		
+					
 		/* 업체등록 */
 		$("#k_bu_eroll_menu").click(function() {			
 			location.href="bucompany";
@@ -687,10 +683,7 @@ td, th {
 		
 		/* 토글 - 비밀번호 변경 */
 	  	$("#k_pwdinfo").click(function() {
-	    	var frm = $("#frm");
-				frm.attr("action", "buminfocheck");
-				frm.attr("method", "post");
-				frm.submit();
+	  		location.href="buminfocheck";
 		});
 		</script>
 	<script
