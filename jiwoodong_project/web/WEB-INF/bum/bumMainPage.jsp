@@ -337,7 +337,7 @@ article>div>p {
 									data-bs-toggle="dropdown"> 예약관리 </a>
 									<ul class="dropdown-menu dropdown-menu">
 										<li><a class="dropdown-item" id="k_re_menu_enroll"
-											href="#">예약메뉴등록</a></li>
+											>예약메뉴등록</a></li>
 										<li>
 											<hr class="dropdown-divider">
 										</li>
@@ -486,9 +486,9 @@ article>div>p {
       		<div id="c_us_info_edit_info">
 			<form id="frm" method="post" action="">
 				<table class="table table-striped">
-					<thead>						
+					<thead>
 						<tr>
-							<td colspan="3"><p id="s_id_style">${bvo.buId}</p>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</td>
+							<td colspan="3"><p id="s_id_style">"<%= session.getAttribute("buName") %>"</p>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -496,7 +496,7 @@ article>div>p {
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">아이디</th>
 							<td colspan="2" class="table-light" id="s_us_no">
 							<input type="text" class="form-control border_none" name="buId" maxlength="300" readonly="readonly"
-								value="${bvo.buId}" /></td>
+								value="<%= session.getAttribute("buName") %>" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="vertical-align: middle;">비밀번호</th>
@@ -521,7 +521,7 @@ article>div>p {
 	$(function(){
 		console.log(${msg});
 		/* if('${msg}' != ''){
-			alert('됬나?');
+			alert('되나?');
 		} */
 	})
 	</script>
@@ -550,15 +550,39 @@ article>div>p {
 				$("#k_re_menu_content").hide();
 				$("#main_box").hide();
 			});
-			//업체등록
+			
+			/* 내정보 관리 이동 */
+		    $("#k_info_menu").click(function() {
+		       var frm = $("#frm");
+		       frm.attr("action", "buminfocheck");
+		       frm.attr("method", "post");
+		       frm.submit();
+		    });		
+			
+			
+			/* 업체등록 */
 			$("#k_bu_eroll_menu").click(function() {			
 				location.href="bucompany";
 			});
 			
-			
+			//예약관리 - 예약 조회/수정
 			$("#k_re_cu_menu").click(function() {
 				location.href = "<%=request.getContextPath()%>/burscheck";
 			});
+			
+			/* 예약관리 - 예약 메뉴 등록 */
+			$("#k_re_menu_enroll").click(function() {
+				location.href = "<%=request.getContextPath()%>/burmenu";
+			});
+			
+			/* 토글 - 비밀번호 변경 */
+		  	$("#k_pwdinfo").click(function() {
+		    	var frm = $("#frm");
+					frm.attr("action", "buminfocheck");
+					frm.attr("method", "post");
+					frm.submit();
+			});
+			
 			
 	</script>
 	<script>
@@ -635,7 +659,7 @@ article>div>p {
 	<script>
   	$("#buPwd").keyup(function() {
   		// console.log("db에 있는 pwd 확인" + ${bvo.buPwd});
-  		var db_pwd = "${bvo.buPwd}";
+  		var db_pwd = "<%= session.getAttribute("password") %>";
   		console.log(db_pwd);
   		var check_pwd = $("#buPwd").val();
   		
@@ -676,12 +700,7 @@ article>div>p {
   		}
   	});
   	
-  	$("#k_pwdinfo").click(function() {
-    	var frm = $("#frm");
-			frm.attr("action", "buminfocheck");
-			frm.attr("method", "post");
-			frm.submit();
-	});
+  	
   </script>
   
   <script src="https://code.highcharts.com/modules/data.js"></script>

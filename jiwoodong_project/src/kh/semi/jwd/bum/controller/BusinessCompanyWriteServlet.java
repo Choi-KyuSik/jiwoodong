@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kh.semi.jwd.bum.model.service.BumService;
 import kh.semi.jwd.bum.model.vo.BumVo;
@@ -30,7 +31,7 @@ public class BusinessCompanyWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();		   
-		   //°¡Á®¿Â ¼¼¼Ç¿¡¼­ ¼Ó¼º¸íÀ» ÅëÇØ µ¥ÀÌÅÍ °ªÀ» °¡Á®¿Í¼­ String º¯¼ö¿¡ ÀúÀå
+		   //ê°€ì ¸ì˜¨ ì„¸ì…˜ì—ì„œ ì†ì„±ëª…ì„ í†µí•´ ë°ì´í„° ê°’ì„ ê°€ì ¸ì™€ì„œ String ë³€ìˆ˜ì— ì €ì¥
 		   String bu_id = (String)session.getAttribute("bu_id");
 		   String password = (String)session.getAttribute("password");
 		
@@ -42,12 +43,12 @@ public class BusinessCompanyWriteServlet extends HttpServlet {
 		
 //		String result2 = new BumService().companyWriteCheck(buNo);
 //		request.setAttribute("cpSignYn", result2);
-//		//¾÷Ã¼µî·Ï Áßº¹¿©ºÎ È®ÀÎ
+//		//ì—…ì²´ë“±ë¡ ì¤‘ë³µì—¬ë¶€ í™•ì¸
 //		System.out.println(result2);
 //		if(result2.length() < 1) {
 //			request.getRequestDispatcher("WEB-INF/bum/businessCompanyWritePage.jsp").forward(request, response);
 //		} else {
-//			request.setAttribute("msg", "ÀÌ¹Ì µî·ÏµÇ¾ú°Å³ª ½ÂÀÎ ´ë±âÁßÀÔ´Ï´Ù.");
+//			request.setAttribute("msg", "ì´ë¯¸ ë“±ë¡ë˜ì—ˆê±°ë‚˜ ìŠ¹ì¸ ëŒ€ê¸°ì¤‘ì…ë‹ˆë‹¤.");
 //			response.sendRedirect(request.getContextPath()+"/BumMainPage?msg=a");
 //		}
 		
@@ -63,3 +64,4 @@ public class BusinessCompanyWriteServlet extends HttpServlet {
 //	}
 
 }
+

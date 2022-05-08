@@ -253,7 +253,7 @@ article>div>p {
 	<script>
 	$(".menuDelete").click(function(){
 		if (confirm("삭제하시겠습니까?")){
-			$("#frmMenuDelete").submit();
+			$(this).parent().parent().parent().parent().submit();
 		} else {
 			return;
 		}
