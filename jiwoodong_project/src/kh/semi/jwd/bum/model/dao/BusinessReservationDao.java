@@ -591,4 +591,24 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 		
 		return list;
 	}
+
+	public String getSighyn(Connection conn, int cpNo) {
+		String list = "";
+		String sql = "select CP_SIGNYN from company where cp_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return list;
+	}
 }

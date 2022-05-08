@@ -1,6 +1,7 @@
 package kh.semi.jwd.bum.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -33,20 +34,32 @@ public class BusinessReservationCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int cpNo = (int) request.getSession().getAttribute("cpNo");
-		System.out.println(request.getSession().getAttribute("cpNo"));
+		String category = new BusinessReservationService().cpCatecoryCheck(cpNo);
 		ArrayList<Map<String, Object>> menulist = new  BusinessReservationService().menuList(cpNo);
+		String cpSignYn = new BusinessReservationService().getSighyn(cpNo);
+		PrintWriter out2 = response.getWriter();
+		response.setContentType("text/html; charset=utf-8");
+		
 		request.setAttribute("menulist", menulist);
 		
-		String category = new BusinessReservationService().cpCatecoryCheck(cpNo);
-		if(category.equals("카페")) {
-			ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheckCafe(cpNo);
-			request.setAttribute("reservation", reservation);
-			request.getRequestDispatcher("WEB-INF/bum/bumBookingListCafe.jsp").forward(request, response);
-		} else {
-		ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheck(cpNo);
-		request.setAttribute("reservation", reservation);
-		request.getRequestDispatcher("WEB-INF/bum/bumBookingList.jsp").forward(request, response);
-		}
+		//업체등록 여부 확인
+				if(cpSignYn.equals("Y")) {
+					if(category.equals("카페")) {
+						ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheckCafe(cpNo);
+						request.setAttribute("reservation", reservation);
+						request.getRequestDispatcher("WEB-INF/bum/bumBookingListCafe.jsp").forward(request, response);
+					} else {
+						ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheck(cpNo);
+						request.setAttribute("reservation", reservation);
+						request.getRequestDispatcher("WEB-INF/bum/bumBookingList.jsp").forward(request, response);
+					}
+				}else {
+						out2.println("<script language='javascript'>");
+						out2.println("alert('업체등록을 먼저 해주세요.'); history.back();");
+						out2.println("</script>");
+						out2.flush();
+				}
+		
 	}
 
 	/**

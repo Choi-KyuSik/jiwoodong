@@ -167,4 +167,11 @@ public class BusinessReservationService {
 		return result;
 	}
 
+	public String getSighyn(int cpNo) {
+		Connection conn = getConnection();
+		String result = new BusinessReservationDao().getSighyn(conn,cpNo);
+		close(conn);
+		return result;
+	}
+
 }

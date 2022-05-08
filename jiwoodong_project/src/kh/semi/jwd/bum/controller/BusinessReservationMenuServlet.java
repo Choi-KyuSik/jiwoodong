@@ -1,6 +1,7 @@
 package kh.semi.jwd.bum.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.jwd.bum.model.service.BusinessReservationService;
+import kh.semi.jwd.bum.model.vo.BumReservationVo;
 
 /**
  * Servlet implementation class BusinessReservationMenuServlet
@@ -34,7 +36,19 @@ public class BusinessReservationMenuServlet extends HttpServlet {
 		int cpNo = (int) request.getSession().getAttribute("cpNo");
 		ArrayList<Map<String, Object>> list = new BusinessReservationService().reservationMenuList(cpNo);
 		request.setAttribute("MenuList", list);
-		request.getRequestDispatcher("WEB-INF/bum/bumBookingMenuList.jsp").forward(request, response);
+		String cpSignYn = new BusinessReservationService().getSighyn(cpNo);
+		PrintWriter out2 = response.getWriter();
+		response.setContentType("text/html; charset=utf-8");
+		if(cpSignYn.equals("Y")) {
+			request.getRequestDispatcher("WEB-INF/bum/bumBookingMenuList.jsp").forward(request, response);
+		}else {
+				out2.println("<script language='javascript'>");
+				out2.println("alert('업체등록을 먼저 해주세요.'); history.back();");
+				out2.println("</script>");
+				out2.flush();
+		}
+		
+		
 	}
 
 	/**
