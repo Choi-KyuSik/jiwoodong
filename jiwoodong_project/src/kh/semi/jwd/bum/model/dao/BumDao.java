@@ -7,11 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
 import kh.semi.jwd.bum.model.vo.CompanyVo;
+import kh.semi.jwd.bum.model.vo.ReviewVo;
 
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
@@ -525,15 +528,18 @@ public class BumDao {
 	}
 	
 	//우진 - buNo 뽑아오기
+
 	public int getBuno(Connection conn, String bu_id) {
 		int list = 0;
 		String sql = "select bu_no from b_member where bu_id = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bu_id);
+
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
+
 				list = rs.getInt(1);
 			}
 		} catch (SQLException e) {
@@ -544,4 +550,124 @@ public class BumDao {
 		
 		return list;
 	}
+
+
+	//승희 - 리뷰 리스트
+	// 검색 조건에 맞는 게시물의 개수를 반환합니다.
+    public int selectRvCount(Map<String, Object> map) {
+        int totalCount = 0; // 결과(게시물 수)를 담을 변수
+
+        // 게시물 수를 얻어오는 쿼리문 작성
+        String query = "SELECT COUNT(*) FROM review";
+        if (map.get("searchWord") != null) {
+            query += " WHERE " + map.get("searchField") + " "
+                   + " LIKE '%" + map.get("searchWord") + "%'";
+        }
+
+        try {
+        	Connection conn= getConnection();
+            stmt = conn.createStatement();   // 쿼리문 생성
+            rs = stmt.executeQuery(query);  // 쿼리 실행
+            rs.next();  // 커서를 첫 번째 행으로 이동
+            totalCount = rs.getInt(1);  // 첫 번째 칼럼 값을 가져옴
+        }
+        catch (Exception e) {
+            System.out.println("게시물 수를 구하는 중 예외 발생");
+            e.printStackTrace();
+        }
+
+        return totalCount; 
+    }
+    // 검색 조건에 맞는 게시물 목록을 반환합니다.
+    public List<ReviewVo> selectRvList(Map<String, Object> map) { 
+        List<ReviewVo> volist = new Vector<ReviewVo>();  // 결과(게시물 목록)를 담을 변수
+
+        String query = "select c.cp_name,c.cp_no,b.um_id,b.bk_name,r.*"
+        		+ "    from booking b join review r"
+        		+ "                on r.bk_no = b.bk_no"
+        		+ "                join company c "
+        		+ "                on b.cp_no = c.cp_no";
+        if (map.get("searchWord") != null) {
+            query += " WHERE " + map.get("searchField") + " "
+                   + " LIKE '%" + map.get("searchWord") + "%' ";
+        }
+        query += " ORDER BY rv_score DESC "; 
+
+
+        try {
+        	Connection conn = getConnection();
+        	//ReviewVo vo = new ReviewVo();
+           stmt = conn.createStatement();  // 쿼리문 생성
+            //pstmt.setInt(1, vo.getCpNo());
+            rs = stmt.executeQuery(query);  // 쿼리 실행
+
+            while (rs.next()) {  // 결과를 순화하며...
+                // 한 행(게시물 하나)의 내용을 rvo에 저장
+            	ReviewVo rvo = new ReviewVo(); 
+
+            	rvo.setCpName(rs.getString("cp_Name"));
+                rvo.setCpNo(rs.getInt("cp_No"));
+                rvo.setUmID(rs.getString("um_ID"));
+                rvo.setBkName(rs.getString("bk_Name"));
+                rvo.setRvNo(rs.getInt("rv_No"));
+                rvo.setRvNo(rs.getInt("bk_No"));
+                rvo.setRvScore(rs.getInt("rv_Score"));
+                rvo.setRvContent(rs.getString("rv_Content"));
+                rvo.setRvWriteDate(rs.getTimestamp("rv_Write_Date"));
+                rvo.setRvModifyDate(rs.getTimestamp("rv_Modify_Date"));
+                rvo.setFlGno(rs.getString("fl_Gno"));
+            	 
+
+                volist.add(rvo);  // 결과 목록에 저장
+            }
+        } 
+        catch (Exception e) {
+            System.out.println("게시물 조회 중 예외 발생");
+            e.printStackTrace();
+        }finally {
+			close(rs);
+			close(pstmt);
+		}
+
+        return volist;
+    }
+	//승희- 리뷰 상세 조회
+	 public ReviewVo detailRv(Connection conn,ReviewVo vo) { 
+		 	ReviewVo rvo = new ReviewVo();
+	        
+	        // 쿼리문 준비
+	        String query = "select c.cp_name,c.cp_no,b.um_id,b.bk_name,r.*"
+	        		+ "    from booking b join review r"
+	        		+ "                on r.bk_no = b.bk_no"
+	        		+ "                join company c"
+	        		+ "                on b.cp_no = c.cp_no"
+	        		+ "                where rv_no=?";
+	        try {
+	            pstmt = conn.prepareStatement(query);
+	            pstmt.setInt(1, vo.getRvNo());   
+	            System.out.println("vo.getRvNo():"+vo.getRvNo());
+	            rs = pstmt.executeQuery();  // 쿼리 실행 
+
+	            // 결과 처리
+	            if (rs.next()) {
+	            	rvo.setCpName(rs.getString("cp_Name"));
+	                rvo.setCpNo(rs.getInt("cp_No"));
+	                rvo.setUmID(rs.getString("um_ID"));
+	                rvo.setBkName(rs.getString("bk_Name"));
+	                rvo.setRvScore(rs.getInt("rv_Score"));
+	                rvo.setRvContent(rs.getString("rv_Content"));
+	                rvo.setRvWriteDate(rs.getTimestamp("rv_WriteDate"));
+	                rvo.setFlGno(rs.getString("fl_Gno"));
+	            }
+	        } 
+	        catch (Exception e) {
+	            System.out.println("리뷰 상세보기 중 예외 발생");
+	            e.printStackTrace();
+	        }
+	        System.out.println(rvo);
+	        return rvo; 
+	    }
+	 
+	
+	
 }
