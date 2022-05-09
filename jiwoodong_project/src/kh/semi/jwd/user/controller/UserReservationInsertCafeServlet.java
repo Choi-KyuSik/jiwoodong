@@ -61,7 +61,7 @@ public class UserReservationInsertCafeServlet extends HttpServlet {
 		map.put("rsphone",request.getParameter("rsphone"));
 		map.put("rsrequire",request.getParameter("rsrequire"));
 		
-		int result = new UserReservationService().reservationInsertCafe(map);
+		int result = new UserReservationService().reservationInsert(map);
 		
 		for(int i=0; i < menuno.length; i++) {
 			int result2 = new UserReservationService().reservationInsertCafemenu(map, menuno[i], menucount[i]);

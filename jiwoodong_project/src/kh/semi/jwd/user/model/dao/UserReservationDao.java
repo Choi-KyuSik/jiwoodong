@@ -131,7 +131,7 @@ public class UserReservationDao {
 		return result;
 	}
 
-	public int reservationInsertCafe(Connection conn, Map<String, Object> map) {
+	public int reservationInsert(Connection conn, Map<String, Object> map) {
 		int result = 0;
 		String sql = "insert into booking(bk_no,cp_no, um_id, bk_name, bk_phone, bk_require, bk_date, bk_time, bk_status, bk_total_price) values(booking_seq.nextval, ?,?,?,?,?,replace(?, '-', '/'),?,'R',to_number(?))";
 		
@@ -179,6 +179,28 @@ public class UserReservationDao {
 	}
 
 	public int reservationInsertSalonmenu(Connection conn, Map<String, Object> map) {
+		int result = 0;
+		String sql = "insert into b_menu(bk_no, menu_no) values((select bk_no from booking where cp_no=? and um_id=? and bk_name=? and bk_phone=? and bk_date=replace(?,'-','/') and bk_time=?), to_number(?))";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int)map.get("cpno"));
+			pstmt.setString(2, (String)map.get("umid"));
+			pstmt.setString(3, (String)map.get("rsname"));
+			pstmt.setString(4, (String)map.get("rsphone"));
+			pstmt.setString(5, (String)map.get("rsdate"));
+			pstmt.setString(6, (String)map.get("rstime"));
+			pstmt.setString(7, (String) map.get("menuNo"));
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int reservationInsertHotelmenu(Connection conn, Map<String, Object> map) {
 		int result = 0;
 		String sql = "insert into b_menu(bk_no, menu_no) values((select bk_no from booking where cp_no=? and um_id=? and bk_name=? and bk_phone=? and bk_date=replace(?,'-','/') and bk_time=?), to_number(?))";
 		

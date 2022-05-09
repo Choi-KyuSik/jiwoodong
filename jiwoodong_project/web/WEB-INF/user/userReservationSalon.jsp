@@ -147,7 +147,7 @@
                         <p style="font-size: 1.7em; font-weight: bold;">${CpInfo[0].cpName } 예약</p>
                     </div>
                     <div style="margin: 30px;">
-	                    <form action="UserReservationInsertSalon" method="post" id="frmrsinsert">
+	                    <form action="#" method="post" id="frmrsinsert">
 	                     <input type="hidden" value="${cpNo }" name="cpNo">
 	                    <div style="float: left">
 	                    	<label style="font-size: 20px;">날짜선택 : <input type="text" id="datepicker"  name="rsdate" required></label><br>
@@ -175,7 +175,7 @@
 		                    	</c:forEach>
 		                    	</select><br>
 		                    	<label style="font-size: 20px; margin-top: 20px; margin-bottom:20px">메뉴가격 : <input type="text" id="rsmenuprice"  name="rsmenuprice" readonly></label><br>
-	                   	<input type="button" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
+	                   	<input type="button" onclick="requestPay()" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
 	                   	</div>
 	                   	<div id="h_menu" style="clear: both"></div>
 	                   	<div id="h_totalprice"></div>

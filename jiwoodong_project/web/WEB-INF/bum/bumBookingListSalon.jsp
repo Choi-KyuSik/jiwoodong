@@ -420,7 +420,7 @@ td, th {
             	}
     			$.ajax({
        				type :'post' ,
-       				url :'bursaddAjax' ,
+       				url :'bursaddAjaxSalon' ,
        				data : $("#bookingForm").serialize(),
        				success : function(data){
        					alert(data); 
@@ -471,7 +471,7 @@ td, th {
             	}
     			$.ajax({
         			type : 'post',
-        			url : 'bursupdate ',
+        			url : 'bursupdateSalon ',
         			data : $("#bookingForm").serialize(),
         			success : function(data){
         				alert(data);
@@ -491,7 +491,7 @@ td, th {
     		if($(this).val() == '전체'){
     			$.ajax({
     				type : 'post',
-        			url : 'allStatus ',
+        			url : 'allStatusSalon ',
         			data : {"day": $("#todayDate").val()},
         			dataType : "json",
     				success : function(list){
@@ -533,7 +533,7 @@ td, th {
     		} else {
     			$.ajax({
     				type : 'post',
-        			url : 'selectStatusDay ',
+        			url : 'selectStatusDaySalon ',
         			data : {"day": $("#todayDate").val(), "status": $("#bkStatus").val()},
         			dataType : "json",
     				success : function(data){
@@ -579,7 +579,7 @@ td, th {
     		if($("#bkStatus").val() == '전체'){
     			$.ajax({
     				type : 'post',
-        			url : 'allStatus',
+        			url : 'allStatusSalon',
         			data : {"day": $("#todayDate").val()},
         			dataType : "json",
     				success : function(list){
@@ -621,7 +621,7 @@ td, th {
     		} else {
     		$.ajax({
 				type : 'post',
-    			url : 'selectStatusDay ',
+    			url : 'selectStatusDaySalon ',
     			data : {"day": $("#todayDate").val(), "status": $("#bkStatus").val()},
     			dataType : "json",
 				success : function(data){

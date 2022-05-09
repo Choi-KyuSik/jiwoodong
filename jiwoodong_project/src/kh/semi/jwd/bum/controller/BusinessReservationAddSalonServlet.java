@@ -17,14 +17,14 @@ import kh.semi.jwd.bum.model.service.BusinessReservationService;
 /**
  * Servlet implementation class BusinessReservationAddServelt
  */
-@WebServlet("/bursaddAjax")
-public class BusinessReservationAddServlet extends HttpServlet {
+@WebServlet("/bursaddAjaxSalon")
+public class BusinessReservationAddSalonServlet extends HttpServlet {
    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusinessReservationAddServlet() {
+    public BusinessReservationAddSalonServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -56,7 +56,7 @@ public class BusinessReservationAddServlet extends HttpServlet {
          if(result < 0) {
             msg = "예약 등록 실패";
          } else {
-            int result2 = new BusinessReservationService().reservationAddMenu(map, cpNo);
+            int result2 = new BusinessReservationService().reservationAddMenuSalon(map, cpNo);
             if(result2 < 0) {
                msg = "예약 메뉴 등록 실패";
             } else {

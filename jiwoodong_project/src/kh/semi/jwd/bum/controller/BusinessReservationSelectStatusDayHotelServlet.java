@@ -19,14 +19,14 @@ import kh.semi.jwd.bum.model.vo.BumReservationVo;
 /**
  * Servlet implementation class BusinessReservationSelectStatus
  */
-@WebServlet("/selectStatusDay")
-public class BusinessReservationSelectStatusDayServlet extends HttpServlet {
+@WebServlet("/selectStatusDayHotel")
+public class BusinessReservationSelectStatusDayHotelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusinessReservationSelectStatusDayServlet() {
+    public BusinessReservationSelectStatusDayHotelServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,7 +49,7 @@ public class BusinessReservationSelectStatusDayServlet extends HttpServlet {
 		String date = request.getParameter("day");
 		String status = request.getParameter("status");
 		int cpNo = (int) request.getSession().getAttribute("cpNo");
-		ArrayList<BumReservationVo> list = new BusinessReservationService().selectStatusCafe(date, cpNo, status);
+		ArrayList<BumReservationVo> list = new BusinessReservationService().selectStatusHotel(date, cpNo, status);
 		JSONArray Array = new JSONArray ();
 
 		JSONObject json = null;

@@ -56,6 +56,13 @@ public class BusinessReservationService {
 		return result;
 	}
 	
+	public int reservationAddMenuSalon(Map<String, Object> map , int cpNo) {
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationAddMenuSalon(conn, map, cpNo);
+		close(conn);
+		return result;
+	}
+	
 	public int reservationAddMenuCafe(Map<String, Object> map, String menuNo, String menuCount , int cpNo) {
 		Connection conn = getConnection();
 		int result = new BusinessReservationDao().reservationAddMenuCafe(conn, map, menuNo, menuCount, cpNo);
@@ -70,9 +77,16 @@ public class BusinessReservationService {
 		return result;
 	}
 
-	public int reservationUpdate(Map<String, Object> map, int cpNo) {
+	public int reservationUpdateHotel(Map<String, Object> map, int cpNo) {
 		Connection conn = getConnection();
-		int result = new BusinessReservationDao().reservationUpdate(conn, map, cpNo);
+		int result = new BusinessReservationDao().reservationUpdateHotel(conn, map, cpNo);
+		close(conn);
+		return result;
+	}
+	
+	public int reservationUpdateSalon(Map<String, Object> map, int cpNo) {
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationUpdateSalon(conn, map, cpNo);
 		close(conn);
 		return result;
 	}
@@ -84,9 +98,16 @@ public class BusinessReservationService {
 		return result;
 	}
 
-	public ArrayList<BumReservationVo> AllStatus(String date, int cpNo) {
+	public ArrayList<BumReservationVo> AllStatusHotel(String date, int cpNo) {
 		Connection conn = getConnection();
-		ArrayList<BumReservationVo> result = new  BusinessReservationDao().AllStatus(conn, date, cpNo);
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().AllStatusHotel(conn, date, cpNo);
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<BumReservationVo> AllStatusSalon(String date, int cpNo) {
+		Connection conn = getConnection();
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().AllStatusSalon(conn, date, cpNo);
 		close(conn);
 		return result;
 	}
@@ -98,9 +119,16 @@ public class BusinessReservationService {
 		return result;
 	}
 
-	public ArrayList<BumReservationVo> selectStatus(String date, int cpNo, String status) {
+	public ArrayList<BumReservationVo> selectStatusHotel(String date, int cpNo, String status) {
 		Connection conn = getConnection();
-		ArrayList<BumReservationVo> result = new  BusinessReservationDao().selectStatus(conn, date, cpNo, status);
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().selectStatusHotel(conn, date, cpNo, status);
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<BumReservationVo> selectStatusSalon(String date, int cpNo, String status) {
+		Connection conn = getConnection();
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().selectStatusSalon(conn, date, cpNo, status);
 		close(conn);
 		return result;
 	}

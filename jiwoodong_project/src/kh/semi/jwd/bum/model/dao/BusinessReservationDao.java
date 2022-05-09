@@ -182,6 +182,24 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 		return result;
 	}
 	
+	public int reservationAddMenuSalon(Connection conn, Map<String, Object> map, int cpNo) {
+		int result = 0;
+		String sql = "insert into b_menu(bk_no, menu_no) values((select max(bk_no) from booking where cp_no = ? and bk_name = ?), ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			pstmt.setString(2, (String)map.get("bkName"));
+			pstmt.setString(3, (String)map.get("bkMenuNo"));
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	public int reservationAddMenuCafe(Connection conn, Map<String, Object> map, String menuNo, String menuCount , int cpNo) {
 		int result = 0;
 		String sql = "insert into b_menu(bk_no, menu_no, bkm_count) values((select max(bk_no) from booking where cp_no = ? and bk_name = ?), to_number(?), to_number(?))";
@@ -217,7 +235,26 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 		return result;
 	}
 	
-	public int reservationUpdate(Connection conn, Map<String, Object> map, int cpNo) {
+	public int reservationUpdateHotel(Connection conn, Map<String, Object> map, int cpNo) {
+		int result = 0;
+		String sql = "update booking set bk_date =  REPLACE(?, '-', '/'), bk_time = ? where cp_no = ? and bk_no = to_number(?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String)map.get("bkDate"));
+			pstmt.setString(2, (String)map.get("bkTime"));
+			pstmt.setInt(3, cpNo);
+			pstmt.setString(4, (String)map.get("bkNo"));
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int reservationUpdateSalon(Connection conn, Map<String, Object> map, int cpNo) {
 		int result = 0;
 		String sql = "update booking set bk_date =  REPLACE(?, '-', '/'), bk_time = ? where cp_no = ? and bk_no = to_number(?)";
 		try {
@@ -275,7 +312,40 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 		return result;
 	}
 
-	public ArrayList<BumReservationVo> AllStatus(Connection conn, String date, int cpNo) {
+	public ArrayList<BumReservationVo> AllStatusHotel(Connection conn, String date, int cpNo) {
+		String sql = "select * from booking join b_menu using(bk_no) join menu using(menu_no, cp_no) where cp_no=? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(to_date(?, 'yy/mm/dd'),'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
+		ArrayList<BumReservationVo> result = new ArrayList<BumReservationVo>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			pstmt.setString(2, date);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BumReservationVo vo = new BumReservationVo();
+				vo.setBkNo(rs.getInt("bk_no"));
+				vo.setUmId(rs.getString("um_id"));
+				vo.setBkName(rs.getString("bk_name"));
+				vo.setBkPhone(rs.getString("bk_phone"));
+				vo.setBkDate(rs.getString("bk_date"));
+				vo.setBkTime(rs.getString("bk_time"));
+				vo.setMenuName(rs.getString("menu_name"));
+				vo.setBkRequire(rs.getString("bk_require"));
+				vo.setBkStatus(rs.getString("bk_status"));
+				result.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public ArrayList<BumReservationVo> AllStatusSalon(Connection conn, String date, int cpNo) {
 		String sql = "select * from booking join b_menu using(bk_no) join menu using(menu_no, cp_no) where cp_no=? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(to_date(?, 'yy/mm/dd'),'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
 		ArrayList<BumReservationVo> result = new ArrayList<BumReservationVo>();
 		try {
@@ -343,7 +413,51 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 		return result;
 	}
 
-	public ArrayList<BumReservationVo> selectStatus(Connection conn, String date, int cpNo, String status) {
+	public ArrayList<BumReservationVo> selectStatusHotel(Connection conn, String date, int cpNo, String status) {
+		String sql = "select * from booking join b_menu using(bk_no) join menu using(menu_no, cp_no) where cp_no=? and bk_status = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(to_date(?, 'yy/mm/dd'),'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
+		ArrayList<BumReservationVo> result = new ArrayList<BumReservationVo>();
+		if(status.equals("예약")) {
+			status = "R";
+		} else if(status.equals("취소")) {
+			status = "C";
+		} else if(status.equals("매장예약")) {
+			status = "M";
+		} else {
+			status = "?";
+		}
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			pstmt.setString(3, date);
+			pstmt.setString(2, status);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BumReservationVo vo = new BumReservationVo();
+				vo.setBkNo(rs.getInt("bk_no"));
+				vo.setUmId(rs.getString("um_id"));
+				vo.setBkName(rs.getString("bk_name"));
+				vo.setBkPhone(rs.getString("bk_phone"));
+				vo.setBkDate(rs.getString("bk_date"));
+				vo.setBkTime(rs.getString("bk_time"));
+				vo.setMenuName(rs.getString("menu_name"));
+				vo.setMenuPrice(rs.getInt("menu_price"));
+				vo.setBkRequire(rs.getString("bk_require"));
+				vo.setBkStatus(rs.getString("bk_status"));
+				result.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public ArrayList<BumReservationVo> selectStatusSalon(Connection conn, String date, int cpNo, String status) {
 		String sql = "select * from booking join b_menu using(bk_no) join menu using(menu_no, cp_no) where cp_no=? and bk_status = ? and to_char(to_date(bk_date, 'yy/mm/dd'),'dd') in to_char(to_date(?, 'yy/mm/dd'),'dd') order by to_date(bk_date, 'yyyy-mm-dd') desc, bk_time desc";
 		ArrayList<BumReservationVo> result = new ArrayList<BumReservationVo>();
 		if(status.equals("예약")) {

@@ -145,7 +145,7 @@
                         <p style="font-size: 1.7em; font-weight: bold;">${CpInfo[0].cpName } 예약</p>
                     </div>
                     <div style="margin: 30px;">
-	                    <form action="UserReservationInsertSalon" method="post" id="frmrsinsert">
+	                    <form action="UserReservationInsertHotel" method="post" id="frmrsinsert">
 	                     <input type="hidden" value="${cpNo }" name="cpNo">
 	                    <div style="float: left">
 	                    	<label style="font-size: 20px;">날짜선택 : <input type="text" id="datepicker"  name="rsdate" required></label><br>
@@ -173,7 +173,7 @@
 		                    	</c:forEach>
 		                    	</select><br>
 		                    	<label style="font-size: 20px; margin-top: 20px; margin-bottom:20px">메뉴가격 : <input type="text" id="rsmenuprice"  name="rsmenuprice" readonly></label><br>
-	                   	<input type="button" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
+	                   	<input type="button" onclick="requestPay()" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
 	                   	</div>
 	                   	<div id="h_menu" style="clear: both"></div>
 	                   	<div id="h_totalprice"></div>
@@ -183,6 +183,52 @@
             </ul>
         </div>
     </section>
+    <!-- 결제API : 손은진 -->
+    <script>
+       var IMP = window.IMP; // 생략 가능
+      IMP.init("imp39204315") // 지우동 가맹점 식별코드
+      
+      function requestPay() {
+            // IMP.request_pay(param, callback) 결제창 호출
+            IMP.request_pay({ // param
+                pg: "html5_inicis", // 이니시스 웹표준 결제창
+                pay_method: "card", // 결제 방법
+                /* TODO : 예약번호로 넣기 */
+                merchant_uid: new Date().getTime() + "jwd", // 주문번호
+                name: $("#rsmenu option:selected").text(), // 상품명
+                amount: $("#rsmenuprice").val(), // 가격
+                buyer_email: "dms102336@gmail.com", // 이메일
+                /* TODO : 구매자 이름, 전화번호, 주소, 우편번호 로그인 한 사용자 정보로 가져오기 */
+                buyer_name: $("#rsname").val(), // 이름
+                buyer_tel: "010-1111-1111", // 전화번호
+                buyer_addr: "서울특별시 강남구", // 주소
+                buyer_postcode: "01181" // 우편번호
+            }, function (rsp) { // callback
+               if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+            	   var frmEl = $("#frmrsinsert");
+                   alert("결제가 완료되었습니다.");
+                   alert("예약이 완료되었습니다.");
+                   frmEl.attr("action", "UserReservationInsertHotel");
+                   frmEl.attr("method", "post");
+                   frmEl.submit();
+
+            	   /* let response = fetch("/payment", {
+                       method: "post",
+                       body : JSON.stringify(rsp),
+                       headers: {
+                          "Content-Type" : "application/json; charset=utf-8"
+                       }
+                    }); */
+                } else {
+                	alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+                	if(rsp.error_msg == "사용자가 결제를 취소하셨습니다") {
+                		alert("결제가 취소되었습니다. 메인페이지로 돌아갑니다.");
+                		location.href="UserMypage";
+                	}
+                }
+            });
+          }
+    </script>
     <!-- 데이더픽커  -->
      <script>
      // 데이터픽커 선언

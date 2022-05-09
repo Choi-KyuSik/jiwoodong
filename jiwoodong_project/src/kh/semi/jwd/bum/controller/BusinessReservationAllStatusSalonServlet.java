@@ -19,14 +19,14 @@ import kh.semi.jwd.bum.model.vo.BumReservationVo;
 /**
  * Servlet implementation class BusinessReservationAllStatus
  */
-@WebServlet("/allStatus")
-public class BusinessReservationAllStatusServlet extends HttpServlet {
+@WebServlet("/allStatusSalon")
+public class BusinessReservationAllStatusSalonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusinessReservationAllStatusServlet() {
+    public BusinessReservationAllStatusSalonServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,7 +48,7 @@ public class BusinessReservationAllStatusServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String date = request.getParameter("day");
 		int cpNo = (int) request.getSession().getAttribute("cpNo");
-		ArrayList<BumReservationVo> list = new BusinessReservationService().AllStatus(date, cpNo);
+		ArrayList<BumReservationVo> list = new BusinessReservationService().AllStatusSalon(date, cpNo);
 		
 		JSONArray jsonArray = new JSONArray ();
 

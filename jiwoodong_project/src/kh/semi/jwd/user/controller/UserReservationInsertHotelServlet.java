@@ -16,14 +16,14 @@ import kh.semi.jwd.user.model.service.UserReservationService;
 /**
  * Servlet implementation class UserReservationInsertServlet
  */
-@WebServlet("/UserReservationInsertSalon")
-public class UserReservationInsertSalonServlet extends HttpServlet {
+@WebServlet("/UserReservationInsertHotel")
+public class UserReservationInsertHotelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserReservationInsertSalonServlet() {
+    public UserReservationInsertHotelServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -61,7 +61,7 @@ public class UserReservationInsertSalonServlet extends HttpServlet {
 		
 		int result = new UserReservationService().reservationInsert(map);
 		
-		int result2 = new UserReservationService().reservationInsertSalonmenu(map);
+		int result2 = new UserReservationService().reservationInsertHotelmenu(map);
 		System.out.println(result2);
 		response.sendRedirect(request.getContextPath()+"/UserMypage");
 	}

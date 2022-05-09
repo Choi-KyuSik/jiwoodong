@@ -16,14 +16,14 @@ import kh.semi.jwd.bum.model.service.BusinessReservationService;
 /**
  * Servlet implementation class BusinessReservationUpdateServlet
  */
-@WebServlet("/bursupdate")
-public class BusinessReservationUpdateServlet extends HttpServlet {
+@WebServlet("/bursupdateHotel")
+public class BusinessReservationUpdateHotelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusinessReservationUpdateServlet() {
+    public BusinessReservationUpdateHotelServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -54,18 +54,11 @@ public class BusinessReservationUpdateServlet extends HttpServlet {
 			map.put("bkMenuNo", request.getParameter("bkMenuNo"));
 			map.put("bkPrice", request.getParameter("bkPrice"));
 			int cpNo = (int) request.getSession().getAttribute("cpNo");
-			int result = new BusinessReservationService().reservationUpdate(map, cpNo);
+			int result = new BusinessReservationService().reservationUpdateHotel(map, cpNo);
 			if(result < 0) {
-				msg = "예약 수정 실패";
+				msg = "예약 메뉴 수정 실패";
 			} else {
-				int result2 = new BusinessReservationService().reservationUpdate(map, cpNo);
-				System.out.println(result);
-				System.out.println(result2);
-				if(result2 < 0) {
-					msg = "예약 메뉴 수정 실패";
-				} else {
-					msg = "수정 성공";
-				}
+				msg = "수정 성공";
 			}
 			out.println(msg);
 			out.flush();
