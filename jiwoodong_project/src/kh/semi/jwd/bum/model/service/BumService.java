@@ -2,12 +2,14 @@ package kh.semi.jwd.bum.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import kh.semi.jwd.bum.model.dao.BumDao;
 import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
 import kh.semi.jwd.bum.model.vo.CompanyVo;
+import kh.semi.jwd.bum.model.vo.ReviewVo;
 
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
@@ -153,13 +155,7 @@ public class BumService {
 			close(conn);
 			return list;
 		}
-	
-	
-	
-	
-	
-	
-	
+
 	// 승희 검색 조건에 맞는 게시물 목록을 반환합니다.
 		public List<ReviewVo> selectRvList(Map<String, Object> map){
 			Connection conn = getConnection();

@@ -7,11 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
 import kh.semi.jwd.bum.model.vo.CompanyVo;
+import kh.semi.jwd.bum.model.vo.ReviewVo;
 
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
 
@@ -525,8 +528,7 @@ public class BumDao {
 	}
 	
 	//우진 - buNo 뽑아오기
-	public int getBuno(Connection conn, String bu_id) {
-		int list = 0;
+
 	public int getBuno(Connection conn, String bu_id) {
 		int list = 0;
 		String sql = "select bu_no from b_member where bu_id = ?";
