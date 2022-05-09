@@ -275,6 +275,10 @@
     	$("#s_us_delete_menu").click(function() {
     		location.href="AdminUsInfoDeleteList";
     	});
+    	
+    	$("#s_review_menu").click(function() {
+    		location.href="AdminReviewList";
+    	});
     </script>
     
     <!-- 메뉴별 content display변경 -->

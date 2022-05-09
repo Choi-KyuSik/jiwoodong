@@ -67,7 +67,7 @@
                             </ul>
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"
+                                    <a class="nav-link" href="#" role="button" id="s_review_menu" data-bs-toggle="dropdown"
                                         id="s_review_menu">
                                         리뷰관리
                                     </a>

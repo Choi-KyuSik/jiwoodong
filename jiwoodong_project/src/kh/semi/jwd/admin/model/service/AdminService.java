@@ -325,4 +325,60 @@ public class AdminService {
 		return avo;
 		
 	}
+	
+	// 리뷰 조회 : 손은진
+	public ArrayList<Map<String, Object>> adRvList(int startRnum, int endRnum) {
+		
+		ArrayList<Map<String, Object>> volist = null;
+		
+		Connection conn = getConnection();
+		volist = new AdminDao().adRvList(conn, startRnum, endRnum);
+		close(conn);
+		
+		return volist;
+		
+	}
+	
+	// 리뷰 조회(검색) : 손은진
+	public ArrayList<Map<String, Object>> adRvListSearch(String field, String query, int startRnum, int endRnum) {
+
+		ArrayList<Map<String, Object>> volist = null;
+
+		Connection conn = getConnection();
+		volist = new AdminDao().adRvListSearch(conn, field, query, startRnum, endRnum);
+		close(conn);
+
+		return volist;
+
+	}
+	
+	// 리뷰 상세 조회 : 손은진
+	public ArrayList<Map<String, Object>> adRvDetailList(int rvNo) {
+		
+		ArrayList<Map<String, Object>> volist = null;
+		
+		Connection conn = getConnection();
+		volist = new AdminDao().adRvDetailList(conn, rvNo);
+		close(conn);
+		
+		return volist;
+	
+	}
+	
+	// 리뷰 개수 확인
+	public int countReviewList() {
+		Connection conn = getConnection();
+		int result = dao.countReviewList(conn);
+		close(conn);
+		return result;
+	}
+
+	// 리뷰 검색된 것 개수 확인
+	public int countReviewSearchList(String field, String query) {
+		Connection conn = getConnection();
+		int result = dao.countReviewSearchList(conn, field, query);
+		close(conn);
+		return result;
+	}
+	
 }

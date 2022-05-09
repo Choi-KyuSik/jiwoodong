@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/reset.css">
 <link rel="stylesheet"
@@ -23,30 +23,30 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<title>공지사항 조회</title>
+<title>리뷰 관리</title>
 </head>
 <body>
-
 	<div>
 		<%@ include file="../view/admin/admin_header.jsp"%>
 	</div>
+	
 	<section id="contents">
 
-		<!-- 공지사항 content : 손은진 -->
+		<!-- 리뷰관리 content : 손은진 -->
 		<div>
 			<div id="s_notice_content" class="tab_menu s_content" style="display: block;">
-				<p class="p_content_style">공지사항 조회</p>
-				<button type="button" id="s_notice_insert_btn"
-					class="btn btn-primary" data-bs-dismiss="modal">글 등록</button>
+				<p class="p_content_style">리뷰 조회</p>
 				<!-- 검색 -->
 				<nav class="navbar navbar-light"
 					style="float: right; margin-bottom: 20px;">
 					<div class="container-fluid">
-						<form action="AdminNoticeList" method="get" id="frm" class="d-flex">
+						<form action="AdminReviewList" method="get" id="frm" class="d-flex">
 							<select name="f" style="width: 100px; float: right; margin-right: 10px;"
 								class="form-select" aria-label="Default select example">
-								<option value="nt_title" selected="selected" ${field eq 'nt_title' ? 'selected' : ''}>제목</option>
-								<option value="nt_content" ${field eq 'nt_content' ? 'selected' : ''}>내용</option>
+								<option value="cp_category" selected="selected" ${field eq 'cp_category' ? 'selected' : ''}>업종</option>
+								<option value="cp_name" ${field eq 'cp_name' ? 'selected' : ''}>업체명</option>
+								<option value="um_id" ${field eq 'um_id' ? 'selected' : ''}>리뷰작성자</option>
+								<option value="rv_content" ${field eq 'rv_content' ? 'selected' : ''}>내용</option>
 							</select> 
 							<input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" value="${query }">
 							<button id="s_search_btn" class="btn btn-outline-success" type="submit">Search</button>
@@ -54,43 +54,51 @@
 					</div>
 				</nav>
 				<table class="table table table-hover"
-					style="clear: both; table-layout: fixed;">
+					style="clear: both; text-align: center; table-layout: fixed;">
 					<thead>
 						<tr>
-							<th scope="col" class="s_center" style="width: 100px;">글번호</th>
-							<th scope="col" class="s_center" style="width: 300px;">제목</th>
-							<th scope="col" class="s_center" style="width: 450px;">내용</th>
-							<th scope="col" class="s_center">작성자</th>
+							<th scope="col" class="s_center" style="width: 50px;">NO</th>
+							<th scope="col" class="s_center" style="width: 100px;">업종</th>
+							<th scope="col" class="s_center" style="width: 150px;">업체명</th>
+							<th scope="col" class="s_center" style="width: 150px;">리뷰작성자</th>
+							<th scope="col" class="s_center" style="width: 400px;">내용</th>
+							<th scope="col" class="s_center" style="width: 150px;">별점</th>
 							<th scope="col" class="s_center">작성일</th>
 						</tr>
 					</thead>
 
 					<tbody id="tbody" style="cursor: pointer;">
-					<c:if test="${empty query}">
-						<c:forEach items="${noticeListDetailPaging }" var="i">
+					<c:if test="${empty query }">
+						<c:forEach items="${adRvList }" var="i">
 							<tr class="s_tr_readList s_tr_modal">
-								<th class="s_center" scope="row" class="s_ntNo">${i.ntNo}</th>
-								<td class="s_td_short">${i.ntTitle}</td>
-								<td class="s_td_short">${i.ntContent}</td>
-								<td class="s_center">관리자</td>
-								<td class="s_center">${i.ntDate}</td>
+								<td style="display: none;">${i.rvNo }</td>
+								<th class="s_center" scope="row" class="s_ntNo">${i.rnum }</th>
+								<td class="s_td_short">${i.cpCategory }</td>
+								<td class="s_td_short">${i.cpName }</td>
+								<td class="s_center">${i.umId }</td>
+								<td class="s_center">${i.rvContent }</td>
+								<td class="s_center">${i.rvScore }</td>
+								<td class="s_center">${i.rvWriteDate }</td>
 							</tr>
 						</c:forEach>
 					</c:if>
-					<c:if test="${not empty query}">
-						<c:forEach items="${noticeListSearch }" var="i">
+					<c:if test="${not empty query }">
+						<c:forEach items="${adRvListSearch }" var="i">
 							<tr class="s_tr_readList s_tr_modal">
-								<th class="s_center" scope="row" class="s_ntNo">${i.ntNo}</th>
-								<td class="s_td_short">${i.ntTitle}</td>
-								<td class="s_td_short">${i.ntContent}</td>
-								<td class="s_center">관리자</td>
-								<td class="s_center">${i.ntDate}</td>
+								<td style="display: none;">${i.rvNo }</td>
+								<th class="s_center" scope="row" class="s_ntNo">${i.rnum }</th>
+								<td class="s_td_short">${i.cpCategory }</td>
+								<td class="s_td_short">${i.cpName }</td>
+								<td class="s_center">${i.umId }</td>
+								<td class="s_center">${i.rvContent }</td>
+								<td class="s_center">${i.rvScore }</td>
+								<td class="s_center">${i.rvWriteDate }</td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					</tbody>
 				</table>
-				<c:if test="${fn:length(noticeListSearch) == 0 and noticeListDetailPaging == null}">
+				<c:if test="${fn:length(adRvListSearch) == 0 and fn:length(adRvList) == 0}">
 					<div class="s_notice_msg">검색결과가 없습니다. 다시 검색해주세요.</div>
 					<div id="s_back_list_div"><button id="s_back_list" class="btn btn-primary" type="button">목록으로</button></div>
 				</c:if>
@@ -98,25 +106,25 @@
 					<ul class="pagination">
 					<!-- startPage에서 -1일 때 -->
 					<c:if test="${startPage > 1 }">
-						<li class="page-item"><a class="page-link" href="AdminNoticeList?pageNum=${startPage-1 }">Previous</a></li>
+						<li class="page-item"><a class="page-link" href="AdminReviewList?pageNum=${startPage-1 }">Previous</a></li>
 					</c:if>
 					<c:if test="${startPage <= 1 }">
-						<li class="page-item disabled"><a class="page-link" href="AdminNoticeList?pageNum=${startPage-1 }">Previous</a></li>
+						<li class="page-item disabled"><a class="page-link" href="AdminReviewList?pageNum=${startPage-1 }">Previous</a></li>
 					</c:if>
 					<c:forEach step="1" begin="${startPage }" end="${endPage }" var="idx">
 						<c:if test="${idx eq currentPage }">
-						<li class="page-item active"><a class="page-link" href="AdminNoticeList?pageNum=${idx }">${idx }</a></li>
+						<li class="page-item active"><a class="page-link" href="AdminReviewList?pageNum=${idx }">${idx }</a></li>
 						</c:if>
 						<c:if test="${idx ne currentPage }">
-						<li class="page-item"><a class="page-link" href="AdminNoticeList?pageNum=${idx }">${idx }</a></li>
+						<li class="page-item"><a class="page-link" href="AdminReviewList?pageNum=${idx }">${idx }</a></li>
 						</c:if>
 					</c:forEach>
 					<!-- endPage에서 +1일 때 -->
 					<c:if test="${endPage < pageCnt }">
-						<li class="page-item"><a class="page-link" href="AdminNoticeList?pageNum=${endPage+1 }">Next</a></li>
+						<li class="page-item"><a class="page-link" href="AdminReviewList?pageNum=${endPage+1 }">Next</a></li>
 					</c:if>
 					<c:if test="${endPage >= pageCnt }">
-						<li class="page-item disabled"><a class="page-link" href="AdminNoticeList?pageNum=${endPage+1 }">Next</a></li>
+						<li class="page-item disabled"><a class="page-link" href="AdminReviewList?pageNum=${endPage+1 }">Next</a></li>
 					</c:if>
 					</ul>
 				</div>
@@ -124,15 +132,11 @@
 		</div>
 	</section>
 	<script>
-		$("#s_notice_insert_btn").click(function() {
-			console.log("등록버튼 눌리니?");
-			location.href = "AdminNoticeWrite";
-		});
 		
 		$("#s_back_list").click(function() {
-    		location.href="AdminNoticeList";
-    	});
-		
+			location.href="AdminReviewList";
+		});
+	
 		$(".s_tr_readList").click(function() {
 			// 배열 선언
 			var tdArr = new Array();
@@ -152,9 +156,10 @@
 			console.log(typeof (tdArr[0]));
 
 			// 링크로 넘기기
-			location.href = "AdminNoticeDetailRead?ntNo=" + tdArr[0];
+			location.href = "AdminReviewDetailList?rvNo=" + tdArr[0];
 		});
 	</script>
+	
 	<!-- 메뉴버튼 눌렀을 때 이동할 페이지 -->
 	<script>
     	$("#s_notice_menu").click(function() {
@@ -193,28 +198,6 @@
     		location.href="AdminReviewList";
     	});
     </script>
-    
-    <!-- 카카오 스크립트 -->
-	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script>
-    	$("#s_logout").click(function() {
-    		Kakao.init('f276b6cc77a90e02edac0cb9b783cc3f'); //발급받은 키 중 javascript키를 사용해준다.
-    		if (Kakao.Auth.getAccessToken()) {
-				Kakao.API.request({
-					url : '/v1/user/unlink',
-					success : function(response) {
-						console.log(response);
-						alert("로그아웃 성공");
-						location.href="AdminLogin";
-					},
-					fail : function(error) {
-						console.log(error);
-						alert("로그아웃 실패");
-					},
-				})
-				Kakao.Auth.setAccessToken(undefined)
-			}
-    	});
-    </script>
+	
 </body>
 </html>

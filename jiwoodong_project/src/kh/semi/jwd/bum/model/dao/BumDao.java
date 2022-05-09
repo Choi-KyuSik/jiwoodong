@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;

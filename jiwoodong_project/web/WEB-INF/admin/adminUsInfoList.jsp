@@ -182,6 +182,10 @@
     	$("#s_us_delete_menu").click(function() {
     		location.href="AdminUsInfoDeleteList";
     	});
+
+    	$("#s_review_menu").click(function() {
+    		location.href="AdminReviewList";
+    	});
     </script>
     
     <!-- 카카오 스크립트 -->
