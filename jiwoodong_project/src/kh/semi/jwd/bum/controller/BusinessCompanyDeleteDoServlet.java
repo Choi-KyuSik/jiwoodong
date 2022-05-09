@@ -45,9 +45,11 @@ public class BusinessCompanyDeleteDoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int buNo = 5;
+		
 		int result = 0;
 		int result2 = 0;
+				   
+		   int buNo = (int) request.getSession().getAttribute("buNo");
 
 		BumVo vo = new BumVo();
 		vo.setBuNo(buNo);
@@ -56,7 +58,7 @@ public class BusinessCompanyDeleteDoServlet extends HttpServlet {
 		CompanyVo cvo = new CompanyVo();
 		cvo.setBuNo(buNo);
 
-		result = new BumService().bumDelete(vo);
+		result = new BumService().bumDelete(vo, buNo);
 		System.out.println("사업자 사용여부:" + vo);
 		
 		

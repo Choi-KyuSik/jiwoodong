@@ -168,6 +168,27 @@ article>div>p {
 </head>
 
 <body>
+<c:choose>
+	<c:when test="${cpSignYn eq 'N' }">
+		<script>
+			alert('현재 신청하신 업체등록 심사중입니다.'); 
+			history.back();
+		</script>
+	</c:when>
+	<c:when test="${cpSignYn eq 'Y' }">
+		<script>
+			alert('업체등록은 계정당 한번만 등록이 가능합니다.'); 
+			history.back();
+		</script>
+	</c:when>
+	<c:when test="${cpSignYn eq 'R' }">
+		<script>
+			alert('업체등록이 거절되었습니다. 양식에 맞추어 재작성 부탁드립니다.');
+		</script>
+	</c:when>
+	<c:otherwise>
+	</c:otherwise>
+</c:choose>
    <header>
       <div id="p_main_top">
          <div id="p_top_logo">

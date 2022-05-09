@@ -463,10 +463,10 @@ public class BumDao {
 	}
 
 	// 우진 - 내 정보 삭제
-	public int bumDelete(Connection conn, BumVo vo) {
+	public int bumDelete(Connection conn, BumVo vo, int buNo) {
 		System.out.println("companyDelete buNo:" + vo);
 		int result = 0;
-		String sql = "update b_member set bu_useyn = 'N', BU_UPDATE_DATE = SYSTIMESTAMP where bu_no = ?";
+		String sql = "update b_member set bu_useyn = 'N', BU_OUT_DATE = SYSTIMESTAMP where bu_no = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

@@ -119,10 +119,10 @@ public class BumService {
 
 	}
 	// 우진
-	public int bumDelete(BumVo vo){
+	public int bumDelete(BumVo vo, int buNo){
 		Connection conn = getConnection();
 		int result = 0;
-		result = new BumDao().bumDelete(conn, vo);
+		result = new BumDao().bumDelete(conn, vo, buNo);
 		close(conn);
 		System.out.println("bumDelete result: " + result);
 		return result;
@@ -140,7 +140,7 @@ public class BumService {
 	}
 	
 	// 우진
-		public String companyWriteCheck(int buNo) {
+		public String companyWriteCheck(BumVo bvo, int buNo) {
 			Connection conn = getConnection();
 			String result2 = new BumDao().companyWriteCheck(conn, buNo);
 			close(conn);

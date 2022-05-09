@@ -347,24 +347,24 @@ article>div>p {
 						</tr>					
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none; background-color: var(--bs-table-bg);">아이디</th>
-							<td colspan="3" class="table-light" id="s_us_no">
-							<input type="text" class="form-control border_none" name="buId" readonly="readonly"
-								value="${bvo.buId}" /></td>
+							<td class="table-light" id="s_url_no" style="background-color : #ecedee">
+							<input type="text" class="form-control border_none" name="buId" readonly="readonly" style="background-color : #ecedee"
+								value="${bvo.buId}" /></td><td colspan="2" class="table-light" style="background-color : #ecedee" id="s_us_notice_1"></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">변경할 비밀번호</th>
-							<td class="table-light" id="s_bu_pwd">
+							<td class="table-light" id="s_bu_pwd" style="background-color : #f8f9fa">
 							<input type="password" class="form-control" name="buPwd_1" id="buPwd_1"
 								value="" placeholder="변경할 비밀번호를 입력해주세요."/></td>
-							<td colspan="2" class="table-light" id="s_us_notice_1">
+							<td colspan="2" class="table-light" id="s_us_notice_1" style="background-color : #f8f9fa">
 							<span id="s_bu_pwd_check_1" style="display: none;"></span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">비밀번호 확인</th>
-							<td class="table-light" id="s_bu_pwd_check">
+							<td class="table-light" id="s_bu_pwd_check" style="background-color : #ecedee">
 							<input type="password" class="form-control" name="buPwd_2" id="buPwd_2"
 								value="" placeholder="비밀번호를 한번 더 입력해주세요."/></td>
-							<td colspan="2" class="table-light" id="s_us_notice_2">
+							<td colspan="2" class="table-light" id="s_us_notice_2" style="background-color : #ecedee">
 							<span id="s_bu_pwd_check_2" style="display: none;">현재 비밀번호가 일치하지 않습니다.</span></td>
 						</tr>
 						<tr>
@@ -376,21 +376,21 @@ article>div>p {
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">생년월일</th>
-							<td class="table-light">
+							<td class="table-light" style="background-color : #ecedee">
 							<input type="text" class="form-control border_none" name="buBirth" readonly="readonly" value="${bvo.buBirth}" /></td>
-							<td colspan="2" class="table-light"><span style="display: none;"></span></td>
+							<td colspan="2" class="table-light" style="background-color : #ecedee"><span style="display: none;"></span></td>
 						</tr>						
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">이메일</th>
-							<td class="table-light">
+							<td class="table-light" style="background-color : #f8f9fa">
 							<input type="text" class="form-control" name="buEmail" value="${bvo.buEmail}" /></td>
-							<td colspan="2" class="table-light"><span style="display: none;"></span></td>
+							<td colspan="2" class="table-light" style="background-color : #f8f9fa"><span style="display: none;"></span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">핸드폰 번호</th>
-							<td class="table-light">
+							<td class="table-light" style="background-color : #ecedee">
 							<input type="text" class="form-control" name="buTel" placeholder="-없이 입력" id="k_tel" value="${bvo.buTel}" /></td>
-							<td colspan="2" class="table-light"><span style="display: none;"></span></td>
+							<td colspan="2" class="table-light" style="background-color : #ecedee"><span style="display: none;" ></span></td>
 						</tr>					
 					</tbody>
 				</table>

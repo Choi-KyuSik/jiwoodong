@@ -35,9 +35,17 @@ public class BusinessCompanyWriteServlet extends HttpServlet {
 		   String bu_id = (String)session.getAttribute("bu_id");
 		   String password = (String)session.getAttribute("password");
 		
-		response.setContentType("text/html; charset=utf-8");
-		BumVo bvo = new BumService().companyCheck(bu_id);
-		request.setAttribute("bvo", bvo);
+//		response.setContentType("text/html; charset=utf-8");
+//		response.setContentType("text/html; charset=utf-8");
+		BumVo bvo = new BumVo();
+//		request.setAttribute("bvo", bvo);
+//		request.getRequestDispatcher("WEB-INF/bum/businessCompanyWritePage.jsp").forward(request, response);
+		int buNo = (int) request.getSession().getAttribute("buNo");
+		String cpSignYn = new BumService().companyWriteCheck(bvo, buNo);
+		System.out.println("담겼는지 체크1:"+ buNo);
+		System.out.println("담겼는지 체크1: cpSignYn : "+ cpSignYn);
+//		PrintWriter out = response.getWriter();
+		request.setAttribute("cpSignYn", cpSignYn);
 		request.getRequestDispatcher("WEB-INF/bum/businessCompanyWritePage.jsp").forward(request, response);
 		
 		
