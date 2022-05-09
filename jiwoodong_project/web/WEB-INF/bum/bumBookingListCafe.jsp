@@ -186,15 +186,6 @@ td, th {
 			</select>
 			<!-- 날짜선택 -->
 			<input type="date" id="todayDate" style="height: 30px;">
-			<!-- 검색 -->
-			<nav class="navbar navbar-light">
-				<div class="container-fluid">
-					<form class="d-flex">
-						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success" type="submit" onclick="search()">Search</button>
-					</form>
-				</div>
 			</nav>
 			<!-- 예약추가-->
 			<button type="button" class="btn btn-primary" id="booking_add"
@@ -276,9 +267,9 @@ td, th {
 				<div class="modal-body">
 					<form id="bookingForm">
 						<label for="bkno" style="margin: 10px;">예약번호 :</label><input
-							type="text" id="bkno" name="bkno" value="asdad" readonly><br>
+							type="text" id="bkno" name="bkno" value="asdad" readonly style="background-color: rgb(233,236,239); border: 1px solid black;"><br>
 						<label for="umid" style="margin: 10px;">아이디 :</label><input
-							type="text" id="umid" name="umid" readonly><br> <label
+							type="text" id="umid" name="umid" readonly style="background-color: rgb(233,236,239); border: 1px solid black;"><br> <label
 							for="bkname" style="margin: 10px;">이름 :</label><input type="text"
 							id="bkname" name="bkname" placeholder="1글자 이상"><br>
 						<label for="bkphone" style="margin: 10px;">핸드폰번호 :</label><input
@@ -293,7 +284,7 @@ td, th {
 							<input type="text" readonly value="메뉴1"><span> 수량 : </span><input type="text" readonly value="수량" style="width: 80px">
 							</div>
 							<label for="bkPrice" style="margin: 10px;">총 금액 :</label><input
-							type="text" id="bkPrice" name="bkPrice" readonly="readonly" /><br> <label
+							type="text" id="bkPrice" name="bkPrice" readonly="readonly" style="background-color: rgb(233,236,239); border: 1px solid black;"/><br> <label
 							for="bkrequire" style="margin: 10px;">요청사항 :</label>
 						<textarea cols="55" rows="5" id="bkrequire"
 							style="padding: 10px;" name="bkrequire"></textarea>
