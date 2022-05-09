@@ -139,6 +139,8 @@
 			</div>
 		</form>
 	</div>
+	
+	
 	<script>
 		$("#back_btn").click(function() {
 			history.back();

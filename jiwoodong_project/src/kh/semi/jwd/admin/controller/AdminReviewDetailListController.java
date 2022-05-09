@@ -37,6 +37,7 @@ public class AdminReviewDetailListController extends HttpServlet {
 		
 		ArrayList<Map<String, Object>> adRvDetailList = new AdminService().adRvDetailList(rvNo);
 		request.setAttribute("rvDetailList", adRvDetailList);
+		request.setAttribute("rvNo", rvNo);
 		
 		request.getRequestDispatcher("WEB-INF/admin/adminReviewDetailList.jsp").forward(request, response);
 		

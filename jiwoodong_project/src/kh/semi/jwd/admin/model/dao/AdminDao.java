@@ -1300,6 +1300,32 @@ public class AdminDao {
 		return result;
 
 	}
+	
+	// 리뷰 수정
+	public int updateReview(Connection conn, String rvContent, String fileUrl, int rvScore, int rvNo) {
+		
+		int result = 0;
+		
+		String sql = "UPDATE REVIEW SET RV_CONTENT = ?, FL_GNO = ?, RV_SCORE = ?  WHERE RV_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rvContent);
+			pstmt.setString(2, fileUrl);
+			pstmt.setInt(3, rvScore);
+			pstmt.setInt(4, rvNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 
 
 }

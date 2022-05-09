@@ -381,4 +381,13 @@ public class AdminService {
 		return result;
 	}
 	
+	// 리뷰 수정
+	public int updateReview(String rvContent, String fileUrl, int rvScore, int rvNo) {
+		Connection conn = getConnection();
+		int result = dao.updateReview(conn, rvContent, fileUrl, rvScore, rvNo);
+		close(conn);
+		return result;
+		
+	}
+	
 }
