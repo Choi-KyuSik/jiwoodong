@@ -47,10 +47,29 @@
 						 </button>
       				 <% } %>
 					<br>
-					<button type="button" class="btn btn-secondary btn-sm">아이디/비밀번호찾기</button>
+					<% if (session.getAttribute("bu_id") != null && session.getAttribute("um_id") == null) { %>
+					<button type="button" id="bum_mypage_btn" class="btn btn-secondary btn-sm">
+						<%= session.getAttribute("bu_id") %>'s page
+						</button>
+					<% } else if(session.getAttribute("um_id") != null && session.getAttribute("bu_id") == null){ %>
+					<button type="button" id="um_mypage_btn" class="btn btn-secondary btn-sm">
+							 <%= session.getAttribute("um_id") %>'s page
+							 </button>
+					 <% } %>
 				</div>
 			</div>
 		</div>
 	</header>
+	<script>
+	//사업자 마이페이지로 이동
+		    $("#bum_mypage_btn").click(function() {
+		    	location.href="BumMainPage";
+		    });		
+	//사용자 마이페이지로 이동
+			    $("#um_mypage_btn").click(function() {
+		    	location.href="UserMypage";
+		    });	
+			
+	</script>
 </body>
 </html>

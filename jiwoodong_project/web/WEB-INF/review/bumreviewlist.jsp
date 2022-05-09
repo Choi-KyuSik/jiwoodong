@@ -273,7 +273,7 @@ article>div>p {
 						<%= session.getAttribute("buName") %>님</p>
 					<ul class="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" id="k_pwdinfo" href="">비밀번호 재설정</a></li>
+						<li><a class="dropdown-item" id="k_pwdinfo" href="#">비밀번호 재설정</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
@@ -346,10 +346,7 @@ article>div>p {
 			
 			/* 내정보 관리 이동 */
 		    $("#k_info_menu").click(function() {
-		       var frm = $("#frm");
-		       frm.attr("action", "buminfocheck");
-		       frm.attr("method", "post");
-		       frm.submit();
+		    	location.href="buminfocheck";
 		    });		
 			
 			
@@ -370,10 +367,7 @@ article>div>p {
 			
 			/* 토글 - 비밀번호 변경 */
 		  	$("#k_pwdinfo").click(function() {
-		    	var frm = $("#frm");
-					frm.attr("action", "buminfocheck");
-					frm.attr("method", "post");
-					frm.submit();
+		  		location.href="buminfocheck";
 			});
 			
 			
