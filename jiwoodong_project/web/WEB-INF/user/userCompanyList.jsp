@@ -109,8 +109,8 @@
 	<section style="height: 100%;">
         <div id="main_box"
             style="width: 1200px; margin: 15px auto 0; background-color: rgb(241, 241, 241); border-radius: 15px;">
-            <ul style="padding-top: 20px; height: 100%; padding-bottom: 20px;">
-                <div style="width: 95%; background-color: white; border-radius: 15px; margin-left: 12px; height: 100%;">
+            <ul style="padding-top: 20px; padding-bottom: 20px;">
+                <div style="width: 95%; background-color: white; border-radius: 15px; margin-left: 12px;">
                     <div style="padding: 45px 0 10px 40px; border-bottom: 2px solid silver;">
                         <h3 style="font-weight: 600;">지금 우리 동네는</h3>
                     </div>
