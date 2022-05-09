@@ -53,6 +53,15 @@ public class UserMypageController extends HttpServlet {
 		
 		// System.out.println("결과를 내놓아라!" + usMemberListInfo);
 		
+		//리뷰상세조회 페이지 사용자 - 전승희
+//		String rvNoStr = request.getParameter("rvNo");
+//		int rvNo = Integer.parseInt(rvNoStr);
+//		
+//		ArrayList<Map<String, Object>> userRvDetailList = new UserService().userRvDetailList(rvNo);
+//		request.setAttribute("rvDetailList", userRvDetailList);
+//		request.setAttribute("rvNo", rvNo);
+		
+		
 		request.getRequestDispatcher("WEB-INF/user/userMypage.jsp").forward(request, response);
 	}
 

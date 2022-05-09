@@ -127,61 +127,16 @@
 								class="btn btn-secondary pull-right" value="뒤로가기"> <input
 								type="button" id="s_update_btn"
 								class="btn btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#exampleModal"value="수정하기"> 
-								<input type="button" id="s_delete_btn"
-								class="btn btn-danger pull-right" value="삭제하기">
+							
 						</div>
 					</section>
 				</c:forEach>
 			</form>
-						<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">리뷰 수정</h5>
-				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				      </div>
-				      <div class="modal-body">
-				      	<div style="width: 466px;border: 1px solid lightgray; border-radius: 3px; margin-bottom: 5px; padding-left: 10px;">
-				      		<div style="line-height: 1; margin: 10px 0; vertical-align: middle;">
-					      		<p id="rating_ct" style="display: inline-block; color: dimgray; margin-bottom: 0;">수정할 별점을 선택해주세요 : </p>
-						      	<p class="star_rating" style="display: inline-block; margin-bottom: 0;">
-								    <a href="1" class="on">♥</a>
-								    <a href="2" class="on">♥</a>
-								    <a href="3" class="on">♥</a>
-								    <a href="4" class="on">♥</a>
-								    <a href="5" class="on">♥</a>
-								</p>
-							</div>
-						</div>
-						<input type="hidden" name="rvNo" id="rvNo" value="${rvNo}" />
-				        <input type="text" class="form-control" name="rvContent" id="rvContent" placeholder="수정할 내용을 입력하세요." style="margin-bottom: 5px;"/>
-				        <input type="hidden"
-									role="uploadcare-uploader"
-									data-public-key="c545e991d9de45462444"
-									data-tabs="file camera url facebook gdrive gphotos" />
-					<!-- hidden input에 주소 url을 value로 받을거여서 같이 만듬 세트로 놔두면 편할 듯, 위에거가 파일등록 버튼 -->
-									<input type="hidden" name="fileUrl" id="fileUrl">
-				        
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-				        <button type="button" id="s_rv_update_btn" class="btn btn-primary">수정하기</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
+		
 		</div>
 		
 	</section>
-		<script>
-		/* 이미지등록 */
-		var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
-	
-		singleWidget.onUploadComplete(function(info) {
-			$("#fileUrl").val(info.cdnUrl);
-		});
-	</script>
+
 		<script>
 		$("#back_btn").click(function() {
 			history.back();
@@ -193,48 +148,15 @@
 			console.log($(this).attr('href'));
 			var obj = $(this);
 			console.log(obj.attr('href'));
-			//console.log("this가 뭔데?" + JSON.Stringfy(thisVal));
 			return false;
 		});
 		
 		
-		$("#s_rv_update_btn").click(function() {
-			if(confirm("정말 수정하시겠습니까?") == true) {
-				var val = $(".on").last();
-				var rvScore = val.attr('href');
-				console.log("rvScore : " + rvScore);
-				console.log("마지막자식의 값 : " + val.attr('href'));
-				var rvContent = $("#rvContent").val();
-				var fileUrl = $("#fileUrl").val();
-				var rvNo = $("#rvNo").val();
-				console.log("rvNo : " + rvNo);
+	
 				
-				$.ajax({
-					url: "AdminReviewUpdateDo", //엉니..
-					type: "post",
-					data: {"rvScore": rvScore, "rvContent": rvContent, "fileUrl": fileUrl, "rvNo": rvNo},
-					dataType : "text",
-					success: function(result) {
-						console.log("전달 성공");
-						alert(result);
-						location.href="userreviewlist";
-					}
-				});
-			} else {
-				history.back();
-			}
-		});
 
-		$("#s_delete_btn").click(function() {
-			if (confirm("정말 삭제하시겠습니까?") == true) {
-				var frmEl = $("#frm");
-				frmEl.attr("action", "#");
-				frmEl.attr("method", "post");
-				frmEl.submit();
-			} else {
-				history.back();
-			}
-		});
+
+
 	</script>
 </body>
 </html>

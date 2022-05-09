@@ -598,6 +598,62 @@ public class BumDao {
 		return volist;
 	}
 	 
-	
+	// 사업자 리뷰 상세 조회 : 전승희
+public ArrayList<Map<String, Object>> bumRvDetailList(Connection conn, int rvNo) {
+		
+		ArrayList<Map<String, Object>> volist = null;
+
+		String sql = "SELECT * FROM("
+				+ " SELECT ROWNUM RNUM, A.* FROM ("
+				+ " SELECT B.CP_NO 업체번호, UM_ID 예약자명"
+				+ "    , CASE RV_SCORE\r\n"
+				+ "            WHEN 1 THEN '💙🤍🤍🤍🤍'"
+				+ "            WHEN 2 THEN '💙💙🤍🤍🤍'"
+				+ "            WHEN 3 THEN '💙💙💙🤍🤍'"
+				+ "            WHEN 4 THEN '💙💙💙💙🤍'"
+				+ "            WHEN 5 THEN '💙💙💙💙💙'"
+				+ "            ELSE '평점이 없습니다.'"
+				+ "      END 별점    \r\n"
+				+ "    , TO_CHAR(RV_WRITE_DATE, 'YY/MM/DD') 리뷰작성일, RV_CONTENT 리뷰내용"
+				+ "    , R.FL_GNO 리뷰사진, CP_CATEGORY 업종, CP_NAME 업체명, RV_NO 리뷰번호"
+				+ " FROM BOOKING B"
+				+ " JOIN REVIEW R ON B.BK_NO = R.BK_NO"
+				+ " JOIN COMPANY C ON B.CP_NO = C.CP_NO  "
+				+ " WHERE RV_NO = ? ORDER BY RV_WRITE_DATE DESC) A)"
+				+ " WHERE RNUM BETWEEN 1 AND 10";
+
+		volist = new ArrayList<Map<String,Object>>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rvNo);
+			rs = pstmt.executeQuery();
+
+
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("rnum", rs.getInt(1)); // rownum
+				map.put("cpNo", rs.getInt(2)); // 업체번호
+				map.put("umId", rs.getString(3)); // 예약자명
+				map.put("rvScore", rs.getString(4)); // 별점
+				map.put("rvWriteDate", rs.getString(5)); // 리뷰작성일
+				map.put("rvContent", rs.getString(6)); // 리뷰내용
+				map.put("flGno", rs.getString(7)); // 리뷰사진
+				map.put("cpCategory", rs.getString(8)); // 업종
+				map.put("cpName", rs.getString(9)); // 업체명
+				map.put("rvNo", rs.getInt(10)); // 리뷰번호
+				volist.add(map);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return volist;
+
+	}
 	
 }

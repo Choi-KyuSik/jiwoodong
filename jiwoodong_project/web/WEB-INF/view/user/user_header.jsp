@@ -154,7 +154,14 @@
       $("#main_box").hide();
     });
     
+    //c_reviewlist
     
+    		$("#c_reviewlist").click(function() {
+			//var rvNo = $("#umId").val();
+			//console.log("umId ? : " + umId);
+			//console.log("umId 의 타입 ? : " + typeof (umId));
+			location.href = "userreviewlist";
+		});
   </script>
   
 </body>

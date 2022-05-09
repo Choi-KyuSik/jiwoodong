@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Map;
 
-import kh.semi.jwd.bum.model.dao.BumDao;
 import kh.semi.jwd.bum.model.vo.CompanyVo;
 import kh.semi.jwd.user.model.dao.UserDao;
 import kh.semi.jwd.user.model.dao.UserReviewDao;
@@ -136,8 +135,20 @@ public class UserService {
 			Connection conn = getConnection();
 			ArrayList<Map<String, Object>> volist = new UserReviewDao().userRvlist(conn, umId);
 			close(conn);
-			System.out.println("bumRvlist volist:"+volist);
+			System.out.println("userRvlist volist:"+volist);
 			return volist;
+		}
+		//승희 - 사용자 리뷰 상세 조회
+		public ArrayList<Map<String, Object>> userRvDetailList(int rvNo) {
+			
+			ArrayList<Map<String, Object>> volist = null;
+			
+			Connection conn = getConnection();
+			volist = new UserReviewDao().userRvDetailList(conn, rvNo);
+			close(conn);
+			System.out.println("userRvDetailList volist:"+volist);
+			return volist;
+		
 		}
 	
 }

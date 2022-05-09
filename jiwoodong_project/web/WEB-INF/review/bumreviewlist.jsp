@@ -290,6 +290,7 @@ article>div>p {
               <table class="table" style="width: 100%; margin-top: 40px;">
                 <thead>
                   <tr>
+                  <th style="display: none;" scope="col" class="s_center">No</th>
 					<th scope="col" class="s_center" style="width: 300px;">업체명</th>
 					<th scope="col" class="s_center" style="width: 400px;">내용</th>
 					<th scope="col" class="s_center" style="width: 100px;">평점</th>
@@ -299,24 +300,31 @@ article>div>p {
                 </thead>
                 <tbody>
                 <c:forEach items="${bumRvlists}" var="i">
-					<tr class="s_tr_readList s_tr_modal">
+					<tr id="j_review_menu" class="s_tr_readList s_tr_modal" href="#">
+					<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.rvNo}</th>
 						<th class="s_center" scope="row" class="s_ntNo">${i.cpName }</th>
 						<td class="s_td_short">${i.rvContent}</td>
 						<td class="s_td_short">${i.rvScore}</td>
 						<td class="s_center">${i.umId}</td>
 						<td class="s_center">${i.rvWriteDate }</td>
-                 <input type="hidden" id="cpNo" name="cpNo" value="${cpNo }" />
+                 <input type="hidden" id="rvNo" name="rvNo" value="${i.rvNo}" />
 					</tr>
                 </c:forEach>
                 </tbody>
               </table>
             </div>
 	<script>
-		$("#k_review_menu").click(function() {
+	$("#k_review_menu").click(function() {
 			var cpNo = $("#cpNo").val();
 			console.log("cpNo ? : " + cpNo);
 			console.log("cpNo 의 타입 ? : " + typeof(cpNo));
 			location.href="bumreviewlist?cpNo=" + cpNo;
+		}); 
+		$("#j_review_menu").click(function() {
+			var rvNo = $("#rvNo").val();
+			console.log("rvNo ? : " + rvNo);
+			console.log("rvNo 의 타입 ? : " + typeof(rvNo));
+			location.href="bumReviewDetailList?rvNo=" + rvNo;
 		});
 	</script>            
 	<script>

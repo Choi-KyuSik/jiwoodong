@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/reset.css">
 <link rel="stylesheet"
@@ -10,14 +10,21 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
-	 <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-	  <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <!--이용매장 슬라이더-->
 	
@@ -163,35 +170,35 @@
                     <td>집 나가면 개고생</td>
                     <td>예약완료</td>
                   </tr> -->
-                </tbody>
-              </table>
-            </div>
-            <div id="c_inner_info">
-              <p class="c_info_title">리뷰내역</p>
-              <table class="table" style="width: 100%; margin-top: 40px;">
-                <thead>
-                  <tr>
-                    <th scope="col" class="c_info_center">No</th>
-                    <th scope="col" class="c_info_center">내용</th>
-                    <th scope="col" class="c_info_center">업체명</th>
-                    <th scope="col" class="c_info_center">별점</th>
-                    <th scope="col" class="c_info_center">작성일</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${usRvList}" var="i">
-                  <tr>
-                    <th scope="row" class="c_info_center short c_info_ct_ftsz">${i.rownum}</th>
-                    <td class="short c_info_ct_ftsz">${i.rvContent}</td>
-                    <td class="c_info_center short c_info_ct_ftsz">${i.cpName}</td>
-                    <td class="c_info_center" style="font-size: .8em;">${i.rvScore}</td>
-                    <td class="c_info_center c_info_ct_ftsz">${i.rvWriteDate}</td>
-                  </tr>
-                </c:forEach>
-                </tbody>
-              </table>
-            </div>
-            <%-- <div id="c_inner_info_l" style="margin-bottom: 40px;">
+								</tbody>
+							</table>
+						</div>
+						<div id="c_inner_info">
+							<p class="c_info_title">리뷰내역</p>
+							<table class="table" style="width: 100%; margin-top: 14px;">
+								<thead>
+									<tr>
+										<th scope="col" class="c_info_center">No</th>
+										<th scope="col" class="c_info_center">내용</th>
+										<th scope="col" class="c_info_center">업체명</th>
+										<th scope="col" class="c_info_center">별점</th>
+										<th scope="col" class="c_info_center">작성일</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${usRvList}" var="i">
+										<tr>
+											<th scope="row" class="c_info_center short c_info_ct_ftsz">${i.rownum}</th>
+											<td class="short c_info_ct_ftsz">${i.rvContent}</td>
+											<td class="c_info_center short c_info_ct_ftsz">${i.cpName}</td>
+											<td class="c_info_center" style="font-size: .8em;">${i.rvScore}</td>
+											<td class="c_info_center c_info_ct_ftsz">${i.rvWriteDate}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<%-- <div id="c_inner_info_l" style="margin-bottom: 40px;">
               <p class="c_info_title">리뷰내역</p>
               <table class="table" style="width: 100%; margin-top: 40px;">
                 <thead>
@@ -329,22 +336,21 @@
             </div>
           </div>
         </div>
-      </div> -->
-    
-    
-    <!-- 네비 리뷰 -->
-    <article>
-      <div id="c_reviewlist_info">
-        <div style="text-align: center;">
-        	<p style="font-size: 2em; font-weight: bold;">리뷰 조회</p>
-        </div>
-        <table class="table table table-hover"
+      </div> --> 
+      <!-- 네비 리뷰 -->
+		<article>
+			<div id="c_reviewlist_info">
+				<div style="text-align: center;">
+					<p style="font-size: 2em; font-weight: bold;" id="k_review_menu" href="#">리뷰 조회</p>
+				</div>
+				<%--  <table class="table table table-hover"
 					style="clear: both; table-layout: fixed;">
 					<thead>
 						<tr>
-							<th scope="col" class="s_center" style="width: 100px;">업체명</th>
-							<th scope="col" class="s_center" style="width: 500px;">내용</th>
-							<th scope="col" class="s_center" style="width: 250px;">평점</th>
+							<th style="display: none;" scope="col" class="s_center">No</th>
+							<th scope="col" class="s_center">업체명</th>
+							<th scope="col" class="s_center">내용</th>
+							<th scope="col" class="s_center">평점</th>
 							<th scope="col" class="s_center">작성자</th>
 							<th scope="col" class="s_center">작성일</th>
 						</tr>
@@ -352,67 +358,80 @@
 
 					<tbody id="tbody" style="cursor: pointer;">
 				                <c:forEach items="${userrvlist}" var="i">
-								<tr class="s_tr_readList s_tr_modal">
-									<th class="s_center" scope="row" class="s_ntNo">${i.cpName }</th>
-									<td class="s_td_short">${i.rvContent}</td>
-									<td class="s_td_short">${i.rvScore}</td>
-									<td class="s_center">${i.umId }</td>
-									<td class="s_center">${i.rvWriteDate }</td>
+								<tr id="k_review_menu" class="s_tr_readList s_tr_modal">
+									<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.rvNo}</th>
+									<th class="s_td_short" scope="row" class="s_ntNo">${i.cpName }</th>
+									<td class="s_center">${i.rvContent}</td>
+									<td class="s_center">${i.rvScore}</td>
+									<td class="s_td_short">${i.umId }</td>
+									<td class="s_td_short">${i.rvWriteDate }</td>
+									 <input type="hidden" id="umId" name="umId" value="${umId}"/>
 								</tr>
 			                </c:forEach>
 					</tbody>
-				</table>
-      </div>
-    </article>
-    
-    <!-- 내 정보 관리 -->
-    <article>
-      <div id="c_mypage_info">
-        마이페이지로 이동
-      </div>
-    </article>
-    <!-- 내 정보 관리(내 정보 수정) : 손은진 -->
-    <article>
-        <div class="s_row">
-      		<div id="c_us_info_edit_info">
-			<form id="frm" method="post" action="">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th colspan="3" style="font-size: 2em;">회원정보확인</th>
-						</tr>
-						<tr>
-							<td colspan="3"><p id="s_id_style">${um_id }</p>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">아이디</th>
-							<td colspan="2" class="table-light" id="s_us_no">
-							<input type="text" class="form-control border_none" name="umId" readonly="readonly"
-								value="${um_id }" /></td>
-						</tr>
-						<tr>
-							<th class="table-primary s_us_th" style="vertical-align: middle;">비밀번호</th>
-							<td class="table-light" id="s_us_pwd">
-							<input type="password" class="form-control" name="umPwd" id="umPwd"
-								value="" placeholder="비밀번호를 입력해주세요."/></td>
-							<td class="table-light" id="s_us_notice">
-							<span id="s_us_pwd_check" style="display: none;">현재 비밀번호가 일치하지 않습니다.</span></td>
-						</tr>
-					</tbody>
-				</table>
-				<div id="s_us_info_btn">
-				<input type="button" id="s_us_check_btn" class="btn btn-primary pull-right s_ad_nt_btn" value="확인">
-				<input type="button" id="back_btn" class="btn btn-secondary pull-right s_ad_nt_btn" value="취소">
+				</table> --%>
+			</div>
+		</article>
+
+		<!-- 내 정보 관리 -->
+		<article>
+			<div id="c_mypage_info">마이페이지로 이동</div>
+		</article>
+		<!-- 내 정보 관리(내 정보 수정) : 손은진 -->
+		<article>
+			<div class="s_row">
+				<div id="c_us_info_edit_info">
+					<form id="frm" method="post" action="">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th colspan="3" style="font-size: 2em;">회원정보확인</th>
+								</tr>
+								<tr>
+									<td colspan="3"><p id="s_id_style">${um_id }</p>님의 정보를
+										안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th class="table-primary s_us_th"
+										style="-bs-table-accent-bg: none;">아이디</th>
+									<td colspan="2" class="table-light" id="s_us_no"><input
+										type="text" class="form-control border_none" name="umId"
+										readonly="readonly" value="${um_id }" /></td>
+								</tr>
+								<tr>
+									<th class="table-primary s_us_th"
+										style="vertical-align: middle;">비밀번호</th>
+									<td class="table-light" id="s_us_pwd"><input
+										type="password" class="form-control" name="umPwd" id="umPwd"
+										value="" placeholder="비밀번호를 입력해주세요." /></td>
+									<td class="table-light" id="s_us_notice"><span
+										id="s_us_pwd_check" style="display: none;">현재 비밀번호가
+											일치하지 않습니다.</span></td>
+								</tr>
+							</tbody>
+						</table>
+						<div id="s_us_info_btn">
+							<input type="button" id="s_us_check_btn"
+								class="btn btn-primary pull-right s_ad_nt_btn" value="확인">
+							<input type="button" id="back_btn"
+								class="btn btn-secondary pull-right s_ad_nt_btn" value="취소">
+						</div>
+					</form>
 				</div>
-			</form>
-		</div>
-      </div>
-    </article>
-  </content>
-  </section>
-  
+			</div>
+		</article>
+		</content>
+	</section>
+	<script>
+		$("#k_review_menu").click(function() {
+			//var rvNo = $("#umId").val();
+			//console.log("umId ? : " + umId);
+			//console.log("umId 의 타입 ? : " + typeof (umId));
+			location.href = "userreviewlist";
+		});
+	</script>
   <script>
   	$("#umPwd").keyup(function() {
   		// console.log("db에 있는 pwd 확인" + ${uvo.umPwd});
@@ -473,15 +492,20 @@
   
   <!-- 네비바 클릭시 페이지 이동 -->
 	<script>
-    	$("#c_cplist").click(function(){
-    		/* location.href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=qbxlvnf11&logNo=221141017820"; */
-    		location.href="uscplist";
-    	})
-    	$("#c_mypage").click(function () {
-    	console.log("찍히냐? mypage");
-    	location.reload();
-    });
-    	
-    </script>
+		$("#k_review_menu").click(function() {
+			//var rvNo = $("#umId").val();
+			//console.log("umId ? : " + umId);
+			//console.log("umId 의 타입 ? : " + typeof (umId));
+			location.href = "userreviewlist";
+		});
+		$("#c_cplist").click(function() {
+			/* location.href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=qbxlvnf11&logNo=221141017820"; */
+			location.href = "uscplist";
+		})
+		$("#c_mypage").click(function() {
+			console.log("찍히냐? mypage");
+			location.reload();
+		});
+	</script>
 </body>
 </html>

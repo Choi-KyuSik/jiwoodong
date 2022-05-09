@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import kh.semi.jwd.admin.model.dao.AdminDao;
 import kh.semi.jwd.bum.model.dao.BumDao;
 import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
@@ -164,5 +165,17 @@ public class BumService {
 			System.out.println("bumRvlist volist:"+volist);
 			return volist;
 		}
+	// 승희 - 사업사 리뷰 상세 조회 bumRvDetailList
+		public ArrayList<Map<String, Object>> bumRvDetailList(int rvNo) {
+			
+			ArrayList<Map<String, Object>> volist = null;
+			
+			Connection conn = getConnection();
+			volist = new BumDao().bumRvDetailList(conn, rvNo);
+			close(conn);
+			
+			return volist;
+		
+		}	
 
 }
