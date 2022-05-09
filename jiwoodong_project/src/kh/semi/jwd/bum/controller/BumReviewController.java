@@ -30,12 +30,8 @@ public class BumReviewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/review/review.jsp").forward(request, response);
-		String rv_no = request.getParameter("rv_no");
-		
-		ReviewVo vo = new ReviewVo();
-		BumService result = new BumService();
-		ReviewVo rvo= result.detailRv(vo);
+		//request.getRequestDispatcher("WEB-INF/review/review.jsp").forward(request, response);
+
 		
 		
 	}

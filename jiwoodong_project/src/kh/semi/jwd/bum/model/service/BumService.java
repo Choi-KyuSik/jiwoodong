@@ -2,6 +2,7 @@ package kh.semi.jwd.bum.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import kh.semi.jwd.bum.model.dao.BumDao;
@@ -155,21 +156,13 @@ public class BumService {
 			return list;
 		}
 
-	// 승희 검색 조건에 맞는 게시물 목록을 반환합니다.
-		public List<ReviewVo> selectRvList(Map<String, Object> map){
+	// 승희 - 사업자 리뷰 페이지
+		public ArrayList<Map<String, Object>> bumRvlist(int cpNo){
 			Connection conn = getConnection();
-			List<ReviewVo> volist = new BumDao().selectRvList(map);
+			ArrayList<Map<String, Object>> volist = new BumDao().bumRvlist(conn, cpNo);
 			close(conn);
-			System.out.println("BumService selectRvList volist:"+volist);
+			System.out.println("bumRvlist volist:"+volist);
 			return volist;
-		}
-	//승희 리뷰상세페이지
-		public ReviewVo detailRv(ReviewVo vo) {
-			Connection conn = getConnection();
-			ReviewVo rvo = new BumDao().detailRv(conn, vo);
-			close(conn);
-			System.out.println("BumService datailRv() ReviewVo rvo :" + rvo);
-			return rvo;
 		}
 
 }

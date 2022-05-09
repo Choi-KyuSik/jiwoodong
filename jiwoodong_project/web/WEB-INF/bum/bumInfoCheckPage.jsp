@@ -318,7 +318,7 @@ article>div>p {
 				</div>
 			</div>
 		</article>
-		
+		<input type="hidden" id="cpNo" name="cpNo" value="${cpNo}" />
 		<script>
 				
 		//업체등록
@@ -392,6 +392,12 @@ article>div>p {
 	  			frm.attr("action", "buminfocheck");
 	  			frm.attr("method", "post");
 	  			frm.submit();
+			});
+			$("#k_review_menu").click(function() {
+				var cpNo = $("#cpNo").val();
+				console.log("cpNo ? : " + cpNo);
+				console.log("cpNo 의 타입 ? : " + typeof(cpNo));
+				location.href="bumreviewlist?cpNo=" + cpNo;
 			});
 		</script>
 	

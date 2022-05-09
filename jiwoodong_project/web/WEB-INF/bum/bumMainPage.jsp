@@ -304,9 +304,6 @@ article>div>p {
 
 </style>
 </head>
-<script>
-	$()
-</script>
 <body>
 	<header>
 		<div id="p_main_top">
@@ -324,8 +321,9 @@ article>div>p {
 									id="k_info_menu" role="button"> 내정보 관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
-								<li class="nav-item dropdown"><a class="nav-link dropdown"
-									id="k_review_menu" href="#" role="button"> 리뷰관리 </a></li>
+									
+									<li class="nav-item dropdown"><a class="nav-link dropdown"
+										id="k_review_menu" href="#" role="button" > 리뷰관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown" data-value="cpSignYn"
@@ -430,8 +428,17 @@ article>div>p {
 								</tr>
 							</thead>
 							<tbody>
-							<c:if test="${not empty Rist }">
-								<c:forEach items="${Rlist}" var="list">
+							<c:if test="${not empty bumRvlists }">
+							 <c:forEach items="${bumRvlists}" var="i">
+								<tr class="s_tr_readList s_tr_modal">
+									<th class="s_center" scope="row" class="s_ntNo">${i.cpName }</th>
+									<td class="s_td_short">${i.rvContent}</td>
+									<td class="s_td_short">${i.rvScore}</td>
+									<td class="s_center">${i.umId}</td>
+									<td class="s_center">${i.rvWriteDate }</td>
+								</tr>
+			                </c:forEach>
+				<%-- 				<c:forEach items="${Rlist}" var="list">
 									<tr>
 										<th class="ftsz" scope="row">${list.rownum}</th>
 										<td class="ftsz"><c:out value="${list.rvContent}" /></td>
@@ -439,9 +446,9 @@ article>div>p {
 										<td class="ftsz">${list.umId}</td>
 										<td class="ftsz">${list.rvScore}</td>
 									</tr>
-								</c:forEach>
+								</c:forEach> --%>
 							</c:if>
-							<c:if test="${empty Rist }">
+							<c:if test="${empty bumRvlists }">
 								<tr>
 									<td colspan="5">등록된 리뷰가 없습니다.</td>
 								</tr>
@@ -530,6 +537,7 @@ article>div>p {
 		</div>
       </div>
     </article>
+    <input type="hidden" id="cpNo" name="cpNo" value="${cpNo }" />
 </content>	
 	<script>
 	$(function(){
@@ -538,6 +546,15 @@ article>div>p {
 			alert('되나?');
 		} */
 	})
+	</script>
+	
+	<script>
+		$("#k_review_menu").click(function() {
+			var cpNo = $("#cpNo").val();
+			console.log("cpNo ? : " + cpNo);
+			console.log("cpNo 의 타입 ? : " + typeof(cpNo));
+			location.href="bumreviewlist?cpNo=" + cpNo;
+		});
 	</script>
 	
 	<script>

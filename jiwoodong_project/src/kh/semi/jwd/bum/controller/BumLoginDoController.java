@@ -74,6 +74,7 @@ public class BumLoginDoController extends HttpServlet {
 			System.out.println("bu_id:"+bu_id);
 			System.out.println("password:"+password);
 			System.out.println("name:"+result.getBuName());
+			System.out.println("로그인 cpNo"+cpno);
 			
 			System.out.println(request.getSession().getAttribute("cpNo"));
 			System.out.println("로그인 성공한거지 여기가?네네 - 오늘의 명언... 언니 최고...");

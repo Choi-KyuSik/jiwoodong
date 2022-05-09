@@ -205,6 +205,7 @@ article>div>p {
                            id="k_info_menu" role="button"> 내정보 관리 </a></li>
                      </ul>
                      <ul class="navbar-nav">
+                     	 <input type="hidden" id="cpNo" name="cpNo" value="${cpNo }" />
                         <li class="nav-item dropdown"><a class="nav-link dropdown"
                            id="k_review_menu" href="#" role="button"> 리뷰관리 </a></li>
                      </ul>
@@ -601,6 +602,13 @@ article>div>p {
 				frm.attr("action", "buminfocheck");
 				frm.attr("method", "post");
 				frm.submit();
+		});
+		/* 리뷰페이지 */
+		$("#k_review_menu").click(function() {
+			var cpNo = $("#cpNo").val();
+			console.log("cpNo ? : " + cpNo);
+			console.log("cpNo 의 타입 ? : " + typeof(cpNo));
+			location.href="bumreviewlist?cpNo=" + cpNo;
 		});
    </script>
 

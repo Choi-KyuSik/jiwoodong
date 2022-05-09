@@ -40,12 +40,14 @@ public class UserMypageController extends HttpServlet {
 		ArrayList<CompanyVo> usCpList = new UserService().usCpList();
 		ArrayList<Map<String, Object>> usBkList = new UserService().usBkList(umId);
 		ArrayList<Map<String, Object>> usRvList = new UserService().usRvList(umId);
-		
+		//사용자가 작성한 리뷰리스트 : 승희
+		ArrayList<Map<String, Object>> userrvlist = new UserService().userRvlist(umId);
 		// System.out.println("usCpList : " + usCpList);
 		
 		request.setAttribute("usCpList", usCpList);
 		request.setAttribute("usBkList", usBkList);
 		request.setAttribute("usRvList", usRvList);
+		request.setAttribute("userrvlist", userrvlist);
 		
 		request.setAttribute("usMemberListInfo", usMemberListInfo);
 		

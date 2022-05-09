@@ -1,32 +1,29 @@
-package kh.semi.jwd.bum.controller;
+package kh.semi.jwd.user.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.jwd.bum.model.dao.BumDao;
-import kh.semi.jwd.bum.model.service.BumService;
-import kh.semi.jwd.bum.model.vo.ReviewVo;
+import kh.semi.jwd.user.model.service.UserService;
 
 /**
- * Servlet implementation class BumReviewListController
+ * Servlet implementation class UserReviewListController
  */
-@WebServlet("/bumreviewlist")
-public class BumReviewListController extends HttpServlet {
+@WebServlet("/userreviewlist")
+public class UserReviewListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BumReviewListController() {
+    public UserReviewListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,18 +33,16 @@ public class BumReviewListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String cpNoStr = request.getParameter("cpNo"); //값을 가져오는거
-		int cpNo = Integer.parseInt(cpNoStr);
-		System.out.println("cpNoStr : " + cpNoStr);
-		System.out.println("cpNo : " + cpNo);
+		String umId = (String)request.getSession().getAttribute("um_id");
 		
-		System.out.println("cpno:"+cpNo);
-		ArrayList<Map<String, Object>> bumRvlists = new BumService().bumRvlist(cpNo);
-		System.out.println("bumRvlists:"+bumRvlists);
-		request.setAttribute("bumRvlists", bumRvlists);
+		System.out.println("umId"+umId);
+		ArrayList<Map<String, Object>> userrvlist = new UserService().userRvlist(umId);
+		System.out.println("userrvlist:"+userrvlist);
+		request.setAttribute("userrvlist", userrvlist);
 		
-		request.getRequestDispatcher("WEB-INF/review/bumreviewlist.jsp").forward(request, response);
-
+		//request.getRequestDispatcher("WEB-INF/review/reviewlist.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/review/review.jsp").forward(request, response);
+		
 	}
 
 	/**

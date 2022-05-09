@@ -335,7 +335,33 @@
     <!-- 네비 리뷰 -->
     <article>
       <div id="c_reviewlist_info">
-        리뷰 페이지로 이동
+        <div style="text-align: center;">
+        	<p style="font-size: 2em; font-weight: bold;">리뷰 조회</p>
+        </div>
+        <table class="table table table-hover"
+					style="clear: both; table-layout: fixed;">
+					<thead>
+						<tr>
+							<th scope="col" class="s_center" style="width: 100px;">업체명</th>
+							<th scope="col" class="s_center" style="width: 500px;">내용</th>
+							<th scope="col" class="s_center" style="width: 250px;">평점</th>
+							<th scope="col" class="s_center">작성자</th>
+							<th scope="col" class="s_center">작성일</th>
+						</tr>
+					</thead>
+
+					<tbody id="tbody" style="cursor: pointer;">
+				                <c:forEach items="${userrvlist}" var="i">
+								<tr class="s_tr_readList s_tr_modal">
+									<th class="s_center" scope="row" class="s_ntNo">${i.cpName }</th>
+									<td class="s_td_short">${i.rvContent}</td>
+									<td class="s_td_short">${i.rvScore}</td>
+									<td class="s_center">${i.umId }</td>
+									<td class="s_center">${i.rvWriteDate }</td>
+								</tr>
+			                </c:forEach>
+					</tbody>
+				</table>
       </div>
     </article>
     

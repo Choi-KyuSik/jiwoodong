@@ -7,8 +7,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Map;
 
+import kh.semi.jwd.bum.model.dao.BumDao;
 import kh.semi.jwd.bum.model.vo.CompanyVo;
 import kh.semi.jwd.user.model.dao.UserDao;
+import kh.semi.jwd.user.model.dao.UserReviewDao;
 import kh.semi.jwd.user.model.vo.UserBookingListVo;
 import kh.semi.jwd.user.model.vo.UserLoginVo;
 import kh.semi.jwd.user.model.vo.UserVo;
@@ -128,6 +130,14 @@ public class UserService {
 			close(conn);
 			
 			return bklist_r;
+		}
+		// 승희 -사용자 리뷰 페이지
+		public ArrayList<Map<String, Object>> userRvlist(String umId){
+			Connection conn = getConnection();
+			ArrayList<Map<String, Object>> volist = new UserReviewDao().userRvlist(conn, umId);
+			close(conn);
+			System.out.println("bumRvlist volist:"+volist);
+			return volist;
 		}
 	
 }

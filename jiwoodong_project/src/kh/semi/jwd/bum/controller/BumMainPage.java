@@ -50,6 +50,11 @@ public class BumMainPage extends HttpServlet {
 	  ArrayList<Map<String, Object>> result = new BumService().mainPageReviewList(cpNo);
 	  ArrayList<Map<String,Object>> statiscicsVisit = new BumService().mainPageStatisticsVisit(cpNo);
 	  ArrayList<Map<String,Object>> statiscicsReview = new BumService().mainPageStatisticsReview(cpNo);
+	  
+	  //bum_review
+	  ArrayList<Map<String, Object>> bumRvlists = new BumService().bumRvlist(cpNo);
+	  request.setAttribute("bumRvlists", bumRvlists);
+	  
 	  BumVo bvo = new BumService().companyCheck(bu_id);
 	  
 	 
@@ -59,6 +64,7 @@ public class BumMainPage extends HttpServlet {
 	  request.setAttribute("visit", statiscicsVisit);
 	  request.setAttribute("review", statiscicsReview);	  
 	  request.setAttribute("bvo", bvo);
+	  request.setAttribute("cpNo", cpNo);
 	  System.out.println(statiscicsReview);
       request.getRequestDispatcher("WEB-INF/bum/bumMainPage.jsp").forward(request, response);
       

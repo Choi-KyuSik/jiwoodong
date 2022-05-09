@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import kh.semi.jwd.bum.model.vo.BumLoginVo;
 import kh.semi.jwd.bum.model.vo.BumVo;
@@ -550,121 +552,51 @@ public class BumDao {
 	}
 
 
-	//승희 - 리뷰 리스트
-	// 검색 조건에 맞는 게시물의 개수를 반환합니다.
-    public int selectRvCount(Map<String, Object> map) {
-        int totalCount = 0; // 결과(게시물 수)를 담을 변수
+	//승희 - 사업자 리뷰 리스트
 
-        // 게시물 수를 얻어오는 쿼리문 작성
-        String query = "SELECT COUNT(*) FROM review";
-        if (map.get("searchWord") != null) {
-            query += " WHERE " + map.get("searchField") + " "
-                   + " LIKE '%" + map.get("searchWord") + "%'";
-        }
+	public ArrayList<Map<String, Object>> bumRvlist(Connection conn,int cpNo){
 
-        try {
-        	Connection conn= getConnection();
-            stmt = conn.createStatement();   // 쿼리문 생성
-            rs = stmt.executeQuery(query);  // 쿼리 실행
-            rs.next();  // 커서를 첫 번째 행으로 이동
-            totalCount = rs.getInt(1);  // 첫 번째 칼럼 값을 가져옴
-        }
-        catch (Exception e) {
-            System.out.println("게시물 수를 구하는 중 예외 발생");
-            e.printStackTrace();
-        }
-
-        return totalCount; 
-    }
-    // 검색 조건에 맞는 게시물 목록을 반환합니다.
-    public List<ReviewVo> selectRvList(Map<String, Object> map) { 
-        List<ReviewVo> volist = new Vector<ReviewVo>();  // 결과(게시물 목록)를 담을 변수
-
-        String query = "select c.cp_name,c.cp_no,b.um_id,b.bk_name,r.*"
-        		+ "    from booking b join review r"
-        		+ "                on r.bk_no = b.bk_no"
-        		+ "                join company c "
-        		+ "                on b.cp_no = c.cp_no";
-        if (map.get("searchWord") != null) {
-            query += " WHERE " + map.get("searchField") + " "
-                   + " LIKE '%" + map.get("searchWord") + "%' ";
-        }
-        query += " ORDER BY rv_score DESC "; 
-
-
-        try {
-        	Connection conn = getConnection();
-        	//ReviewVo vo = new ReviewVo();
-           stmt = conn.createStatement();  // 쿼리문 생성
-            //pstmt.setInt(1, vo.getCpNo());
-            rs = stmt.executeQuery(query);  // 쿼리 실행
-
-            while (rs.next()) {  // 결과를 순화하며...
-                // 한 행(게시물 하나)의 내용을 rvo에 저장
-            	ReviewVo rvo = new ReviewVo(); 
-
-            	rvo.setCpName(rs.getString("cp_Name"));
-                rvo.setCpNo(rs.getInt("cp_No"));
-                rvo.setUmID(rs.getString("um_ID"));
-                rvo.setBkName(rs.getString("bk_Name"));
-                rvo.setRvNo(rs.getInt("rv_No"));
-                rvo.setRvNo(rs.getInt("bk_No"));
-                rvo.setRvScore(rs.getInt("rv_Score"));
-                rvo.setRvContent(rs.getString("rv_Content"));
-                rvo.setRvWriteDate(rs.getTimestamp("rv_Write_Date"));
-                rvo.setRvModifyDate(rs.getTimestamp("rv_Modify_Date"));
-                rvo.setFlGno(rs.getString("fl_Gno"));
-            	 
-
-                volist.add(rvo);  // 결과 목록에 저장
-            }
-        } 
-        catch (Exception e) {
-            System.out.println("게시물 조회 중 예외 발생");
-            e.printStackTrace();
-        }finally {
-			close(rs);
-			close(pstmt);
+		ArrayList<Map<String, Object>> volist = null;
+		
+		String sql = "SELECT RV_NO 리뷰번호, UM_ID 예약자명\r\n"
+				+ "    , CASE RV_SCORE\r\n"
+				+ "            WHEN 1 THEN '♥♡♡♡♡'\r\n"
+				+ "            WHEN 2 THEN '♥♥♡♡♡'\r\n"
+				+ "            WHEN 3 THEN '♥♥♥♡♡'\r\n"
+				+ "            WHEN 4 THEN '♥♥♥♥♡'\r\n"
+				+ "            WHEN 5 THEN '♥♥♥♥♥'\r\n"
+				+ "            ELSE '평점이 없습니다.'\r\n"
+				+ "      END 별점    \r\n"
+				+ "    , TO_CHAR(RV_WRITE_DATE, 'YY/MM/DD') 리뷰작성일, RV_CONTENT 리뷰내용\r\n"
+				+ "    , R.FL_GNO 리뷰사진, CP_NAME 업체명\r\n"
+				+ "FROM BOOKING B\r\n"
+				+ "JOIN REVIEW R ON B.BK_NO = R.BK_NO\r\n"
+				+ "JOIN COMPANY C ON B.CP_NO = C.CP_NO\r\n"
+				+ "WHERE c.CP_NO = ? \r\n"
+				+ "ORDER BY RV_WRITE_DATE DESC";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpNo);
+			rs = pstmt.executeQuery();
+			
+			volist = new ArrayList<Map<String,Object>>();
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("rvNo", rs.getInt(1)); //리뷰 번호
+				map.put("umId", rs.getString(2));	//작성자아이디
+				map.put("rvScore", rs.getString(3));	//별점
+				map.put("rvWriteDate", rs.getString(4)); //리뷰작성일
+				map.put("rvContent", rs.getString(5)); //리뷰내용
+				map.put("flGno", rs.getString(6)); //리뷰 사진
+				map.put("cpName", rs.getString(7)); //업체명
+				
+				volist.add(map);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-
-        return volist;
-    }
-	//승희- 리뷰 상세 조회
-	 public ReviewVo detailRv(Connection conn,ReviewVo vo) { 
-		 	ReviewVo rvo = new ReviewVo();
-	        
-	        // 쿼리문 준비
-	        String query = "select c.cp_name,c.cp_no,b.um_id,b.bk_name,r.*"
-	        		+ "    from booking b join review r"
-	        		+ "                on r.bk_no = b.bk_no"
-	        		+ "                join company c"
-	        		+ "                on b.cp_no = c.cp_no"
-	        		+ "                where rv_no=?";
-	        try {
-	            pstmt = conn.prepareStatement(query);
-	            pstmt.setInt(1, vo.getRvNo());   
-	            System.out.println("vo.getRvNo():"+vo.getRvNo());
-	            rs = pstmt.executeQuery();  // 쿼리 실행 
-
-	            // 결과 처리
-	            if (rs.next()) {
-	            	rvo.setCpName(rs.getString("cp_Name"));
-	                rvo.setCpNo(rs.getInt("cp_No"));
-	                rvo.setUmID(rs.getString("um_ID"));
-	                rvo.setBkName(rs.getString("bk_Name"));
-	                rvo.setRvScore(rs.getInt("rv_Score"));
-	                rvo.setRvContent(rs.getString("rv_Content"));
-	                rvo.setRvWriteDate(rs.getTimestamp("rv_WriteDate"));
-	                rvo.setFlGno(rs.getString("fl_Gno"));
-	            }
-	        } 
-	        catch (Exception e) {
-	            System.out.println("리뷰 상세보기 중 예외 발생");
-	            e.printStackTrace();
-	        }
-	        System.out.println(rvo);
-	        return rvo; 
-	    }
+		return volist;
+	}
 	 
 	
 	
