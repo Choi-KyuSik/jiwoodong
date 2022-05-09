@@ -19,9 +19,8 @@ public class UsercpDetailpageService {
 		
 		return result;
 	}
-	
-	// »ç¿ëÀÚ ¾÷Ã¼ »ó¼¼ÆäÀÌÁö - ¸®ºä ³»¿ª Á¶È¸
-	public ArrayList<Map<String, Object>> uscpRvList(int cpNo) {
+// ì‚¬ìš©ì ì—…ì²´ ìƒì„¸í˜ì´ì§€ - ë¦¬ë·° ë‚´ì—­ ì¡°íšŒ
+public ArrayList<Map<String, Object>> uscpRvList(int cpNo) {
 		Connection conn = getConnection();
 		ArrayList<Map<String, Object>> uscpRvList = new UsercpDetailpageDao().uscpRvList(conn, cpNo);
 		close(conn);
