@@ -1,50 +1,36 @@
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/login.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mainpage.css"> 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/login.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mainpage.css"> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>사업자 로그인</title>
-<!-- google font -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	    <!-- google font -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Noto+Sans+KR:wght@500&display=swap');
     </style>
 </head>
 <body style="background: none;">
 	<div id="bgcolor" style="background-image: url(https://cdn.discordapp.com/attachments/692994434526085184/970185730959749120/34234234324.png);">
-	<header style="height: 150px;">
-		<div class="p_main_top">
-			<div id="p_main_logo_bar">
-				<div id="p_main_logo">
-					<a href="<%=request.getContextPath()%>"><img
-						src="https://cdn.discordapp.com/attachments/958566133752016901/966262090698457108/logo.png"
-						alt="지우동로고"></a>
-				</div>
-				<div id="p_main_bar">
-					<ul class="nav justify-content-end" style="font-size: 1.1em;">
-						<li class="nav-item"><a class="nav-link" href="/jwd/#about">About</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="/jwd/#service">Service</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="/jwd/#notice">공지사항</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="enrollMain">회원가입</a></li>
-						<li class="nav-item"><a class="nav-link" href="AdminLogin">관리자로그인</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</header>
+	<div>
+		<%@ include file="../view/template_header.jsp"%>
+	</div>
     <div id="j_loginform" style="margin-bottom: 80px;">
         <p><img id="j_logo_img" alt="지우동 로고" src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"></p>
         <form action="bumLogin.lo" method="post" name="loginFrm" onsubmit="return validateForm(this);">
             <div id="j_loginform2">
                 <fieldset id="j_loginform3">
-                    <legend style="color: #0f7bc3; font-size: large; font-weight: bolder; text-align: center; padding: 0 5px; width: 130px;">사업자 로그인</legend>
+                    <legend style="color: #0f7bc3; float: none; font-size: large; font-weight: bolder; text-align: center; padding: 0 5px; width: 130px;">사업자 로그인</legend>
                     <div style="position: relative; height: 150px;">
 							<div id="j_id_div" style="position: absolute; line-height: 30px; margin-top: 10px;">
 								<label id="j_id" for="bu_id"

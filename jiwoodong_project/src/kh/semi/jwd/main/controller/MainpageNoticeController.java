@@ -1,8 +1,7 @@
-package kh.semi.jwd.admin.controller;
+package kh.semi.jwd.main.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.jwd.admin.model.service.AdminNoticeService;
-import kh.semi.jwd.admin.model.service.AdminService;
+import kh.semi.jwd.admin.model.vo.AdminNoticeVo;
 
 /**
- * Servlet implementation class AdminReviewListController
+ * Servlet implementation class MainpageNoticeController
  */
-@WebServlet("/AdminReviewList")
-public class AdminReviewListController extends HttpServlet {
+@WebServlet("/MainpageNotice")
+public class MainpageNoticeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminReviewListController() {
+    public MainpageNoticeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,41 +31,42 @@ public class AdminReviewListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// System.out.println("잘 넘어왔겠죠 ? ㅎㅎㅎㅎㅎ");
 		
 		// 검색
 		String field = request.getParameter("f");
 		String query = request.getParameter("q");
-
+		
 		System.out.println("field : " + field);
 		System.out.println("query : " + query);
-
+		
 		// 사용자가 검색 전달을 안했을 때
 		String field_ = "nt_title";
 		if(field != null) {
 			// 기본이 제목이 선택되도록
 			field_ = field;
 		}
-
+		
 		String query_ = "";
 		if(query != null) {
 			query_ = query;
 		}
-
+		
 		String pageNumStr = request.getParameter("pageNum");
 		System.out.println("pageNumStr:"+pageNumStr);
 		int currentPage = 1;
 		if(pageNumStr != null && !pageNumStr.equals(""))
-			currentPage = Integer.parseInt(pageNumStr);
+		  currentPage = Integer.parseInt(pageNumStr);
 		System.out.println("currentPage:"+currentPage);
-		final int pageSize = 10;
+		final int pageSize = 18;
 		final int pageBlock = 2;
 		int totalCnt = 0;
 		
 		if(field == null || query == null) {
-			totalCnt = countReviewList();
+			// 검색결과가 없을 때
+			totalCnt = countNoticeList();
 		} else {
-			totalCnt = countReviewSearchList(field, query);
+			// 검색결과가 있을 때
+			totalCnt = countNoticeSearchList(field, query);
 		}
 		
 		// paging 처리
@@ -84,7 +84,7 @@ public class AdminReviewListController extends HttpServlet {
 			endPage = pageCnt;
 		}
 		// System.out.println("paging" + startPage+"~"+endPage);
-
+		
 		// rownum 처리
 		int startRnum = 0;
 		int endRnum = 0;
@@ -95,36 +95,38 @@ public class AdminReviewListController extends HttpServlet {
 		}
 		
 		
-		ArrayList<Map<String, Object>> adRvList = new AdminService().adRvList(startRnum, endRnum);
-		ArrayList<Map<String, Object>> adRvListSearch = new AdminService().adRvListSearch(field, query, startRnum, endRnum);
-		ArrayList<Map<String, Object>> reviewCnt = new AdminService().reviewCount();
+		ArrayList<AdminNoticeVo> noticeListDetailPaging = new AdminNoticeService().noticeListDetailPaging(startRnum, endRnum);
+		ArrayList<AdminNoticeVo> noticeListSearch = new AdminNoticeService().noticeListDetailSearchPaging(field, query, startRnum, endRnum);
 		
-		request.setAttribute("adRvList", adRvList);
+		System.out.println("noticeListSearch" + noticeListSearch);
+		
+		// System.out.println("여기불림 ? ");
+		// System.out.println("noticeListDetailPaging" + noticeListDetailPaging);
+		// System.out.println("여기확인중 : 시작 " + startPage + ", 끝 " + endPage);
+		request.setAttribute("noticeListDetailPaging", noticeListDetailPaging);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCnt", pageCnt);
 		request.setAttribute("currentPage", currentPage);
 		
-		request.setAttribute("adRvListSearch", adRvListSearch);
+		request.setAttribute("noticeListSearch", noticeListSearch);
 		request.setAttribute("field", field);
 		request.setAttribute("query", query);
 		
-		request.setAttribute("reviewCnt", reviewCnt);
+		request.getRequestDispatcher("WEB-INF/view/admin/mainpageNotice.jsp").forward(request, response);
+	}
+	// 공지사항 검색 결과 카운트
+		public int countNoticeSearchList(String field, String query) {
+			int result = new AdminNoticeService().countNoticeSearchList(field, query);
+			// System.out.println("결과 나옵니까 ? : " + result);
+			return result;
+		}
 		
-		request.getRequestDispatcher("WEB-INF/admin/adminReviewList.jsp").forward(request, response);
-		
-	}
-	// 리뷰 검색 결과 카운트
-	public int countReviewSearchList(String field, String query) {
-		int result = new AdminService().countReviewSearchList(field, query);
-		return result;
-	}
-
-	// 리뷰 리스트 개수
-	public int countReviewList() {
-		int result = new AdminService().countReviewList();
-		return result;
-	}
+		// 공지사항 리스트 개수
+		public int countNoticeList() {
+			int result = new AdminNoticeService().countNoticeList();
+			return result;
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

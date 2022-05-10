@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/user_enrollpage.css"> 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/mainpage.css"> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 <%@page import="java.sql.SQLException"%>
 <%@page import="kh.semi.jwd.common.jdbc.JdbcDBCP"%>
 <%@page import="java.sql.Connection"%>
@@ -12,6 +13,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
     <title>사용자 회원가입 페이지</title>
   	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -28,30 +30,9 @@
 <body style="background: none;">
 <section>
 	<div id="bgcolor" style="background-image: url(https://cdn.discordapp.com/attachments/692994434526085184/970185730959749120/34234234324.png);">
-	<header style="height: 150px;">
-		<div class="p_main_top">
-			<div id="p_main_logo_bar">
-				<div id="p_main_logo">
-					<a href="<%=request.getContextPath()%>"><img
-						src="https://cdn.discordapp.com/attachments/958566133752016901/966262090698457108/logo.png"
-						alt="지우동로고"></a>
-				</div>
-				<div id="p_main_bar">
-					<ul class="nav justify-content-end" style="font-size: 1.1em;">
-						<li class="nav-item"><a class="nav-link" href="/jwd/#about">About</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="/jwd/#service">Service</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="/jwd/#notice">공지사항</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="enrollMain">회원가입</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">관리자로그인</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</header>
+	<div>
+		<%@ include file="../view/template_header.jsp"%>
+	</div>
 
 
 <div class="container">

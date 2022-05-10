@@ -390,4 +390,13 @@ public class AdminService {
 		
 	}
 	
+	// 업종별 예약현황 통계 count
+	public ArrayList<Map<String, Object>> reviewCount() {
+
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> result = dao.reviewCount(conn);
+		close(conn);
+		return result;
+	}
+	
 }

@@ -23,6 +23,72 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<!-- 통계 CSS -->
+<style>
+.highcharts-figure, .highcharts-data-table table {
+	min-width: 310px;
+	max-width: 800px;
+	margin: 1em auto;
+}
+
+#container {
+	height: 400px;
+}
+
+.highcharts-data-table table {
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #ebebeb;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
+}
+
+.highcharts-data-table caption {
+	padding: 1em 0;
+	font-size: 1.2em;
+	color: #555;
+}
+
+.highcharts-data-table th {
+	font-weight: 600;
+	padding: 0.5em;
+}
+
+.highcharts-data-table td, .highcharts-data-table th,
+	.highcharts-data-table caption {
+	padding: 0.5em;
+}
+
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even)
+	{
+	background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+	background: #f1f7ff;
+}
+
+.highcharts-background {
+	fill: none;
+}
+
+.highcharts-title {
+	font-size: 15px !important;
+}
+
+.highcharts-root {
+	border: 1px solid lightgrey;
+	padding: 10px; border-radius : 10px;
+	background-color: whitesmoke;
+	border-radius: 10px;
+}
+</style>
 <title>리뷰 관리</title>
 </head>
 <body>
@@ -34,8 +100,18 @@
 
 		<!-- 리뷰관리 content : 손은진 -->
 		<div>
-			<div id="s_notice_content" class="tab_menu s_content" style="display: block;">
-				<p class="p_content_style">리뷰 조회</p>
+			<div style="width: 1200px; margin: 0 auto;">
+			<div id="s_notice_content" class="tab_menu s_content" style="display: block; height: 1150px !important;">
+				<p class="p_content_style" style="font-size: 1.5em;">리뷰 조회</p>
+				
+				<!-- 통계 -->
+				<figure class="highcharts-figure">
+				  <div id="container"></div>
+				  <p class="highcharts-description" style="text-align: center; font-size: 15px; margin-top: 20px;">
+				    2022년 기준
+				  </p>
+				</figure>
+				
 				<!-- 검색 -->
 				<nav class="navbar navbar-light"
 					style="float: right; margin-bottom: 20px;">
@@ -76,7 +152,7 @@
 								<td class="s_td_short">${i.cpCategory }</td>
 								<td class="s_td_short">${i.cpName }</td>
 								<td class="s_center">${i.umId }</td>
-								<td class="s_center">${i.rvContent }</td>
+								<td class="s_center s_td_short">${i.rvContent }</td>
 								<td class="s_center">${i.rvScore }</td>
 								<td class="s_center">${i.rvWriteDate }</td>
 							</tr>
@@ -128,6 +204,7 @@
 					</c:if>
 					</ul>
 				</div>
+			</div>
 			</div>
 		</div>
 	</section>
@@ -196,6 +273,69 @@
 
     	$("#s_review_menu").click(function() {
     		location.href="AdminReviewList";
+    	});
+    </script>
+    
+    <script>
+    Highcharts.chart('container', {
+    	  colors: ['#F5CB16', '#956BF5', '#F56BC3'],
+    	  chart: {
+    	    type: 'bar'
+    	  },
+    	  title: {
+    	    text: '업체 별 리뷰 별점 통계'
+    	  },
+    	  xAxis: {
+    	    categories: ['💙🤍🤍🤍🤍', '💙💙🤍🤍🤍', '💙💙💙🤍🤍', '💙💙💙💙🤍', '💙💙💙💙💙'],
+    	    title: {
+    	      text: null
+    	    }
+    	  },
+    	  yAxis: {
+    	    min: 0,
+    	    title: {
+    	      text: '리뷰개수',
+    	      align: 'high'
+    	    },
+    	    labels: {
+    	      overflow: 'justify'
+    	    }
+    	  },
+    	  tooltip: {
+    	    valueSuffix: ' millions'
+    	  },
+    	  plotOptions: {
+    	    bar: {
+    	      dataLabels: {
+    	        enabled: true
+    	      }
+    	    }
+    	  },
+    	  legend: {
+    	    layout: 'vertical',
+    	    align: 'right',
+    	    verticalAlign: 'top',
+    	    x: -40,
+    	    y: 80,
+    	    floating: true,
+    	    borderWidth: 1,
+    	    backgroundColor:
+    	      Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+    	    shadow: true
+    	  },
+    	  credits: {
+    	    enabled: false
+    	  },
+    	  series: [{
+    	    name: '호텔',
+    	    data: [${reviewCnt[10].reviewCnt}, ${reviewCnt[11].reviewCnt}, ${reviewCnt[12].reviewCnt}, ${reviewCnt[13].reviewCnt}, ${reviewCnt[14].reviewCnt}]
+    	  }, {
+    	    name: '미용실',
+    	    data: [${reviewCnt[0].reviewCnt}, ${reviewCnt[1].reviewCnt}, ${reviewCnt[2].reviewCnt}, ${reviewCnt[3].reviewCnt}, ${reviewCnt[4].reviewCnt}]
+    	  }, {
+    	    name: '카페',
+    	    data: [${reviewCnt[5].reviewCnt}, ${reviewCnt[6].reviewCnt}, ${reviewCnt[7].reviewCnt}, ${reviewCnt[8].reviewCnt}, ${reviewCnt[9].reviewCnt}]
+    	  }]
     	});
     </script>
 	

@@ -98,42 +98,6 @@
             </div>
         </div>
         
-        <!-- 리뷰 조회 : 전승희 -->
-        <div>
-            <div id="s_review_menu" class="tab_menu s_content">
-                <p class="p_content_style">리뷰 Content~~~~~~~</p>
-                <!-- 검색 -->
-                <nav class="navbar navbar-light" style="float: right; margin-bottom: 20px;">
-                    <div class="container-fluid">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
-                <div>
-                	내용~ 들어가야지~~~~~~~~~~~~~~~~~~~~~~~~
-                </div>
-                <div>
-                	내용~ 들어가야지~~~~~~~~~~~~~~~~~~~~~~~~
-                </div>
-                <div>
-                	내용~ 들어가야지~~~~~~~~~~~~~~~~~~~~~~~~
-                </div>
-				<div id="pagingBox">
-					<ul class="pagination">
-						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</div>
-            </div>
-        </div>
-    </section>
     <!-- 통계 -->
     <script>
         // Create the chart

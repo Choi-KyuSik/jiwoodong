@@ -126,7 +126,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${adnolist }" var="i">
-							<tr>
+							<tr style="cursor: pointer;" class="s_tr_readList">
 								<th scope="row">${i.ntNo}</th>
 								<td>${i.ntTitle}</td>
 								<td>관리자</td>
@@ -302,7 +302,41 @@
 
         </div>
     </section>
-    
+    <script>
+	//사업자 마이페이지로 이동
+		    $("#bum_mypage_btn").click(function() {
+		    	location.href="BumMainPage";
+		    });		
+	//사용자 마이페이지로 이동
+			    $("#um_mypage_btn").click(function() {
+		    	location.href="UserMypage";
+		    });	
+			
+	</script>
+	
+	<script>
+	$(".s_tr_readList").click(function() {
+		// 배열 선언
+		var tdArr = new Array();
+		// 현재 클릭된 행(tr의 td)
+		var tr = $(this);
+		console.log("tr : " + tr);
+		var td = tr.children();
+		console.log("td : " + td);
+
+		// 반복문을 통해 배열에 값을 담아 사용
+		td.each(function(i) {
+			tdArr.push(td.eq(i).text());
+		});
+		// td들이 배열에 담겨있는데 그 중 1번째가 필요
+		console.log("tdArr : " + tdArr);
+		console.log("배열에 담긴 값 : " + tdArr[0]);
+		console.log(typeof (tdArr[0]));
+
+		// 링크로 넘기기
+		location.href = "MainpageNoticeDetail?ntNo=" + tdArr[0];
+	});
+	</script>
     
 </body>
 </html>

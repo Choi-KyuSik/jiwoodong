@@ -1306,7 +1306,7 @@ public class AdminDao {
 		
 		int result = 0;
 		
-		String sql = "UPDATE REVIEW SET RV_CONTENT = ?, FL_GNO = ?, RV_SCORE = ?  WHERE RV_NO = ?";
+		String sql = "UPDATE REVIEW SET RV_CONTENT = ?, FL_GNO = ?, RV_SCORE = ?, RV_MODIFY_DATE = SYSTIMESTAMP  WHERE RV_NO = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -1325,6 +1325,62 @@ public class AdminDao {
 		
 		return result;
 		
+	}
+	
+	// 리뷰 평점 별 통계 count
+	public ArrayList<Map<String, Object>> reviewCount(Connection conn) {
+
+		ArrayList<Map<String, Object>> result = null;
+
+		String sql = "SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '미용실' AND RV_SCORE = 1"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '미용실' AND RV_SCORE = 2"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '미용실' AND RV_SCORE = 3"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '미용실' AND RV_SCORE = 4"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '미용실' AND RV_SCORE = 5"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '카페' AND RV_SCORE = 1"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '카페' AND RV_SCORE = 2"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '카페' AND RV_SCORE = 3"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '카페' AND RV_SCORE = 4"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '카페' AND RV_SCORE = 5"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '호텔' AND RV_SCORE = 1"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '호텔' AND RV_SCORE = 2"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '호텔' AND RV_SCORE = 3"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '호텔' AND RV_SCORE = 4"
+				+ " UNION ALL"
+				+ " SELECT COUNT(*) FROM BOOKING JOIN REVIEW USING (BK_NO) JOIN COMPANY USING (CP_NO) WHERE CP_CATEGORY = '호텔' AND RV_SCORE = 5";
+
+		result = new ArrayList<Map<String,Object>>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				Map<String,Object> map = new HashMap<String, Object>();
+				map.put("reviewCnt", rs.getInt(1));
+				result.add(map);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+
 	}
 
 
