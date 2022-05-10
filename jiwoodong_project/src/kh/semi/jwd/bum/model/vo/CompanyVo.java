@@ -1,6 +1,6 @@
 package kh.semi.jwd.bum.model.vo;
 
-import java.sql.Date;
+import oracle.sql.TIMESTAMP;
 
 public class CompanyVo {
 
@@ -40,8 +40,8 @@ public class CompanyVo {
 	private String cpPostcode;
 	private String cpAddress;
 	private String cpDtaddress;
-	private Date cpWriteDate;
-	private Date cpUpdateDate;
+	private TIMESTAMP cpWriteDate;
+	private TIMESTAMP cpUpdateDate;
 	private String flGno;
 	private String flGno2;
 	private String flGno3;
@@ -210,22 +210,22 @@ public class CompanyVo {
 	}
 
 
-	public Date getCpWriteDate() {
+	public TIMESTAMP getCpWriteDate() {
 		return cpWriteDate;
 	}
 
 
-	public void setCpWriteDate(Date cpWriteDate) {
+	public void setCpWriteDate(TIMESTAMP cpWriteDate) {
 		this.cpWriteDate = cpWriteDate;
 	}
 
 
-	public Date getCpUpdateDate() {
+	public TIMESTAMP getCpUpdateDate() {
 		return cpUpdateDate;
 	}
 
 
-	public void setCpUpdateDate(Date cpUpdateDate) {
+	public void setCpUpdateDate(TIMESTAMP cpUpdateDate) {
 		this.cpUpdateDate = cpUpdateDate;
 	}
 

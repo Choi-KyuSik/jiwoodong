@@ -1,6 +1,9 @@
 package kh.semi.jwd.bum.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,11 +44,10 @@ public class BusinessCompanyWriteServlet extends HttpServlet {
 //		request.setAttribute("bvo", bvo);
 //		request.getRequestDispatcher("WEB-INF/bum/businessCompanyWritePage.jsp").forward(request, response);
 		int buNo = (int) request.getSession().getAttribute("buNo");
-		String cpSignYn = new BumService().companyWriteCheck(bvo, buNo);
+		ArrayList<Map<String, Object>> result = new BumService().companyWriteCheck(bvo, buNo);
 		System.out.println("담겼는지 체크1:"+ buNo);
-		System.out.println("담겼는지 체크1: cpSignYn : "+ cpSignYn);
 //		PrintWriter out = response.getWriter();
-		request.setAttribute("cpSignYn", cpSignYn);
+		request.setAttribute("list", result);
 		request.getRequestDispatcher("WEB-INF/bum/businessCompanyWritePage.jsp").forward(request, response);
 		
 		

@@ -428,26 +428,24 @@ public class BumDao {
 //	FL_GNO                  VARCHAR2(4000) 
 //	CP_REJECT_MSG           VARCHAR2(200) 
 
-		String sql = "INSERT INTO company(CP_NO, BU_NO, CP_NAME, CP_CATEGORY, CP_CLASSIFY , CP_OPEN_DATE , CP_CLOSE_DATE, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, CP_OPEN_TIME, CP_CLOSE_TIME ,CP_EXPLAIN, FL_GNO, FL_GNO2, FL_GNO3)"
-				+ " VALUES(COMPANY_SEQ.NEXTVAL,?,?,?,?,REPLACE(?, '-', '/'),REPLACE(?, '-', '/'),?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO company(CP_NO, BU_NO, CP_NAME, CP_CATEGORY, CP_CLASSIFY, CP_POSTCODE, CP_ADDRESS, CP_DTADDRESS, CP_OPEN_TIME, CP_CLOSE_TIME ,CP_EXPLAIN, FL_GNO, FL_GNO2, FL_GNO3)"
+				+ " VALUES(COMPANY_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cvo.getBuNo());
 			pstmt.setString(2, cvo.getCpName());
 			pstmt.setString(3, cvo.getCpCategory());
-			pstmt.setString(4, cvo.getCpClassify());
-			pstmt.setString(5, cvo.getCpOpenDate());
-			pstmt.setString(6, cvo.getCpCloseDate());
-			pstmt.setString(7, cvo.getCpPostcode());
-			pstmt.setString(8, cvo.getCpAddress());
-			pstmt.setString(9, cvo.getCpDtaddress());
-			pstmt.setString(10, cvo.getCpOpenTime());
-			pstmt.setString(11, cvo.getCpCloseTime());
-			pstmt.setString(12, cvo.getCpExplain());
-			pstmt.setString(13, cvo.getFlGno());
-			pstmt.setString(14, cvo.getFlGno2());
-			pstmt.setString(15, cvo.getFlGno3());
+			pstmt.setString(4, cvo.getCpClassify());			
+			pstmt.setString(5, cvo.getCpPostcode());
+			pstmt.setString(6, cvo.getCpAddress());
+			pstmt.setString(7, cvo.getCpDtaddress());
+			pstmt.setString(8, cvo.getCpOpenTime());
+			pstmt.setString(9, cvo.getCpCloseTime());
+			pstmt.setString(10, cvo.getCpExplain());
+			pstmt.setString(11, cvo.getFlGno());
+			pstmt.setString(12, cvo.getFlGno2());
+			pstmt.setString(13, cvo.getFlGno3());
 
 			result = pstmt.executeUpdate();
 			System.out.println("companyWrite Dao result:" + result);
@@ -461,6 +459,42 @@ public class BumDao {
 		return result;
 
 	}
+	
+	// 우진 - 업체등록 'R'인 경우 업체 내역 수정
+		public int companyWriteUpdate(Connection conn, CompanyVo cvo, int buNo) {
+
+			int result = 0;
+
+			String sql = "UPDATE company SET CP_NAME=?, CP_CATEGORY=?, CP_CLASSIFY=? , CP_POSTCODE=?, CP_ADDRESS=?, CP_DTADDRESS=?, CP_OPEN_TIME=?, CP_CLOSE_TIME=? ,CP_EXPLAIN=?, FL_GNO = ?, FL_GNO2 = ?, FL_GNO3 = ?, cp_signyn = 'N' where bu_no = ?";
+			try {
+
+				pstmt = conn.prepareStatement(sql);				
+				pstmt.setString(1, cvo.getCpName());
+				pstmt.setString(2, cvo.getCpCategory());
+				pstmt.setString(3, cvo.getCpClassify());
+				pstmt.setString(4, cvo.getCpPostcode());
+				pstmt.setString(5, cvo.getCpAddress());
+				pstmt.setString(6, cvo.getCpDtaddress());
+				pstmt.setString(7, cvo.getCpOpenTime());
+				pstmt.setString(8, cvo.getCpCloseTime());
+				pstmt.setString(9, cvo.getCpExplain());
+				pstmt.setString(10, cvo.getFlGno());
+				pstmt.setString(11, cvo.getFlGno2());
+				pstmt.setString(12, cvo.getFlGno3());
+				pstmt.setInt(13, cvo.getBuNo());
+
+				result = pstmt.executeUpdate();
+				System.out.println("companyWrite Dao result:" + result);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(conn);
+			}
+			System.out.println("companyWrite Dao return result:" + result);
+			return result;
+
+		}
 
 	// 우진 - 내 정보 삭제
 	public int bumDelete(Connection conn, BumVo vo, int buNo) {
@@ -503,26 +537,29 @@ public class BumDao {
 	}
 	
 	//우진 - 업체등록 여부 확인
-	public String companyWriteCheck(Connection conn, int buNo) {
+	public ArrayList<Map<String, Object>> companyWriteCheck(Connection conn, int buNo) {
 		System.out.println("companyWriteCheck buNo:"+ buNo);
 		String result2 = "";
-		
-		String sql = "select cp_signyn from company where bu_no = ?";
+		ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		String sql = "select cp_signyn, cp_reject_msg from company where bu_no = ?";
 		try {
 //			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, buNo);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-			result2 = rs.getString(1);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("cpSignyn", rs.getString(1));
+			map.put("cpRejectMsg", rs.getString(2));
+			list.add(map);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);			
 		}
-		System.out.println("companyWriteCheck 값 담겼나?:" + result2);
-		return result2;
+		System.out.println("companyWriteCheck 값 담겼나?:" + list);
+		return list;
 	}
 	
 	//우진 - buNo 뽑아오기

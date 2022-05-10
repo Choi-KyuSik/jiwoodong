@@ -23,14 +23,14 @@ import kh.semi.jwd.bum.model.vo.CompanyVo;
 /**
  * Servlet implementation class BusinessCompanyWriteDoServlet
  */
-@WebServlet("/bucompanydo")
-public class BusinessCompanyWriteDoServlet extends HttpServlet {
+@WebServlet("/bucompanydoupdate")
+public class BusinessCompanyWriteDoUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public BusinessCompanyWriteDoServlet() {
+	public BusinessCompanyWriteDoUpdateServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -61,18 +61,8 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 		String cpCategory = request.getParameter("cpCategory");
 		String cpExplain = request.getParameter("cpExplain");
 		String cpClassify = request.getParameter("cpClassify");
-		System.out.println("cpClassify:" + cpClassify);
-		if(cpClassify.equals("none")) {
-			cpClassify = "A";
-		}
 		String cpOpenTime = request.getParameter("cpOpenTime");
-		if(cpOpenTime == null) {
-			cpOpenTime = "X";
-		}
 		String cpCloseTime = request.getParameter("cpCloseTime");
-		if(cpCloseTime == null) {
-			cpCloseTime = "X";
-		}
 		String cpPostcode = request.getParameter("cpPostcode");
 		String cpAddress = request.getParameter("cpAddress");
 		String cpDtaddress = request.getParameter("cpDtaddress");
@@ -102,7 +92,7 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 		 
 		 
 
-		result = new BumService().companyWrite(cvo, buNo);
+		result = new BumService().companyWriteUpdate(cvo, buNo);
 		
 		System.out.println("Controller result" + result);
 

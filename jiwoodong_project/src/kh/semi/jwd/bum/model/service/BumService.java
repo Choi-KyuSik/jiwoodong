@@ -120,6 +120,15 @@ public class BumService {
 
 	}
 	// 우진
+		public int companyWriteUpdate(CompanyVo cvo, int buNo) {
+			Connection conn = getConnection();
+			int result = new BumDao().companyWriteUpdate(conn, cvo, buNo);
+			close(conn);
+			System.out.println("companyWriteService result: " + result);
+			return result;
+
+		}
+	// 우진
 	public int bumDelete(BumVo vo, int buNo){
 		Connection conn = getConnection();
 		int result = 0;
@@ -141,9 +150,9 @@ public class BumService {
 	}
 	
 	// 우진
-		public String companyWriteCheck(BumVo bvo, int buNo) {
+		public ArrayList<Map<String, Object>> companyWriteCheck(BumVo bvo, int buNo) {
 			Connection conn = getConnection();
-			String result2 = new BumDao().companyWriteCheck(conn, buNo);
+			ArrayList<Map<String, Object>> result2 = new BumDao().companyWriteCheck(conn, buNo);
 			close(conn);
 			System.out.println("companyCheck result" + result2);
 			return result2;

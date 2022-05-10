@@ -155,7 +155,7 @@ td, th {
 					<a href="#"
 						class="d-block link-dark text-decoration-none dropdown-toggle"
 						id="dropdownUser1" data-bs-toggle="dropdown"> <img
-						src="https://media.discordapp.net/attachments/692994434526085184/965630874999730296/1.png"
+						src="https://media.discordapp.net/attachments/958566133752016901/973649744310202458/e3362c1706dbf481.png?width=676&height=676"
 						alt="mdo" width="60px">
 					</a>
 					<p style="font-size: 12px; margin: 5px;">환영합니다

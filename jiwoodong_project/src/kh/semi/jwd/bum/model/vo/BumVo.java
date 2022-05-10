@@ -1,6 +1,6 @@
 package kh.semi.jwd.bum.model.vo;
 
-import java.sql.Date;
+import oracle.sql.TIMESTAMP;
 
 public class BumVo {
 // 	B_MEMBER table
@@ -30,9 +30,9 @@ public class BumVo {
 	private String buEmail;
 	private String buTel;
 	private String buUseYn;
-	private Date buWriteDate;
-	private Date buUpdateDate;
-	private Date buOutDate;
+	private TIMESTAMP buWriteDate;
+	private TIMESTAMP buUpdateDate;
+	private TIMESTAMP buOutDate;
 	private String flGno;
 	
 	// TO_CHAR이용해서 담는 변수 : 손은진
@@ -174,32 +174,32 @@ public class BumVo {
 		this.buUseYn = buUseYn;
 	}
 	
-		public Date getBuWriteDate() {
+		public TIMESTAMP getBuWriteDate() {
 		return buWriteDate;
 	}
 
 
-	public void setBuWriteDate(Date buWriteDate) {
+	public void setBuWriteDate(TIMESTAMP buWriteDate) {
 		this.buWriteDate = buWriteDate;
 	}
 
 
-	public Date getBuUpdateDate() {
+	public TIMESTAMP getBuUpdateDate() {
 		return buUpdateDate;
 	}
 
 
-	public void setBuUpdateDate(Date buUpdateDate) {
+	public void setBuUpdateDate(TIMESTAMP buUpdateDate) {
 		this.buUpdateDate = buUpdateDate;
 	}
 
 
-	public Date getBuOutDate() {
+	public TIMESTAMP getBuOutDate() {
 		return buOutDate;
 	}
 
 
-	public void setBuOutDate(Date buOutDate) {
+	public void setBuOutDate(TIMESTAMP buOutDate) {
 		this.buOutDate = buOutDate;
 	}
 
