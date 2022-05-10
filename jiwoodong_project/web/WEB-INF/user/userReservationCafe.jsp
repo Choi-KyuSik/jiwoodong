@@ -156,8 +156,11 @@
 		            			<h4 style="margin-top: 30px; color: rgb(241, 77, 12)">★날짜를 선택해 주세요★</h4>
 		                    </div>
 		                    <div>
-		                    <label style="font-size: 20px; margin-top: 20px">예약자명 : <input type="text" id="rsname"  name="rsname" required></label>
-		                    <label style="font-size: 20px; margin-top: 20px">전화번호 : <input type="text" id="rsphone"  name="rsphone" required></label><br>
+		                    <input type="hidden" value="${umTel }" id="umTel" name="umTel"/>
+		                    <input type="hidden" value="${umPostcode }" id="umPostcode" name="umPostcode"/>
+		                    <input type="hidden" value="${umAddress }" id="umAddress" name="umAddress"/>
+		                    <label style="font-size: 20px; margin-top: 20px">예약자명 : <input type="text" id="rsname"  name="rsname" value="${umName }" required></label>
+		                    <label style="font-size: 20px; margin-top: 20px">전화번호 : <input type="text" id="rsphone"  name="rsphone" value="${umTel }" required></label><br>
 		                    <label style="font-size: 20px; margin-top: 10px;">요청사항 : </label><br>
 		                    <textarea rows="3" cols="50"  style="width: 640px; margin: 10px 0 0 10px; resize: none; padding: 5px" id="rsrequire" name="rsrequire"></textarea><br>
 		                    </div>
@@ -166,7 +169,7 @@
 		                  <div style="border: 1px solid black;">
 									<img src="https://missioninfra.net/img/noimg/noimg_4x3.gif" alt="메뉴사진" id="menuimg"  style="width: 330px; height:330px; object-fit: cover;" >
 		                  </div>
-		                  <textarea rows="2" cols="50"  style="width: 332px ; resize: none; padding: 5px" readonly id="rsmenuexplain" >메뉴설명</textarea><br>
+		                  <textarea rows="2" cols="50"  style="width: 332px; resize: none; padding: 5px" readonly id="rsmenuexplain">메뉴설명</textarea><br>
 		                    <label style="font-size: 20px; margin-top: 20px;">메뉴선택 : </label>
 		                    	<select style="font-size: 20px; width: 225px" id="rsmenu" name="rsmenu">
 		                    	<option value="none">메뉴를 선택해주세요</option>
@@ -174,7 +177,7 @@
 		                    		<option value="${menu.menuNo }">${menu.menuName }</option>
 		                    	</c:forEach>
 		                    	</select><br>
-		                    	<label style="font-size: 20px; margin-top: 20px"">메뉴가격 : <input type="text" id="rsmenuprice"  name="rsmenuprice" readonly style="background-color: rgb(233,236,239); border: 1px solid black;"></label><br>
+		                    	<label style="font-size: 20px; margin-top: 20px"">메뉴가격 : <input type="text" id="rsmenuprice"  name="rsmenuprice" readonly></label><br>
 		                    	<label style="font-size: 20px; margin-top: 20px"">메뉴수량 : </label>
 		                    	<select style="font-size: 20px; width: 225px" id="rsmenucount">
 		                    			<option value="none">수량을 선택해주세요</option>
@@ -188,7 +191,7 @@
 		                   	<span id="totalprice" style="font-weight : bold;"></span>
 		                   원
 	                   	</span>
-	                   	<input type="button" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
+	                   	<input type="button" onclick="requestPay()" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
 	                   	</div>
 	                   	<div id="h_menu" style="clear: both"></div>
 	                   	<div id="h_totalprice"></div>
@@ -201,24 +204,23 @@
     
     <!-- 결제API : 손은진 -->
     <script>
-      /*  var IMP = window.IMP; // 생략 가능
-      IMP.init("imp39204315") // 지우동 가맹점 식별코드 */
+       var IMP = window.IMP; // 생략 가능
+      IMP.init("imp39204315") // 지우동 가맹점 식별코드
       
       function requestPay() {
             // IMP.request_pay(param, callback) 결제창 호출
-            /* IMP.request_pay({ // param
+            IMP.request_pay({ // param
                 pg: "html5_inicis", // 이니시스 웹표준 결제창
                 pay_method: "card", // 결제 방법
-                // TODO : 예약번호로 넣기
                 merchant_uid: new Date().getTime() + "jwd", // 주문번호
                 name: $("#menuinfo").val(), // 상품명
                 amount: $("#totalprice").text(), // 가격
                 buyer_email: "dms102336@gmail.com", // 이메일
-                // TODO : 구매자 이름, 전화번호, 주소, 우편번호 로그인 한 사용자 정보로 가져오기
+                /* 구매자 이름, 전화번호, 주소, 우편번호 로그인 한 사용자 정보로 가져오기 */
                 buyer_name: $("#rsname").val(), // 이름
-                buyer_tel: "010-1111-1111", // 전화번호
-                buyer_addr: "서울특별시 강남구", // 주소
-                buyer_postcode: "01181" // 우편번호
+                buyer_tel: $("#rsphone").val(), // 전화번호
+                buyer_addr: $("#umAddress").val(), // 주소
+                buyer_postcode: $("#umPostcode").val() // 우편번호
             }, function (rsp) { // callback
                if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
             	   var frmEl = $("#frmrsinsert");
@@ -228,13 +230,13 @@
                    frmEl.attr("method", "post");
                    frmEl.submit();
 
-            	   // let response = fetch("/payment", {
-                    //   method: "post",
-                    //   body : JSON.stringify(rsp),
-                    //   headers: {
-                      //    "Content-Type" : "application/json; charset=utf-8"
-                     //  }
-                    });
+            	   /* let response = fetch("/payment", {
+                       method: "post",
+                       body : JSON.stringify(rsp),
+                       headers: {
+                          "Content-Type" : "application/json; charset=utf-8"
+                       }
+                    }); */
                 } else {
                 	// alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
                 	if(rsp.error_msg == "사용자가 결제를 취소하셨습니다") {
@@ -242,11 +244,7 @@
                 		location.href="UserMypage";
                 	}
                 }
-            }); */
-            var frmEl = $("#frmrsinsert");
-            frmEl.attr("action", "UserReservationInsertCafe");
-            frmEl.attr("method", "post");
-            frmEl.submit();
+            });
           }
     </script>
     
@@ -425,7 +423,7 @@
 	    $("#btnsubmit").click(function(){
     		if($("#datepicker").val() == ""){
     			alert('날짜를 선택해주세요');
-    			$("#rsdate").focus();
+    			$("#datepicker").focus();
     			return;
     		} 
     		if($("input:radio[name=rstime]:checked").val() == "none"){
@@ -454,7 +452,10 @@
     			return;
     		} 
     		
-               requestPay();
+    		if($("#rsmenu").val() != "none" && $("#rsmenucount").val() != "none" && $("#rsdate").val() != "" && $("#rstime").val() != "" && $("#rsname").val() != "" && $("#rsphone").val() != "") {
+                requestPay();
+             }
+	    	// $("#frmrsinsert").submit();
 	    })
     </script>
     <script>
