@@ -47,7 +47,7 @@
 
               <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown" id="c_reviewlist" href="#" role="button">
+                  <a class="nav-link dropdown" id="c_reviewlist" href="userreviewlist" role="button">
                     리뷰
                   </a>
                 </li>
