@@ -64,7 +64,6 @@
                     <img alt="사용자 이미지" src="https://cdn.discordapp.com/attachments/958682757230366780/969684968735404133/23ff6546daa743f1.png"><br>
 
                     <input type="button" id="join_u_btn" value="사용자로 로그인 하기"><br>
-                    <input type="button" id="join_u_kakao_btn" value="카카오톡으로 시작하기">
                  
                 </td>
             </tr>

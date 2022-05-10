@@ -46,7 +46,6 @@
                 </fieldset>
                 <div id="j_loginform4">
                     <input type="submit" id="login_btn" value="로그인하기" /><br>
-                    <input type="button" id="login_kakao_btn" value="카카오톡으로 시작하기">
                 </div>
             </div>
         </form>

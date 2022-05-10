@@ -45,14 +45,12 @@ href="<%=request.getContextPath()%>/resources/css/admin.css">
                 <td id="join_bu">
                     <img alt="사업자 이미지" src="https://cdn.discordapp.com/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png"><br>
                     <input type="button" id="join_bu_btn" value="사업자로 시작하기" ><br>
-                    <input type="button" id="join_bu_kakao_btn" value="카카오톡으로 시작하기">
                 </td>
                 <td id="join_user">
                 
                     <img alt="사용자 이미지" src="https://cdn.discordapp.com/attachments/958682757230366780/969684968735404133/23ff6546daa743f1.png"><br>
 
                     <input type="button" id="join_u_btn" value="사용자로 시작하기"><br>
-                    <input type="button" id="join_u_kakao_btn" value="카카오톡으로 시작하기">
                  
                 </td>
             </tr>

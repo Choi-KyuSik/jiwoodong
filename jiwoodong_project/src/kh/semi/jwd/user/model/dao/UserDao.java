@@ -184,6 +184,7 @@ public class UserDao {
 				uvo.setUmTel(rs.getString(6)); // 전화번호
 				uvo.setUmPostcode(rs.getString(7)); // 우편번호
 				uvo.setUmAddress(rs.getString(8)); // 주소
+				uvo.setUmUseYn(rs.getString(12));//탈퇴 여부
 			}
 			
 		} catch (SQLException e) {
