@@ -4,26 +4,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.jwd.admin.model.service.AdminService;
 import kh.semi.jwd.user.model.service.UserService;
 
 /**
- * Servlet implementation class UserReviewListController
+ * Servlet implementation class UserReviewDetailController
  */
-@WebServlet("/userreviewlist")
-public class UserReviewListController extends HttpServlet {
+@WebServlet("/userRvDetailList")
+public class UserReviewDetailListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserReviewListController() {
+    public UserReviewDetailListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +32,17 @@ public class UserReviewListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("안녕!");
-		String umId = (String)request.getSession().getAttribute("um_id");
-		
-		System.out.println("umId"+umId);
-		ArrayList<Map<String, Object>> userrvlist = new UserService().userRvlist(umId);
-		System.out.println("userrvlist:"+userrvlist);
-		request.setAttribute("userrvlist", userrvlist);
+		System.out.println("안녕 rvNo?");
+		String rvNoStr = request.getParameter("rvNo");
+		int rvNo = Integer.parseInt(rvNoStr);
 		
 		
+		System.out.println("rvNo?"+rvNo);
+		ArrayList<Map<String, Object>> userRvDetailList = new UserService().userRvDetailList(rvNo);
+		request.setAttribute("rvDetailList", userRvDetailList);
+		request.setAttribute("rvNo", rvNo);
 		
-		request.getRequestDispatcher("WEB-INF/review/reviewlist.jsp").forward(request, response);
-		//request.getRequestDispatcher("WEB-INF/review/review.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("WEB-INF/review/reviewdetail.jsp").forward(request, response);
 	}
 
 	/**
