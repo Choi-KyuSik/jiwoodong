@@ -57,7 +57,6 @@
                    
                     <img alt="사업자 이미지" src="https://cdn.discordapp.com/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png"><br>
                     <input type="button" id="join_bu_btn" value="사업자로 로그인 하기"><br>
-                    <input type="button" id="join_bu_kakao_btn" value="카카오톡으로 시작하기">
                 </td>
                 <td id="join_user">
                 
