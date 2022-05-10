@@ -8,6 +8,36 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div
+			style="clear: both; height: 500px; background-image: url(https://www.gongbiz.kr/resources/static/assets/img/common/bg-img@2x.png); background-size: cover; color: white;">
+			<div id="p_main_login">
+				<div id="p_small_text">Welcome To JIWOODONG!</div>
+				<div id="p_big_text">IT'S NICE TO MEET YOU</div>
+				<div id="p_login_btn">
+					 <!-- 로그인 여부에 따른 메뉴 변화 -->
+        			<% if (session.getAttribute("password") == null) { %>
+						<button type="button" id="login_btn" class="btn btn-primary btn-lg">
+							<a href="loginMain">로그인</a>
+						</button>
+					<% } else { %>
+						<button type="button" id="logout_btn" class="btn btn-primary btn-lg">
+						 	<a href="logout">로그아웃</a>
+						 </button>
+      				 <% } %>
+					<br>
+					<% if (session.getAttribute("bu_id") != null && session.getAttribute("um_id") == null) { %>
+					<button type="button" id="bum_mypage_btn" class="btn btn-secondary btn-sm">
+						<%= session.getAttribute("bu_id") %>'s page
+						</button>
+					<% } else if(session.getAttribute("um_id") != null && session.getAttribute("bu_id") == null){ %>
+					<button type="button" id="um_mypage_btn" class="btn btn-secondary btn-sm">
+							 <%= session.getAttribute("um_id") %>'s page
+							 </button>
+					 <% } %>
+				</div>
+			</div>
+		</div>
+
 	<section id="first_section">
 		<div id="first_section_div1">
 			<p class="color_yellow">지</p>

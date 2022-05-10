@@ -17,11 +17,11 @@
 				</div>
 				<div id="p_main_bar">
 					<ul class="nav justify-content-end">
-						<li class="nav-item"><a class="nav-link" href="#about">About</a>
+						<li class="nav-item"><a class="nav-link" href="/jwd/#about">About</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="#service">Service</a>
+						<li class="nav-item"><a class="nav-link" href="/jwd/#service">Service</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="#notice">공지사항</a>
+						<li class="nav-item"><a class="nav-link" href="/jwd/#notice">공지사항</a>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="enrollMain">회원가입</a></li>
 						<li class="nav-item"><a class="nav-link" href="AdminLogin">관리자로그인</a>
@@ -30,35 +30,7 @@
 				</div>
 			</div>
 		</div>
-		<div
-			style="clear: both; height: 500px; background-image: url(https://www.gongbiz.kr/resources/static/assets/img/common/bg-img@2x.png); background-size: cover; color: white;">
-			<div id="p_main_login">
-				<div id="p_small_text">Welcome To JIWOODONG!</div>
-				<div id="p_big_text">IT'S NICE TO MEET YOU</div>
-				<div id="p_login_btn">
-					 <!-- 로그인 여부에 따른 메뉴 변화 -->
-        			<% if (session.getAttribute("password") == null) { %>
-						<button type="button" id="login_btn" class="btn btn-primary btn-lg">
-							<a href="loginMain">로그인</a>
-						</button>
-					<% } else { %>
-						<button type="button" id="logout_btn" class="btn btn-primary btn-lg">
-						 	<a href="logout">로그아웃</a>
-						 </button>
-      				 <% } %>
-					<br>
-					<% if (session.getAttribute("bu_id") != null && session.getAttribute("um_id") == null) { %>
-					<button type="button" id="bum_mypage_btn" class="btn btn-secondary btn-sm">
-						<%= session.getAttribute("bu_id") %>'s page
-						</button>
-					<% } else if(session.getAttribute("um_id") != null && session.getAttribute("bu_id") == null){ %>
-					<button type="button" id="um_mypage_btn" class="btn btn-secondary btn-sm">
-							 <%= session.getAttribute("um_id") %>'s page
-							 </button>
-					 <% } %>
-				</div>
-			</div>
-		</div>
+		
 	</header>
 	<script>
 	//사업자 마이페이지로 이동
