@@ -40,7 +40,7 @@ href="<%=request.getContextPath()%>/resources/css/admin.css">
 				<nav class="navbar navbar-light"
 					style="float: right; margin-bottom: 20px;">
 					<div class="container-fluid">
-						<form action="AdminNoticeList" method="get" id="frm" class="d-flex">
+						<form action="MainpageNotice" method="get" id="frm" class="d-flex">
 							<select name="f" style="width: 100px; float: right; margin-right: 10px;"
 								class="form-select" aria-label="Default select example">
 								<option value="nt_title" selected="selected" ${field eq 'nt_title' ? 'selected' : ''}>제목</option>
@@ -88,31 +88,31 @@ href="<%=request.getContextPath()%>/resources/css/admin.css">
 				</table>
 				<c:if test="${fn:length(noticeListSearch) == 0 and noticeListDetailPaging == null}">
 					<div class="s_notice_msg">검색결과가 없습니다. 다시 검색해주세요.</div>
-					<div id="s_back_list_div"><button id="s_back_list" class="btn btn-primary" type="button">목록으로</button></div>
+					<div id="s_back_list_div"><button id="s_back_list" class="btn btn-primary s_back_list" type="button">목록으로</button></div>
 				</c:if>
 				<div id="pagingBox">
 					<ul class="pagination">
 					<!-- startPage에서 -1일 때 -->
 					<c:if test="${startPage > 1 }">
-						<li class="page-item"><a class="page-link" href="AdminNoticeList?pageNum=${startPage-1 }">Previous</a></li>
+						<li class="page-item"><a class="page-link" href="MainpageNotice?pageNum=${startPage-1 }">Previous</a></li>
 					</c:if>
 					<c:if test="${startPage <= 1 }">
-						<li class="page-item disabled"><a class="page-link" href="AdminNoticeList?pageNum=${startPage-1 }">Previous</a></li>
+						<li class="page-item disabled"><a class="page-link" href="MainpageNotice?pageNum=${startPage-1 }">Previous</a></li>
 					</c:if>
 					<c:forEach step="1" begin="${startPage }" end="${endPage }" var="idx">
 						<c:if test="${idx eq currentPage }">
-						<li class="page-item active"><a class="page-link" href="AdminNoticeList?pageNum=${idx }">${idx }</a></li>
+						<li class="page-item active"><a class="page-link" href="MainpageNotice?pageNum=${idx }">${idx }</a></li>
 						</c:if>
 						<c:if test="${idx ne currentPage }">
-						<li class="page-item"><a class="page-link" href="AdminNoticeList?pageNum=${idx }">${idx }</a></li>
+						<li class="page-item"><a class="page-link" href="MainpageNotice?pageNum=${idx }">${idx }</a></li>
 						</c:if>
 					</c:forEach>
 					<!-- endPage에서 +1일 때 -->
 					<c:if test="${endPage < pageCnt }">
-						<li class="page-item"><a class="page-link" href="AdminNoticeList?pageNum=${endPage+1 }">Next</a></li>
+						<li class="page-item"><a class="page-link" href="MainpageNotice?pageNum=${endPage+1 }">Next</a></li>
 					</c:if>
 					<c:if test="${endPage >= pageCnt }">
-						<li class="page-item disabled"><a class="page-link" href="AdminNoticeList?pageNum=${endPage+1 }">Next</a></li>
+						<li class="page-item disabled"><a class="page-link" href="MainpageNotice?pageNum=${endPage+1 }">Next</a></li>
 					</c:if>
 					</ul>
 				</div>
@@ -120,9 +120,10 @@ href="<%=request.getContextPath()%>/resources/css/admin.css">
 
 
 	<script>
-		$("#s_back_list").click(function() {
-    		location.href="AdminNoticeList";
-    	});
+	
+		$(".s_back_list").click(function() {
+			location.href = "MainpageNotice";
+		});
 		
 		$(".s_tr_readList").click(function() {
 			// 배열 선언
