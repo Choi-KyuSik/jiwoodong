@@ -62,9 +62,10 @@
             <div class="row">
                   <div class="mb-3" style="display: inline-block; width: 100%; margin-left: 2%;"> 
                         <label for="bu_num" style="display: block;">사업자 번호</label> 
-                        <input type="text" class="form-control" id="bu_num" name="bu_num" placeholder="000-00-00000" required="required" style="margin-bottom: 20px; margin-right: 5px;">
+                        <input type="text" class="form-control" id="bu_num" name="bu_num" placeholder="000-00-00000" required="required" style="margin-bottom: 10px; margin-right: 5px;">
                         <div class="invalid-feedback"> 사업자번호를 조회해주세요.</div>
                         <input type="button" id="bu_num_btn" class="btn btn-primary" value="사업자 번호 조회" required="required">
+                        <br><font id="checkbunum" size ="1"></font>
                     </div>
                     <div class="col-md-6 mb-3" style="margin-bottom: 20px;">
                         <label for="name">이름</label>
@@ -92,27 +93,27 @@
                         <div class="invalid-feedback"> 핸드폰번호를 입력해주세요. </div>
                     </div>
                 </div>
-                <div class="mb-3" style=" margin-bottom: 4px!important; float: left;"> 
+                <div class="mb-3" style=" margin-bottom: 4px!important; "> 
                     <label for="email" style="display: block;">이메일</label> 
-                    <input type="email" class="form-control" id="email" name="email" placeholder="email1@example.com"  required="required"  maxlength="30" style="width: 200px; margin-right: 5px;">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="email1@example.com"  required="required"  maxlength="30" style="width: 80%; margin-right: 5px;">
                     <div class="invalid-feedback"> 이메일을 입력해주세요. </div>
-                    <input type="button" id="email_btn" class="btn btn-primary" value="인증번호 발송" onsubmit="return email_btn()" onclick="return email_btn()" >
+                    <!-- <input type="button" id="email_btn" class="btn btn-primary" value="인증번호 발송" onsubmit="return email_btn()" onclick="return email_btn()" > -->
                 </div>
                  
-                <div class="mb-3" id="email_check" style="margin-bottom: 4px!important; float: right; width: 230px;"> 
+<!--                 <div class="mb-3" id="email_check" style="margin-bottom: 4px!important; float: right; width: 230px;"> 
                     <label for="email_check" style="line-height: 80px;">인증번호</label> 
                     <input type="email" class="form-control" id="email_check_no" name="email_check_no" required="required" maxlength="10" disabled="disabled" style="margin: 0 5px;">
                     <input type="button" class="btn btn-primary" id="email_check_btn" name="email_check_btn" value="인증" onclick="email_check_btn()"  disabled="disabled">
                     <input type="hidden" name="authPass" id="authPass" value="false">
                     <div class="invalid-feedback"> 인증번호를 입력해주세요. </div>
                     
-                </div>
+                </div> -->
                 <div class="mb-3" style="clear: both; margin-bottom: 20px;">
-                    <label for="bu_id" style="display: block;">아이디</label>
-                    <input type="text" class="form-control" id="bu_id" name="bu_id" required="required" style="margin-right: 5px;">
-                    <div class="invalid-feedback"> 아이디를 입력해주세요.
-                    </div>
-                    <input type="button" class="btn btn-primary" name="bu_id_check" id="bu_id_check" value="중복확인" onclick="winopen()" >
+                    <label for="bu_id" style="display: block; width: 100%;float: left;"">아이디</label>
+                    <input type="text" class="form-control" id="bu_id" name="bu_id" required="required" style="margin-right: 5px; width: 80%;float: left;">
+                    <div class="invalid-feedback"> 아이디를 입력해주세요.</div>
+                    <input type="button" class="btn btn-primary" name="bu_id_check" id="bu_id_check" value="중복확인" >
+                    <br><font id="checkId" size ="1"></font>
                 </div>
                 <div class="mb-3" style="margin-bottom: 20px;"> 
                     <label for="password">비밀번호</label> 
@@ -171,8 +172,64 @@
             </div>
         </div>
     </footer>
-    
-    
+    <!--사업자 번호 중복체크  -->
+	<script type="text/javascript">
+		$("#bu_num_btn").click(function(){
+			var bu_num = $('#bu_num').val();
+			console.log("bu_num: "+bu_num);
+			
+			$.ajax({
+				url:"bumNumCheck",
+				type:"post",
+				data: {bu_num: bu_num},
+				dataType: 'json',
+				success: function(result){
+					if(result ==0){
+						$("#checkbunum").html('이미 등록된 사업자번호 입니다');
+						$("#checkbunum").attr('color','red');
+					}else{
+						$("#checkbunum").html('사업자번호가 등록되었습니다.');
+						$("#checkbunum").attr('color','blue');
+					}
+				},
+				error : function(){
+					alert("서버요청실패");
+				}
+			
+			})
+			
+		});
+	
+	</script>   
+    <!--ID 중복체크  -->
+	<script type="text/javascript">
+		$("#bu_id_check").click(function(){
+			var bu_id = $('#bu_id').val();
+			console.log("bu_id: "+bu_id);
+			
+			$.ajax({
+				url:"bumIdCheck",
+				type:"post",
+				data: {bu_id: bu_id},
+				dataType: 'json',
+				success: function(result){
+					if(result ==0){
+						$("#checkId").html('이미 존재 하는 아이디 입니다.');
+						$("#checkId").attr('color','red');
+					}else{
+						$("#checkId").html('사용 가능한 아이디 입니다.');
+						$("#checkId").attr('color','blue');
+					}
+				},
+				error : function(){
+					alert("서버요청실패");
+				}
+			
+			})
+			
+		});
+	
+	</script>
     <script type="text/javascript">
     $("#j_cancle_btn").click(function() {
         var result = confirm('메인페이지로 이동하시겠습니까?'); 

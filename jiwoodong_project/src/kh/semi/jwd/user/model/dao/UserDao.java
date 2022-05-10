@@ -69,7 +69,7 @@ public class UserDao {
 	
 	public int checkUmId(Connection conn, String umId) {
 		
-		int result = -1;
+		int result = 0;
 		
 		String sql = "select um_id from u_member where um_id=?";
 		System.out.println(umId);
@@ -79,18 +79,20 @@ public class UserDao {
 			pstmt.setString(1, umId);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				result = 0;
+			if(rs.next() || umId.equals("")) {
+				result = 0; 
+				System.out.println("이미 존재 하는 아이디 입니다.");
 			}else {
 				result = 1;
+				System.out.println("사용가능한 아이디입니다.");
 			}
-			System.out.println("아이디 중복체크 결과: "+result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 			
 		}
+		System.out.println("아이디 중복체크 결과: "+result);
 		return result;
 	}
 	
@@ -184,7 +186,7 @@ public class UserDao {
 				uvo.setUmTel(rs.getString(6)); // 전화번호
 				uvo.setUmPostcode(rs.getString(7)); // 우편번호
 				uvo.setUmAddress(rs.getString(8)); // 주소
-				uvo.setUmUseYn(rs.getString(12));//탈퇴 여부
+				//uvo.setUmUseYn(rs.getString(12));//탈퇴 여부
 			}
 			
 		} catch (SQLException e) {

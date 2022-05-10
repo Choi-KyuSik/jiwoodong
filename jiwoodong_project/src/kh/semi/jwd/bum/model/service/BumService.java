@@ -67,16 +67,7 @@ public class BumService {
 		close(conn);
 		return result;
 	}
-	//승희 - 아이디 중복 체크
-	public String emailDupleCheck(String inputEmail) {
-		String result;
-		Connection conn = getConnection();
-		result = new BumDao().emailDupleCheck(conn, inputEmail);
-		close(conn);
-		System.out.println("(bum)emailDupleCheck result:" + result);
-		return result;
-		
-	}
+
 	//승희 - 사업자 로그인
 	public BumLoginVo loginBuMember(BumLoginVo vo) {
 		BumLoginVo bvo = new BumLoginVo();
@@ -87,7 +78,7 @@ public class BumService {
 		return bvo;
 		
 	}
-	//승희 - 사업자 이메일 중복 체크
+	//승희 - 사업자 아이디 중복 체크
 	public int checkBuId(String buId) {
 		int result;
 		Connection conn = getConnection();
@@ -184,6 +175,17 @@ public class BumService {
 			
 			return volist;
 		
+		}	
+		
+		//승희 - 사업자 번호 중복 체크
+		public int checkBuNum(String bu_num) {
+			int result;
+			Connection conn = getConnection();
+			result = new BumDao().checkBuNum(conn, bu_num);
+			close(conn);
+			System.out.println("checkBuNum result:" + result);
+			return result;
+			
 		}	
 
 }

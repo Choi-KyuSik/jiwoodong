@@ -12,9 +12,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     
     <title>사용자 회원가입 페이지</title>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-json/2.6.0/jquery.json.min.js" integrity="sha512-QE2PMnVCunVgNeqNsmX6XX8mhHW+OnEhUhAWxlZT0o6GFBJfGRCfJ/Ut3HGnVKAxt8cArm7sEqhq2QdSF0R7VQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -68,27 +79,28 @@
                         <div class="invalid-feedback"> 핸드폰번호를 입력해주세요. </div>
                     </div>
                 </div>
-                <div class="mb-3" style=" margin-bottom: 4px!important; float: left;"> 
+                <div class="mb-3" style=" margin-bottom: 4px!important;  width: 80%;"> 
                     <label for="email" style="display: block;">이메일</label> 
-                    <input type="email" class="form-control" id="email" name="email" placeholder="email1@example.com"  required="required"  maxlength="30" style="width: 200px; margin-right: 5px;">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="email1@example.com"  required="required"  maxlength="30" style="width:400px; margin-right: 5px;">
                     <div class="invalid-feedback"> 이메일을 입력해주세요. </div>
-                    <input type="button" id="email_btn" class="btn btn-primary" value="인증번호 발송" onsubmit="return email_btn()" onclick="return email_btn()" >
+                   <!--  <input type="button" id="email_btn" class="btn btn-primary" value="인증번호 발송" onsubmit="return email_btn()" onclick="return email_btn()" > -->
                 </div>
                  
-                <div class="mb-3" id="email_check" style="margin-bottom: 4px!important; float: right; width: 230px;"> 
+<!--                 <div class="mb-3" id="email_check" style="margin-bottom: 4px!important; float: right; width: 230px;"> 
                     <label for="email_check" style="line-height: 80px;">인증번호</label> 
                     <input type="email" class="form-control" id="email_check_no" name="email_check_no" required="required" maxlength="10" disabled="disabled" style="margin: 0 5px;">
                     <input type="button" class="btn btn-primary" id="email_check_btn" name="email_check_btn" value="인증" onclick="email_check_btn()"  disabled="disabled">
                     <input type="hidden" name="authPass" id="authPass" value="false">
                     <div class="invalid-feedback"> 인증번호를 입력해주세요. </div>
                     
-                </div>
+                </div> -->
                 <div class="mb-3" style="clear: both; margin-bottom: 20px;">
                     <label for="bu_id" style="display: block;">아이디</label>
-                    <input type="text" class="form-control" id="user_id" name="user_id" required="required" style="margin-right: 5px; float: left; width: 86%; margin-bottom: 20px;">
-                    <div class="invalid-feedback"> 아이디를 입력해주세요.
-                    </div>
-                    <input type="button" class="btn btn-primary" name="bu_id_check" id="bu_id_check" value="중복확인" onclick="winopen()" >
+                    <input type="text" class="form-control" id="user_id" name="user_id" required="required" style="margin-right: 5px; float: left; width: 80%; margin-bottom: 20px;">
+                    <input type="button" class="btn btn-primary" name="user_id_btn" id="user_id_btn" value="중복확인" >
+                    <br><font id="checkId" size ="1"></font>
+                    <div class="invalid-feedback"> 아이디를 입력해주세요.</div>
+                    <!-- <input type="button" class="btn btn-primary" name="bu_id_check" id="bu_id_check" value="중복확인" onclick="winopen()" > -->
                 </div>
                 <div class="mb-3" style="margin-bottom: 20px; clear: both;"> 
                     <label for="password">비밀번호</label> 
@@ -165,8 +177,37 @@
                 <p>고객센터 : <a href="#">6612-1867</a></p>
             </div>
         </div>
-    </footer>
 
+    </footer>
+<!--ID 중복체크  -->
+	<script type="text/javascript">
+		$("#user_id_btn").click(function(){
+			var user_id = $('#user_id').val();
+			console.log("user_id: "+user_id);
+			
+			$.ajax({
+				url:"userIdCheck",
+				type:"post",
+				data: {user_id: user_id},
+				dataType: 'json',
+				success: function(result){
+					if(result ==0){
+						$("#checkId").html('이미 존재 하는 아이디 입니다.');
+						$("#checkId").attr('color','red');
+					}else{
+						$("#checkId").html('사용 가능한 아이디 입니다.');
+						$("#checkId").attr('color','blue');
+					}
+				},
+				error : function(){
+					alert("서버요청실패");
+				}
+			
+			})
+			
+		});
+	
+	</script>
    <script type="text/javascript">
    //뒤로 가기
    $("#j_cancle_btn").click(function() {
@@ -355,7 +396,20 @@
 			    
 			    $("#j_bu_enroll_btn").click(function(){
 
-				    
+			 		//유효성검사
+					window.addEventListener('load',() => { 
+						const forms = document.getElementsByClassName('validation-form');
+						Array.prototype.filter.call(forms, (form) => {
+							form.addEventListener('submit', function (event) { 
+								if (form.checkValidity() === false) { 
+									event.preventDefault(); 
+									event.stopPropagation(); 
+									} 
+										form.classList.add('was-validated'); 
+									}, 	false); 
+							}); 
+						}, false);
+			 		
 			    	//형식 체크
 			    	if($("#name").val() == '') {
 			    		alert("이름을 입력해주십시오");
@@ -474,19 +528,7 @@
 		 			
 		 			}
 		 		
- 		//유효성검사
-		window.addEventListener('load',() => { 
-			const forms = document.getElementsByClassName('validation-form');
-			Array.prototype.filter.call(forms, (form) => {
-				form.addEventListener('submit', function (event) { 
-					if (form.checkValidity() === false) { 
-						event.preventDefault(); 
-						event.stopPropagation(); 
-						} 
-							form.classList.add('was-validated'); 
-						}, 	false); 
-				}); 
-			}, false);
+
 	</script>
 </body>
 </html>

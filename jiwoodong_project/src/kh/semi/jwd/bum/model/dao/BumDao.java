@@ -240,23 +240,25 @@ public class BumDao {
 		String sql = "select bu_id from b_member where bu_id=?";
 		System.out.println(buId);
 		try {
-//			
+		
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, buId);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				result = 0;
+			if(rs.next()|| buId.equals("")) {
+				result = 0; 
+				System.out.println("이미 존재 하는 아이디 입니다.");
 			}else {
 				result = 1;
+				System.out.println("사용가능한 아이디입니다.");
 			}
-			System.out.println("아이디 중복체크 결과: "+result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 			
 		}
+		System.out.println("아이디 중복체크 결과: "+result);
 		return result;
 	}
 	
@@ -296,33 +298,7 @@ public class BumDao {
 		return bvo;
 	}
 	
-	// 승희 - 이메일 중복확인.
-	public String emailDupleCheck(Connection conn,String inputEmail) {
-		String result = "unuseable";
-		String sql = "SELECT bu_email FROM b_member WHERE bu_email = ?";
-	
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, inputEmail);
-			rs = pstmt.executeQuery();
-	
-			if (!rs.next()) {
-				result = "useable";
-				System.out.println("사용가능한 이메일 입니다.");
-			} else {
-				result = "unuseable";
-				System.out.println("존재하는 이메일 입니다");
-			}
-		} catch (Exception e) {
-			System.out.println("이메일 중복확인 실패! 여기는 bumdao다!!!");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-			close(conn);
-			}
-		return result;
-		}
+
 	
 // TODO 우진 :내 정보 조회
 	public BumVo companyCheck(Connection conn, String buId) {
@@ -690,5 +666,35 @@ public ArrayList<Map<String, Object>> bumRvDetailList(Connection conn, int rvNo)
 		return volist;
 
 	}
+//승희 - 사업자 번호 중복확인
+
+public int checkBuNum(Connection conn, String bu_num) {
+	
+	int result = -1;
+	
+	String sql = "select * from b_member where bu_number=?";
+	System.out.println(bu_num);
+	try {
+	
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, bu_num);
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()|| bu_num.equals("")) {
+			result = 0; 
+			System.out.println("이미 존재 하는 아이디 입니다.");
+		}else {
+			result = 1;
+			System.out.println("사용가능한 아이디입니다.");
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+		
+	}
+	System.out.println("아이디 중복체크 결과: "+result);
+	return result;
+}
 	
 }
