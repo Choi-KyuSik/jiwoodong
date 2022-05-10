@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.jwd.admin.model.service.AdminNoticeService;
 import kh.semi.jwd.admin.model.vo.AdminNoticeVo;
+import kh.semi.jwd.bum.model.vo.CompanyVo;
+import kh.semi.jwd.user.model.service.UserService;
 
 /**
  * Servlet implementation class MainController
@@ -33,9 +35,11 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 // System.out.println("diur;");
 		 ArrayList<AdminNoticeVo> adnolist = new AdminNoticeService().noticeList();
+		 ArrayList<CompanyVo> usCpList = new UserService().usCpList();
 		 // System.out.println("왜 이거 안찍혀 ? : " + adnolist);
 		 
 		 request.setAttribute("adnolist", adnolist);
+		 request.setAttribute("usCpList", usCpList);
 		 
 		request.getRequestDispatcher("WEB-INF/mainpage.jsp").forward(request, response);
 		

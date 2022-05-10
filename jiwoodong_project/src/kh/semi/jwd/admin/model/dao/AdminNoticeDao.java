@@ -26,7 +26,7 @@ public class AdminNoticeDao {
 		//		NT_WRITE_DATE NOT NULL TIMESTAMP(6)   
 		//		NT_COUNT      NOT NULL NUMBER         
 
-		String sql = "INSERT INTO NOTICE VALUES (ADMIN_SEQ.NEXTVAL, ?, ?, DEFAULT, DEFAULT, ?)";
+		String sql = "INSERT INTO NOTICE VALUES (NOTICE_SEQ.NEXTVAL, ?, ?, DEFAULT, ?)";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

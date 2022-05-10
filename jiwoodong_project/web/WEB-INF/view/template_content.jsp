@@ -146,7 +146,7 @@
             <div class="fas fa-chevron-left c_prev">〈</div>
             <div class="fas fa-chevron-right c_next">〉</div>
             <div class="c_company-wrapper">
-                <div class="c_company">
+                <!-- <div class="c_company">
                     <a href="#">
                         <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203806155157504/hotel.jpg"
                             class="c_slider-image">
@@ -155,8 +155,26 @@
                         <h6 style="margin-top: 10px;"><a href="#"> 집 나가면 개고생 호텔 부산점 </a></h6>
                         <div class="far fa-user" style="height:10%;"> 부산광역시 해운대구 헌팅로 65길 31-2 </div>
                     </div>
-                </div>
-                <div class="c_company">
+                </div> -->
+                <c:forEach items="${usCpList }" var="i">
+                  <div class="c_company">
+                    <a href="#">
+                    	<c:if test="${empty i.flGno }">
+                      <img src="https://economist.co.kr/resources/images/error/noimage.gif"
+                        class="c_slider-image">
+                        </c:if>
+                        <c:if test="${not empty i.flGno }">
+                      <img style="border-radius: 10px;" src="${i.flGno }"
+                        class="c_slider-image">
+                        </c:if>
+                    </a>
+                    <div class="c_company-info" style="text-align: center;">
+                      <p style="margin-top: 20px; font-weight: bold; font-size: 1.5em">${i.cpName }</p>
+                      <div class="far fa-user" style="height:10%;"> ${i.cpAddress } ${i.cpDtaddress } </div>
+                    </div>
+                  </div>
+                  </c:forEach>
+                <!-- <div class="c_company">
                     <a href="#">
                         <img src="https://cdn.discordapp.com/attachments/958682757230366780/966203805815431238/hair.jpg"
                             class="c_slider-image">
@@ -205,7 +223,7 @@
                         <h6 style="margin-top: 10px;"><a href="#"> 카페 이름이 뭐였지? </a></h6>
                         <div class="far fa-user" style="height:10%;"> 서울특별시 서초구 콜드브루로 1번길 </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
