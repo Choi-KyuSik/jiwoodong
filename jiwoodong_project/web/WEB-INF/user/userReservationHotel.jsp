@@ -154,8 +154,11 @@
 		            			<h4 style="margin-top: 30px; color: rgb(241, 77, 12)">★날짜 선택★</h4>
 		                    </div>
 		                    <div style="float: left; padding-left: 70px;">
-		                    <label style="font-size: 20px;">예약자명 : <input type="text" id="rsname"  name="rsname" required></label><br>
-		                    <label style="font-size: 20px; margin-top: 20px">전화번호 : <input type="text" id="rsphone"  name="rsphone" required></label><br>
+		                    <input type="hidden" value="${umTel }" id="umTel" name="umTel"/>
+		                    <input type="hidden" value="${umPostcode }" id="umPostcode" name="umPostcode"/>
+		                    <input type="hidden" value="${umAddress }" id="umAddress" name="umAddress"/>
+		                    <label style="font-size: 20px;">예약자명 : <input type="text" id="rsname"  name="rsname" value="${umName }" required></label><br>
+		                    <label style="font-size: 20px; margin-top: 20px">전화번호 : <input type="text" id="rsphone"  name="rsphone" value="${umTel }" required></label><br>
 		                    <label style="font-size: 20px; margin-top: 10px;">요청사항 : </label><br>
 		                    <textarea rows="10" cols="30"  style="width:310px; margin: 10px 0 0 10px; resize: none; padding: 5px" id="rsrequire" name="rsrequire"></textarea><br>
 		                    </div>
@@ -193,16 +196,15 @@
             IMP.request_pay({ // param
                 pg: "html5_inicis", // 이니시스 웹표준 결제창
                 pay_method: "card", // 결제 방법
-                /* TODO : 예약번호로 넣기 */
                 merchant_uid: new Date().getTime() + "jwd", // 주문번호
                 name: $("#rsmenu option:selected").text(), // 상품명
                 amount: $("#rsmenuprice").val(), // 가격
                 buyer_email: "dms102336@gmail.com", // 이메일
-                /* TODO : 구매자 이름, 전화번호, 주소, 우편번호 로그인 한 사용자 정보로 가져오기 */
+                /* 구매자 이름, 전화번호, 주소, 우편번호 로그인 한 사용자 정보로 가져오기 */
                 buyer_name: $("#rsname").val(), // 이름
-                buyer_tel: "010-1111-1111", // 전화번호
-                buyer_addr: "서울특별시 강남구", // 주소
-                buyer_postcode: "01181" // 우편번호
+                buyer_tel: $("#rsphone").val(), // 전화번호
+                buyer_addr: $("#umAddress").val(), // 주소
+                buyer_postcode: $("#umPostcode").val() // 우편번호
             }, function (rsp) { // callback
                if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
             	   var frmEl = $("#frmrsinsert");
@@ -380,11 +382,13 @@
 		});
 	    $("#rsmenucount").change(function(){
     		if($("#rsmenu").val() == "none"){
-    			alert('메뉴를 선택해주세요')
+    			alert('메뉴를 선택해주세요');
+    			$("#rsmenu").focus();
     			return;
     		} 
     		if($("#rsmenucount").val() == "none"){
-    			alert('개수를 선택해주세요')
+    			alert('개수를 선택해주세요');
+    			$("#rsmenucount").focus();
     			return;
     		} 
     		var menuinfo = '';
@@ -405,23 +409,28 @@
     	});
 	    $("#btnsubmit").click(function(){
     		if($("#rsdate").val() == ""){
-    			alert('날짜를 선택해주세요')
+    			alert('날짜를 선택해주세요');
+    			$("#rsdate").focus();
     			return;
     		} 
     		if($("#rstime").val() == ""){
-    			alert('시간을 선택해주세요')
+    			alert('시간을 선택해주세요');
+    			$("#rstime").focus();
     			return;
     		} 
     		if($("#rsname").val() == ""){
-    			alert('이름을 입력해주세요')
+    			alert('이름을 입력해주세요');
+    			$("#rsname").focus();
     			return;
     		} 
     		if($("#rsphone").val() == ""){
-    			alert('전화번호를 입력해주세요')
+    			alert('전화번호를 입력해주세요');
+    			$("#rsphone").focus();
     			return;
     		} 
     		if($("#rsmenu").val() == "none"){
-    			alert('메뉴를 선택해주세요')
+    			alert('메뉴를 선택해주세요');
+    			$("#rsmenu").focus();
     			return;
     		} 
 	    	$("#frmrsinsert").submit();

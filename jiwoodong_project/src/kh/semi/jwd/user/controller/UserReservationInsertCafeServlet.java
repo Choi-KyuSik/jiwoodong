@@ -44,6 +44,7 @@ public class UserReservationInsertCafeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String umid = (String) request.getSession().getAttribute("um_id");
+		
 		int cpno = Integer.parseInt(request.getParameter("cpNo"));
 		String[] menuno = request.getParameterValues("menuno");
 		String[] menucount = request.getParameterValues("menucount");

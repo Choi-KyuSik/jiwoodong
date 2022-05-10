@@ -37,6 +37,17 @@ public class UserReservationServlet extends HttpServlet {
 		request.setAttribute("cpNo", cpNo);
 		// System.out.println("===========cpNo값 확인========== : " + cpNo);
 		
+		// 결제 시 로그인 한 사용자 정보 가져오려 추가 : 손은진
+		String umName = (String) request.getSession().getAttribute("umName");
+		String umTel = (String) request.getSession().getAttribute("umTel");
+		String umPostcode = (String) request.getSession().getAttribute("umPostcode");
+		String umAddress = (String) request.getSession().getAttribute("umAddress");
+		
+		request.setAttribute("umName", umName);
+		request.setAttribute("umTel", umTel);
+		request.setAttribute("umPostcode", umPostcode);
+		request.setAttribute("umAddress", umAddress);
+		
 		ArrayList<CompanyVo> result = new UserReservationService().cpInfo(cpNo);
 		ArrayList<Map<String, Object>> menu = new UserReservationService().cpmenu(cpNo);
 		request.setAttribute("CpInfo", result);

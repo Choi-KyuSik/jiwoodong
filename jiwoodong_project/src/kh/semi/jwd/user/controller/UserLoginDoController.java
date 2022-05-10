@@ -58,10 +58,18 @@ public class UserLoginDoController extends HttpServlet {
 			session.setAttribute("um_id", result.getUmId());
 			session.setAttribute("password", result.getUmPwd());
 			session.setAttribute("umName", result.getUmName());
+			// 결제 시 로그인 한 사용자 정보 가져오려 추가 : 손은진
+			session.setAttribute("umTel", result.getUmTel());
+			session.setAttribute("umPostcode", result.getUmPostcode());
+			session.setAttribute("umAddress", result.getUmAddress());
 			
 			System.out.println("um_id:"+um_id);
 			System.out.println("password:"+password);
 			System.out.println("name:"+result.getUmName());
+			
+			System.out.println("umTel : " + result.getUmTel());
+			System.out.println("umPostcode : " + result.getUmPostcode());
+			System.out.println("umAddress : " + result.getUmAddress());
 			
 			System.out.println("로그인 성공한거지 여기가?네네 - 오늘의 명언... 언니 최고...");
 			response.sendRedirect("/jwd");

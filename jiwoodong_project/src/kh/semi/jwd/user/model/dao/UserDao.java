@@ -181,6 +181,9 @@ public class UserDao {
 				uvo.setUmId(rs.getString("um_Id"));
 				uvo.setUmPwd(rs.getString("um_Pwd")); 
 				uvo.setUmName(rs.getString(3)); //사용자 이름 저장.
+				uvo.setUmTel(rs.getString(6)); // 전화번호
+				uvo.setUmPostcode(rs.getString(7)); // 우편번호
+				uvo.setUmAddress(rs.getString(8)); // 주소
 			}
 			
 		} catch (SQLException e) {

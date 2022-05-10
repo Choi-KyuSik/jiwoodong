@@ -19,6 +19,31 @@ public class UserLoginVo {
 	private String umId;
 	private String umPwd;
 	private String umName;
+	
+	// 결제 시 로그인 한 사용자 정보 가져오려 변수 추가 : 손은진
+	private String umTel;
+	private String umAddress;
+	private String umPostcode;
+	
+	// 결제 시 로그인 한 사용자 정보 가져오려 getter, setter 추가 : 손은진
+	public String getUmTel() {
+		return umTel;
+	}
+	public void setUmTel(String umTel) {
+		this.umTel = umTel;
+	}
+	public String getUmAddress() {
+		return umAddress;
+	}
+	public void setUmAddress(String umAddress) {
+		this.umAddress = umAddress;
+	}
+	public String getUmPostcode() {
+		return umPostcode;
+	}
+	public void setUmPostcode(String umPostcode) {
+		this.umPostcode = umPostcode;
+	}
 	public String getUmId() {
 		return umId;
 	}
