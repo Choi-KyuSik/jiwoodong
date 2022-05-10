@@ -19,15 +19,24 @@ public class UserLoginVo {
 	private String umId;
 	private String umPwd;
 	private String umName;
+	//탈퇴한 회원 로그인 불가능 : 전승희
+	private String umUseYn;
 	
 	// 결제 시 로그인 한 사용자 정보 가져오려 변수 추가 : 손은진
 	private String umTel;
 	private String umAddress;
 	private String umPostcode;
 	
+	
 	// 결제 시 로그인 한 사용자 정보 가져오려 getter, setter 추가 : 손은진
 	public String getUmTel() {
 		return umTel;
+	}
+	public String getUmUseYn() {
+		return umUseYn;
+	}
+	public void setUmUseYn(String umUseYn) {
+		this.umUseYn = umUseYn;
 	}
 	public void setUmTel(String umTel) {
 		this.umTel = umTel;
@@ -78,6 +87,26 @@ public class UserLoginVo {
 		this.umId = umId;
 		this.umPwd = umPwd;
 		this.umName = umName;
+	}
+	
+	public UserLoginVo(String umId, String umPwd, String umName, String umUseYn, String umTel, String umAddress,
+			String umPostcode) {
+		super();
+		this.umId = umId;
+		this.umPwd = umPwd;
+		this.umName = umName;
+		this.umUseYn = umUseYn;
+		this.umTel = umTel;
+		this.umAddress = umAddress;
+		this.umPostcode = umPostcode;
+	}
+	
+	public UserLoginVo(String umId, String umPwd, String umName, String umUseYn) {
+		super();
+		this.umId = umId;
+		this.umPwd = umPwd;
+		this.umName = umName;
+		this.umUseYn = umUseYn;
 	}
 	@Override
 	public String toString() {

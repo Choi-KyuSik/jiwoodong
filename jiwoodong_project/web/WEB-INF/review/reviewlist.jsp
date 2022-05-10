@@ -242,7 +242,7 @@ article>div>p {
         	<p style="font-size: 2em; font-weight: bold;">리뷰 조회</p>
         </div>
         <table class="table table table-hover"
-					style="clear: both; table-layout: fixed;">
+					style="clear: both; table-layout: fixed; width: 70%; margin: 0 auto; margin-top: 30px;">
 					<thead>
 						<tr>
 							<th style="display: none;" scope="col" class="s_center">No</th>

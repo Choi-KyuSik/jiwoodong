@@ -49,10 +49,15 @@ public class UserLoginDoController extends HttpServlet {
 		vo.setUmId(um_id);
 		vo.setUmPwd(password);
 		vo.setUmName(vo.getUmName());
+		vo.setUmUseYn(vo.getUmUseYn());
+		
 		UserLoginVo result = new UserService().loginUserMember(vo);
 		System.out.println("controller UserLoginVo : " + result);
+		System.out.println("umUseYn:"+result.getUmUseYn());
+		String umUseYn = result.getUmUseYn();
 		
-		if(result != null && result.getUmId() !=null) {
+//		if((umUseYn == "N") && (result != null && result.getUmId() != null) ) {
+		if( result != null && result.getUmId() != null) {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("um_id", result.getUmId());
@@ -73,11 +78,22 @@ public class UserLoginDoController extends HttpServlet {
 			
 			System.out.println("로그인 성공한거지 여기가?네네 - 오늘의 명언... 언니 최고...");
 			response.sendRedirect("/jwd");
-		}else {
+		}
+//		else if( result != null && result.getUmId() != null ) {
+//			PrintWriter out = response.getWriter();
+//			out.println("<script>alert('탈퇴한 회원입니다. 다시 지우동과 함께해주세요ㅎㅎ'); location.href='enrollMain';</script>");
+//			out.flush();
+//			System.out.println("탈퇴 umUseYn:"+umUseYn);
+//			System.out.println("탈퇴 result.getUmId():"+result.getUmId());
+//			System.out.println("탈퇴 result:"+result);
+//		}
+		else {
 			// 로그인 실패
 			System.out.println("로그인 해주세요");
 			//response.sendRedirect("userLogin");
-			
+			System.out.println("else umUseYn:"+umUseYn);
+			System.out.println("else result.getUmId():"+result.getUmId());
+			System.out.println("else result:"+result);
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('아이디/비밀번호를 확인해주세요.'); location.href='userLogin';</script>");
 			out.flush();
