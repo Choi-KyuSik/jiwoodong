@@ -2,6 +2,7 @@ package kh.semi.jwd.user.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,11 +34,16 @@ public class UserBookingList_r_Controller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String umId = (String) request.getSession().getAttribute("um_id");
 		
-		ArrayList<UserBookingListVo> bklist_r = new UserService().usBkList_r(umId);
+		ArrayList<Map<String, Object>> bklist_r = new UserService().usBkList_r(umId);
+		
 		request.setAttribute("bklist_r", bklist_r);
-		request.getRequestDispatcher("WEB-INF/user/userCompanyDetail.jsp").forward(request, response);
+		
+		System.out.println("bklist_r 담겻니" + bklist_r);
+		
+//		request.getRequestDispatcher("WEB-INF/user/userCompanyDetail.jsp").forward(request, response);
 //		request.getRequestDispatcher("WEB-INF/user/userCompanyList.jsp").forward(request, response);
-//		request.getRequestDispatcher("WEB-INF/user/userMypage.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/user/userMypage.jsp").forward(request, response);
+		
 	}
 
 	/**

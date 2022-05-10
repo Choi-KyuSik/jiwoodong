@@ -2,6 +2,7 @@ package kh.semi.jwd.user.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.jwd.user.model.service.UsercpDetailpageService;
+import kh.semi.jwd.user.model.vo.UserVo;
 import kh.semi.jwd.user.model.vo.UsercpDetailpageVo;
 
 /**
@@ -37,8 +39,17 @@ public class UsercpDetailpageController extends HttpServlet {
 		System.out.println("cpNo : " + cpNo);
 		
 		ArrayList<UsercpDetailpageVo> uscpdetail = new UsercpDetailpageService().companyDetail(cpNo);
+		UserVo uscpRvscoreAVG = new UsercpDetailpageService().uscpRvscoreAVG(cpNo);
+		System.out.println("별점 평균은 ? : "+ uscpRvscoreAVG);
+		
+//		double rvScoreAvg = Double.parseDouble("rvScore");
+		
 		System.out.println("uscpdetail : " + uscpdetail);
+		
 		request.setAttribute("uscpdetail", uscpdetail);
+		request.setAttribute("uscpRvscoreAVG", uscpRvscoreAVG);
+		
+		
 		request.getRequestDispatcher("WEB-INF/user/userCompanyDetail.jsp").forward(request, response);
 	}
 

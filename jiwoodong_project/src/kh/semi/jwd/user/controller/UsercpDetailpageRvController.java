@@ -38,8 +38,9 @@ public class UsercpDetailpageRvController extends HttpServlet {
 		System.out.println("cpNo : " + cpNo);
 		
 		ArrayList<Map<String, Object>> uscpRvList = new UsercpDetailpageService().uscpRvList(cpNo);
-		request.setAttribute("uscprvlist", uscpRvList);
+		request.setAttribute("uscpRvList", uscpRvList);
 		System.out.println("리뷰 리스트 어디갔니 " + uscpRvList);
+		
 		request.getRequestDispatcher("WEB-INF/user/userCompanyDetail.jsp").forward(request, response);
 	}
 

@@ -141,19 +141,10 @@ header {
 	border-top-right-radius: 5px;
 }
 
-content>article>div, #c_notice_info {
-	width: 1200px;
-	height: 1000px;
-	padding: 30px;
-	display: none;
-	margin: 20px auto 0;
-	background-color: rgb(241, 241, 241);
-}
-
 /* 컨텐트 */
 content>article>div, #c_notice_info {
 	width: 1200px;
-	height: 1000px;
+	/* height: 1000px; */
 	padding: 30px;
 	display: none;
 	margin: 20px auto 0;

@@ -2,6 +2,7 @@ package kh.semi.jwd.user.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,14 +16,14 @@ import kh.semi.jwd.user.model.vo.UserBookingListVo;
 /**
  * Servlet implementation class UserBookingList_h_Controller
  */
-@WebServlet("/UserBookingList_h")
-public class UserBookingList_h_Controller extends HttpServlet {
+@WebServlet("/UserBookingList_c")
+public class UserBookingList_c_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserBookingList_h_Controller() {
+    public UserBookingList_c_Controller() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,9 +32,13 @@ public class UserBookingList_h_Controller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<UserBookingListVo> bklist_h = new UserService().usBkList_h();
-		request.setAttribute("bklist_h", bklist_h);
-		request.getRequestDispatcher("WEB-INF/user/userMypage.jsp").forward(request, response);
+		String umId = (String) request.getSession().getAttribute("um_id");
+		
+		ArrayList<Map<String, Object>> bklist_c = new UserService().usBkList_c(umId);
+		
+		request.setAttribute("bklist_c", bklist_c);
+		
+		System.out.println("bklist_c ´ã°ä´Ï" + bklist_c);
 	}
 
 	/**

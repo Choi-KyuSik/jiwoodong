@@ -87,6 +87,12 @@
   
   
   
+  <!-- <script>
+  	$("#c_bklist").click(function() {
+  		location.href="UserBookingList_r";
+  	});
+  </script> -->
+  
   <script>
 	$("#c_cplist").click(function () {
     	console.log("찍히냐? mypage");

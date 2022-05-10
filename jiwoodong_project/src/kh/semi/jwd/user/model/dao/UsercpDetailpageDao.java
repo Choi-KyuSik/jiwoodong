@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import kh.semi.jwd.user.model.vo.UserVo;
 import kh.semi.jwd.user.model.vo.UsercpDetailpageVo;
 
 import static kh.semi.jwd.common.jdbc.JdbcDBCP.*;
@@ -105,7 +106,7 @@ public class UsercpDetailpageDao {
 	}
 	
 	public ArrayList<Map<String, Object>> uscpRvList(Connection conn, int cpNo) {
-		
+		System.out.println(cpNo+"들어있는지 확인");
 		ArrayList<Map<String, Object>> rvlist = null;
 
 		String sql = "select * from(select rownum rnum, A.*"
@@ -121,13 +122,13 @@ public class UsercpDetailpageDao {
 				+ " where b.cp_no = ? order by b.bk_write_date desc) A)"
 				+ " where rnum between 1 and 10;";
 		
+		rvlist = new ArrayList<Map<String, Object>>();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cpNo);
 			rs = pstmt.executeQuery();
 			
-			rvlist = new ArrayList<Map<String, Object>>();
 			while (rs.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("rownum", rs.getInt(1));
@@ -148,4 +149,30 @@ public class UsercpDetailpageDao {
 		}
 		return rvlist;
 	}
+	
+	// 업체별 별점 평균 : 최규식
+	public UserVo uscpRvscoreAVG(Connection conn, int cpNo) {
+		
+		UserVo rvscoreAvg = null;
+		String sql = "select round (avg(rv_score), 1)"
+				+ " from review join booking b using (bk_no) "
+				+ " where b.cp_no = ? ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,cpNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				rvscoreAvg = new UserVo();
+				rvscoreAvg.setRvScore(rs.getDouble(1));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rvscoreAvg;
+	}
+	
 }

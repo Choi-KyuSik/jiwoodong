@@ -35,6 +35,8 @@ public class UserMypageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		String umId = "apple";
 		String umId = (String) request.getSession().getAttribute("um_id");
+		System.out.println(" ============= ");
+		System.out.println("umId : " + umId);
 		
 		UserVo usMemberListInfo = new UserService().usMemberListInfo(umId);
 		ArrayList<CompanyVo> usCpList = new UserService().usCpList();
@@ -44,10 +46,15 @@ public class UserMypageController extends HttpServlet {
 		ArrayList<Map<String, Object>> userrvlist = new UserService().userRvlist(umId);
 		// System.out.println("usCpList : " + usCpList);
 		
+		ArrayList<Map<String, Object>> bklist_r = new UserService().usBkList_r(umId);
+		System.out.println("bklist_r : " + bklist_r);
+		
 		request.setAttribute("usCpList", usCpList);
 		request.setAttribute("usBkList", usBkList);
 		request.setAttribute("usRvList", usRvList);
 		request.setAttribute("userrvlist", userrvlist);
+		request.setAttribute("bklist_r", bklist_r);
+		request.setAttribute("umId", umId);
 		
 		request.setAttribute("usMemberListInfo", usMemberListInfo);
 		

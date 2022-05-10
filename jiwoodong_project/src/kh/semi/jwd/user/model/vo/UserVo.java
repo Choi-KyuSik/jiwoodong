@@ -181,6 +181,20 @@ public class UserVo {
 	public void setUmOutDate(Date umOutDate) {
 		this.umOutDate = umOutDate;
 	}
+
+
+	public Double getRvScore() {
+		return rvScore;
+	}
+
+
+	public void setRvScore(Double rvScore) {
+		this.rvScore = rvScore;
+	}
+
+
+
+
 	
 	
 }

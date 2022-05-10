@@ -102,6 +102,7 @@ public class UserService {
 		
 		return volist;
 	}
+	
 	// 사용자 마이페이지 - 리뷰 내역 조회 : 최규식
 	public ArrayList<Map<String, Object>> usRvList(String umId) {
 		Connection conn = getConnection();
@@ -111,26 +112,35 @@ public class UserService {
 		return usRvList;
 	}
 	
-	// 사용자 마이페이지 - 예약 현황(대기/h) 조회 : 최규식
-	public ArrayList<UserBookingListVo> usBkList_h() {
+	// 사용자 마이페이지 - 예약 현황(취소/c) 조회 : 최규식
+	public ArrayList<Map<String, Object>> usBkList_c(String umId) {
 		
-		ArrayList<UserBookingListVo> bklist_h = null;
-		Connection conn	= getConnection();
-		bklist_h = new UserDao().usBkList_h(conn);
+		ArrayList<Map<String, Object>> volist = null;
+		
+		Connection conn = getConnection();
+		
+		volist = new UserDao().usBkList_c(conn, umId);
+		
 		close(conn);
 		
-		return bklist_h;
+		return volist;
 	}
+	
 	// 사용자 마이페이지 - 예약 현황(완료/r) 조회 : 최규식
-		public ArrayList<UserBookingListVo> usBkList_r(String umId) {
-			
-			Connection conn	= getConnection();
-			ArrayList<UserBookingListVo> bklist_r = new UserDao().usBkList_r(conn, umId);
-//			bklist_r = new UserDao().usBkList_r(conn);
-			close(conn);
-			
-			return bklist_r;
-		}
+	public ArrayList<Map<String, Object>> usBkList_r(String umId) {
+		
+		ArrayList<Map<String, Object>> volist = null;
+		
+		Connection conn = getConnection();
+		
+		volist = new UserDao().usBkList_r(conn, umId);
+		
+		close(conn);
+		
+		return volist;
+	}
+	
+	
 		// 승희 -사용자 리뷰 페이지
 		public ArrayList<Map<String, Object>> userRvlist(String umId){
 			Connection conn = getConnection();

@@ -109,16 +109,16 @@
 						<div style="margin-bottom: 20px; text-align: center;">
 						
 							<p style="font-weight: bold; font-size: 1.5em;">${i.cpName }</p>
-							<div>
-								<span>💙 4.8 / 5.0</span>
-							</div>
+								  <c:if test="${not empty uscpRvscoreAVG.rvScore }">
+							<div><span>💙 ${uscpRvscoreAVG.rvScore } / 5.0</span></div>
+								</c:if>
+								<c:if test="${empty uscpRvscoreAVG.rvScore }">
+								<div><span>💙 0.0 / 5.0</span></div>
+								</c:if>
 							<input type="hidden" id="cpNo" name="cpNo" value="${i.cpNo }"/>
 							<div>
 								<span><button id="s_us_reservation_btn" class="btn btn-primary" href="#"
-									style="width: 300px;">예약하기</button></span> <span><input
-									type="checkbox" class="btn-check" id="btncheck2"
-									autocomplete="off"> <label
-									class="btn btn-outline-primary" for="btncheck2">☆</label> </span>
+									style="width: 300px;">예약하기</button></span>
 							</div>
 						</div>
 						</c:forEach>
@@ -391,53 +391,77 @@
     <!-- 네비 예약현황 -->
     <article>
     <div id="c_bklist_info">
-    <div style="width: 100%; height: 100%; padding: 30px; border-radius: 15px; background-color: white;">
+    <div style="padding: 30px; border-radius: 15px; background-color: white;">
       <div class="d-flex align-items-start">
   		<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-    		<button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">예약완료</button>
-    		<button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">예약취소</button>
+    		<button class="nav-link active" id="v-pills-home-tab" style="width: 100px;" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">예약완료</button>
+    		<button class="nav-link" id="v-pills-profile-tab" style="width: 100px;" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">예약취소</button>
   		</div>
   	  <div class="tab-content" id="v-pills-tabContent">
 		<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 		<!-- 네비 예약현황 : 예약 완료 -->
-		<%-- <c:forEach items="${usBkList_r }" var="i"> --%>
-    		<div class="card" style="width: 250px; display: inline-block; float: left; margin: 10px;">
-            	<img src="https://cdn.discordapp.com/attachments/958566133752016903/966709570334523402/hotel7.jpg" class="card-img-top" alt="...">
+		<c:forEach items="${bklist_r }" var="i">
+    		<div class="card" style="width: 300px; height: 540px; display: inline-block; float: left; margin: 10px;">
+    		<c:if test="${empty i.flGno }">
+    		<!-- https://hk-clean.co.kr/images/no_image.jpg 대체이미지 -->
+                      <img src="https://media.discordapp.net/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png?width=1358&height=1358"
+                        class="card-img-top" style="height: 260px;">
+                        </c:if>
+                        <c:if test="${not empty i.flGno }">
+                      <img src="${i.flGno }"
+                        class="card-img-top" style="height: 270px;">
+                        </c:if>
+            	<%-- <img src="${i.flGno }" class="card-img-top" alt="..."> --%>
 	            <div class="card-body">
-	              <h5 class="card-title"> ${bklist_r.cpName} </h5>
-	              <p class="card-text">${bklist_r.cpAddress}</p>
+	            	<input type="hidden" id="umId" name="umId" value="${umId }"/>
+	              <h5 class="card-title"> ${i.cpName} </h5>
+	              <p class="card-text">${i.cpAddress}</p>
 	            </div>
 	            <ul class="list-group list-group-flush">
-	              <li class="list-group-item">${bklist_r.bkDate}</li>
-	              <li class="list-group-item">${bklist_r.bkStatus}</li>
+	              <li class="list-group-item">${i.bkDate}</li>
+	              <li class="list-group-item">${i.bkStatus}</li>
 	            </ul>
 	            <div class="card-body">
 	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
 	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a>
 	            </div>
          	</div>
-         	<%-- </c:forEach> --%>
+         	</c:forEach>
     	 </div>
     	
 	     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 	     	<!-- 네비 예약현황 : 예약 취소 -->
-          <%-- <c:forEach items="${usBkList_h }" var="i"> --%>
-    		<div class="card" style="width: 250px; display: inline-block; float: left; margin: 10px;">
-            	<img src="https://cdn.discordapp.com/attachments/958566133752016903/966709570334523402/hotel7.jpg" class="card-img-top" alt="...">
-	            <div class="card-body">
-	              <h5 class="card-title"> ${bklist_h.cpName} </h5>
-	              <p class="card-text">${bklist_h.cpAddress}</p>
-	            </div>
-	            <ul class="list-group list-group-flush">
-	              <li class="list-group-item">${bklist_h.bkDate}</li>
-	              <li class="list-group-item">${bklist_h.bkStatus}</li>
-	            </ul>
-	            <div class="card-body">
-	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
-	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a>
-	            </div>
-         	</div>
-         	<%-- </c:forEach> --%>
+	          <c:forEach items="${bklist_c }" var="i">
+	    		<div class="card" style="width: 300px; height: 540px; display: inline-block; float: left; margin: 10px;">
+	    		<c:if test="${empty i.flGno }">
+	    		<!-- https://hk-clean.co.kr/images/no_image.jpg 대체이미지 -->
+	                      <img src="https://media.discordapp.net/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png?width=1358&height=1358"
+	                        class="card-img-top" style="height: 260px;">
+	                        </c:if>
+	                        <c:if test="${not empty i.flGno }">
+	                      <img src="${i.flGno }"
+	                        class="card-img-top" style="height: 270px;">
+	                        </c:if>
+	            	<%-- <img src="${i.flGno }" class="card-img-top" alt="..."> --%>
+		            <div class="card-body">
+		            	<input type="hidden" id="umId" name="umId" value="${umId }"/>
+		              <h5 class="card-title"> ${i.cpName} </h5>
+		              <p class="card-text">${i.cpAddress}</p>
+		            </div>
+		            <ul class="list-group list-group-flush">
+		              <li class="list-group-item">${i.bkDate}</li>
+		              <li class="list-group-item">${i.bkStatus}</li>
+		            </ul>
+		            <div class="card-body">
+		              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
+		              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a>
+		            </div>
+	         	</div>
+	         	</c:forEach>
+	         	<c:if test="${empty bklist_c }">
+	         	<p style="margin: 50px 0 0 100px; font-size: 16px; font-weight: 700; text-align: center; width: 800; height: 500px;"> 
+	         	예약 취소 내역이 없습니다. </p>
+	         	</c:if>
 	     </div>
   	  </div>
 	</div>
@@ -513,6 +537,13 @@
 		</article>
 	</section>
 
+	<script>
+	/* $("#c_riview-tab").click(function(){
+		location.href = "usercpdetailreview";
+		 var cpNo = $("#cpNo").val(); 
+	}); */
+	</script>
+	
 
 	<script>
 		$("#c_map-tab").click(function() {

@@ -384,28 +384,34 @@ public class UserDao {
 			return list;
 		}
 		
-		// 사용자 마이페이지 - 예약 현황(대기/h) 조회 : 최규식
-		public ArrayList<UserBookingListVo> usBkList_h(Connection conn) {
+		// 사용자 마이페이지 - 예약 현황(취소/c) 조회 : 최규식
+		public ArrayList<Map<String, Object>> usBkList_c(Connection conn, String umId) {
+			System.out.println("umId : " + umId);
+			ArrayList<Map<String, Object>> volist = null;
+			String sql = "select bk_no, um_id, cp_name, cp_address, bk_date, substr(bk_time,1,5), REPLACE(REPLACE(BK_STATUS,'R','예약완료'),'C','예약취소') as bk_statusC, fl_gno "
+					+ " from booking b "
+					+ " join company c using (cp_no) "
+					+ " where bk_status in ('c','C') and um_id = ? "
+					+ " order by um_id, bk_date desc";
 			
-			ArrayList<UserBookingListVo> bklist_h = null;
-			
-			String sql = "select um_id, cp_name, cp_address, bk_date, bk_status from booking b join company c using (cp_no) where bk_status in ('h','H');";
-			
-			bklist_h = new ArrayList<UserBookingListVo>();
+			volist = new ArrayList<Map<String, Object>>();
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, umId);
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()) {
-					UserBookingListVo usbklist_h = new UserBookingListVo();
-					usbklist_h.setUmId(rs.getString("UM_ID"));
-					usbklist_h.setCpName(rs.getString("CP_NAME"));
-					usbklist_h.setCpAddress(rs.getString("CP_ADDRESS"));
-					usbklist_h.setBkDate(rs.getString("BK_DATE"));
-					usbklist_h.setBkStatus(rs.getString("BK_STATUS"));
-					
-					bklist_h.add(usbklist_h);
+					Map<String, Object> map	= new HashMap<String, Object>();
+					map.put("bkNo", rs.getInt(1));
+					map.put("umId", rs.getString(2));
+					map.put("cpName", rs.getString(3));
+					map.put("cpAddress", rs.getString(4));
+					map.put("bkDate", rs.getString(5));
+					map.put("bkTime", rs.getString(6));
+					map.put("bkStatus", rs.getString(7));
+					map.put("flGno", rs.getString(8));
+					volist.add(map);
 				}
 				
 			} catch (SQLException e) {
@@ -414,35 +420,40 @@ public class UserDao {
 				close(rs);
 				close(pstmt);
 			}
-			return bklist_h;
+			
+			return volist;
+			
 		}
 		
 		// 사용자 마이페이지 - 예약 현황(완료/r) 조회 : 최규식
-		public ArrayList<UserBookingListVo> usBkList_r(Connection conn, String umId) {
-			
-			ArrayList<UserBookingListVo> bklist_r = new ArrayList<UserBookingListVo>();
-			
-			String sql = "select bk_no, um_id, cp_name, cp_address, bk_date, substr(bk_time,1,5) bk_status "
-					+ " from booking b"
+		public ArrayList<Map<String, Object>> usBkList_r(Connection conn, String umId) {
+			System.out.println(" ============= ");
+			System.out.println("umId : " + umId);
+			ArrayList<Map<String, Object>> volist = null;
+			String sql = "select bk_no, um_id, cp_name, cp_address, bk_date, substr(bk_time,1,5), REPLACE(REPLACE(BK_STATUS,'R','예약완료'),'C','예약취소') as bk_statusC, fl_gno "
+					+ " from booking b "
 					+ " join company c using (cp_no) "
 					+ " where bk_status in ('r','R') and um_id = ? "
 					+ " order by um_id, bk_date desc";
 			
+			volist = new ArrayList<Map<String, Object>>();
+			
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1,umId);
+				pstmt.setString(1, umId);
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()) {
-					UserBookingListVo usbklist_r = new UserBookingListVo();
-					usbklist_r.setUmId(rs.getString("UM_ID"));
-					usbklist_r.setCpName(rs.getString("CP_NAME"));
-					usbklist_r.setCpAddress(rs.getString("CP_ADDRESS"));
-					usbklist_r.setBkDate(rs.getString("BK_DATE"));
-					usbklist_r.setBkStatus(rs.getString("BK_STATUS"));
-					
-					
-					bklist_r.add(usbklist_r);
+					Map<String, Object> map	= new HashMap<String, Object>();
+					map.put("bkNo", rs.getInt(1));
+					map.put("umId", rs.getString(2));
+					map.put("cpName", rs.getString(3));
+					map.put("cpAddress", rs.getString(4));
+					map.put("bkDate", rs.getString(5));
+					map.put("bkTime", rs.getString(6));
+					map.put("bkStatus", rs.getString(7));
+					map.put("flGno", rs.getString(8));
+					volist.add(map);
 				}
 				
 			} catch (SQLException e) {
@@ -451,7 +462,9 @@ public class UserDao {
 				close(rs);
 				close(pstmt);
 			}
-			return bklist_r;
+			
+			return volist;
+			
 		}
 }
 
