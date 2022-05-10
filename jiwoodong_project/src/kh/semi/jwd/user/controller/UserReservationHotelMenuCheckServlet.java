@@ -1,8 +1,9 @@
-package kh.semi.jwd.bum.controller;
+package kh.semi.jwd.user.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,26 +11,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import kh.semi.jwd.bum.model.service.BusinessReservationService;
-import kh.semi.jwd.bum.model.vo.BumReservationVo;
+import kh.semi.jwd.user.model.service.UserReservationService;
 
 /**
- * Servlet implementation class BusinessReservationAllStatus
+ * Servlet implementation class UserReservationHotelMenuCheckServlet
  */
-@WebServlet("/allStatusSalon")
-public class BusinessReservationAllStatusSalonServlet extends HttpServlet {
+@WebServlet("/UserReservationHotelMenuCheck")
+public class UserReservationHotelMenuCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BusinessReservationAllStatusSalonServlet() {
+    public UserReservationHotelMenuCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,15 +43,15 @@ public class BusinessReservationAllStatusSalonServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json");
+		String date = request.getParameter("date");
+		int cpno = Integer.parseInt(request.getParameter("cpno"));
+		ArrayList<Map<String, Object>> list = new UserReservationService().hotelmenuCheck(cpno, date);
 		PrintWriter out = response.getWriter();
-		String date = request.getParameter("day");
-		int cpNo = (int) request.getSession().getAttribute("cpNo");
-		ArrayList<BumReservationVo> list = new BusinessReservationService().AllStatusSalon(date, cpNo);
-Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String list1 = gson.toJson(list);
+		System.out.println(list1);
+		
 		out.println(list1);
 		out.flush();
 		out.close();

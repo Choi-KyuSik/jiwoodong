@@ -47,16 +47,15 @@ public class BusinessReservationAddHotelServlet extends HttpServlet {
          map.put("bkName", request.getParameter("bkname"));
          map.put("bkPhone", request.getParameter("bkphone"));
          map.put("bkDate", request.getParameter("bkdate"));
-         map.put("bkTime", request.getParameter("bktime"));
          map.put("bkRequire", request.getParameter("bkrequire"));
          map.put("bkMenuNo", request.getParameter("bkMenuNo"));
          map.put("bkPrice", request.getParameter("bkPrice"));
          int cpNo = (int) request.getSession().getAttribute("cpNo");
-         int result = new BusinessReservationService().reservationAdd(map, cpNo);
+         int result = new BusinessReservationService().reservationAddHotel(map, cpNo);
          if(result < 0) {
             msg = "예약 등록 실패";
          } else {
-            int result2 = new BusinessReservationService().reservationAddMenuSalon(map, cpNo);
+            int result2 = new BusinessReservationService().reservationAddMenuHotel(map, cpNo);
             if(result2 < 0) {
                msg = "예약 메뉴 등록 실패";
             } else {

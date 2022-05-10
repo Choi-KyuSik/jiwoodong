@@ -176,7 +176,7 @@ td, th {
 	<content>
 	<article>
 		<div id="k_us_info_content">
-			<p>예약 조회</p>
+			<p>호텔 예약 조회</p>
 			<!-- 예약상태 선택-->
 			<select style="width: 100px; height: 30px;" id="bkStatus">
 				<option value="전체" selected>전체</option>
@@ -200,7 +200,6 @@ td, th {
 						<th scope="col">핸드폰번호</th>
 						<th scope="col">예약상태</th>
 						<th scope="col">예약날짜</th>
-						<th scope="col">예약시간</th>
 						<th scope="col">메뉴</th>
 						<th scope="col">금액</th>
 						<th scope="col">요청사항</th>
@@ -227,7 +226,6 @@ td, th {
 									</c:when>
 								</c:choose></td>
 							<td class="l5"><c:out value="${reservation.bkDate}" /></td>
-							<td class="l6"><c:out value="${reservation.bkTime }" /></td>
 							<td class="l7"><c:out value="${reservation.menuName }" /></td>
 							<td class="l8"><c:out value="${reservation.menuPrice }" />
 								원</td>
@@ -270,17 +268,15 @@ td, th {
 							type="tel" id="bkphone" name="bkphone"
 							placeholder="###-####-####"><br> <label for="bkdate"
 							style="margin: 10px;">예약날짜 :</label><input type="date"
-							id="bkdate" name="bkdate"><br> <label for="bktime"
-							style="margin: 10px;">예약시간 :</label><input type="time"
-							id="bktime" name="bktime"><br> <label for="bkMenuNo"
+							id="bkdate" name="bkdate"><br> <label for="bkMenuNo"
 							style="margin: 10px;">메뉴 :</label>
 							 <select id="bkMenuNo"
 							onchange="bkPriceChange()" name="bkMenuNo">
 							<c:forEach items="${menulist }" var="menulist">
-								<option value="${menulist.menuNo }">${menulist.menuName }</option>
+								<option value="${menulist.menuNo }" class="menuoption" style="display:none">${menulist.menuName }</option>
 							</c:forEach>
-						</select> <label for="bkPrice" style="margin: 10px;">금액 :</label><input
-							type="text" id="bkPrice" name="bkPrice" readonly="readonly" style="background-color: rgb(233,236,239); border: 1px solid black;" /> <label
+						</select> <br><label for="bkPrice" style="margin: 10px;">금액 :</label><input
+							type="text" id="bkPrice" name="bkPrice" readonly="readonly" style="background-color: rgb(233,236,239); border: 1px solid black;" /> <br><label
 							for="bkrequire" style="margin: 10px;">요청사항 :</label>
 						<textarea cols="55" rows="10" id="bkrequire"
 							style="padding: 10px;" name="bkrequire"></textarea>
@@ -321,6 +317,8 @@ td, th {
     });
 		/* 예약 추가 버튼  클릭시*/
     	$("#booking_add").click(function(){
+    		$("#bkMenuNo").css("background-color", "white");
+    		$("#bkMenuNo option").hide();
     		/* 모달 추가, 상세정보 같이사용해서 selected 충돌 클릭시 초기화*/
     		$("#bkMenuNo option").removeAttr("selected");
     			/* 예약번호, 사용자아이디 숨김*/
@@ -357,9 +355,12 @@ td, th {
     			$("#bkphone").val($(this).children('.l4').html());
     			$("#bkdate").val($(this).children('.l5').html().replaceAll("/","-").trim());
     			$("#bktime").val($(this).children('.l6').html());
+    			$("#bkMenuNo").css("background-color", "rgb(233,236,239)");
+    			$("#bkMenuNo option").hide();
     			$("#bkMenuNo option").each(function (i,item){
     				if($("#bkMenuNo option").eq(i).text() == bkMenuName){
-    					$("#bkMenuNo option").eq(i).attr("selected","selected");
+    					$("#bkMenuNo option").eq(i).prop("selected", true);
+    					$("#bkMenuNo option").eq(i).show();
     				}
     			});
     			$("#bkPrice").val($(this).children('.l8').html());
@@ -381,6 +382,25 @@ td, th {
         			$("#booking_insert").hide();
     			}
     	});
+    	// 날짜 선택시 예약 가능한 객실만 호출
+    	$("#bkdate").change(function(){
+    		$(".menuoption").show();
+    		$.ajax({
+    			type : "post",
+    			url : "UserReservationHotelMenuCheck",
+    			data : {"date" : $("#bkdate").val(), "cpno" : ${cpNo}},
+    			dataType : "json",
+    			success : function(data){
+    				$.each(data, function(i, item){
+    					$(".menuoption").each(function(a, atem){
+    						if(item.menu_no == $(atem).val()){
+   							 $(atem).hide();
+   						}
+    					})
+    				})
+    			}
+    		})
+    	})
     	/* 사업자 해당 메뉴 가격 불러오기 */
     	function bkPriceChange(){
     		$.ajax({
@@ -410,9 +430,6 @@ td, th {
             		return;
             	} else if(($("#bkdate").val()) == ''){
             		alert("날짜를 선택하세요")
-            		return;
-            	} else if(($("#bktime").val()) == ''){
-            		alert("시간을 선택하세요")
             		return;
             	} else if(($("#bkPrice").val()) == ''){
             		alert("메뉴를 선택하세요")
@@ -512,9 +529,8 @@ td, th {
                             }
                             html += '</td>'
                             html += '<td class="l5">'+list[i].bkDate+'</td>'
-                            html += '<td class="l6">'+list[i].bkTime+'</td>'
                             html += '<td class="l7">'+list[i].menuName+'</td>'
-                            html += '<td class="l8">'+list[i].menuPrice+'원</td>'
+                            html += '<td class="l8">'+list[i].bkTotalPrice+'원</td>'
                             html += '<td class="l9">'
                             if(list[i].bkRequire == null){
                             	 html +="X"
@@ -554,9 +570,8 @@ td, th {
                             }
                             html += '</td>'
                             html += '<td class="l5">'+data[i].bkDate+'</td>'
-                            html += '<td class="l6">'+data[i].bkTime+'</td>'
                             html += '<td class="l7">'+data[i].menuName+'</td>'
-                            html += '<td class="l8">'+data[i].menuPrice+'원</td>'
+                            html += '<td class="l8">'+data[i].bkTotalPrice+'원</td>'
                             html += '<td class="l9">'
                             if(data[i].bkRequire == null){
                             	 html +="X"
@@ -600,9 +615,8 @@ td, th {
                             }
                             html += '</td>'
                             html += '<td class="l5">'+list[i].bkDate+'</td>'
-                            html += '<td class="l6">'+list[i].bkTime+'</td>'
                             html += '<td class="l7">'+list[i].menuName+'</td>'
-                            html += '<td class="l8">'+list[i].menuPrice+'원</td>'
+                            html += '<td class="l8">'+list[i].bkTotalPrice+'원</td>'
                             html += '<td class="l9">'
                             if(list[i].bkRequire == null){
                             	 html +="X"
@@ -642,9 +656,8 @@ td, th {
                         }
                         html += '</td>'
                         html += '<td class="l5">'+data[i].bkDate+'</td>'
-                        html += '<td class="l6">'+data[i].bkTime+'</td>'
                         html += '<td class="l7">'+data[i].menuName+'</td>'
-                        html += '<td class="l8">'+data[i].menuPrice+'원</td>'
+                        html += '<td class="l8">'+data[i].bkTotalPrice+'원</td>'
                         html += '<td class="l9">'
                         if(data[i].bkRequire == null){
                         	 html +="X"

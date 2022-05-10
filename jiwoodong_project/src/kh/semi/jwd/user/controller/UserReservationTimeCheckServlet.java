@@ -48,7 +48,7 @@ public class UserReservationTimeCheckServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		String rsdate = request.getParameter("rsdate");
-		int cpNo = 18;
+		int cpNo = Integer.parseInt(request.getParameter("cpno"));
 		ArrayList<Map<String, Object>> map = new UserReservationService().reservationTimeCheck(rsdate, cpNo);
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

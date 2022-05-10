@@ -49,7 +49,7 @@ public class UserReservationInsertSalonServlet extends HttpServlet {
 		System.out.println(request.getParameter("rsdate"));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("totalprice", request.getParameter("totalprice"));
+		map.put("totalprice", request.getParameter("rsmenuprice"));
 		map.put("umid", umid);
 		map.put("cpno", cpno);
 		map.put("rsdate",request.getParameter("rsdate"));

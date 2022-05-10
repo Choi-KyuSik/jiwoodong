@@ -153,6 +153,28 @@ public class UserReservationDao {
 		}
 		return result;
 	}
+	
+	public int reservationInsertHotel(Connection conn, Map<String, Object> map) {
+		int result = 0;
+		String sql = "insert into booking(bk_no,cp_no, um_id, bk_name, bk_phone, bk_require, bk_date, bk_time, bk_status, bk_total_price) values(booking_seq.nextval, ?,?,?,?,?,replace(?, '-', '/'),'X','R',to_number(?))";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int)map.get("cpno"));
+			pstmt.setString(2, (String)map.get("umid"));
+			pstmt.setString(3, (String)map.get("rsname"));
+			pstmt.setString(4, (String)map.get("rsphone"));
+			pstmt.setString(5, (String)map.get("rsrequire"));
+			pstmt.setString(6, (String)map.get("rsdate"));
+			pstmt.setString(7, (String)map.get("totalprice"));
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	public int reservationInsertCafemenu(Connection conn, Map<String, Object> map, String menuno, String menucount) {
 		int result = 0;
@@ -202,7 +224,7 @@ public class UserReservationDao {
 	
 	public int reservationInsertHotelmenu(Connection conn, Map<String, Object> map) {
 		int result = 0;
-		String sql = "insert into b_menu(bk_no, menu_no) values((select bk_no from booking where cp_no=? and um_id=? and bk_name=? and bk_phone=? and bk_date=replace(?,'-','/') and bk_time=?), to_number(?))";
+		String sql = "insert into b_menu(bk_no, menu_no) values((select bk_no from booking where cp_no=? and um_id=? and bk_name=? and bk_phone=? and bk_date=replace(?,'-','/')), to_number(?))";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -211,14 +233,39 @@ public class UserReservationDao {
 			pstmt.setString(3, (String)map.get("rsname"));
 			pstmt.setString(4, (String)map.get("rsphone"));
 			pstmt.setString(5, (String)map.get("rsdate"));
-			pstmt.setString(6, (String)map.get("rstime"));
-			pstmt.setString(7, (String) map.get("menuNo"));
+			pstmt.setString(6, (String) map.get("menuNo"));
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public ArrayList<Map<String, Object>> hotelmenuCheck(Connection conn, int cpno, String date) {
+		String sql = "select menu_no from booking join b_menu using(bk_no) where cp_no = ? and bk_date = replace(?, '-', '/') and bk_status <> 'C'";
+		 ArrayList<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cpno);
+			pstmt.setString(2, date);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("menu_no", rs.getString("menu_no"));
+				result.add(map);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

@@ -21,6 +21,13 @@ public class BusinessReservationService {
 		return result;
 	}
 	
+	public ArrayList<BumReservationVo>  BusinessReservationCheckHotel(int cpNo){
+		Connection conn = getConnection();
+		ArrayList<BumReservationVo> result = new  BusinessReservationDao().BusinessReservationCheckHotel(conn, cpNo);
+		close(conn);
+		return result;
+	}
+	
 	public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(int cpNo){
 		Connection conn = getConnection();
 		ArrayList<BumReservationVo> result = new  BusinessReservationDao().BusinessReservationCheckCafe(conn, cpNo);
@@ -49,9 +56,23 @@ public class BusinessReservationService {
 		return result;
 	}
 	
+	public int reservationAddHotel(Map<String, Object> map, int cpNo){
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationAddHotel(conn, map, cpNo);
+		close(conn);
+		return result;
+	}
+	
 	public int reservationAddMenu(Map<String, Object> map , int cpNo) {
 		Connection conn = getConnection();
 		int result = new BusinessReservationDao().reservationAddMenu(conn, map, cpNo);
+		close(conn);
+		return result;
+	}
+	
+	public int reservationAddMenuHotel(Map<String, Object> map , int cpNo) {
+		Connection conn = getConnection();
+		int result = new BusinessReservationDao().reservationAddMenuHotel(conn, map, cpNo);
 		close(conn);
 		return result;
 	}

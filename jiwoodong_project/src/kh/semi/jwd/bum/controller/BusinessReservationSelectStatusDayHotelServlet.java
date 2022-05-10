@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import kh.semi.jwd.bum.model.service.BusinessReservationService;
 import kh.semi.jwd.bum.model.vo.BumReservationVo;
 
@@ -50,32 +53,10 @@ public class BusinessReservationSelectStatusDayHotelServlet extends HttpServlet 
 		String status = request.getParameter("status");
 		int cpNo = (int) request.getSession().getAttribute("cpNo");
 		ArrayList<BumReservationVo> list = new BusinessReservationService().selectStatusHotel(date, cpNo, status);
-		JSONArray Array = new JSONArray ();
-
-		JSONObject json = null;
-
-		for(int i=0; i<list.size();i++){
-		  json = new JSONObject();
-		  BumReservationVo vo = new BumReservationVo();
-		  vo = (BumReservationVo) list.get(i);
-		  json.put("bkTotalPrice", vo.getBkTotalPrice());
-		   json.put("bkNo",vo.getBkNo());
-		   json.put("umId",vo.getUmId());
-		   json.put("bkName",vo.getBkName());
-		   json.put("bkPhone",vo.getBkPhone());
-		   json.put("bkDate",vo.getBkDate());
-		   json.put("bkTime",vo.getBkTime());
-		   json.put("menuName",vo.getMenuName());
-		   json.put("menuNo",vo.getMenuNo());
-		   json.put("menuCount", vo.getMenuCount());
-		   json.put("menuPrice",vo.getMenuPrice());
-		   json.put("bkRequire",vo.getBkRequire());
-		   json.put("bkStatus",vo.getBkStatus());
-		   json.put("bkmCount", vo.getBkmCount());
-		  Array.add(json);
-		}
-		System.out.println(Array);
-		out.println(Array);
+Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		
+		String list1 = gson.toJson(list);
+		out.println(list1);
 		out.flush();
 		out.close();
 	}

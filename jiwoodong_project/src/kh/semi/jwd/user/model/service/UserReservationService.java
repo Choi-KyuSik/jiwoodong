@@ -45,6 +45,13 @@ public class UserReservationService {
 		close(conn);
 		return result;
 	}
+	
+	public int reservationInsertHotel(Map<String, Object> map) {
+		Connection conn = getConnection();
+		int result = new UserReservationDao().reservationInsertHotel(conn, map);
+		close(conn);
+		return result;
+	}
 
 	public int reservationInsertCafemenu(Map<String, Object> map, String menuno, String menucount) {
 		Connection conn = getConnection();
@@ -63,6 +70,13 @@ public class UserReservationService {
 	public int reservationInsertHotelmenu(Map<String, Object> map) {
 		Connection conn = getConnection();
 		int result = new UserReservationDao().reservationInsertHotelmenu(conn, map);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Map<String, Object>> hotelmenuCheck(int cpno, String date) {
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> result  = new UserReservationDao().hotelmenuCheck(conn, cpno, date);
 		close(conn);
 		return result;
 	}

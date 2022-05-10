@@ -49,17 +49,16 @@ public class UserReservationInsertHotelServlet extends HttpServlet {
 		System.out.println(request.getParameter("rsdate"));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("totalprice", request.getParameter("totalprice"));
+		map.put("totalprice", request.getParameter("rsmenuprice"));
 		map.put("umid", umid);
 		map.put("cpno", cpno);
 		map.put("rsdate",request.getParameter("rsdate"));
-		map.put("rstime",request.getParameter("rstime"));
 		map.put("rsname",request.getParameter("rsname"));
 		map.put("rsphone",request.getParameter("rsphone"));
 		map.put("rsrequire",request.getParameter("rsrequire"));
 		map.put("menuNo", request.getParameter("rsmenu"));
 		
-		int result = new UserReservationService().reservationInsert(map);
+		int result = new UserReservationService().reservationInsertHotel(map);
 		
 		int result2 = new UserReservationService().reservationInsertHotelmenu(map);
 		System.out.println(result2);

@@ -281,7 +281,7 @@ td, th {
 							id="bktime" name="bktime"><br> 
 							<div id="menuName_Count">
 							<label for="bkMenuNo" style="margin: 10px;">메뉴 :</label>
-							<input type="text" readonly value="메뉴1"><span> 수량 : </span><input type="text" readonly value="수량" style="width: 80px">
+							<input type="text" readonly value="메뉴1" ><span> 수량 : </span><input type="text" readonly value="수량" style="width: 80px; background-color: rgb(233,236,239); border: 1px solid black;">
 							</div>
 							<label for="bkPrice" style="margin: 10px;">총 금액 :</label><input
 							type="text" id="bkPrice" name="bkPrice" readonly="readonly" style="background-color: rgb(233,236,239); border: 1px solid black;"/><br> <label
@@ -389,7 +389,7 @@ td, th {
     						console.log(items.menuName);
     						$("#menuName_Count").html("");
     						html += '<label for="bkMenuName" style="margin: 10px;">메뉴 :</label>';
-							html += '<input type="text" id="bkMenuName" name="menuName" readonly value="'+items.menuName+'"><span> 수량 : </span><input type="text" readonly name="menuCount" value="'+items.bkmCount+'" style="width: 80px"><br>';
+							html += '<input type="text" id="bkMenuName" name="menuName" readonly value="'+items.menuName+'" style="background-color: rgb(233,236,239); border: 1px solid black;"><span> 수량 : </span><input type="text" readonly name="menuCount" value="'+items.bkmCount+'" style="width: 80px; background-color: rgb(233,236,239); border: 1px solid black;"><br>';
     						$("#menuName_Count").append(html);
     						
     						
