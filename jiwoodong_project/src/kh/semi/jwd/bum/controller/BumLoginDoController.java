@@ -88,7 +88,7 @@ public class BumLoginDoController extends HttpServlet {
 			out.println("<script>alert('아이디/비밀번호를 확인해주세요.'); location.href='bumLogin';</script>");
 		   // request.setAttribute("LoginErrMsg", "로그인 오류입니다."); 
 		   // request.getRequestDispatcher("bumLogin").forward(request, response);
-			
+			out.flush();
 		}
 	}
 }

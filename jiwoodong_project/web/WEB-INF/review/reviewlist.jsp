@@ -264,7 +264,8 @@ article>div>p {
 									<td class="s_center">${i.rvScore}</td>
 									<td class="s_td_short">${i.umId }</td>
 									<td class="s_td_short">${i.rvWriteDate }</td>
-									 <input type="hidden" id="rvNo" name="rvNo" value="${i.rvNo}"/>
+									<td style="display: none;" class="s_td_short">${i.rvNo }</td>
+									<%-- <input type="text" id="rvNo" name="rvNo" value="${i.rvNo}"/> --%>
 								</tr>
 			                </c:forEach>
 					</tbody>
@@ -299,11 +300,28 @@ article>div>p {
             </div> --%>
 	
   	<script>
-		$("#k_review_menu").click(function() {
-			var rvNo = $("#rvNo").val();
+		$(".s_tr_readList").click(function() {
+			
+			// 배열 선언
+			var tdArr = new Array();
+			// 현재 클릭된 행(tr의 td)
+			var tr = $(this);
+			console.log("tr : " + tr);
+			var td = tr.children();
+			console.log("td : " + td);
+
+			// 반복문을 통해 배열에 값을 담아 사용
+			td.each(function(i) {
+				tdArr.push(td.eq(i).text());
+			});
+			// td들이 배열에 담겨있는데 그 중 1번째가 필요
+			console.log("tdArr : " + tdArr);
+			console.log("배열에 담긴 값 : " + tdArr[0]);
+			console.log(typeof (tdArr[0]));
+			/* var rvNo = $("#rvNo").val();
 			console.log("rvNo ? : " + rvNo);
-			console.log("rvNo 의 타입 ? : " + typeof(rvNo));
-			location.href="userRvDetailList?rvNo=" + rvNo;
+			console.log("rvNo 의 타입 ? : " + typeof(rvNo)); */
+			location.href="userRvDetailList?rvNo=" + tdArr[0];
 		}); 
 	</script>   
 	<!-- 네비바 클릭시 페이지 이동 -->

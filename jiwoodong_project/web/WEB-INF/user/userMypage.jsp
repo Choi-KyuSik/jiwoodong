@@ -301,6 +301,7 @@
 	              <li class="list-group-item">${bklist_r.bkStatus}</li>
 	            </ul>
 	            <div class="card-body">
+	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="rv_btn">리뷰작성</button></a>
 	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
 	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a>
 	            </div>
@@ -424,14 +425,7 @@
 		</article>
 		</content>
 	</section>
-	<script>
-		$("#k_review_menu").click(function() {
-			//var rvNo = $("#umId").val();
-			//console.log("umId ? : " + umId);
-			//console.log("umId 의 타입 ? : " + typeof (umId));
-			location.href = "userreviewlist";
-		});
-	</script>
+
   <script>
   	$("#umPwd").keyup(function() {
   		// console.log("db에 있는 pwd 확인" + ${uvo.umPwd});
@@ -475,7 +469,10 @@
   			$("#umPwd").focus();
   		}
   	});
-  	
+  	/* 리뷰작성 버튼 클릭시 */
+  	$("#rv_btn").click(function() {
+  		location.href="userRvWrite";
+  	});
   	
   	/* 예약변경 버튼 클릭시 */
   	$("#bkupdata_btn").click(function() {

@@ -40,8 +40,8 @@
 						</li>
 						<li class="nav-item"><a class="nav-link" href="/jwd/#notice">공지사항</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="enrollMain">회원가입</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">관리자로그인</a>
+						<li class="nav-item"><a class="nav-link" href="loginMain">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="AdminMainPage">관리자로그인</a>
 						</li>
 					</ul>
 				</div>

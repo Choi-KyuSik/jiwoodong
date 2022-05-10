@@ -80,6 +80,7 @@ public class AdminLoginDoController extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('아이디/비밀번호를 확인해주세요.'); location.href='AdminLogin';</script>");
+			out.flush();
 		}
 	}
 

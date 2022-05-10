@@ -116,4 +116,58 @@ public class UserReviewDao {
 		return volist;
 	}
 	
+	//승희 - 사용자 리뷰 작성
+	public int insertReview(Connection conn, ReviewVo vo) {
+		String um_id = vo.getUmID();	
+		
+		int result = 0;  // 1. 리턴자료형으로 변수 생성 [+ 초기값]
+		// 2. sql문 작성. 메소드 기능을 기반으로 
+		String sql = "INSERT INTO REVIEW VALUES (REVIEW_SEQ.Nextval,?,?,?,default,null,null)";
+		try {  // 4. try-catch
+			// 3. pstmt/stmt 생성 - 2.sql문을 실행해야하므로 pstmt(?,없는경우) / stmt(없는경우) 선택
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, vo.getBkNo());
+			pstmt.setInt(2, vo.getRvScore());
+			pstmt.setString(3, vo.getRvContent());
+			// 7. 2,3번을 기반으로 sql문에 채워줄 값을 채움. -? pstmt.setXxx(1,);  pstmt.setInt / setString / setDate..
+			// 8. sql문 실행 + 결과값 변수에 담기 - 2기반으로 메소드(executeUpdate / executeQuery) 결정 및 리턴변수(int / ResultSet) 결정
+			result = pstmt.executeUpdate();
+			// 9.10.11. select 문의 결과 rs 인 경우 
+			// 12. 리턴변수에 값 채움 - 목표한바 확인			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {  // 5. finally
+			// 6. 사용한 객체 close - 2.sql문 기반 rs / stmt / pstmt
+			close(pstmt);
+		}
+		// 목표 : 리턴변수에 값을 채움. 아마도 구현 마지막 단계에서 결과 값을 알 수 있어 수행절차상 마지막에 구현됨.
+		
+		System.out.println("userreviewdao의 result: "+result);
+		return result;   // 1. 리턴변수 값을 리턴함.
+		
+	}
+	//승희 - 사용자 리뷰 수정
+	
+	public int updateUserReview(Connection conn,String rvContent,String fileUrl,int rvScore,int rvNo) {
+		int result = 0;
+		String sql = "UPDATE REVIEW SET RV_CONTENT = ?, FL_GNO = ?, RV_SCORE = ?  WHERE RV_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rvContent);
+			pstmt.setString(2, fileUrl);
+			pstmt.setInt(3, rvScore);
+			pstmt.setInt(4, rvNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("업데이트 실패다~! ");
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

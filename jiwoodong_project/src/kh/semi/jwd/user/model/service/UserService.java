@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import kh.semi.jwd.bum.model.vo.CompanyVo;
+import kh.semi.jwd.bum.model.vo.ReviewVo;
 import kh.semi.jwd.user.model.dao.UserDao;
 import kh.semi.jwd.user.model.dao.UserReviewDao;
 import kh.semi.jwd.user.model.vo.UserBookingListVo;
@@ -149,6 +150,22 @@ public class UserService {
 			System.out.println("userRvDetailList volist:"+volist);
 			return volist;
 		
+		}
+		//승희 - 사용자 리뷰 작성
+		public int insertReview(ReviewVo vo) {
+			Connection conn = getConnection();
+			int result = new UserReviewDao().insertReview(conn, vo);
+			System.out.println("user서비스의 result: "+result);
+			close(conn);
+			return result;
+		}
+		//승희 - 사용자 리뷰 수정
+		public int updateUserReview(String rvContent,String fileUrl,int rvScore,int rvNo) {
+			Connection conn = getConnection();
+			int result = new UserReviewDao().updateUserReview(conn, rvContent, fileUrl, rvScore, rvNo);
+			close(conn);
+			System.out.println("updateUserReview result: "+result);
+			return result;
 		}
 	
 }

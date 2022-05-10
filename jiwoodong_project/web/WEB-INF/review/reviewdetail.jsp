@@ -92,7 +92,9 @@
 </style>
 </head>
 <body>
-
+	<div>
+		<%@ include file="../view/user/user_header.jsp"%>
+	</div>
 
 	<section id="contents">
 
@@ -208,9 +210,11 @@
 				var fileUrl = $("#fileUrl").val();
 				var rvNo = $("#rvNo").val();
 				console.log("rvNo : " + rvNo);
+				console.log("rvScore : " + rvScore);
+				console.log("rvContent : " + rvContent);
 				
-				$.ajax({
-					url: "AdminReviewUpdateDo", //엉니..
+			$.ajax({
+					url: "userUpdateReview.lo", //엉니..
 					type: "post",
 					data: {"rvScore": rvScore, "rvContent": rvContent, "fileUrl": fileUrl, "rvNo": rvNo},
 					dataType : "text",
@@ -219,7 +223,7 @@
 						alert(result);
 						location.href="userreviewlist";
 					}
-				});
+				}); 
 			} else {
 				history.back();
 			}
@@ -236,5 +240,23 @@
 			}
 		});
 	</script>
+  <!-- 네비바 클릭시 페이지 이동 -->
+  
+	<script>
+		$("#k_review_menu").click(function() {
+			//var rvNo = $("#umId").val();
+			//console.log("umId ? : " + umId);
+			//console.log("umId 의 타입 ? : " + typeof (umId));
+			location.href = "userreviewlist";
+		});
+		$("#c_cplist").click(function() {
+			/* location.href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=qbxlvnf11&logNo=221141017820"; */
+			location.href = "uscplist";
+		})
+		$("#c_mypage").click(function() {
+			console.log("찍히냐? mypage");
+			location.reload();
+		});
+	</script>	
 </body>
 </html>
