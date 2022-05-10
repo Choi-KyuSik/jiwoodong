@@ -145,7 +145,6 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 				map.put("menuExplain", rs.getString("menu_explain"));
 				map.put("menuUseyn", rs.getString("menu_useyn"));
 				map.put("menuWriteDate", rs.getTimestamp("menu_write_date"));
-				map.put("menuUpdateDate", rs.getTimestamp("menu_update_date"));
 				map.put("flGno", rs.getString("fl_gno"));
 				list.add(map);
 			}
@@ -296,7 +295,7 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 
 	public int reservationCancle(Connection conn, String bkNo) {
 		int result = 0;
-		String sql = "update booking set bk_status = 'C' where bk_no = to_number(?)";
+		String sql = "update booking set bk_status = 'C', bk_cdate = systemstamp  where bk_no = to_number(?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bkNo);
@@ -377,7 +376,7 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 
 	public int reservationUpdateMenu(Connection conn, Map<String, Object> map, int cpNo) {
 		int result = 0;
-		String sql = "update b_menu set menu_no = ?, bkm_update_date = sysdate where bk_no = to_number(?)";
+		String sql = "update b_menu set menu_no = ? where bk_no = to_number(?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, (String)map.get("bkMenuNo"));
@@ -692,7 +691,7 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 
 	public int reservationMenuDelete(Connection conn, int menuNo) {
 		int result = 0;
-		String sql = "update menu set menu_useyn = 'N', menu_update_date = sysdate where menu_no = ?";
+		String sql = "update menu set menu_useyn = 'N' where menu_no = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, menuNo);
