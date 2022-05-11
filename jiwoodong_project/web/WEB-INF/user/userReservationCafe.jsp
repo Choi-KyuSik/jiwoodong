@@ -177,7 +177,7 @@
 		                    		<option value="${menu.menuNo }">${menu.menuName }</option>
 		                    	</c:forEach>
 		                    	</select><br>
-		                    	<label style="font-size: 20px; margin-top: 20px"">메뉴가격 : <input type="text" id="rsmenuprice"  name="rsmenuprice" readonly></label><br>
+		                    	<label style="font-size: 20px; margin-top: 20px"">메뉴가격 : <input type="text" id="rsmenuprice"  name="rsmenuprice" readonly style="background-color: rgb(233,236,239); border: 1px solid black;"></label><br>
 		                    	<label style="font-size: 20px; margin-top: 20px"">메뉴수량 : </label>
 		                    	<select style="font-size: 20px; width: 225px" id="rsmenucount">
 		                    			<option value="none">수량을 선택해주세요</option>
@@ -191,7 +191,7 @@
 		                   	<span id="totalprice" style="font-weight : bold;"></span>
 		                   원
 	                   	</span>
-	                   	<input type="button" onclick="requestPay()" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
+	                   	<input type="button" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
 	                   	</div>
 	                   	<div id="h_menu" style="clear: both"></div>
 	                   	<div id="h_totalprice"></div>
@@ -452,9 +452,7 @@
     			return;
     		} 
     		
-    		if($("#rsmenu").val() != "none" && $("#rsmenucount").val() != "none" && $("#rsdate").val() != "" && $("#rstime").val() != "" && $("#rsname").val() != "" && $("#rsphone").val() != "") {
                 requestPay();
-             }
 	    	// $("#frmrsinsert").submit();
 	    })
     </script>

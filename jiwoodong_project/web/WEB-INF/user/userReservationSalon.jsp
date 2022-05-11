@@ -177,8 +177,8 @@
 		                    		<option value="${menu.menuNo }">${menu.menuName }</option>
 		                    	</c:forEach>
 		                    	</select><br>
-		                    	<label style="font-size: 20px; margin-top: 20px; margin-bottom:20px">메뉴가격 : <input type="text" id="rsmenuprice"  name="rsmenuprice" readonly></label><br>
-	                   	<input type="button" onclick="requestPay()" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
+		                    	<label style="font-size: 20px; margin-top: 20px; margin-bottom:20px">메뉴가격 : <input type="text" id="rsmenuprice"  name="rsmenuprice" readonly style="background-color: rgb(233,236,239); border: 1px solid black;"></label><br>
+	                   	<input type="button" id="btnsubmit" value="예약하기" style="font-size:20px; padding: 10px; border-radius:10px; border: 1px solid black; background-color: rgb(13,110,253); color: white; margin-bottom: 20px; float: right">
 	                   	</div>
 	                   	<div id="h_menu" style="clear: both"></div>
 	                   	<div id="h_totalprice"></div>
