@@ -56,7 +56,7 @@ public class AdminNoticeListController extends HttpServlet {
 		if(pageNumStr != null && !pageNumStr.equals(""))
 		  currentPage = Integer.parseInt(pageNumStr);
 		System.out.println("currentPage:"+currentPage);
-		final int pageSize = 18;
+		final int pageSize = 15;
 		final int pageBlock = 2;
 		int totalCnt = 0;
 		

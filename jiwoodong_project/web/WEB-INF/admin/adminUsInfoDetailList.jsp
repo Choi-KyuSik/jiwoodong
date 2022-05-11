@@ -51,26 +51,30 @@
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">이름</th>
 							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
-								name="umName" maxlength="300"
+								name="umName" maxlength="300" required="required" style="border: none; background-color: #e9ecef;"
 								value="${usMemberDetail.umName}" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">생년월일</th>
 							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
-								name="umBirth" maxlength="300"
+								name="umBirth" maxlength="300" required="required" style="border: none; background-color: #e9ecef;"
 								required="required" value="${usMemberDetail.umBirth}" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">전화번호</th>
 							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
-								name="umTel" maxlength="300"
-								required="required" value="${usMemberDetail.umTel}" /></td>
+								name="umTel" maxlength="300" id="umTel"
+								required="required" value="${usMemberDetail.umTel}" style="width: 500px;display: inline-block;" />
+								<span id="s_check_tel" style="display: none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span>
+								</td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">이메일</th>
 							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
-								name="umEmail" maxlength="300"
-								required="required" value="${usMemberDetail.umEmail}" /></td>
+								name="umEmail" maxlength="300" id="umEmail"
+								required="required" value="${usMemberDetail.umEmail}" style="width: 500px;display: inline-block;" />
+								<span id="s_check_email" style="display:none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span>
+								</td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th">주소</th>
@@ -101,6 +105,79 @@
 			</form>
 		</div>
 	</div>
+	
+	<!-- 유효성 검사 -->
+	<script>
+	// 전화번호 유효성 검사
+	$("#umTel").keyup(function(){
+		
+		console.log("눌리나요?");
+		
+		var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //휴대폰 번호
+		var phone = $("#umTel").val().trim();
+		if(phone == "") {
+	    	console.log("빈문자열");
+	    	$("#s_check_tel").css('display', 'inline-block');
+	    	$("#s_check_tel").text('');
+	    	
+		} else if(!regPhone.test(phone)){
+			 console.log("유효성체크 하나요?");
+	            // alert("휴대폰 번호 양식(01#-####-####)에 맞게 입력해주시길 바랍니다.");
+	            $("#s_check_tel").css('display', 'inline-block');
+	            $("#s_check_tel").text('휴대폰 번호 양식(01#-####-####)에 맞게 입력해주시길 바랍니다.');
+	            $("#s_check_tel").css('font-size', '0.8em');
+	            $("#s_check_tel").css('color', 'red');
+	            
+	            // $("#k_tel").focus();
+	            // return false;
+	     } else {
+	    	 $("#s_check_tel").css('display', 'inline-block');
+	         $("#s_check_tel").text('✅');
+	         $("#s_check_tel").css('font-size', '1.2em');
+	         $("#s_check_tel").css('color', 'green');
+	     }
+	
+	});
+	
+    
+	$("#umTel").on(
+			"input",
+			function() {
+				var target = document.getElementById("umTel");
+				target.value = target.value.replace(/[^0-9]/g, '').replace(
+						/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
+						.replace(/(-{1,2})$/g, "");
+			});
+	
+	// 이메일 유효성 검사
+	$("#umEmail").keyup(function(){
+		
+		console.log("눌리나요?");
+		
+		// var regEmail = /^[0-9a-zA-Z]([-.]?[0-9a-zA-Z])@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]).[a-zA-Z]{2,3}$/i; //이메일 양식
+		var regEmail = /^[a-z0-9.-_]+@([a-z0-9-]+.)+[a-z]{2,6}.[a-zA-Z]{3}$/i; // 이메일 양식
+		var email = $("#umEmail").val().trim();
+		if(email == "") {
+	    	console.log("빈문자열");
+	    	$("#s_check_email").css('display', 'inline-block');
+	    	$("#s_check_email").text('');
+	    	
+		} else if(!regEmail.test(email)){
+			 console.log("유효성체크 하나요?");
+	            $("#s_check_email").css('display', 'inline-block');
+	            $("#s_check_email").text('email@example.com 형태로 작성 해주시길 바랍니다.');
+	            $("#s_check_email").css('font-size', '0.8em');
+	            $("#s_check_email").css('color', 'red');
+	     } else {
+	    	 $("#s_check_email").css('display', 'inline-block');
+	         $("#s_check_email").text('✅');
+	         $("#s_check_email").css('font-size', '1.2em');
+	         $("#s_check_email").css('color', 'green');
+	     }
+	
+	});
+	</script>
+	
 	<script>
 		// 뒤로 가기
 		$("#back_btn").click(function() {

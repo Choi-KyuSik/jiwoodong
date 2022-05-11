@@ -46,7 +46,7 @@
 							<td class="table-light tb_bg_color" id="s_us_pwd">
 							<input type="password" class="form-control" name="umPwd_1" id="umPwd_1"
 								value="" placeholder="변경할 비밀번호를 입력해주세요."/></td>
-							<td colspan="2" class="table-light tb_bg_color" id="s_us_notice_1">
+							<td colspan="2" class="table-light tb_bg_color" id="s_us_notice_1" style="vertical-align: middle;">
 							<span id="s_us_pwd_check_1" style="display: none;"></span></td>
 						</tr>
 						<tr>
@@ -60,27 +60,28 @@
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">이름</th>
 							<td class="table-light tb_bg_color" id="s_us_no">
-							<input type="text" class="form-control" name="umName"
+							<input type="text" class="form-control" name="umName" style="border: none;" type="text" readonly="readonly" 
 								value="${usMemberListInfo.umId }" /></td>
 							<td colspan="2" class="table-light tb_bg_color"><span style="display: none;"></span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">생년월일</th>
 							<td class="table-light tb_bg_color">
-							<input type="text" class="form-control" name="umBirth" value="${usMemberListInfo.umBirth }" /></td>
+							<input type="text" class="form-control" name="umBirth" value="${usMemberListInfo.umBirth }" style="border: none;" type="text" readonly="readonly"  /></td>
 							<td colspan="2" class="table-light tb_bg_color"><span style="display: none;"></span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">전화번호</th>
 							<td class="table-light tb_bg_color">
-							<input type="text" class="form-control" name="umTel" value="${usMemberListInfo.umTel }" /></td>
-							<td colspan="2" class="table-light tb_bg_color"><span style="display: none;"></span></td>
+							<input type="text" class="form-control" name="umTel" id="umTel" value="${usMemberListInfo.umTel }" style="width: 500px;" />
+							</td>
+							<td style="vertical-align: middle;" colspan="2" class="tb_bg_color"><span id="s_check_tel" style="display: none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">이메일</th>
 							<td class="table-light tb_bg_color">
-							<input type="text" class="form-control" name="umEmail" value="${usMemberListInfo.umEmail }" /></td>
-							<td colspan="2" class="table-light tb_bg_color"><span style="display: none;"></span></td>
+							<input type="text" class="form-control" name="umEmail" id="umEmail" value="${usMemberListInfo.umEmail }"  style="width: 500px;"/></td>
+							<td style="vertical-align: middle; --bs-table-accent-bg: none;" colspan="2" class="tb_bg_color"><span id="s_check_email" style="display: none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span></td>
 						</tr>
 						<%-- <tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">주소</th>
@@ -131,11 +132,17 @@
       </div>
     </article>
 
+
+	<!-- 유효성 검사 -->
 	<script>
+	/* 비밀번호 유효성 검사 */
+	
+	
 	$("#umPwd_2").keyup(function() {
 
 		var firstPwd = $("#umPwd_1").val();
 		var secondPwd = $("#umPwd_2").val();
+		
 
 		// console.log("firstPwd : " + firstPwd);
 		// console.log("secondPwd : " + secondPwd);
@@ -145,6 +152,7 @@
 				$("#s_us_pwd_check_2").css('display', 'inline-block');
 				$("#s_us_pwd_check_2").text('');
 			} else if (firstPwd != secondPwd) {
+				console.log("여기눌리니?333333333333");
 				console.log("firstPwd : " + firstPwd);
 				console.log("secondPwd : " + secondPwd);
 				console.log("비밀번호가 일치하지 않습니다.");
@@ -160,6 +168,101 @@
 				$("#s_us_pwd_check_2").css('color', 'green');
 			}
 	});
+	
+	$("#umPwd_1").keyup(function() {
+		var password = $("#umPwd_1").val().trim();
+		// var regExpPassword =/^(?=.[A-Za-z])(?=.[0-9]).{8,16}$/;  // 영문자, 숫자가 적어도 1개이상, 8~16글자
+		var regExpPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+		
+		if(password == "") {
+			console.log("빈문자열");
+			$("#s_us_pwd_check_1").css('display', 'inline-block');
+			$("#s_us_pwd_check_1").text('');
+		} else if(!regExpPassword.test(password)){
+			console.log("여기눌리니?22222222222");
+			$("#s_us_pwd_check_1").css('display', 'inline-block');
+			$("#s_us_pwd_check_1").text('패스워드는 영문자, 숫자가 적어도 1개이상, 8~16글자여야 합니다.');
+			$("#s_us_pwd_check_1").css('font-size', '0.8em');
+			$("#s_us_pwd_check_1").css('color', 'red');
+		} else if(regExpPassword.test(password)) {
+			console.log("else 탔아???");
+			$("#s_us_pwd_check_1").css('display', 'inline-block');
+	        $("#s_us_pwd_check_1").text('✅');
+	        $("#s_us_pwd_check_1").css('font-size', '1.2em');
+	        $("#s_us_pwd_check_1").css('color', 'green');
+		}
+		
+	});
+	// 전화번호 유효성 검사
+	$("#umTel").keyup(function(){
+		
+		console.log("눌리나요?");
+		
+		var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //휴대폰 번호
+		var phone = $("#umTel").val().trim();
+		if(phone == "") {
+	    	console.log("빈문자열");
+	    	$("#s_check_tel").css('display', 'inline-block');
+	    	$("#s_check_tel").text('');
+	    	
+		} else if(!regPhone.test(phone)){
+			 console.log("유효성체크 하나요?");
+	            // alert("휴대폰 번호 양식(01#-####-####)에 맞게 입력해주시길 바랍니다.");
+	            $("#s_check_tel").css('display', 'inline-block');
+	            $("#s_check_tel").text('휴대폰 번호 양식(01#-####-####)에 맞게 입력해주시길 바랍니다.');
+	            $("#s_check_tel").css('font-size', '0.8em');
+	            $("#s_check_tel").css('color', 'red');
+	            
+	            // $("#k_tel").focus();
+	            // return false;
+	     } else {
+	    	 console.log("else 탔아???");
+	    	 $("#s_check_tel").css('display', 'inline-block');
+	         $("#s_check_tel").text('✅');
+	         $("#s_check_tel").css('font-size', '1.2em');
+	         $("#s_check_tel").css('color', 'green');
+	     }
+	
+	});
+	
+    
+	$("#umTel").on(
+			"input",
+			function() {
+				var target = document.getElementById("umTel");
+				target.value = target.value.replace(/[^0-9]/g, '').replace(
+						/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
+						.replace(/(-{1,2})$/g, "");
+			});
+	
+	// 이메일 유효성 검사
+	$("#umEmail").keyup(function(){
+		
+		console.log("눌리나요?");
+		
+		// var regEmail = /^[0-9a-zA-Z]([-.]?[0-9a-zA-Z])@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]).[a-zA-Z]{2,3}$/i; //이메일 양식
+		var regEmail = /^[a-z0-9.-_]+@([a-z0-9-]+.)+[a-z]{2,6}.[a-zA-Z]{3}$/i; // 이메일 양식
+		var email = $("#umEmail").val().trim();
+		if(email == "") {
+	    	console.log("빈문자열");
+	    	$("#s_check_email").css('display', 'inline-block');
+	    	$("#s_check_email").text('');
+	    	
+		} else if(!regEmail.test(email)){
+			 console.log("유효성체크 하나요?");
+	            $("#s_check_email").css('display', 'inline-block');
+	            $("#s_check_email").text('email@example.com 형태로 작성 해주시길 바랍니다.');
+	            $("#s_check_email").css('font-size', '0.8em');
+	            $("#s_check_email").css('color', 'red');
+	     } else {
+	    	 $("#s_check_email").css('display', 'inline-block');
+	         $("#s_check_email").text('✅');
+	         $("#s_check_email").css('font-size', '1.2em');
+	         $("#s_check_email").css('color', 'green');
+	     }
+	
+	});
+	
 	</script>
 	
 	<script>

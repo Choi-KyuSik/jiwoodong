@@ -52,27 +52,31 @@
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">이름</th>
-							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
+							<td class="table-light" id="s_url_no"><input style="border: none;" type="text" readonly="readonly" class="form-control"
 								name="buName" maxlength="300"
 								value="${buMemberDetail.buName}" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th">생년월일</th>
-							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
+							<td class="table-light tb_bg_color" id="s_url_no"><input style="border: none;" type="text" readonly="readonly" class="form-control"
 								name="buBirth" maxlength="300"
 								required="required" value="${buMemberDetail.buBirth}" /></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">전화번호</th>
-							<td class="table-light" id="s_url_no"><input type="text" class="form-control"
-								name="buTel" maxlength="300"
-								required="required" value="${buMemberDetail.buTel}" /></td>
+							<td class="table-light" id="s_url_no"><input type="text" class="form-control" id="buTel"
+								name="buTel" maxlength="300" style="width: 500px;display: inline-block;"
+								required="required" value="${buMemberDetail.buTel}" />
+								<span id="s_check_tel" style="display: none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span>
+								</td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th">이메일</th>
-							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
-								name="buEmail" maxlength="300"
-								required="required" value="${buMemberDetail.buEmail}" /></td>
+							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control" id="buEmail"
+								name="buEmail" maxlength="300" style="width: 500px; display: inline-block;
+								required="required" value="${buMemberDetail.buEmail}" />
+								<span id="s_check_email" style="display:none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span>
+								</td>
 						</tr>
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">가입일</th>
@@ -88,6 +92,79 @@
 			</form>
 		</div>
 	</div>
+	
+	<!-- 유효성 검사 -->
+	<script>
+		// 전화번호 유효성 검사
+		$("#buTel").keyup(function(){
+			
+			console.log("눌리나요?");
+			
+			var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //휴대폰 번호
+			var phone = $("#buTel").val().trim();
+			if(phone == "") {
+		    	console.log("빈문자열");
+		    	$("#s_check_tel").css('display', 'inline-block');
+		    	$("#s_check_tel").text('');
+		    	
+			} else if(!regPhone.test(phone)){
+				 console.log("유효성체크 하나요?");
+		            // alert("휴대폰 번호 양식(01#-####-####)에 맞게 입력해주시길 바랍니다.");
+		            $("#s_check_tel").css('display', 'inline-block');
+		            $("#s_check_tel").text('휴대폰 번호 양식(01#-####-####)에 맞게 입력해주시길 바랍니다.');
+		            $("#s_check_tel").css('font-size', '0.8em');
+		            $("#s_check_tel").css('color', 'red');
+		            
+		            // $("#k_tel").focus();
+		            // return false;
+		     } else {
+		    	 $("#s_check_tel").css('display', 'inline-block');
+		         $("#s_check_tel").text('✅');
+		         $("#s_check_tel").css('font-size', '1.2em');
+		         $("#s_check_tel").css('color', 'green');
+		     }
+		
+		});
+		
+	    
+		$("#buTel").on(
+				"input",
+				function() {
+					var target = document.getElementById("buTel");
+					target.value = target.value.replace(/[^0-9]/g, '').replace(
+							/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
+							.replace(/(-{1,2})$/g, "");
+				});
+		
+		// 이메일 유효성 검사
+		$("#buEmail").keyup(function(){
+			
+			console.log("눌리나요?");
+			
+			// var regEmail = /^[0-9a-zA-Z]([-.]?[0-9a-zA-Z])@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]).[a-zA-Z]{2,3}$/i; //이메일 양식
+			var regEmail = /^[a-z0-9.-_]+@([a-z0-9-]+.)+[a-z]{2,6}.[a-zA-Z]{3}$/i; // 이메일 양식
+			var email = $("#buEmail").val().trim();
+			if(email == "") {
+		    	console.log("빈문자열");
+		    	$("#s_check_email").css('display', 'inline-block');
+		    	$("#s_check_email").text('');
+		    	
+			} else if(!regEmail.test(email)){
+				 console.log("유효성체크 하나요?");
+		            $("#s_check_email").css('display', 'inline-block');
+		            $("#s_check_email").text('email@example.com 형태로 작성 해주시길 바랍니다.');
+		            $("#s_check_email").css('font-size', '0.8em');
+		            $("#s_check_email").css('color', 'red');
+		     } else {
+		    	 $("#s_check_email").css('display', 'inline-block');
+		         $("#s_check_email").text('✅');
+		         $("#s_check_email").css('font-size', '1.2em');
+		         $("#s_check_email").css('color', 'green');
+		     }
+		
+		});
+	</script>
+	
 	<script>
 		$("#back_btn").click(function() {
 			history.back();
