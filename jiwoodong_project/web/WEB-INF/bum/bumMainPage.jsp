@@ -423,12 +423,12 @@ article>div>p {
 				<div id="review" style="overflow: hidden;">
 					<p class="box_font">리뷰</p>
 					<div>
-						<table class="table">
+						<table class="table" table-layout: fixed;>
 							<thead>
 								<tr>
 								    <th style="display: none;" scope="col" class="s_center">No</th>
                   					<th style="display: none;" scope="col" class="s_center">업체번호</th>
-									<th scope="col" class="s_center" style="display: block;width: 100px;">업체명</th>
+									<th scope="col" class="s_center" style="display: block; width: 100px;">업체명</th>
 									<th scope="col" class="s_center">내용</th>
 									<th scope="col" class="s_center">별점</th>
 									<th scope="col" class="s_center">작성자</th>
@@ -442,7 +442,7 @@ article>div>p {
 									<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.rvNo}</th>
 									<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.cpNo}</th>
 									<th class="s_center" scope="row" class="s_ntNo">${i.cpName }</th>
-									<td class="s_td_short">${i.rvContent}</td>
+									<td class="s_td_short" style=" overflow: hidden; display: block; text-overflow: ellipsis; white-space: nowrap; width: 100px;">${i.rvContent}</td>
 									<td class="s_td_short">${i.rvScore}</td>
 									<td class="s_center">${i.umId}</td>
 									<td class="s_center">${i.rvWriteDate }</td>

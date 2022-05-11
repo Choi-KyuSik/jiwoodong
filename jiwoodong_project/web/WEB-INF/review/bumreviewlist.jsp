@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/userMypage.css">       
+<%-- <link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/userMypage.css">       --%> 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/reset.css"> 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
-<title>Insert title here</title>
+<title>사업자 리뷰 관리</title>
 <!--header-->
 <style>
 header {
@@ -284,18 +284,22 @@ article>div>p {
 			<div style="clear: both;"></div>
 		</div>
 	</header>
+	
+	<content>
+	<article>
+		<div id="main_box" style="display: block;height: 1000px;background-color: rgb(241, 241, 241);margin: 20px auto 0;padding: 30px;border-radius: 20px;">
          	<!-- 리뷰 조회 content : 전승희 -->
             <div id="c_inner_info" style="width: 1000px ; margin:0 auto;">
               <p class="c_info_title"
               style="text-align: center;margin: 20px;font-size: 1.5em;font-weight: bolder;">내 업체 리뷰조회</p>
-              <table class="table" style="width: 100%; margin-top: 40px;">
+              <table class="table" style="width: 100%; margin-top: 40px; margin:0 auto;">
                 <thead>
                   <tr>
                   	<th style="display: none;" scope="col" class="s_center">No</th>
                   	<th style="display: none;" scope="col" class="s_center">업체번호</th>
-					<th scope="col" class="s_center" style="width: 300px;">업체명</th>
+					<th scope="col" class="s_center" style="width: 200px;">업체명</th>
 					<th scope="col" class="s_center" style="width: 400px;">내용</th>
-					<th scope="col" class="s_center" style="width: 100px;">평점</th>
+					<th scope="col" class="s_center" style="width: 200px;">평점</th>
 					<th scope="col" class="s_center" style="width: 100px;">작성자</th>
 					<th scope="col" class="s_center" style="width: 100px;">작성일</th>
                   </tr>
@@ -307,7 +311,8 @@ article>div>p {
 							<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.rvNo}</th>
 							<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.cpNo}</th>
 							<th class="s_center" scope="row" class="s_ntNo">${i.cpName }</th>
-							<td class="s_td_short">${i.rvContent}</td>
+							<td class="s_td_short" 
+								style=" overflow: hidden; display: block; text-overflow: ellipsis; white-space: nowrap; width: 400px;">${i.rvContent}</td>
 							<td class="s_td_short">${i.rvScore}</td>
 							<td class="s_center">${i.umId}</td>
 							<td class="s_center">${i.rvWriteDate }</td>
@@ -323,7 +328,10 @@ article>div>p {
 				</c:if>                
                 </tbody>
               </table>
+              </div>
             </div>
+           </article>
+		</content>           
 <!-- 	<script>
 	$("#k_review_menu").click(function() {
 			var cpNo = $("#cpNo").val();
