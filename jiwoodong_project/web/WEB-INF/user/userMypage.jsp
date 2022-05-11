@@ -173,6 +173,7 @@
 								</tbody>
 							</table>
 						</div>
+						<!-- 리뷰내역  -->
 						<div id="c_inner_info">
 							<p class="c_info_title">리뷰내역</p>
 							<table class="table" style="width: 100%; margin-top: 40px; table-layout: fixed;">
@@ -495,14 +496,14 @@
 		});
 	</script>
 	
-	<script>
+<!--  	<script>
 		$("#k_review_menu").click(function() {
 			//var rvNo = $("#umId").val();
 			//console.log("umId ? : " + umId);
 			//console.log("umId 의 타입 ? : " + typeof (umId));
 			location.href = "userreviewlist";
 		});
-	</script>
+	</script>  -->
   <script>
   	$("#umPwd").keyup(function() {
   		// console.log("db에 있는 pwd 확인" + ${uvo.umPwd});
@@ -582,7 +583,7 @@
 		});
 	</script>
 	
-	<script>
+<!-- 	<script>
 	$("#c_reviewlist").click(function() {
 		console.log("안녕");
 		$("#c_reviewlist_info").show();
@@ -592,6 +593,6 @@
 	//console.log("umId 의 타입 ? : " + typeof (umId));
 	// location.href = "userreviewlist";
 });
-	</script>
+	</script> -->
 </body>
 </html>

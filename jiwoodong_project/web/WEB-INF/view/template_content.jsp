@@ -27,11 +27,11 @@
 					<br>
 					<% if (session.getAttribute("bu_id") != null && session.getAttribute("um_id") == null) { %>
 					<button type="button" id="bum_mypage_btn" class="btn btn-secondary btn-sm">
-						<%= session.getAttribute("bu_id") %>'s page
+						<%= session.getAttribute("buName") %>'s page
 						</button>
 					<% } else if(session.getAttribute("um_id") != null && session.getAttribute("bu_id") == null){ %>
 					<button type="button" id="um_mypage_btn" class="btn btn-secondary btn-sm">
-							 <%= session.getAttribute("um_id") %>'s page
+							 <%= session.getAttribute("umName") %>'s page
 							 </button>
 					 <% } %>
 				</div>

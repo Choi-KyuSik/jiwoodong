@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/reset.css">    
+	href="<%=request.getContextPath()%>/resources/css/reset.css"> 
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/userMypage.css">	 
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,9 +94,9 @@
 </style>
 </head>
 <body>
-	<div>
+<%-- 	<div>
 		<%@ include file="../view/user/user_header.jsp"%>
-	</div>
+	</div> --%>
 
 	<section id="contents">
 
@@ -126,13 +128,12 @@
 						</article>
 						<div id="s_rv_btn_box" style="position: relative;left: 20px;">
 							<input type="button" id="back_btn"
-								class="btn btn-secondary pull-right" value="뒤로가기"> <input
-								type="button" id="s_update_btn"
-								class="btn btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#exampleModal"value="수정하기"> 
-								<input type="button" id="s_delete_btn"
-								class="btn btn-danger pull-right" value="삭제하기">
+								class="btn btn-secondary pull-right" value="뒤로가기"> 
+								<input type="button" id="s_update_btn" class="btn btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#exampleModal"value="수정하기"> 
+								<input type="button" id="s_delete_btn" class="btn btn-danger pull-right" value="삭제하기">
 						</div>
 					</section>
+					<input type="hidden" name="rvNo" id="rvNo" value="${rvNo}" />
 				</c:forEach>
 			</form>
 						<!-- Modal -->
@@ -232,9 +233,11 @@
 		$("#s_delete_btn").click(function() {
 			if (confirm("정말 삭제하시겠습니까?") == true) {
 				var frmEl = $("#frm");
-				frmEl.attr("action", "#");
+				frmEl.attr("action", "deleteReview");
 				frmEl.attr("method", "post");
 				frmEl.submit();
+				$("#c_reviewlist_info").load("userreviewlist");
+				//location.href="userreviewlist";
 			} else {
 				history.back();
 			}

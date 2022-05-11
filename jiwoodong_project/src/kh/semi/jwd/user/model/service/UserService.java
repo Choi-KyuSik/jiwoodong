@@ -177,5 +177,13 @@ public class UserService {
 			System.out.println("updateUserReview result: "+result);
 			return result;
 		}
+		//승희 - 사용자 리뷰 삭제
+		public int deleteReview(int rvNo) {
+			Connection conn = getConnection();
+			int result = new UserReviewDao().deleteReview(conn, rvNo);
+			close(conn);
+			System.out.println("deleteReview result : "+result);
+			return result;
+		}
 	
 }

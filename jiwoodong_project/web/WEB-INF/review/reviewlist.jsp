@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/userMypage.css">
-<%-- <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/reset.css"> --%>
+ <link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/reset.css"> 
  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/admin.css">
 
 <!DOCTYPE html>
@@ -33,13 +33,14 @@
 
 </head>
 <body>
-	<%-- <div>
+<header>
+ 	<div>
 		<%@ include file="../view/user/user_header.jsp"%>
-	</div> --%>
-    <!-- 네비 리뷰 -->
+	</div>  
+</header>   
     <article>
-    <!-- <div id="main_box" style="background-color: rgb(241, 241, 241); border-radius: 15px;">
-    	<div style="padding: 10px 0 10px 0;"> -->
+    <div id="main_box" style="background-color: rgb(241, 241, 241); border-radius: 15px;">
+    	<div style="padding: 10px 0 10px 0;">
      	 <div style="width: 90%;margin: 0 auto;background: white;border-radius: 15px;padding: 51px;margin-top: 30px;">
 	        <div style="text-align: center;">
 	        	<p style="font-size: 2em; font-weight: bold;">리뷰 조회</p>
@@ -74,36 +75,10 @@
 			                </c:forEach>
 					</tbody>
 				</table>
-      <!-- </div>
-      </div> -->
+      </div>
+      </div> 
       </div>
     </article>
-
-<%--             <div id="c_inner_info" style="width: 1000px">
-              <p class="c_info_title">리뷰내역</p>
-              <table class="table" style="width: 100%; margin-top: 40px;">
-                <thead>
-                  <tr>
-					<th scope="col" class="s_center" style="width: 300px;">업체명</th>
-					<th scope="col" class="s_center" style="width: 400px;">내용</th>
-					<th scope="col" class="s_center" style="width: 100px;">평점</th>
-					<th scope="col" class="s_center" style="width: 100px;">작성자</th>
-					<th scope="col" class="s_center" style="width: 100px;">작성일</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${userrvlist}" var="i">
-					<tr class="s_tr_readList s_tr_modal">
-						<th class="s_center" scope="row" class="s_ntNo">${i.cpName }</th>
-						<td class="s_td_short">${i.rvContent}</td>
-						<td class="s_td_short">${i.rvScore}</td>
-						<td class="s_center">${i.umId}</td>
-						<td class="s_center">${i.rvWriteDate }</td>
-					</tr>
-                </c:forEach>
-                </tbody>
-              </table>
-            </div> --%>
 	
   	<script>
 		$(".s_tr_readList").click(function() {
@@ -151,7 +126,7 @@
 		});
 	</script>  -->
 	
-	<script>
+<!-- 	<script>
 	$("#c_reviewlist").click(function() {
 		console.log("안녕");
 		$("#c_reviewlist_info").show();
@@ -161,6 +136,6 @@
 	//console.log("umId 의 타입 ? : " + typeof (umId));
 	// location.href = "userreviewlist";
 });
-	</script>
+	</script> -->
 </body> 
 </html>

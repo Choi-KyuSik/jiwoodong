@@ -170,4 +170,24 @@ public class UserReviewDao {
 		
 		return result;
 	}
+	//리뷰 삭제 기능 : 전승희
+	public int deleteReview(Connection conn,int rvNo) {
+		int result = 0;
+		String sql ="DELETE FROM REVIEW WHERE RV_NO=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rvNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("리뷰 삭제 실패! ");
+			e.printStackTrace();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }
