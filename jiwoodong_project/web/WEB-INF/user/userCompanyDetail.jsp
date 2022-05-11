@@ -247,24 +247,36 @@
 									<ul class="c_img_list">
 										<div style="margin: 30px 0;">
 										<c:forEach items="${uscpdetail }" var="i">
-											<li class="c_img_box">
-												<!-- <div> -->
+											
 											<c:if test="${empty i.flGno }">
+												<li class="c_img_box">
+												<div>
 												<img
 													src="https://economist.co.kr/resources/images/error/noimage.gif"
 													class="c_img" alt="">
+												</div>
+												</li>
 											</c:if>
 											<c:if test="${not empty i.flGno }">
+											<li class="c_img_box">
+												<div>
 												<img src="${i.flGno }" class="c_img" alt="">
+											</div>
+											</li>
 													<c:if test="${not empty i.flGno2 }">
+														<li class="c_img_box">
+														<div>
 														<img src="${i.flGno2 }" class="c_img" alt="">
+														</div>
+														</li>
 													</c:if>
 													<c:if test="${not empty i.flGno3 }">
-														<img src="${i.flGno3 }" class="c_img" alt="">
+														<li class="c_img_box">
+														<div><img src="${i.flGno3 }" class="c_img" alt=""></div></li>
 													</c:if>
 											</c:if>
-												<!-- </div> -->
-											</li>
+											
+											
 											</c:forEach>
 											<!-- <li class="c_img_box">
 												<div>
