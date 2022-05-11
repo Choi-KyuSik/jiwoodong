@@ -53,7 +53,17 @@ public class AdminNoticeUpdateDoController extends HttpServlet {
 		adnvo.setNtContent(ntContent);
 		adnvo.setNtNo(ntNo);
 		adnvo.setFlGno(flGno);
-		int result = new AdminNoticeService().updateNotice(adnvo);
+		
+		System.out.println("flGno : " + flGno);
+		
+		int result = 0;
+		
+		if(flGno != "") {
+			result = new AdminNoticeService().updateNotice(adnvo);
+		} else {
+			result = new AdminNoticeService().updateNoticeNtNc(adnvo);
+		}
+		
 		if(result < 1) {
 			System.out.println("글수정 실패!");
 			PrintWriter out = response.getWriter();

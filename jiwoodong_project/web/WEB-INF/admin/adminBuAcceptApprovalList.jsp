@@ -67,6 +67,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<c:if test="${empty acceptApprovalList }">
+               		<div class="s_notice_msg">업체 승인 수락 내역이 없습니다.</div>
+               	</c:if>
 				<div id="pagingBox">
 					<ul class="pagination">
 						<!-- startPage에서 -1일 때 -->

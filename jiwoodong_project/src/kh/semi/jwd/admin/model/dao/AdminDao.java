@@ -1327,6 +1327,31 @@ public class AdminDao {
 		
 	}
 	
+	// 리뷰 수정(파일 수정 안할 때)
+	public int updateReviewCtScNo(Connection conn, String rvContent, int rvScore, int rvNo) {
+		
+		int result = 0;
+		
+		String sql = "UPDATE REVIEW SET RV_CONTENT = ?, RV_SCORE = ?, RV_MODIFY_DATE = SYSTIMESTAMP  WHERE RV_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rvContent);
+			pstmt.setInt(2, rvScore);
+			pstmt.setInt(3, rvNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
 	// 리뷰 평점 별 통계 count
 	public ArrayList<Map<String, Object>> reviewCount(Connection conn) {
 

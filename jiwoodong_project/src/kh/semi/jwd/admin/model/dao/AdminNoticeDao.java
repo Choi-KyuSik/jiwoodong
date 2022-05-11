@@ -207,6 +207,33 @@ public class AdminNoticeDao {
 		}
 		return result;
 	}
+	
+	// 글 수정(파일 없을 때)
+	public int updateNoticeNtNc(Connection conn, AdminNoticeVo adnvo) {
+		int result = 0;
+
+		//			NT_NO         NOT NULL NUMBER         
+		//			NT_TITLE      NOT NULL VARCHAR2(300)  
+		//			NT_CONTENT    NOT NULL VARCHAR2(4000) 
+		//			NT_WRITE_DATE NOT NULL TIMESTAMP(6)   
+		//			NT_COUNT      NOT NULL NUMBER         
+
+		String sql = "UPDATE NOTICE SET NT_TITLE = ?, NT_CONTENT = ? WHERE NT_NO = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, adnvo.getNtTitle());
+			pstmt.setString(2, adnvo.getNtContent());
+			pstmt.setInt(3, adnvo.getNtNo());
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	// 글 삭제
 	public int deleteNotice(Connection conn, AdminNoticeVo adnvo) {

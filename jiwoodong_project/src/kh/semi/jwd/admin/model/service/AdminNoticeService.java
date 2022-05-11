@@ -67,6 +67,15 @@ public class AdminNoticeService {
 		return result;
 	}
 	
+	// 글 수정(파일 없을 때)
+	public int updateNoticeNtNc(AdminNoticeVo adnvo) {
+		Connection conn = getConnection();
+		int result = dao.updateNoticeNtNc(conn, adnvo);
+
+		close(conn);
+		return result;
+	}
+	
 	// 글 삭제
 	public int deleteNotice(AdminNoticeVo adnvo) {
 		Connection conn = getConnection();

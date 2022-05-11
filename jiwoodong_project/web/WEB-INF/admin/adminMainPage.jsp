@@ -15,6 +15,7 @@
     crossorigin="anonymous"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <title>관리자 메인페이지</title>
 
 </head>
@@ -56,6 +57,9 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                       	<c:if test="${empty cpaclist }">
+                       		<div class="s_notice_msg">업체 신청 내역이 없습니다.</div>
+                       	</c:if>
                     </div>
                 </div>
                 <div id="s_bu_statistics">
@@ -97,6 +101,7 @@
                 </div>
             </div>
         </div>
+        </section>
         
     <!-- 통계 -->
     <script>

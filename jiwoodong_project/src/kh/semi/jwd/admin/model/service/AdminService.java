@@ -390,6 +390,15 @@ public class AdminService {
 		
 	}
 	
+	// 리뷰 수정(파일 수정 안할 때)
+	public int updateReviewCtScNo(String rvContent, int rvScore, int rvNo) {
+		Connection conn = getConnection();
+		int result = dao.updateReviewCtScNo(conn, rvContent, rvScore, rvNo);
+		close(conn);
+		return result;
+		
+	}
+	
 	// 업종별 예약현황 통계 count
 	public ArrayList<Map<String, Object>> reviewCount() {
 

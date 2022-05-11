@@ -67,7 +67,14 @@ public class AdminReviewUpdateDoController extends HttpServlet {
 		System.out.println("rvScore : " + rvScore);
 		System.out.println("rvNo : " + rvNo);
 		
-		int result = new AdminService().updateReview(rvContent, fileUrl, rvScore, rvNo);
+		int result = 0;
+		
+		if(fileUrl != "") {
+			result = new AdminService().updateReview(rvContent, fileUrl, rvScore, rvNo);
+		} else {
+			result = new AdminService().updateReviewCtScNo(rvContent, rvScore, rvNo);
+		}
+		
 		System.out.println("결과는 ? : " + result);
 		if(result < 1) {
 			msg = "리뷰 수정 실패";
