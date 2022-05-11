@@ -315,7 +315,7 @@ article>div>p {
 						<%= session.getAttribute("buName") %>님</p>
 					<ul class="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" id="k_pwdinfo" href="">비밀번호 재설정</a></li>
+						<li><a class="dropdown-item" id="k_pwdinfo" href="#">비밀번호 재설정</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
@@ -461,6 +461,12 @@ article>div>p {
     	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //휴대폰 번호
 		if(!regExpPassword.test(password)){
 			alert("패스워드는 영문자, 숫자가 적어도 1개이상, 8~16글자여야 합니다.");
+			$("#buPwd_1").focus();
+			return false;
+		}else if(!password || password != $("#buPwd_2").val().trim()){
+			alert("패스워드 입력란과 확인란이 같지 않습니다.");
+			$("#buPwd_1").val("");
+			$("#buPwd_2").val("");
 			$("#buPwd_1").focus();
 			return false;
 		}else if(!reg.test(email)){

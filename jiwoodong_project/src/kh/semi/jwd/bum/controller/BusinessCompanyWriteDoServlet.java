@@ -62,17 +62,17 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 		String cpExplain = request.getParameter("cpExplain");
 		String cpClassify = request.getParameter("cpClassify");
 		System.out.println("cpClassify:" + cpClassify);
-		if(cpClassify.equals("n")) {
+		/*
+		 * if(cpClassify.equals("n")) { cpClassify = "A"; }
+		 */
+		
+		if(cpClassify.equals("D")) {
 			cpClassify = "A";
 		}
 		String cpOpenTime = request.getParameter("cpOpenTime");
-		if(cpOpenTime == null) {
-			cpOpenTime = "X";
-		}
+		System.out.println("cpOpenTime 왜 안담기지?:"+ cpOpenTime);
 		String cpCloseTime = request.getParameter("cpCloseTime");
-		if(cpCloseTime == null) {
-			cpCloseTime = "X";
-		}
+		System.out.println("cpCloseTime 왜 안담기지?:"+ cpCloseTime);
 		String cpPostcode = request.getParameter("cpPostcode");
 		String cpAddress = request.getParameter("cpAddress");
 		String cpDtaddress = request.getParameter("cpDtaddress");

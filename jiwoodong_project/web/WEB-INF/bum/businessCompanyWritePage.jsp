@@ -302,7 +302,8 @@ article>div>p {
 								<th class="table-primary s_us_th"
 									style="-bs-table-accent-bg: none;">업체 사진 추가</th>
 								<td class="table-light" id="s_us_no">
-									<!-- 업로드 버튼 1,2,3 --> 사진1:<input type="hidden"
+									<!-- 업로드 버튼 1,2,3 --> 
+									사진1:<input type="hidden"
 									role="uploadcare-uploader"
 									data-public-key="c545e991d9de45462444"
 									data-tabs="file camera url facebook gdrive gphotos" /> <br>
@@ -324,30 +325,21 @@ article>div>p {
 									style="-bs-table-accent-bg: none;">운영 구분<span
 									class="k_essential_info">*필수</span></th>
 								<td class="table-light">
-								<input type="radio" name="cpClassify" value="n" checked style="display:none;">
+								<input type="radio" name="cpClassify" value="D" checked style="display:none;">
 								<input type="radio"
 									class="form-check-input" id="k_everyday" value="B"
-									name="cpClassify"> <label class="form-check-label"
-									for="k_everyday" id="k_everyday">평일만 운영해요</label> <input
-									type="radio" id="k_neveryday" value="A"
-									class="form-check-input" name="cpClassify"> <label
-									class="form-check-label" id="k_neveryday" for="k_neveryday">주말까지
-										운영해요</label>
+									name="cpClassify"> <label class="form-check-label" for="k_everyday" id="k_everyday">
+									평일만 운영해요</label> 
+									<input type="radio" id="k_neveryday" value="A" class="form-check-input" name="cpClassify"> <label
+									class="form-check-label" id="k_neveryday" for="k_neveryday">
+									주말까지 운영해요</label>
 									<div id="k_Classify">
 										<div id=k_everyday_content>
 											<div>
 												<hr>
 												영업시작 시간: <input type="time" id="k_timebar" name="cpOpenTime">
-												영업마감 시간: <input type="time" id="k_timebar"
-													name="cpCloseTime">
+												영업마감 시간: <input type="time" id="k_timebar" name="cpCloseTime">
 
-											</div>
-										</div>
-										<div id=k_neveryday_content>
-											<div>
-												<hr>
-												영업시작 시간: <input type="time" name="cpOpenTime"> 영업마감
-												시간: <input type="time" name="cpCloseTime">
 											</div>
 										</div>
 									</div></td>
@@ -491,13 +483,11 @@ article>div>p {
       });
 
       $("#k_everyday").click(function() {
-         $("#k_everyday_content").show();
-         $("#k_neveryday_content").hide();
+         $("#k_everyday_content").show();        
       });
 
-      $("#k_neveryday").click(function() {
-         $("#k_neveryday_content").show();
-         $("#k_everyday_content").hide();
+      $("#k_neveryday").click(function() {        
+         $("#k_everyday_content").show();
       });
 
       $(document).ready(function() {

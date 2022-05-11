@@ -61,8 +61,13 @@ public class BusinessCompanyWriteDoUpdateServlet extends HttpServlet {
 		String cpCategory = request.getParameter("cpCategory");
 		String cpExplain = request.getParameter("cpExplain");
 		String cpClassify = request.getParameter("cpClassify");
+		if(cpClassify.equals("D")) {
+			cpClassify = "A";
+		}
 		String cpOpenTime = request.getParameter("cpOpenTime");
+		System.out.println("cpOpenTime 왜 안담기지?:"+ cpOpenTime);
 		String cpCloseTime = request.getParameter("cpCloseTime");
+		System.out.println("cpCloseTime 왜 안담기지?:"+ cpCloseTime);
 		String cpPostcode = request.getParameter("cpPostcode");
 		String cpAddress = request.getParameter("cpAddress");
 		String cpDtaddress = request.getParameter("cpDtaddress");
@@ -105,7 +110,7 @@ public class BusinessCompanyWriteDoUpdateServlet extends HttpServlet {
 			out1.println("</script>");
 			out1.flush();
 		} else {
-			System.out.println("업체 등록 *성공*");
+			System.out.println("업체 수정 *성공*");
 			PrintWriter out1 = response.getWriter();
 			response.setContentType("text/html; charset=utf-8");
 			out1.println("<script language='javascript'>");

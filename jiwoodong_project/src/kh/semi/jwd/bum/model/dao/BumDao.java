@@ -441,7 +441,7 @@ public class BumDao {
 
 			int result = 0;
 
-			String sql = "UPDATE company SET CP_NAME=?, CP_CATEGORY=?, CP_CLASSIFY=? , CP_POSTCODE=?, CP_ADDRESS=?, CP_DTADDRESS=?, CP_OPEN_TIME=?, CP_CLOSE_TIME=? ,CP_EXPLAIN=?, FL_GNO = ?, FL_GNO2 = ?, FL_GNO3 = ?, cp_signyn = 'N' where bu_no = ?";
+			String sql = "UPDATE company SET CP_NAME=?, CP_CATEGORY=?, CP_CLASSIFY=? , CP_POSTCODE=?, CP_ADDRESS=?, CP_DTADDRESS=?, CP_OPEN_TIME=?, CP_CLOSE_TIME=?, CP_EXPLAIN=?, FL_GNO = ?, FL_GNO2 = ?, FL_GNO3 = ?, cp_signyn = 'N' where bu_no = ?";
 			try {
 
 				pstmt = conn.prepareStatement(sql);				
