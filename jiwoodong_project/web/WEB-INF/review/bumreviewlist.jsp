@@ -286,11 +286,13 @@ article>div>p {
 	</header>
          	<!-- 리뷰 조회 content : 전승희 -->
             <div id="c_inner_info" style="width: 1000px ; margin:0 auto;">
-              <p class="c_info_title">내 업체 리뷰조회</p>
+              <p class="c_info_title"
+              style="text-align: center;margin: 20px;font-size: 1.5em;font-weight: bolder;">내 업체 리뷰조회</p>
               <table class="table" style="width: 100%; margin-top: 40px;">
                 <thead>
                   <tr>
-                  <th style="display: none;" scope="col" class="s_center">No</th>
+                  	<th style="display: none;" scope="col" class="s_center">No</th>
+                  	<th style="display: none;" scope="col" class="s_center">업체번호</th>
 					<th scope="col" class="s_center" style="width: 300px;">업체명</th>
 					<th scope="col" class="s_center" style="width: 400px;">내용</th>
 					<th scope="col" class="s_center" style="width: 100px;">평점</th>
@@ -299,21 +301,30 @@ article>div>p {
                   </tr>
                 </thead>
                 <tbody>
+                <c:if test="${not empty bumRvlists }">
                 <c:forEach items="${bumRvlists}" var="i">
-					<tr id="j_review_menu" class="s_tr_readList s_tr_modal" href="#">
-					<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.rvNo}</th>
-						<th class="s_center" scope="row" class="s_ntNo">${i.cpName }</th>
-						<td class="s_td_short">${i.rvContent}</td>
-						<td class="s_td_short">${i.rvScore}</td>
-						<td class="s_center">${i.umId}</td>
-						<td class="s_center">${i.rvWriteDate }</td>
-                 <input type="hidden" id="rvNo" name="rvNo" value="${i.rvNo}" />
+					<tr id="j_review_menu" class="s_tr_readList s_tr_modal" href="#">	
+							<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.rvNo}</th>
+							<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.cpNo}</th>
+							<th class="s_center" scope="row" class="s_ntNo">${i.cpName }</th>
+							<td class="s_td_short">${i.rvContent}</td>
+							<td class="s_td_short">${i.rvScore}</td>
+							<td class="s_center">${i.umId}</td>
+							<td class="s_center">${i.rvWriteDate }</td>
+							
+                 <%-- <input type="hidden" id="rvNo" name="rvNo" value="${i.rvNo}" /> --%>
 					</tr>
                 </c:forEach>
+                </c:if>
+				<c:if test="${empty bumRvlists }">
+					<tr>
+						<td colspan="5">등록된 리뷰가 없습니다.</td>
+					</tr>
+				</c:if>                
                 </tbody>
               </table>
             </div>
-	<script>
+<!-- 	<script>
 	$("#k_review_menu").click(function() {
 			var cpNo = $("#cpNo").val();
 			console.log("cpNo ? : " + cpNo);
@@ -326,7 +337,32 @@ article>div>p {
 			console.log("rvNo 의 타입 ? : " + typeof(rvNo));
 			location.href="bumReviewDetailList?rvNo=" + rvNo;
 		});
-	</script>            
+	</script>     -->     
+	  	<script>
+		$(".s_tr_readList").click(function() {
+			
+			// 배열 선언
+			var tdArr = new Array();
+			// 현재 클릭된 행(tr의 td)
+			var tr = $(this);
+			console.log("tr : " + tr);
+			var td = tr.children();
+			console.log("td : " + td);
+
+			// 반복문을 통해 배열에 값을 담아 사용
+			td.each(function(i) {
+				tdArr.push(td.eq(i).text());
+			});
+			// td들이 배열에 담겨있는데 그 중 1번째가 필요
+			console.log("tdArr : " + tdArr);
+			console.log("배열에 담긴 값 : " + tdArr[0]);
+			console.log(typeof (tdArr[0]));
+			/* var rvNo = $("#rvNo").val();
+			console.log("rvNo ? : " + rvNo);
+			console.log("rvNo 의 타입 ? : " + typeof(rvNo)); */
+			location.href="bumReviewDetailList?rvNo=" + tdArr[0];
+		}); 
+	</script>    
 	<script>
 			$("#k_info_menu").click(function() {
 				$("#k_info_content").hide();

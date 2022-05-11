@@ -17,6 +17,107 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.min.js"></script>
 <title>리뷰 상세 조회 페이지(사용자)</title>
+<!--header-->
+<style>
+header {
+	margin-top: 10px;
+}
+
+#p_main_top {
+	width: 1200px;
+	margin: 0 auto;
+	border-bottom: 2px solid silver;
+}
+
+#p_top_logo {
+	float: left;
+	margin-left: 30px;
+}
+
+#p_top_menu {
+	float: left;
+	margin: 15px 0 0 10px;
+}
+
+#p_top_profile {
+	float: left;
+}
+
+.navbar-nav {
+	margin-right: 20px;
+}
+
+.dropdown-toggle, .dropdown {
+	font-weight: bold;
+}
+
+#dropdownUser1 {
+	padding-right: 10px;
+}
+</style>
+<!--section공용-->
+<style>
+#main_box {
+	width: 1200px;
+	margin: 15px auto 0;
+}
+
+#booking, #review {
+	text-align: center;
+	/* display: flex;
+      justify-content: center; */
+	/* float: left; */
+	width: 550px;
+	height: 450px;
+	background-color: white;
+	border-radius: 30px;
+	margin: 30px 15px;
+	padding: 15px;
+}
+
+#statistics_visit, #statistics_review {
+	text-align: center;
+	/* display: flex;
+      justify-content: center; */
+	/* float: left; */
+	width: 550px;
+	height: 480px;
+	background-color: white;
+	border-radius: 30px;
+	margin: 0 15px 30px;
+	overflow: hidden;
+}
+
+.box_font {
+	margin-top: 10px;
+	font-weight: bold;
+	color: #0D6EFD;
+	margin-bottom: 20px;
+	font-size: large;
+}
+
+.nav_tab_div {
+	background-color: rgba(241, 241, 241);
+	width: 1200px;
+	margin: 10px 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	border-radius: 15px;
+}
+
+.statiscics_font {
+	margin-top: 20px;
+    font-weight: bold;
+    color: #0D6EFD;
+    margin-bottom: 20px;
+    font-size: large;
+}
+.table{
+	font-size : 15px;
+	text-align: center;
+}
+</style>
 <style>
 #s_rv_section {
 	width: 800px;
@@ -92,8 +193,78 @@
 </style>
 </head>
 <body>
+	<header>
+		<div id="p_main_top">
+			<div id="p_top_logo">
+				<a href="<%=request.getContextPath() %>/BumMainPage" id="k_logo"><img
+					src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"
+					width="80px" alt="logo"></a>
+			</div>
+			<div id="p_top_menu">
+				<nav class="navbar navbar-expand-lg">
+					<div class="container-fluid">
+						<div class="collapse navbar-collapse">
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown"><a class="nav-link dropdown"
+									id="k_info_menu" role="button"> 내정보 관리 </a></li>
+							</ul>
+							<ul class="navbar-nav">
+									
+									<li class="nav-item dropdown"><a class="nav-link dropdown"
+										id="k_review_menu" href="#" role="button" > 리뷰관리 </a></li>
+							</ul>
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown"><a class="nav-link dropdown" data-value="cpSignYn"
+									id="k_bu_eroll_menu" href="#" role="button"> 업체등록 </a></li>
+							</ul>
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" href="#" role="button"
+									data-bs-toggle="dropdown"> 예약관리 </a>
+									<ul class="dropdown-menu dropdown-menu">
+										<li><a class="dropdown-item" id="k_re_menu_enroll" href="#"
+											>예약메뉴등록</a></li>
+										<li>
+											<hr class="dropdown-divider">
+										</li>
+										<li><a class="dropdown-item" id="k_re_cu_menu" href="#">예약
+												조회/수정</a></li>
+									</ul></li>
+							</ul>
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown"><a class="nav-link dropdown"
+									id="k_us_info_menu" href="" role="button"> 회원정보 조회 </a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+			<div style="float: right; margin: 0 30px 0 0;">
+				<div class="dropdown text-end" id="p_top_profile">
+					<a href="#"
+						class="d-block link-dark text-decoration-none dropdown-toggle"
+						id="dropdownUser1" data-bs-toggle="dropdown"> <img
+						src="https://media.discordapp.net/attachments/958566133752016901/973649744310202458/e3362c1706dbf481.png?width=676&height=676"
+						alt="mdo" width="60px">
+					</a>
+					<p style="font-size: 12px; margin: 5px;">환영합니다
+						<%= session.getAttribute("buName") %>님</p>
+					<ul class="dropdown-menu text-small"
+						aria-labelledby="dropdownUser1">
+						<li><a class="dropdown-item" id="k_pwdinfo" href="#">비밀번호 재설정</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li><a class="dropdown-item" href="logout">로그아웃</a></li>
+					</ul>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+	</header>
 
-
+	<article>
+	<div id="main_box">
 	<section id="contents">
 
 		<div id="s_rv_main_box">
@@ -124,9 +295,9 @@
 						</article>
 						<div id="s_rv_btn_box">
 							<input type="button" id="back_btn"
-								class="btn btn-secondary pull-right" value="뒤로가기"> <input
-								type="button" id="s_update_btn"
-								class="btn btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#exampleModal"value="수정하기"> 
+								class="btn btn-secondary pull-right" value="뒤로가기"> 
+							<!-- <input type="button" id="s_update_btn"
+								class="btn btn-primary pull-right" data-bs-toggle="modal" data-bs-target="#exampleModal"value="수정하기"> --> 
 							
 						</div>
 					</section>
@@ -136,8 +307,10 @@
 		</div>
 		
 	</section>
+	</div>
+</article>
 
-		<script>
+	<script>
 		$("#back_btn").click(function() {
 			history.back();
 		});
@@ -157,6 +330,66 @@
 
 
 
+	</script>
+	<!--메뉴바 이동  -->
+		<script>
+			$("#k_info_menu").click(function() {
+				$("#k_info_content").hide();
+				$(".s_row").show();
+				$("#k_bu_eroll_content").hide();
+				$("#k_re_cu_content").hide();
+				$("#k_us_info_content").hide();
+				$("#k_re_menu_content").hide();
+				$("#main_box").hide();
+				/* var frm = $("#frm");
+				frm.attr("action", "buminfocheck");
+				frm.attr("method", "post");
+				frm.submit(); */
+			});
+			
+			$("#k_review_menu").click(function() {
+				$("#k_info_content").hide();
+				$("#k_review_content").show();
+				$("#k_bu_eroll_content").hide();
+				$("#k_re_cu_content").hide();
+				$("#k_us_info_content").hide();
+				$("#k_re_menu_content").hide();
+				$("#main_box").hide();
+			});
+			
+			/* 내정보 관리 이동 */
+		    $("#k_info_menu").click(function() {
+		       var frm = $("#frm");
+		       frm.attr("action", "buminfocheck");
+		       frm.attr("method", "post");
+		       frm.submit();
+		    });		
+			
+			
+			/* 업체등록 */
+			$("#k_bu_eroll_menu").click(function() {			
+				location.href="bucompany";
+			});
+			
+			//예약관리 - 예약 조회/수정
+			$("#k_re_cu_menu").click(function() {
+				location.href = "<%=request.getContextPath()%>/burscheck";
+			});
+			
+			/* 예약관리 - 예약 메뉴 등록 */
+			$("#k_re_menu_enroll").click(function() {
+				location.href = "<%=request.getContextPath()%>/burmenu";
+			});
+			
+			/* 토글 - 비밀번호 변경 */
+		  	$("#k_pwdinfo").click(function() {
+		    	var frm = $("#frm");
+					frm.attr("action", "buminfocheck");
+					frm.attr("method", "post");
+					frm.submit();
+			});
+			
+			
 	</script>
 </body>
 </html>

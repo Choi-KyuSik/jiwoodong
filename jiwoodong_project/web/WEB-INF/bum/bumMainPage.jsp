@@ -420,23 +420,27 @@ article>div>p {
 						</table>
 					</div>
 				</div>
-				<div id="review">
+				<div id="review" style="overflow: hidden;">
 					<p class="box_font">리뷰</p>
 					<div>
-						<table class="table" style="table-layout: fixed;">
+						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">No</th>
-									<th scope="col">제목</th>
-									<th scope="col">작성일자</th>
-									<th scope="col">아이디</th>
-									<th scope="col">별점</th>
+								    <th style="display: none;" scope="col" class="s_center">No</th>
+                  					<th style="display: none;" scope="col" class="s_center">업체번호</th>
+									<th scope="col" class="s_center" style="display: block;width: 100px;">업체명</th>
+									<th scope="col" class="s_center">내용</th>
+									<th scope="col" class="s_center">별점</th>
+									<th scope="col" class="s_center">작성자</th>
+									<th scope="col" class="s_center">작성일</th>
 								</tr>
 							</thead>
 							<tbody>
 							<c:if test="${not empty bumRvlists }">
 							 <c:forEach items="${bumRvlists}" var="i">
-								<tr class="s_tr_readList s_tr_modal">
+								<tr id="j_review_menu" class="s_tr_readList s_tr_modal" href="#">	
+									<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.rvNo}</th>
+									<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.cpNo}</th>
 									<th class="s_center" scope="row" class="s_ntNo">${i.cpName }</th>
 									<td class="s_td_short">${i.rvContent}</td>
 									<td class="s_td_short">${i.rvScore}</td>
