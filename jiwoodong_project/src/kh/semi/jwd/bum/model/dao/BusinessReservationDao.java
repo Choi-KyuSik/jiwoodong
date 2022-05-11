@@ -295,7 +295,7 @@ public ArrayList<BumReservationVo>  BusinessReservationCheckCafe(Connection conn
 
 	public int reservationCancle(Connection conn, String bkNo) {
 		int result = 0;
-		String sql = "update booking set bk_status = 'C', bk_cdate = systemstamp  where bk_no = to_number(?)";
+		String sql = "update booking set bk_status = 'C', bk_cdate = systimestamp  where bk_no = to_number(?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bkNo);

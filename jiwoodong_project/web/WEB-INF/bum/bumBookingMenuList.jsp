@@ -244,6 +244,36 @@ article>div>p {
 		</div>
 	</div>
 	<script>
+	//정규표현식
+		$("#menuName").keyup(function(){
+			var regname = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{1,10}$/;
+			var $str = $(this).val();
+			 if(!regname.test($str)){
+		            alert("10자 이내로 작성해주세요");
+		            $("#menuName").val("");
+		            $("#menuName").focus();
+			 }
+		});
+		$("#menuPrice").keyup(function(){
+			var regtest = /^[0-9]+$/ ;
+			var $str = $(this).val();
+			 if(!regtest.test($str)){
+		            alert("숫자만 입력해주세요.");
+		            $(this).val("")
+		            $(this).focus();
+			 }
+		});
+		$("#menuExplain").keyup(function(){
+			var regtest = /^[0-9]+$/ ;
+			var $str = $(this).val();
+			 if(!regtest.test($str)){
+		            alert("50자 이내로 작성해주세요.");
+		            $(this).val("")
+		            $(this).focus();
+			 }
+		});
+	</script>
+	<script>
     var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
     
     singleWidget.onUploadComplete(function(info){
@@ -260,6 +290,14 @@ article>div>p {
 	})
 	$(".menuAdd").click(function(){
 		if (confirm("추가하시겠습니까?")){
+			if($("#menuName").val() == ""){
+				alert("메뉴명을 입력해주세요")
+				return;
+			} else if($("#menuPrice").val() == ""){
+				alert("가격을 입력해주세요")
+				return;
+			}
+			 
 			$("#frmMenuAdd").submit();
 		} else {
 			return;

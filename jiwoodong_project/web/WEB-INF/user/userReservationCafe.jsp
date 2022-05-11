@@ -202,6 +202,25 @@
         </div>
     </section>
     
+    		<script>
+	$(document).on("change",  "#rsname", function(){
+			var regstr = /^[가-힣]{1,4}$/;
+			if(!regstr.test($(this).val())){
+				$(this).val("");
+				$(this).focus();
+				alert("이름을 4자 이내로 작성해주세요");
+			}
+		});
+		$("#rsphone").keyup(function(){
+			var regstr =  /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
+			if(!regstr.test($(this).val())){
+				$(this).val("");
+				$(this).focus();
+				alert("전화번호를 잘못입력했습니다");
+			}
+		});
+	</script>
+    
     <!-- 결제API : 손은진 -->
     <script>
        var IMP = window.IMP; // 생략 가능
@@ -253,6 +272,11 @@
      // 데이터픽커 선언
         $(function () {
             $("#datepicker").datepicker();
+         // 등록된 메뉴가없을시
+            if($("#rsmenu  option").length == 1){
+            	$("#rsmenu  option").html("등록된 메뉴가 없습니다");
+            	$("#rsmenu").css("font-size", "19px");
+            };
         });
         
      //데이터필커 설정(운영구분 비교)

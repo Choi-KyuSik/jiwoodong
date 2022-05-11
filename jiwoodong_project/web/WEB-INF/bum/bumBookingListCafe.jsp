@@ -271,7 +271,7 @@ td, th {
 						<label for="umid" style="margin: 10px;">아이디 :</label><input
 							type="text" id="umid" name="umid" readonly style="background-color: rgb(233,236,239); border: 1px solid black;"><br> <label
 							for="bkname" style="margin: 10px;">이름 :</label><input type="text"
-							id="bkname" name="bkname" placeholder="1글자 이상"><br>
+							id="bkname" name="bkname" placeholder="한글 이름 1~4자 이내"><br>
 						<label for="bkphone" style="margin: 10px;">핸드폰번호 :</label><input
 							type="tel" id="bkphone" name="bkphone"
 							placeholder="###-####-####"><br> <label for="bkdate"
@@ -302,6 +302,24 @@ td, th {
 			</div>
 		</div>
 	</div>
+		<script>
+	$(document).on("change",  "#bkname", function(){
+			var regstr = /^[가-힣]{1,4}$/;
+			if(!regstr.test($(this).val())){
+				$(this).val("");
+				$(this).focus();
+				alert("이름을 4자 이내로 작성해주세요");
+			}
+		});
+		$("#bkphone").keyup(function(){
+			var regstr =  /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
+			if(!regstr.test($(this).val())){
+				$(this).val("");
+				$(this).focus();
+				alert("전화번호를 잘못입력했습니다");
+			}
+		});
+	</script>
 	<script>
     $(function(){
     	/* 날짜선택 오늘날짜 */

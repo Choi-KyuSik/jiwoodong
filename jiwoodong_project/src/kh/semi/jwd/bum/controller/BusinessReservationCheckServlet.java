@@ -42,7 +42,7 @@ public class BusinessReservationCheckServlet extends HttpServlet {
 		
 		request.setAttribute("menulist", menulist);
 		
-		//업체등록 여부 확인
+				//업체등록 여부 확인
 				if(cpSignYn.equals("Y")) {
 					if(category.equals("카페")) {
 						ArrayList<BumReservationVo> reservation  = new BusinessReservationService().BusinessReservationCheckCafe(cpNo);
