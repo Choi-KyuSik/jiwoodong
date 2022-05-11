@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.jwd.user.model.service.UserService;
 import kh.semi.jwd.user.model.service.UsercpSearchpageService;
+import kh.semi.jwd.user.model.vo.UserVo;
 import kh.semi.jwd.user.model.vo.UsercpSearchpageVo;
 
 /**
@@ -37,8 +38,10 @@ public class UsercpSearchpageServlet extends HttpServlet {
 		
 		ArrayList<UsercpSearchpageVo> uscplist = new UsercpSearchpageService().listCompany();
 		ArrayList<Map<String, Object>> bklist_r = new UserService().usBkList_r(umId);
+		UserVo usMemberListInfo = new UserService().usMemberListInfo(umId);
 		request.setAttribute("uscplist", uscplist);
 		request.setAttribute("bklist_r", bklist_r);
+		request.setAttribute("usMemberListInfo", usMemberListInfo);
 		request.getRequestDispatcher("WEB-INF/user/userCompanyList.jsp").forward(request, response);
 	}
 

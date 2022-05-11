@@ -33,14 +33,14 @@
 
 </head>
 <body>
-	<div>
+	<%-- <div>
 		<%@ include file="../view/user/user_header.jsp"%>
-	</div>
+	</div> --%>
     <!-- 네비 리뷰 -->
     <article>
-    <div id="main_box" style="background-color: rgb(241, 241, 241); border-radius: 15px;">
-    	<div style="padding: 10px 0 10px 0;">
-     	 <div id="c_reviewlist_info" style="width: 90%;margin: 0 auto;background: white;border-radius: 15px;padding: 51px;margin-top: 30px;">
+    <!-- <div id="main_box" style="background-color: rgb(241, 241, 241); border-radius: 15px;">
+    	<div style="padding: 10px 0 10px 0;"> -->
+     	 <div style="width: 90%;margin: 0 auto;background: white;border-radius: 15px;padding: 51px;margin-top: 30px;">
 	        <div style="text-align: center;">
 	        	<p style="font-size: 2em; font-weight: bold;">리뷰 조회</p>
 	        </div>
@@ -74,8 +74,8 @@
 			                </c:forEach>
 					</tbody>
 				</table>
-      </div>
-      </div>
+      <!-- </div>
+      </div> -->
       </div>
     </article>
 
@@ -129,7 +129,10 @@
 			console.log("rvNo 의 타입 ? : " + typeof(rvNo)); */
 			location.href="userRvDetailList?rvNo=" + tdArr[0];
 		}); 
-	</script>   
+	</script> 
+	
+	
+	  
 	<!-- 네비바 클릭시 페이지 이동 -->
 <!-- 	<script>
 		//$("#k_review_menu").click(function() {
@@ -147,5 +150,17 @@
 			location.reload();
 		});
 	</script>  -->
+	
+	<script>
+	$("#c_reviewlist").click(function() {
+		console.log("안녕");
+		$("#c_reviewlist_info").show();
+		$("#c_reviewlist_info").load("userreviewlist");
+	//var rvNo = $("#umId").val();
+	//console.log("umId ? : " + umId);
+	//console.log("umId 의 타입 ? : " + typeof (umId));
+	// location.href = "userreviewlist";
+});
+	</script>
 </body> 
 </html>

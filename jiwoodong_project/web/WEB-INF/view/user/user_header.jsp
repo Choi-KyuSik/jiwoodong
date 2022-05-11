@@ -47,7 +47,7 @@
 
               <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown" id="c_reviewlist" href="userreviewlist" role="button">
+                  <a class="nav-link dropdown" id="c_reviewlist" href="#" role="button">
                     리뷰
                   </a>
                 </li>
@@ -87,12 +87,6 @@
   
   
   
-  <!-- <script>
-  	$("#c_bklist").click(function() {
-  		location.href="UserBookingList_r";
-  	});
-  </script> -->
-  
   <script>
 	$("#c_cplist").click(function () {
     	console.log("찍히냐? mypage");
@@ -126,11 +120,11 @@
       $("#c_cplist_info").hide();
       $("#c_maps_info").hide();
       $("#c_bklist_info").hide();
-      $("#c_reviewlist_info").show();
+      // $("#c_reviewlist_info").show();
       $("#c_us_info_edit_info").hide();
       $("#main_box").hide();
       $(".s_row").hide();
-    }); 
+    });
     $("#c_us_info_edit").click(function () {
     	console.log("찍히냐? c_us_info_edit");
       $("#c_cplist_info").hide();
@@ -161,18 +155,18 @@
     });
     
     //c_reviewlist
-    		//네비바 클릭시 메뉴이동
-    		
+    
     		$("#c_reviewlist").click(function() {
-
-			location.href = "userreviewlist";
+    			console.log("안녕");
+    			// $("#c_reviewlist_info").show();
+    			$("#c_reviewlist_info").load("userreviewlist");
+			//var rvNo = $("#umId").val();
+			//console.log("umId ? : " + umId);
+			//console.log("umId 의 타입 ? : " + typeof (umId));
+			// location.href = "userreviewlist";
 		});
-
-    		$("#c_mypage").click(function() {
-    			console.log("찍히냐? mypage");
-    			location.reload();
-    		});
   </script>
+
   
 </body>
 </html>

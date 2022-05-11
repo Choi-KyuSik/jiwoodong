@@ -282,7 +282,7 @@
             	<%-- <img src="${i.flGno }" class="card-img-top" alt="..."> --%>
 	            <div class="card-body">
 	            	<input type="hidden" id="umId" name="umId" value="${umId }"/>
-	              <h5 class="card-title"> ${i.cpName} </h5>
+	              <h5 class="card-title" style="font-weight: bold;font-size: 1.5em;"> ${i.cpName} </h5>
 	              <p class="card-text">${i.cpAddress}</p>
 	            </div>
 	            <ul class="list-group list-group-flush">
@@ -299,7 +299,7 @@
     	
 	     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 	     	<!-- 네비 예약현황 : 예약 취소 -->
-	          <c:forEach items="${bklist_c }" var="i">
+	          <c:forEach items="${usBkList_c }" var="i">
 	    		<div class="card" style="width: 300px; height: 540px; display: inline-block; float: left; margin: 10px;">
 	    		<c:if test="${empty i.flGno }">
 	    		<!-- https://hk-clean.co.kr/images/no_image.jpg 대체이미지 -->
@@ -313,7 +313,7 @@
 	            	<%-- <img src="${i.flGno }" class="card-img-top" alt="..."> --%>
 		            <div class="card-body">
 		            	<input type="hidden" id="umId" name="umId" value="${umId }"/>
-		              <h5 class="card-title"> ${i.cpName} </h5>
+		              <h5 class="card-title" style="font-weight: bold;font-size: 1.5em;"> ${i.cpName} </h5>
 		              <p class="card-text">${i.cpAddress}</p>
 		            </div>
 		            <ul class="list-group list-group-flush">
@@ -326,7 +326,7 @@
 		            </div>
 	         	</div>
 	         	</c:forEach>
-	         	<c:if test="${empty bklist_c }">
+	         	<c:if test="${empty usBkList_c }">
 	         	<p style="margin: 50px 0 0 100px; font-size: 16px; font-weight: 700; text-align: center; width: 800; height: 500px;"> 
 	         	예약 취소 내역이 없습니다. </p>
 	         	</c:if>
@@ -538,6 +538,18 @@
 			console.log("찍히냐? mypage");
 			location.reload();
 		});
+	</script>
+	
+	<script>
+	$("#c_reviewlist").click(function() {
+		console.log("안녕");
+		$("#c_reviewlist_info").show();
+		$("#c_reviewlist_info").load("userreviewlist");
+	//var rvNo = $("#umId").val();
+	//console.log("umId ? : " + umId);
+	//console.log("umId 의 타입 ? : " + typeof (umId));
+	// location.href = "userreviewlist";
+});
 	</script>
 </body>
 </html>

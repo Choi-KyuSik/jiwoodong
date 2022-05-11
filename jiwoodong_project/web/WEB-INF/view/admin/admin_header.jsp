@@ -79,7 +79,7 @@
             </div>
             <div style="float: right; margin-top: 10px;">
                 <div style="text-align: center;">
-                    <img src="https://media.discordapp.net/attachments/692994434526085184/965630874999730296/1.png"
+                    <img src="https://media.discordapp.net/attachments/958566133752016901/973806816339312650/f8988b1aff3ea07c.png?width=671&height=671"
                         alt="프사" width="60px">
                 </div>
             </div>

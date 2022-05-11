@@ -339,6 +339,18 @@
     	});
     }
     </script>
+    
+    	<script>
+	$("#c_reviewlist").click(function() {
+		console.log("안녕");
+		$("#c_reviewlist_info").show();
+		$("#c_reviewlist_info").load("userreviewlist");
+	//var rvNo = $("#umId").val();
+	//console.log("umId ? : " + umId);
+	//console.log("umId 의 타입 ? : " + typeof (umId));
+	// location.href = "userreviewlist";
+});
+	</script>
 
 </body>
 </body>
