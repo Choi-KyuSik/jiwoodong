@@ -37,7 +37,6 @@ public class UserBookingList_c_Controller extends HttpServlet {
 		ArrayList<Map<String, Object>> bklist_c = new UserService().usBkList_c(umId);
 		
 		request.setAttribute("bklist_c", bklist_c);
-		
 		System.out.println("bklist_c : " + bklist_c);
 	}
 
