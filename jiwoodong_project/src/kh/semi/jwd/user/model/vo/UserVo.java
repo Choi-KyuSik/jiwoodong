@@ -35,6 +35,7 @@ public class UserVo {
 	private Date umWriteDate;
 	private Date umUpdateDate;
 	private Date umOutDate;
+	private Double rvScore;
 	
 	
 	

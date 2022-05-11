@@ -38,7 +38,7 @@ public class UserBookingList_c_Controller extends HttpServlet {
 		
 		request.setAttribute("bklist_c", bklist_c);
 		
-		System.out.println("bklist_c ´ã°ä´Ï" + bklist_c);
+		System.out.println("bklist_c : " + bklist_c);
 	}
 
 	/**
