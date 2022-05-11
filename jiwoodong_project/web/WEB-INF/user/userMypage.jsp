@@ -175,10 +175,10 @@
 						</div>
 						<div id="c_inner_info">
 							<p class="c_info_title">리뷰내역</p>
-							<table class="table" style="width: 100%; margin-top: 14px;">
+							<table class="table" style="width: 100%; margin-top: 40px; table-layout: fixed;">
 								<thead>
 									<tr>
-										<th scope="col" class="c_info_center">No</th>
+										<th style="width: 50px;" scope="col" class="c_info_center">No</th>
 										<th scope="col" class="c_info_center">내용</th>
 										<th scope="col" class="c_info_center">업체명</th>
 										<th scope="col" class="c_info_center">별점</th>

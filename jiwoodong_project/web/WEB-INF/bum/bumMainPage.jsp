@@ -302,6 +302,12 @@ article>div>p {
 	display: none !important; 
 }
 
+.s_td_short {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 </style>
 </head>
 <body>
@@ -417,7 +423,7 @@ article>div>p {
 				<div id="review">
 					<p class="box_font">리뷰</p>
 					<div>
-						<table class="table">
+						<table class="table" style="table-layout: fixed;">
 							<thead>
 								<tr>
 									<th scope="col">No</th>
