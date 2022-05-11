@@ -311,6 +311,9 @@ header {
 </article>
 
 	<script>
+		$("#k_review_menu").click(function() {
+			history.back();
+		});
 		$("#back_btn").click(function() {
 			history.back();
 		});
@@ -324,14 +327,34 @@ header {
 			return false;
 		});
 		
-		
-	
-				
-
-
-
 	</script>
+<!-- 	  	<script>
+		$(".s_tr_readList").click(function() {
+			
+			// 배열 선언
+			var tdArr = new Array();
+			// 현재 클릭된 행(tr의 td)
+			var tr = $(this);
+			console.log("tr : " + tr);
+			var td = tr.children();
+			console.log("td : " + td);
+
+			// 반복문을 통해 배열에 값을 담아 사용
+			td.each(function(i) {
+				tdArr.push(td.eq(i).text());
+			});
+			// td들이 배열에 담겨있는데 그 중 1번째가 필요
+			console.log("tdArr : " + tdArr);
+			console.log("배열에 담긴 값 : " + tdArr[0]);
+			console.log(typeof (tdArr[0]));
+			/* var rvNo = $("#rvNo").val();
+			console.log("rvNo ? : " + rvNo);
+			console.log("rvNo 의 타입 ? : " + typeof(rvNo)); */
+			location.href="bumReviewDetailList?rvNo=" + tdArr[0];
+		}); 
+	</script> --> 
 	<!--메뉴바 이동  -->
+	
 		<script>
 			$("#k_info_menu").click(function() {
 				$("#k_info_content").hide();
@@ -391,5 +414,10 @@ header {
 			
 			
 	</script>
+	  <script src="https://code.highcharts.com/modules/data.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script> 
 </body>
 </html>

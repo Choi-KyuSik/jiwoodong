@@ -233,7 +233,7 @@ article>div>p {
 							<ul class="navbar-nav">
 									
 									<li class="nav-item dropdown"><a class="nav-link dropdown"
-										id="k_review_menu" href="#" role="button" > 리뷰관리 </a></li>
+										id="k_review_menu" href="" role="button" > 리뷰관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown" data-value="cpSignYn"
@@ -331,21 +331,17 @@ article>div>p {
               </div>
             </div>
            </article>
+           <input type="hidden" id="cpNo" name="cpNo" value="${cpNo }" />
 		</content>           
-<!-- 	<script>
-	$("#k_review_menu").click(function() {
+
+		<script>
+		$("#k_review_menu").click(function() {
 			var cpNo = $("#cpNo").val();
 			console.log("cpNo ? : " + cpNo);
 			console.log("cpNo 의 타입 ? : " + typeof(cpNo));
 			location.href="bumreviewlist?cpNo=" + cpNo;
-		}); 
-		$("#j_review_menu").click(function() {
-			var rvNo = $("#rvNo").val();
-			console.log("rvNo ? : " + rvNo);
-			console.log("rvNo 의 타입 ? : " + typeof(rvNo));
-			location.href="bumReviewDetailList?rvNo=" + rvNo;
 		});
-	</script>     -->     
+	     
 	  	<script>
 		$(".s_tr_readList").click(function() {
 			
@@ -386,7 +382,7 @@ article>div>p {
 				frm.submit(); */
 			});
 			
-			$("#k_review_menu").click(function() {
+	 		$("#k_review_menu").click(function() {
 				$("#k_info_content").hide();
 				$("#k_review_content").show();
 				$("#k_bu_eroll_content").hide();
@@ -394,7 +390,8 @@ article>div>p {
 				$("#k_us_info_content").hide();
 				$("#k_re_menu_content").hide();
 				$("#main_box").hide();
-			});
+				
+			}); 
 			
 			/* 내정보 관리 이동 */
 		    $("#k_info_menu").click(function() {
