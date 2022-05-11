@@ -328,7 +328,7 @@ header {
 		});
 		
 	</script>
-<!-- 	  	<script>
+ 	  	<script>
 		$(".s_tr_readList").click(function() {
 			
 			// 배열 선언
@@ -352,7 +352,7 @@ header {
 			console.log("rvNo 의 타입 ? : " + typeof(rvNo)); */
 			location.href="bumReviewDetailList?rvNo=" + tdArr[0];
 		}); 
-	</script> --> 
+	</script> 
 	<!--메뉴바 이동  -->
 	
 		<script>
