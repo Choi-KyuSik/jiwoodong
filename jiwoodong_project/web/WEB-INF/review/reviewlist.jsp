@@ -39,9 +39,9 @@
 	</div>  
 </header>   
     <article>
-    <div id="main_box" style="background-color: rgb(241, 241, 241); border-radius: 15px;">
+    <div id="main_box" style="background-color: rgb(241, 241, 241); border-radius: 15px; height: auto;">
     	<div style="padding: 10px 0 10px 0;">
-     	 <div style="width: 90%;margin: 0 auto;background: white;border-radius: 15px;padding: 51px;margin-top: 30px;">
+     	 <div style="width: 90%;margin: 0 auto;background: white;border-radius: 15px;padding: 51px;margin-top: 30px; margin-bottom: 30px;">
 	        <div style="text-align: center;">
 	        	<p style="font-size: 2em; font-weight: bold;">리뷰 조회</p>
 	        </div>
