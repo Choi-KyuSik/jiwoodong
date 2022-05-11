@@ -164,7 +164,7 @@
     		//네비바 클릭시 메뉴이동
     		
     		$("#c_reviewlist").click(function() {
-\
+
 			location.href = "userreviewlist";
 		});
 
