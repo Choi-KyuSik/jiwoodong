@@ -114,7 +114,7 @@ public class BusinessCompanyWriteDoUpdateServlet extends HttpServlet {
 			PrintWriter out1 = response.getWriter();
 			response.setContentType("text/html; charset=utf-8");
 			out1.println("<script language='javascript'>");
-			out1.println("alert('업체등록 요청이 완료되었습니다. 관리자에게 문의해주시기 바랍니다.'); location.href='BumMainPage'");
+			out1.println("alert('업체등록 요청이 완료되었습니다. 승인까지 최대3일이 소요됩니다.'); location.href='BumMainPage'");
 			out1.println("</script>");
 			out1.flush();
 		}

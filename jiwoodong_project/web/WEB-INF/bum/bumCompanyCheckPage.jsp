@@ -457,7 +457,8 @@ article>div>p {
 		var phone = $("#k_tel").val().trim();
     	
     	var regExpPassword =/^(?=.*[A-Za-z])(?=.*[0-9]).{8,16}$/;  // 영문자, 숫자가 적어도 1개이상, 8~16글자
-    	var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; //이메일 양식
+    	/* var regExpPassword = /^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,16}$/; */
+    	var regExpPassword = /^[a-z0-9.-_]+@([a-z0-9-]+.)+[a-z]{2,6}.[a-zA-Z]{3}$/i; // 이메일 양식
     	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //휴대폰 번호
 		if(!regExpPassword.test(password)){
 			alert("패스워드는 영문자, 숫자가 적어도 1개이상, 8~16글자여야 합니다.");
@@ -474,7 +475,7 @@ article>div>p {
 			$("#k_email").focus();
 			return false;
 		}else if(!regPhone.test(phone)){
-			alert("휴대폰 번호 양식에 맞게 입력해주시길 바랍니다.");
+			alert("휴대폰 번호 양식(01#-####-####)에 맞게 입력해주시기 바랍니다.");
 			$("#k_tel").focus();
 			return false;			
 		}else{

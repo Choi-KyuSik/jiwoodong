@@ -267,27 +267,34 @@ article>div>p {
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-primary s_us_th"
-									style="-bs-table-accent-bg: none; background-color: var(- -bs-table-bg);">업체명
-									<span class="k_essential_info">*필수</span>
+								<th class="table-primary s_ac_th"
+									style="-bs-table-accent-bg: none; text-align: center;">업체명<span
+									class="k_essential_info">*필수</span>
 								</th>
-								<td colspan="3" class="table-light" id="s_us_no"><input
-									type="text" class="form-control" name="cpName"
-									placeholder="대표업체명을 입력해주세요." value="" /></td>
+								<td class="table-light" id="s_url_no"><input type="text"
+									class="form-control" id="k_cpName" name="cpName"
+									maxlength="300" style="width: 500px; display: inline-block;"
+									required="required" value="" placeholder="대표업체명을 입력해주세요." />
+								<td colspan="2" class="table-light"><span id="s_check_name"
+									style="display: none; font-size: .8em; padding-left: 10px; color: red;">업체명을
+										올바르게 입력해주세요.</span></td>
+
+								</td>
 							</tr>
 							<tr>
 								<th class="table-primary s_us_th"
-									style="-bs-table-accent-bg: none;">업종을 선택<span
+									style="-bs-table-accent-bg: none;">업종 선택<span
 									class="k_essential_info">*필수</span></th>
-								<td class="table-light" id="s_bu_pwd">
-								<select name="cpCategory" class="form-control" id="selectCategory">
-										<option value="cpCategory"> 🔽업종을 선택해주세요.</option>
+								<td class="table-light" id="s_bu_pwd"><select
+									name="cpCategory" class="form-control" id="selectCategory" 
+									required>
+										<option value="cpCategory">🔽업종을 선택해주세요.</option>
 										<option value="미용실">미용실</option>
 										<option value="카페">카페</option>
 										<option value="호텔">호텔</option>
 								</select></td>
-								<td colspan="2" class="table-light" id="s_us_notice_1"><span
-									id="s_bu_pwd_check_1" style="display: none;"></span></td>
+								<td colspan="2" class="table-light" id="s_us_notice_1" style="background-color:#f8f9fa"><span
+									id="s_bu_pwd_check_1" style="display: none;" ></span></td>
 							</tr>
 							<tr>
 								<th class="table-primary s_us_th"
@@ -324,13 +331,13 @@ article>div>p {
 								<th class="table-primary s_us_th"
 									style="-bs-table-accent-bg: none;">운영 구분<span
 									class="k_essential_info">*필수</span></th>
-								<td class="table-light">
-								<input type="radio" name="cpClassify" value="D" checked style="display:none;">
-								<input type="radio"
-									class="form-check-input" id="k_everyday" value="B"
-									name="cpClassify"> <label class="form-check-label" for="k_everyday" id="k_everyday">
-									평일만 운영해요</label> 
-									<input type="radio" id="k_neveryday" value="A" class="form-check-input" name="cpClassify"> <label
+								<td class="table-light"><input type="radio"
+									name="cpClassify" value="D" checked style="display: none;"
+									required> <input type="radio" class="form-check-input"
+									id="k_everyday" value="B" name="cpClassify"> <label
+									class="form-check-label" for="k_everyday" id="k_everyday">
+										평일만 운영해요</label> <input type="radio" id="k_neveryday" value="A"
+									class="form-check-input" name="cpClassify"> <label
 									class="form-check-label" id="k_neveryday" for="k_neveryday">
 									주말까지 운영해요</label>
 									<div id="k_Classify">
@@ -338,7 +345,8 @@ article>div>p {
 											<div>
 												<hr>
 												영업시작 시간: <input type="time" id="k_timebar" name="cpOpenTime">
-												영업마감 시간: <input type="time" id="k_timebar" name="cpCloseTime">
+												영업마감 시간: <input type="time" id="k_timebar"
+													name="cpCloseTime">
 
 											</div>
 										</div>
@@ -441,6 +449,36 @@ article>div>p {
 
 
 	<script>
+			
+		/* 비밀번호 일치 여부 체크 */
+	$("#buPwd_2").keyup(function() {
+
+		var firstPwd = $("#buPwd_1").val();
+		var secondPwd = $("#buPwd_2").val();
+
+			if(firstPwd == "" || secondPwd == "") {
+				console.log("빈문자열");
+				$("#s_bu_pwd_check_2").css('display', 'inline-block');
+				$("#s_bu_pwd_check_2").text('');H
+			} else if (firstPwd != secondPwd) {
+				console.log("firstPwd : " + firstPwd);
+				console.log("secondPwd : " + secondPwd);
+				console.log("비밀번호가 일치하지 않습니다.");
+				$("#s_bu_pwd_check_2").css('display', 'inline-block');
+				$("#s_bu_pwd_check_2").text('비밀번호가 일치하지 않습니다.');
+				$("#s_bu_pwd_check_2").css('color', 'red');
+			} else {
+				console.log("firstPwd : " + firstPwd);
+				console.log("secondPwd : " + secondPwd);
+				console.log("비밀번호가 일치합니다.");
+				$("#s_bu_pwd_check_2").css('display', 'inline-block');
+				$("#s_bu_pwd_check_2").text('비밀번호가 일치합니다.');
+				$("#s_bu_pwd_check_2").css('color', 'green');
+			}			
+	});
+	
+	
+	
    	/* 운영구분에 따른 운영시간 구분 */
    	$("#selectCategory").change(function(){
    		if($(this).val() == '호텔'){
@@ -462,7 +500,7 @@ article>div>p {
          }
       });
 		$("#s_bu_check_btn2").click(function() {
-		         if (confirm("업체 등록은 수정이 불가능합니다 등록하시겠습니까?") == true) {
+		         if (confirm("업체 재등록도 수정이 불가능합니다 등록하시겠습니까?") == true) {
 		            var frmEl = $("#frm");
 		            frmEl.attr("action", "bucompanydoupdate");
 		            frmEl.attr("method", "post");
@@ -471,15 +509,53 @@ article>div>p {
 		            return;
 		         }
 		      });
+		
+		/* 업체등록 유효성 체크 */
       $("#s_bu_check_btn").click(function() {
-         if (confirm("업체 등록은 수정이 불가능합니다 등록하시겠습니까?") == true) {
-            var frmEl = $("#frm");
-            frmEl.attr("action", "bucompanydo");
-            frmEl.attr("method", "post");
-            frmEl.submit();
-         } else {
-        	 return;
-         }
+    	  
+    	var cpName = $("#k_cpName").val().trim();					
+		var regCpName =	/^[가-힣a-zA-Z\s]{4,20}$/; //업체명 (4자이상, 20자 미만)
+		regCpName.test(cpName)
+	    	  	if(!regCpName.test(cpName)) {
+	 				alert("업체명에 조건에 맞게 입력해주세요.");
+	 				$("#k_cpName").focus();
+	 				return;
+	 				
+	 			}else if($("#selectCategory").val() == '') {
+	 	 			alert("업종을 선택해주세요.");
+	 	 			$("#selectCategory").focus();
+	 	 			return;	
+	 	 			
+		    	}else if($('input[name=cpClassify]').val() == '') {
+		 	 		alert("운영구분을 선택 해주세요.");
+		 	 		$('input[name=cpClassify]').focus();
+		 	 		return;	
+		 	 		
+	      		}else if($("#postcode").val() == '') {
+	 				alert("우편번호를 입력해주세요.");
+	 				$("#postcode").focus();
+	 				return;
+	 				
+	 			}else if($("#roadAddress").val() == '') {
+	 				alert("주소를 입력해주세요.");
+	 				$("#roadAddress").focus();
+	 				return;	
+	 				
+	 			}else if($("#jibunAddress").val() == '') {
+	 				alert("상세주소를 입력해주세요.");
+	 				$("#jibunAddress").focus();
+	 				return; 				
+	 			}else{ 
+	 				if(confirm("업체 등록은 수정이 불가능합니다 등록하시겠습니까?") == true){
+		 				var frmEl = $("#frm");
+		 				frmEl.attr("action", "bucompany");
+		 				frmEl.attr("method", "post");
+		 				frmEl.submit();
+		 				return;
+	 				}else{
+	 						return;
+	 			}
+	 		}
       });
 
       $("#k_everyday").click(function() {
@@ -618,7 +694,42 @@ article>div>p {
 			console.log("cpNo ? : " + cpNo);
 			console.log("cpNo 의 타입 ? : " + typeof(cpNo));
 			location.href="bumreviewlist?cpNo=" + cpNo;
-		});		
+		});	
+		
+		
+		$("#k_cpName").keyup(function() {
+			
+			var cpName = $("#k_cpName").val().trim();					
+			var regCpName =	/^[가-힣a-zA-Z\s]{4,20}$/; //업체명 (4자이상, 20자 미만)
+			
+			if(cpName == "") {				
+				$("#s_check_name").css('display', 'inline-block');
+				$("#s_check_name").text('');
+			} else if (!regCpName.test(cpName)) {				
+				$("#s_check_name").css('display', 'inline-block');
+				$("#s_check_name").text('업체명은 한글or영문 4자이상 20자 미만입니다.');
+				$("#s_check_name").css('font-size', '0.9rem');
+				$("#s_check_name").css('color', 'red');
+			} else {
+				$("#s_check_name").css('display', 'inline-block');
+				$("#s_check_name").text('✅');
+				$("#s_check_name").css('font-size', '1.2em');
+				$("#s_check_name").css('color', 'green');
+			}			
+		});	
+		
+		
+		/* 주소공란 유효성 검사 */			
+		$("#s_bu_check_btn").click(function() {
+			
+		
+		});
+		
+		
+		
+		
+		
+		
 				
    </script>
 
