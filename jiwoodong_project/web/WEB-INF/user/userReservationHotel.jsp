@@ -26,6 +26,8 @@
 	crossorigin="anonymous"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!-- 결제 API : iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <title>지우동 호텔 예약</title>
 <style>
@@ -149,8 +151,11 @@
 	                    <div style="float:left; padding-left: 100px; padding-top: 30px">
 	                     <input type="hidden" value="${cpNo }" name="cpNo">
 	                    	<label style="font-size: 20px;">날짜선택 : <input type="text" id="datepicker"  name="rsdate" required></label><br>
-		                    <label style="font-size: 20px; margin-top: 20px">예약자명 : <input type="text" id="rsname"  name="rsname" required></label><br>
-		                    <label style="font-size: 20px; margin-top: 20px">전화번호 : <input type="text" id="rsphone"  name="rsphone" required></label><br>
+					<input type="hidden" value="${umTel }" id="umTel" name="umTel"/>
+		                    <input type="hidden" value="${umPostcode }" id="umPostcode" name="umPostcode"/>
+		                    <input type="hidden" value="${umAddress }" id="umAddress" name="umAddress"/>
+		                    <label style="font-size: 20px; margin-top: 20px">예약자명 : <input type="text" id="rsname"  name="rsname" value="${umName }" required></label><br>
+		                    <label style="font-size: 20px; margin-top: 20px">전화번호 : <input type="text" id="rsphone"  name="rsphone" value="${umTel }" required></label><br>
 		                    <label style="font-size: 20px; margin-top: 10px;">요청사항 : </label><br>
 		                    <textarea rows="10" cols="30"  style="width:310px; margin: 10px 0 0 10px; resize: none; padding: 5px" id="rsrequire" name="rsrequire"></textarea><br>
 		                  </div>
@@ -179,32 +184,31 @@
     </section>
     <!-- 결제API : 손은진 -->
     <script>
-/*        var IMP = window.IMP; // 생략 가능
-      IMP.init("imp39204315") // 지우동 가맹점 식별코드 */
+      var IMP = window.IMP; // 생략 가능
+      IMP.init("imp39204315") // 지우동 가맹점 식별코드
       
       function requestPay() {
-    	// IMP.request_pay(param, callback) 결제창 호출
-          /* IMP.request_pay({ // param
-              pg: "html5_inicis", // 이니시스 웹표준 결제창
-              pay_method: "card", // 결제 방법
-              // TODO : 예약번호로 넣기
-              merchant_uid: new Date().getTime() + "jwd", // 주문번호
-              name: $("#menuinfo").val(), // 상품명
-              amount: $("#totalprice").text(), // 가격
-              buyer_email: "dms102336@gmail.com", // 이메일
-              // TODO : 구매자 이름, 전화번호, 주소, 우편번호 로그인 한 사용자 정보로 가져오기
-              buyer_name: $("#rsname").val(), // 이름
-              buyer_tel: "010-1111-1111", // 전화번호
-              buyer_addr: "서울특별시 강남구", // 주소
-              buyer_postcode: "01181" // 우편번호
-          }, function (rsp) { // callback
-             if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-          	   var frmEl = $("#frmrsinsert");
-                 alert("결제가 완료되었습니다.");
-                 alert("예약이 완료되었습니다.");
-                 frmEl.attr("action", "UserReservationInsertHotel");
-                 frmEl.attr("method", "post");
-                 frmEl.submit();
+            // IMP.request_pay(param, callback) 결제창 호출
+            IMP.request_pay({ // param
+                pg: "html5_inicis", // 이니시스 웹표준 결제창
+                pay_method: "card", // 결제 방법
+                merchant_uid: new Date().getTime() + "jwd", // 주문번호
+                name: $("#rsmenu option:selected").text(), // 상품명
+                amount: $("#rsmenuprice").val(), // 가격
+                buyer_email: "dms102336@gmail.com", // 이메일
+                /* 구매자 이름, 전화번호, 주소, 우편번호 로그인 한 사용자 정보로 가져오기 */
+                buyer_name: $("#rsname").val(), // 이름
+                buyer_tel: $("#rsphone").val(), // 전화번호
+                buyer_addr: $("#umAddress").val(), // 주소
+                buyer_postcode: $("#umPostcode").val() // 우편번호
+            }, function (rsp) { // callback
+               if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+            	   var frmEl = $("#frmrsinsert");
+                   alert("결제가 완료되었습니다.");
+                   alert("예약이 완료되었습니다.");
+                   frmEl.attr("action", "UserReservationInsertHotel");
+                   frmEl.attr("method", "post");
+                   frmEl.submit();
 
           	   // let response = fetch("/payment", {
                   //   method: "post",
@@ -212,7 +216,7 @@
                   //   headers: {
                     //    "Content-Type" : "application/json; charset=utf-8"
                    //  }
-                  });
+                  // });
               } else {
               	// alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
               	if(rsp.error_msg == "사용자가 결제를 취소하셨습니다") {
@@ -220,12 +224,13 @@
               		location.href="UserMypage";
               	}
               }
-          }); */
-          var frmEl = $("#frmrsinsert");
+          }); 
+       }
+         /*  var frmEl = $("#frmrsinsert");
           frmEl.attr("action", "UserReservationInsertHotel");
           frmEl.attr("method", "post");
           frmEl.submit();
-          }
+          } */
     </script>
     <!-- 데이더픽커  -->
      <script>
