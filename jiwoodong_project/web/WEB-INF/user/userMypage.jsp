@@ -273,11 +273,11 @@
     		<c:if test="${empty i.flGno }">
     		<!-- https://hk-clean.co.kr/images/no_image.jpg 대체이미지 -->
                       <img src="https://media.discordapp.net/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png?width=1358&height=1358"
-                        class="card-img-top" style="height: 260px;">
+                        class="card-img-top" style="height: 250px; border-radius: 15px;">
                         </c:if>
                         <c:if test="${not empty i.flGno }">
                       <img src="${i.flGno }"
-                        class="card-img-top" style="height: 270px;">
+                        class="card-img-top" style="height: 250px; border-radius: 15px;">
                         </c:if>
             	<%-- <img src="${i.flGno }" class="card-img-top" alt="..."> --%>
 	            <div class="card-body">
@@ -290,12 +290,54 @@
 	              <li class="list-group-item">${i.bkStatus}</li>
 	            </ul>
 	            <div class="card-body">
-	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
-	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a>
+	              <!-- <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
+	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a> -->
+	            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_u" id="bkupdata_btn_btn">변경</button>
+	            <!-- 예약 변경 모달창 -->
+		    	 <div class="modal fade" id="staticBackdrop_u" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        예약을 변경하시겠습니까?
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-primary">확인</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				
+	            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop_c" id="bkcancle_btn">취소</button>
+	            <!-- 예약 취소 모달창 -->
+		    	 <div class="modal fade" id="#staticBackdrop_c" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        예약을 취소하시겠습니까?
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-primary">확인</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 	            </div>
          	</div>
          	</c:forEach>
     	 </div>
+    	 
+	     
+    	 
     	
 	     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 	     	<!-- 네비 예약현황 : 예약 취소 -->
@@ -304,11 +346,11 @@
 	    		<c:if test="${empty i.flGno }">
 	    		<!-- https://hk-clean.co.kr/images/no_image.jpg 대체이미지 -->
 	                      <img src="https://media.discordapp.net/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png?width=1358&height=1358"
-	                        class="card-img-top" style="height: 260px;">
+	                        class="card-img-top" style="height: 250px;">
 	                        </c:if>
 	                        <c:if test="${not empty i.flGno }">
 	                      <img src="${i.flGno }"
-	                        class="card-img-top" style="height: 270px;">
+	                        class="card-img-top" style="height: 250px;">
 	                        </c:if>
 	            	<%-- <img src="${i.flGno }" class="card-img-top" alt="..."> --%>
 		            <div class="card-body">

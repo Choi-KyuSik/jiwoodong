@@ -124,7 +124,7 @@
 					<div style="padding-left: 35px;">
 						<c:forEach items="${uscplist }" var="i">
 	                    <li style="display: inline-block; width: 22%; margin: 20px 10px 40px 10px;">
-	                        <div class="card">
+	                        <div class="card" style="height: 410px;">
 	                        <c:if test="${empty i.flGno }">
 	                            <img width="235px;" height="200px;" src="https://economist.co.kr/resources/images/error/noimage.gif"
 	                                class="card-img-top" alt="...">
@@ -140,7 +140,7 @@
 	                            		</th>
 	                            	</tr>
 	                            	<tr class="tr_list">
-	                            		<td style="font-size: small;  padding-top: 15px;">${i.cpAddress} ${i.cpDTAddress} 
+	                            		<td style="font-size: small;  padding-top: 25px;">${i.cpAddress} ${i.cpDTAddress} 
 	                            		</td>
 	                            		<td style="display: none;">${i.cpNo }</td>
 	                            		<td>
@@ -148,7 +148,7 @@
                        		 </td>
 	                            	</tr>
 	                            </table>
-	                            <div class="card-body"  style=" height: 150px;">
+	                            <div class="card-body"  style=" height: 100px;">
 	                            </div>
 	                        </div>
 	                    </li>
@@ -188,11 +188,11 @@
     		<c:if test="${empty i.flGno }">
     		<!-- https://hk-clean.co.kr/images/no_image.jpg 대체이미지 -->
                       <img src="https://media.discordapp.net/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png?width=1358&height=1358"
-                        class="card-img-top" style="height: 260px;">
+                        class="card-img-top" style="height: 250px;">
                         </c:if>
                         <c:if test="${not empty i.flGno }">
                       <img src="${i.flGno }"
-                        class="card-img-top" style="height: 270px;">
+                        class="card-img-top" style="height: 250px;">
                         </c:if>
             	<%-- <img src="${i.flGno }" class="card-img-top" alt="..."> --%>
 	            <div class="card-body">
@@ -219,11 +219,11 @@
 	    		<c:if test="${empty i.flGno }">
 	    		<!-- https://hk-clean.co.kr/images/no_image.jpg 대체이미지 -->
 	                      <img src="https://media.discordapp.net/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png?width=1358&height=1358"
-	                        class="card-img-top" style="height: 260px;">
+	                        class="card-img-top" style="height: 250px;">
 	                        </c:if>
 	                        <c:if test="${not empty i.flGno }">
 	                      <img src="${i.flGno }"
-	                        class="card-img-top" style="height: 270px;">
+	                        class="card-img-top" style="height: 250px;">
 	                        </c:if>
 	            	<%-- <img src="${i.flGno }" class="card-img-top" alt="..."> --%>
 		            <div class="card-body">

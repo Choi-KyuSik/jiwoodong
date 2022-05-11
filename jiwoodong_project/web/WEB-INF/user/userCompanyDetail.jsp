@@ -99,10 +99,10 @@
 							<a href="#" style="text-align: center;"> 
 							<c:if test="${empty i.flGno }">
 							<img src="https://hk-clean.co.kr/images/no_image.jpg"
-								alt="" style="width: 400px; height: 300px; margin: 30px;">
+								alt="" style="width: 400px; height: 300px; margin: 30px; border-radius: 15px;">
 								</c:if>
 							<c:if test="${not empty i.flGno }">
-							<img src="${i.flGno }" alt="" style="width: 400px; height: 300px; margin: 30px;">
+							<img src="${i.flGno }" alt="" style="width: 400px; height: 300px; margin: 30px; border-radius: 15px;">
 							</c:if>
 							</a>
 						</div>
@@ -115,10 +115,11 @@
 								<c:if test="${empty uscpRvscoreAVG.rvScore }">
 								<div><span>💙 0.0 / 5.0</span></div>
 								</c:if>
+								<p></p>
 							<input type="hidden" id="cpNo" name="cpNo" value="${i.cpNo }"/>
 							<div>
 								<span><button id="s_us_reservation_btn" class="btn btn-primary" href="#"
-									style="width: 300px;">예약하기</button></span>
+									style="width: 300px; margin-bottom: 30px;">예약하기</button></span>
 							</div>
 						</div>
 						</c:forEach>
@@ -253,26 +254,26 @@
 												<div>
 												<img
 													src="https://economist.co.kr/resources/images/error/noimage.gif"
-													class="c_img" alt="">
+													class="c_img" alt="" style= "border-radius: 15px;" >
 												</div>
 												</li>
 											</c:if>
 											<c:if test="${not empty i.flGno }">
 											<li class="c_img_box">
 												<div>
-												<img src="${i.flGno }" class="c_img" alt="">
+												<img src="${i.flGno }" class="c_img" alt="" style= "border-radius: 15px;">
 											</div>
 											</li>
 													<c:if test="${not empty i.flGno2 }">
 														<li class="c_img_box">
 														<div>
-														<img src="${i.flGno2 }" class="c_img" alt="">
+														<img src="${i.flGno2 }" class="c_img" alt="" style= "border-radius: 15px;">
 														</div>
 														</li>
 													</c:if>
 													<c:if test="${not empty i.flGno3 }">
 														<li class="c_img_box">
-														<div><img src="${i.flGno3 }" class="c_img" alt=""></div></li>
+														<div><img src="${i.flGno3 }" class="c_img" alt="" style= "border-radius: 15px;"></div></li>
 													</c:if>
 											</c:if>
 											
@@ -417,11 +418,11 @@
     		<c:if test="${empty i.flGno }">
     		<!-- https://hk-clean.co.kr/images/no_image.jpg 대체이미지 -->
                       <img src="https://media.discordapp.net/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png?width=1358&height=1358"
-                        class="card-img-top" style="height: 260px;">
+                        class="card-img-top" style="height: 250px;">
                         </c:if>
                         <c:if test="${not empty i.flGno }">
                       <img src="${i.flGno }"
-                        class="card-img-top" style="height: 270px;">
+                        class="card-img-top" style="height: 250px;">
                         </c:if>
             	<%-- <img src="${i.flGno }" class="card-img-top" alt="..."> --%>
 	            <div class="card-body">
@@ -448,11 +449,11 @@
 	    		<c:if test="${empty i.flGno }">
 	    		<!-- https://hk-clean.co.kr/images/no_image.jpg 대체이미지 -->
 	                      <img src="https://media.discordapp.net/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png?width=1358&height=1358"
-	                        class="card-img-top" style="height: 260px;">
+	                        class="card-img-top" style="height: 250px;">
 	                        </c:if>
 	                        <c:if test="${not empty i.flGno }">
 	                      <img src="${i.flGno }"
-	                        class="card-img-top" style="height: 270px;">
+	                        class="card-img-top" style="height: 250px;">
 	                        </c:if>
 	            	<%-- <img src="${i.flGno }" class="card-img-top" alt="..."> --%>
 		            <div class="card-body">

@@ -269,4 +269,24 @@ public class UserReservationDao {
 		return result;
 	}
 
+	// 사용자 예약 취소 : 최규식
+	public ArrayList<Map<String, Object>> userBKC(Connection conn, int bkNo) {
+		
+		ArrayList<Map<String, Object>> result = null;
+		String sql = " UPDATE booking SET bk_status = 'R' where bk_no = ? ;";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bkNo);
+			rs = pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+		
+	}
 }

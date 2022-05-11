@@ -80,5 +80,13 @@ public class UserReservationService {
 		close(conn);
 		return result;
 	}
+	
+	// 사용자 예약 취소 : 최규식
+	public ArrayList<Map<String, Object>> userBKC(int bkNo) {
+		Connection conn = getConnection();
+		ArrayList<Map<String, Object>> result = new UserReservationDao().userBKC(conn, bkNo);
+		close(conn);
+		return result;
+	}
 
 }

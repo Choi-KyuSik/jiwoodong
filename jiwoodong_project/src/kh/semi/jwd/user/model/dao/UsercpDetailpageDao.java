@@ -170,8 +170,10 @@ public class UsercpDetailpageDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
-		
 		return rvscoreAvg;
 	}
 	
