@@ -161,13 +161,17 @@
     });
     
     //c_reviewlist
-    
+    		//네비바 클릭시 메뉴이동
+    		
     		$("#c_reviewlist").click(function() {
-			//var rvNo = $("#umId").val();
-			//console.log("umId ? : " + umId);
-			//console.log("umId 의 타입 ? : " + typeof (umId));
+\
 			location.href = "userreviewlist";
 		});
+
+    		$("#c_mypage").click(function() {
+    			console.log("찍히냐? mypage");
+    			location.reload();
+    		});
   </script>
   
 </body>

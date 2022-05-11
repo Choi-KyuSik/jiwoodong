@@ -1,16 +1,10 @@
-<%@page import="java.util.List"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.Map"%>
-<%@page import="kh.semi.jwd.bum.model.service.BumService"%>
-<%@page import="kh.semi.jwd.bum.model.dao.BumDao"%>
-<%@page import="kh.semi.jwd.bum.model.vo.ReviewVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/reset.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/userMypage.css">    
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/admin.css">	
+	href="<%=request.getContextPath()%>/resources/css/userMypage.css">
+<%-- <link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/reset.css"> --%>
+ <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/admin.css">
 
 <!DOCTYPE html>
 <html>
@@ -35,201 +29,8 @@
 <title>리뷰 게시판</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!--header-->
-<style>
-header {
-	margin-top: 10px;
-}
 
-#p_main_top {
-	width: 1200px;
-	margin: 0 auto;
-	border-bottom: 2px solid silver;
-}
 
-#p_top_logo {
-	float: left;
-	margin-left: 30px;
-}
-
-#p_top_menu {
-	float: left;
-	margin: 15px 0 0 10px;
-}
-
-#p_top_profile {
-	float: left;
-}
-
-.navbar-nav {
-	margin-right: 20px;
-}
-
-.dropdown-toggle, .dropdown {
-	font-weight: bold;
-}
-
-#dropdownUser1 {
-	padding-right: 10px;
-}
-</style>
-<!--section공용-->
-<style>
-#main_box {
-	width: 1200px;
-	margin: 15px auto 0;
-}
-
-#booking, #review {
-	text-align: center;
-	/* display: flex;
-      justify-content: center; */
-	/* float: left; */
-	width: 550px;
-	height: 450px;
-	background-color: white;
-	border-radius: 30px;
-	margin: 30px 15px;
-	padding: 15px;
-}
-
-#statistics_visit, #statistics_review {
-	text-align: center;
-	/* display: flex;
-      justify-content: center; */
-	/* float: left; */
-	width: 550px;
-	height: 480px;
-	background-color: white;
-	border-radius: 30px;
-	margin: 0 15px 30px;
-	overflow: hidden;
-}
-
-.box_font {
-	margin-top: 10px;
-	font-weight: bold;
-	color: #0D6EFD;
-	margin-bottom: 20px;
-	font-size: large;
-}
-
-.nav_tab_div {
-	background-color: rgba(241, 241, 241);
-	width: 1200px;
-	margin: 10px 0;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	border-radius: 15px;
-}
-
-.statiscics_font {
-	margin-top: 20px;
-    font-weight: bold;
-    color: #0D6EFD;
-    margin-bottom: 20px;
-    font-size: large;
-}
-.table{
-	font-size : 15px;
-	text-align: center;
-}
-<!--content-->
-<style>
-/* 컨텐트 */
-content>article>div {
-	width: 1200px;
-	height: 1000px;
-	padding: 30px;
-	display: none;
-	margin: 20px auto 0;
-	background-color: rgb(241, 241, 241);
-}
-
-/* 컨텐트안 제목 */
-article>div>p {
-	text-align: center;
-	font-weight: bold;
-	padding-top: 20px;
-	font-size: large;
-}
-
-/* 검색바 위치*/
-.navbar-light {
-	float: right;
-	margin-bottom: 20px;
-}
-
-/* 내정보 관리 */
-.k_company {
-	font-weight: bold;
-}
-
-/* 업체등록 */
-#k_bu_eroll_top {
-	display: flex;
-}
-
-.k_company_info {
-	resize: none;
-}
-
-/* 내 정보 수정 : 손은진 */
-.s_us_th {
-    text-align: center;
-    vertical-align: middle;
-    width: 250px;
-}
-
-.s_row {
-	width: 1200px;
-    margin: 0 auto;
-    padding-top: 30px;
-    margin-top: 30px;
-}
-
-#s_us_info_btn {
-	text-align: center;
-	margin-top: 30px;
-}
-
-.border_none {
-	border: 0;
-}
-
-#s_us_notice {
-	vertical-align: middle;
-	color: red;
-}
-
-#s_us_pwd {
-	width: 500px;
-}
-
-#s_id_style {
-	display: inline-block;
-    color: #0d6efd;
-    font-weight: bold;
-}
-
-#s_us_push_right_btn {
-	display: inline-block;
-    color: gray;
-    font-size: .8em;
-}
-.s_row{
-	border-radius: 15px;
-}
-
-.ftsz {
-	font-size: .9em;
-}
-
-.highcharts-credits {
-	display: none !important; 
-}
-</style>
 </head>
 <body>
 	<div>
@@ -237,10 +38,13 @@ article>div>p {
 	</div>
     <!-- 네비 리뷰 -->
     <article>
-      <div id="c_reviewlist_info">
-        <div style="text-align: center;">
-        	<p style="font-size: 2em; font-weight: bold;">리뷰 조회</p>
-        </div>
+    <div id="main_box" style="background-color: rgb(241, 241, 241); border-radius: 15px;">
+    	<div style="padding: 10px 0 10px 0;">
+     	 <div id="c_reviewlist_info" style="width: 90%;margin: 0 auto;background: white;border-radius: 15px;padding: 51px;margin-top: 30px;">
+	        <div style="text-align: center;">
+	        	<p style="font-size: 2em; font-weight: bold;">리뷰 조회</p>
+	        </div>
+	
         <table class="table table table-hover"
 					style="clear: both; table-layout: fixed; width: 70%; margin: 0 auto; margin-top: 30px;">
 					<thead>
@@ -270,6 +74,8 @@ article>div>p {
 			                </c:forEach>
 					</tbody>
 				</table>
+      </div>
+      </div>
       </div>
     </article>
 
@@ -325,7 +131,7 @@ article>div>p {
 		}); 
 	</script>   
 	<!-- 네비바 클릭시 페이지 이동 -->
-	<script>
+<!-- 	<script>
 		//$("#k_review_menu").click(function() {
 			//var rvNo = $("#umId").val();
 			//console.log("umId ? : " + umId);
@@ -340,6 +146,6 @@ article>div>p {
 			console.log("찍히냐? mypage");
 			location.reload();
 		});
-	</script> 
+	</script>  -->
 </body> 
 </html>

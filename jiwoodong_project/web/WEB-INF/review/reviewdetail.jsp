@@ -98,8 +98,8 @@
 
 	<section id="contents">
 
-		<div id="s_rv_main_box">
-			<div id="s_rv_title">리뷰 상세 조회</div>
+		<div id="s_rv_main_box" style="position: relative;top: 10px;">
+			<div id="s_rv_title" style="margin:30px;">리뷰 상세 조회</div>
 			<form id="frm" method="post" action="#">
 				<c:forEach items="${rvDetailList }" var="i">
 					<section id="s_rv_section">
@@ -124,7 +124,7 @@
 							</div>
 							</c:if>
 						</article>
-						<div id="s_rv_btn_box">
+						<div id="s_rv_btn_box" style="position: relative;left: 20px;">
 							<input type="button" id="back_btn"
 								class="btn btn-secondary pull-right" value="뒤로가기"> <input
 								type="button" id="s_update_btn"
