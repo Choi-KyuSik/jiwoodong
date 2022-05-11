@@ -62,7 +62,7 @@ public class BusinessCompanyWriteDoServlet extends HttpServlet {
 		String cpExplain = request.getParameter("cpExplain");
 		String cpClassify = request.getParameter("cpClassify");
 		System.out.println("cpClassify:" + cpClassify);
-		if(cpClassify.equals("none")) {
+		if(cpClassify.equals("n")) {
 			cpClassify = "A";
 		}
 		String cpOpenTime = request.getParameter("cpOpenTime");

@@ -496,7 +496,7 @@ public class BumDao {
 	public int companyDelete(Connection conn, CompanyVo cvo) {
 		System.out.println("companyDelete buNo:" + cvo);
 		int result = 0;
-		String sql = "update company set CP_SIGNYN = 'N', CP_UPDATE_DATE = SYSTIMESTAMP where bu_no = ?";
+		String sql = "update company set CP_SIGNYN = 'R', CP_UPDATE_DATE = SYSTIMESTAMP where bu_no = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

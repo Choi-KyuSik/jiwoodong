@@ -281,7 +281,7 @@ article>div>p {
 									class="k_essential_info">*필수</span></th>
 								<td class="table-light" id="s_bu_pwd">
 								<select name="cpCategory" class="form-control" id="selectCategory">
-										<option value="cpCategory">업종을 선택해주세요.</option>
+										<option value="cpCategory"> 🔽업종을 선택해주세요.</option>
 										<option value="미용실">미용실</option>
 										<option value="카페">카페</option>
 										<option value="호텔">호텔</option>
@@ -593,6 +593,7 @@ article>div>p {
             $("#fileUrl3").val(info.cdnUrl);
          });
 
+         /* 내 정보관리 */
       $("#k_info_menu").click(function() {
          var frm = $("#frm");
          frm.attr("action", "buminfocheck");

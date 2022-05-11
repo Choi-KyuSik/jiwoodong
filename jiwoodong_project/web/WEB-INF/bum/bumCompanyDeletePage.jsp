@@ -20,9 +20,76 @@
 </head>
 <body>
 	
-	<div>
-		<%@ include file="../view/user/user_header.jsp" %>
-	</div>
+	<header>
+		<div id="p_main_top">
+			<div id="p_top_logo">
+				<a href="BumMainPage" id="k_logo"><img
+					src="https://cdn.discordapp.com/attachments/958566133752016901/966263461803876422/22b75afde37f348d.png"
+					width="80px" alt="logo"></a>
+			</div>
+			<div id="p_top_menu">
+				<nav class="navbar navbar-expand-lg">
+					<div class="container-fluid">
+						<div class="collapse navbar-collapse">
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown"><a class="nav-link dropdown"
+									 id="k_info_menu" role="button"> 내정보 관리 </a></li>
+							</ul>
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown"><a class="nav-link dropdown"
+									id="k_review_menu" href="#" role="button"> 리뷰관리 </a></li>
+							</ul>
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown"><a class="nav-link dropdown"
+									href="bucompany" id="k_bu_eroll_menu" href="#" role="button">
+										업체등록 </a></li>
+							</ul>
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" href="#" role="button"
+									data-bs-toggle="dropdown"> 예약관리 </a>
+									<ul class="dropdown-menu dropdown-menu">
+										<li><a class="dropdown-item" id="k_re_menu_enroll"
+											href="#">예약메뉴등록</a></li>
+										<li>
+											<hr class="dropdown-divider">
+										</li>
+										<li><a class="dropdown-item" id="k_re_cu_menu" href="#">예약
+												조회/수정</a></li>
+									</ul></li>
+							</ul>
+							<ul class="navbar-nav">
+								<li class="nav-item dropdown"><a class="nav-link dropdown"
+									id="k_us_info_menu" href="#" role="button"> 회원정보조회 </a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+
+			<div style="float: right; margin: 0 30px 0 0;">
+				<div class="dropdown text-end" id="p_top_profile">
+					<a href="#"
+						class="d-block link-dark text-decoration-none dropdown-toggle"
+						id="dropdownUser1" data-bs-toggle="dropdown"> <img
+						src="https://media.discordapp.net/attachments/958566133752016901/973649744310202458/e3362c1706dbf481.png?width=676&height=676"
+						alt="mdo" width="60px">
+					</a>
+					<p style="font-size: 12px; margin: 5px;">환영합니다
+						<%= session.getAttribute("buName") %>님</p>
+					<ul class="dropdown-menu text-small"
+						aria-labelledby="dropdownUser1">
+						<li><a class="dropdown-item" id="k_pwdinfo" href="">비밀번호 재설정</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li><a class="dropdown-item" href="logout">로그아웃</a></li>
+					</ul>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+	</header>
 	
 	<article>
         <div class="s_row">
@@ -68,6 +135,44 @@
 				location.href="BumMainPage";
 			}
     	});
+    	
+    	/* 내 정보관리 */
+        $("#k_info_menu").click(function() {
+           var frm = $("#frm");
+           frm.attr("action", "buminfocheck");
+           frm.attr("method", "post");
+           frm.submit();
+        });
+      	//업체등록
+  		$("#k_bu_eroll_menu").click(function() {			
+  			location.href="bucompany";
+  		});
+  		
+  		//예약관리 - 예약 조회/수정
+  		$("#k_re_cu_menu").click(function() {
+  			location.href = "<%=request.getContextPath()%>/burscheck";
+  		});
+  		
+  		/* 예약관리 - 예약 메뉴 등록 */
+  		$("#k_re_menu_enroll").click(function() {
+  			location.href = "<%=request.getContextPath()%>/burmenu";
+  		});
+  		
+  		/* 토글 - 비밀번호 변경 */
+  	  	$("#k_pwdinfo").click(function() {
+	  	  	var frm = $("#frm");
+	        frm.attr("action", "buminfocheck");
+	        frm.attr("method", "post");
+	        frm.submit();
+  		});
+  		
+  		/* 리뷰관리 */
+  	  $("#k_review_menu").click(function() {
+			var cpNo = $("#cpNo").val();
+			console.log("cpNo ? : " + cpNo);
+			console.log("cpNo 의 타입 ? : " + typeof(cpNo));
+			location.href="bumreviewlist?cpNo=" + cpNo;
+		});
     </script>
     
 </body>

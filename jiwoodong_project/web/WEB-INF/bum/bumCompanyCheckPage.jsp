@@ -383,7 +383,7 @@ article>div>p {
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">이메일</th>
 							<td class="table-light" style="background-color : #f8f9fa">
-							<input type="text" class="form-control" name="buEmail" value="${bvo.buEmail}" /></td>
+							<input type="text" id= "k_email" placeholder="Email@example.com" class="form-control" name="buEmail" value="${bvo.buEmail}" /></td>
 							<td colspan="2" class="table-light" style="background-color : #f8f9fa"><span style="display: none;"></span></td>
 						</tr>
 						<tr>
@@ -449,16 +449,28 @@ article>div>p {
     		//no 
     		}            
     });
-    	//수정하기 + 비밀번호 유효성검사
+    	//[수정하기] 버튼 클릭시 비밀번호/이메일/휴대폰 번호 유효성검사
     $("#s_bu_check_btn").click(function() {
     	
 		var password = $("#buPwd_1").val().trim();
+		var email = $("#k_email").val().trim();
+		var phone = $("#k_tel").val().trim();
     	
     	var regExpPassword =/^(?=.*[A-Za-z])(?=.*[0-9]).{8,16}$/;  // 영문자, 숫자가 적어도 1개이상, 8~16글자
+    	var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; //이메일 양식
+    	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //휴대폰 번호
 		if(!regExpPassword.test(password)){
 			alert("패스워드는 영문자, 숫자가 적어도 1개이상, 8~16글자여야 합니다.");
 			$("#buPwd_1").focus();
 			return false;
+		}else if(!reg.test(email)){
+			alert("Email@example.com 형태로 작성 해주시길 바랍니다.");
+			$("#k_email").focus();
+			return false;
+		}else if(!regPhone.test(phone)){
+			alert("휴대폰 번호 양식에 맞게 입력해주시길 바랍니다.");
+			$("#k_tel").focus();
+			return false;			
 		}else{
 			if (confirm("입력하신 정보로 수정하시겠습니까?") == true) {
 				var frmEl = $("#frm");
@@ -466,17 +478,18 @@ article>div>p {
 				frmEl.attr("method", "post");
 				frmEl.submit();
 			} else {
-				location.href="BumMainPage";
+				return;
 			}			
-		}   	
+		}
+	   	
     });
     
-    	//탈퇴하기
+    	/* 탈퇴하기 */
     $("#s_bu_delete_btn").click(function() {  	
 			location.href="bucpdelete";
     });
      	
-  	<!--전화번호 하이픈 정규식 DOM  --> 		
+  	/* 전화번호 하이픈 정규식 DOM  */	
 	$("#k_tel").on(
 			"input",
 			function() {
@@ -495,12 +508,12 @@ article>div>p {
 	       frm.submit();
 	    });
 		
-	  	//업체등록
+	  	/* 업체등록 */
 			$("#k_bu_eroll_menu").click(function() {			
 				location.href="bucompany";
 			});
 		
-		//예약관리 - 예약 조회/수정
+		/* 예약관리 - 예약 조회/수정 */
 		$("#k_re_cu_menu").click(function() {
 			location.href = "<%=request.getContextPath()%>/burscheck";
 		});

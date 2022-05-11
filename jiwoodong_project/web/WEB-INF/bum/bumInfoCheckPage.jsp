@@ -308,11 +308,11 @@ article>div>p {
 								</tr>
 							</tbody>
 						</table>
-						<div id="s_us_info_btn">
-							<input type="button" id="s_bu_check_btn"
-								class="btn btn-primary pull-right s_ad_nt_btn" value="확인">
+						<div id="s_us_info_btn">						
 							<input type="button" id="back_btn"
 								class="btn btn-secondary pull-right s_ad_nt_btn" value="취소">
+							<input type="button" id="s_bu_check_btn"
+								class="btn btn-primary pull-right s_ad_nt_btn" value="확인">	
 						</div>
 					</form>
 				</div>
