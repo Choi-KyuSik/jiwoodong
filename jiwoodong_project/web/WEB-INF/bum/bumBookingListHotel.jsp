@@ -118,7 +118,7 @@ td, th {
 						<div class="collapse navbar-collapse">
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
-									id="k_info_menu" role="button"> 내정보 관리 </a></li>
+									id="k_info_menu" href="#" role="button"> 내정보 관리 </a></li>
 							</ul>
 							<ul class="navbar-nav">
 								<li class="nav-item dropdown"><a class="nav-link dropdown"
@@ -162,7 +162,7 @@ td, th {
 						<%= session.getAttribute("buName") %>님</p>
 					<ul class="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" id="k_pwdinfo" href="">비밀번호 재설정</a></li>
+						<li><a class="dropdown-item" id="k_pwdinfo" href="#">비밀번호 재설정</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
