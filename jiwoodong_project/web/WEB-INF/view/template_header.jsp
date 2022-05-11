@@ -17,15 +17,29 @@
 				</div>
 				<div id="p_main_bar">
 					<ul class="nav justify-content-end">
-						<li class="nav-item"><a class="nav-link" href="/jwd/#about">About</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="/jwd/#service">Service</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="/jwd/#notice">공지사항</a>
-						</li>
+						<li class="nav-item"><a class="nav-link" href="/jwd/#about">About</a></li>
+						
+						<li class="nav-item"><a class="nav-link" href="/jwd/#service">Service</a></li>
+						
+						<li class="nav-item"><a class="nav-link" href="/jwd/#notice">공지사항</a></li>
+						
+					<!-- 	<li class="nav-item"><a class="nav-link" href="enrollMain">회원가입</a></li> -->
+						
+					<!-- 	<li class="nav-item"><a class="nav-link" href="AdminLogin">관리자로그인</a></li> -->
+						<!-- 로그인 여부에 따른 버튼 변화 -->
+						<% if (session.getAttribute("password") == null) { %>
 						<li class="nav-item"><a class="nav-link" href="enrollMain">회원가입</a></li>
-						<li class="nav-item"><a class="nav-link" href="AdminLogin">관리자로그인</a>
-						</li>
+						
+						<li class="nav-item"><a class="nav-link" href="AdminLogin">관리자로그인</a></li>
+						<%} else {%>
+						<%} %>
+						<% if (session.getAttribute("bu_id") != null && session.getAttribute("um_id") == null) { %>
+						<li class="nav-item"><a class="nav-link" href="BumMainPage">마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
+					<% } else if(session.getAttribute("um_id") != null && session.getAttribute("bu_id") == null){ %>
+						<li class="nav-item"><a class="nav-link" href="UserMypage">마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link" href="logout">로그아웃</a></li>
+					 <% } %>
 					</ul>
 				</div>
 			</div>
