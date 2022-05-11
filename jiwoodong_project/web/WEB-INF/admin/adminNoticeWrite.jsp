@@ -29,7 +29,7 @@
 
 	<div class="container">
 		<div class="row" style="width: 1200px; margin: 0 auto; padding-top: 30px;">
-			<form method="post" action="AdminNoticeWriteDo">
+			<form method="post" action="AdminNoticeWriteDo" id="frm">
 				<table class="table">
 					<thead>
 						<tr>
@@ -38,10 +38,10 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td width="100%;"><input type="text" class="form-control" placeholder="글 제목" name="ntTitle" maxlength="300" required="required"></td>
+							<td width="100%;"><input type="text" class="form-control" placeholder="글 제목" name="ntTitle" id="ntTitle" maxlength="300" required="required"></td>
 						</tr>
 						<tr>	
-							<td><textarea class="form-control" placeholder="글 내용" name="ntContent" maxlength="4000" style="height: 350px; resize: none;" required="required"></textarea></td>
+							<td><textarea class="form-control ntContent" placeholder="글 내용" name="ntContent" id="ntContent" maxlength="4000" style="height: 350px; resize: none;" required="required"></textarea></td>
 						</tr>
 						<tr>
 								<td class="table-light" id="s_us_no"><input type="hidden"
@@ -55,11 +55,35 @@
 							</tr>
 					</tbody>
 				</table>
-				<input type="submit" class="btn btn-primary pull-right" style="float: right; margin-right: 10px;" value="글쓰기">
+				<input type="button" id="s_write_btn" class="btn btn-primary pull-right" style="float: right; margin-right: 10px;" value="글쓰기">
 				<input type="button" id="back_btn" class="btn btn-secondary pull-right" style="float: right; margin-right: 10px;" value="뒤로가기">
 			</form>
 		</div>
 	</div>
+	<script>
+		$("#s_write_btn").click(function() {
+			
+			if($.trim($("#ntTitle").val()) == '') {
+				console.log("비어이따");
+				alert("제목을 입력해주세요.");
+				$("#ntTitle").val('');
+				$("#ntTitle").focus();
+				return;
+			}
+			
+			if($.trim($("#ntContent").val()) == '') {
+				console.log("비어이따222");
+				alert("내용을 입력해주세요.");
+				$('.ntContent').val('');
+				$('.ntContent').focus();
+				return;
+			}
+			
+			$("#frm").submit();
+			
+		});
+	</script>
+	
 	<script>
 		$("#back_btn").click(function() {
 			history.back();

@@ -73,14 +73,14 @@
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">전화번호</th>
 							<td class="table-light tb_bg_color">
-							<input type="text" class="form-control" name="umTel" id="umTel" value="${usMemberListInfo.umTel }" style="width: 500px;" />
+							<input type="text" class="form-control" name="umTel" id="umTel" value="${usMemberListInfo.umTel }" style="width: 500px;" placeholder="010-0000-0000"/>
 							</td>
 							<td style="vertical-align: middle;" colspan="2" class="tb_bg_color"><span id="s_check_tel" style="display: none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span></td>
 						</tr>
 						<tr>
 							<th class="table-primary s_us_th" style="--bs-table-accent-bg: none;">이메일</th>
 							<td class="table-light tb_bg_color">
-							<input type="text" class="form-control" name="umEmail" id="umEmail" value="${usMemberListInfo.umEmail }"  style="width: 500px;"/></td>
+							<input type="text" class="form-control" name="umEmail" id="umEmail" value="${usMemberListInfo.umEmail }"  style="width: 500px;" placeholder="email@example.com"/></td>
 							<td style="vertical-align: middle; --bs-table-accent-bg: none;" colspan="2" class="tb_bg_color"><span id="s_check_email" style="display: none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span></td>
 						</tr>
 						<%-- <tr>
@@ -334,6 +334,47 @@
 	    		$("#umPwd_1").focus();
 	    	} else {
 		    	if (confirm("정말 수정하시겠습니까?") == true) {
+		    		
+		    		if($.trim($("#umPwd_1").val()) == '') {
+						console.log("비어이따");
+						alert("변경할 비밀번호를 입력해주세요.");
+						$("#umPwd_1").val('');
+						$("#umPwd_1").focus();
+						return;
+					}
+		    		
+		    		if($.trim($("#umPwd_2").val()) == '') {
+						console.log("비어이따");
+						alert("비밀번호를 한번 더 입력해주세요.");
+						$("#umPwd_2").val('');
+						$("#umPwd_2").focus();
+						return;
+					}
+		    		
+		    		if($.trim($("#umTel").val()) == '') {
+						console.log("비어이따");
+						alert("전화번호를 입력해주세요.");
+						$("#umTel").val('');
+						$("#umTel").focus();
+						return;
+					}
+		    		
+		    		if($.trim($("#umEmail").val()) == '') {
+						console.log("비어이따");
+						alert("이메일을 입력해주세요.");
+						$("#umEmail").val('');
+						$("#umEmail").focus();
+						return;
+					}
+		    		
+		    		if($.trim($("#jibunAddress").val()) == '') {
+						console.log("비어이따");
+						alert("상세주소를 입력해주세요.");
+						$("#jibunAddress").val('');
+						$("#jibunAddress").focus();
+						return;
+					}
+		    		
 					var frmEl = $("#frm");
 					frmEl.attr("action", "UserInfoUpdateDo");
 					frmEl.attr("method", "post");

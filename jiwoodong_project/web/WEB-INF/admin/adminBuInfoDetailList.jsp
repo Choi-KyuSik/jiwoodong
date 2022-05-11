@@ -66,7 +66,7 @@
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">전화번호</th>
 							<td class="table-light" id="s_url_no"><input type="text" class="form-control" id="buTel"
 								name="buTel" maxlength="300" style="width: 500px;display: inline-block;"
-								required="required" value="${buMemberDetail.buTel}" />
+								required="required" value="${buMemberDetail.buTel}" placeholder="010-0000-0000" />
 								<span id="s_check_tel" style="display: none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span>
 								</td>
 						</tr>
@@ -74,7 +74,7 @@
 							<th class="table-primary s_ac_th">이메일</th>
 							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control" id="buEmail"
 								name="buEmail" maxlength="300" style="width: 500px; display: inline-block;
-								required="required" value="${buMemberDetail.buEmail}" />
+								required="required" value="${buMemberDetail.buEmail}" placeholder="email@example.com" />
 								<span id="s_check_email" style="display:none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span>
 								</td>
 						</tr>
@@ -172,6 +172,22 @@
 
 		$("#s_update_btn").click(function() {
 			if (confirm("정말 수정하시겠습니까?") == true) {
+				if($.trim($("#buTel").val()) == '') {
+					console.log("비어이따");
+					alert("전화번호를 입력해주세요.");
+					$("#buTel").val('');
+					$("#buTel").focus();
+					return;
+				}
+				
+				if($.trim($("#buEmail").val()) == '') {
+					console.log("비어이따2222");
+					alert("이메일을 입력해주세요.");
+					$("#buEmail").val('');
+					$("#buEmail").focus();
+					return;
+				}
+				
 				var frmEl = $("#frm");
 				frmEl.attr("action", "AdminBuInfoUpdateDo");
 				frmEl.attr("method", "post");

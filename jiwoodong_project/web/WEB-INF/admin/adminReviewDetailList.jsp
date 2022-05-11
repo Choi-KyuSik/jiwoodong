@@ -190,7 +190,7 @@
 	
 	<script>
 		$("#back_btn").click(function() {
-			history.back();
+			location.replace('AdminReviewList');
 		});
 		
 		$(".star_rating a").click(function() {
@@ -247,6 +247,15 @@
 		
 		$("#s_rv_update_btn").click(function() {
 			if(confirm("정말 수정하시겠습니까?") == true) {
+				
+				if($.trim($("#rvContent").val()) == '') {
+					console.log("비어이따");
+					alert("수정할 내용을 입력해주세요.");
+					$("#rvContent").val('');
+					$("#rvContent").focus();
+					return;
+				}
+				
 				var val = $(".on").last();
 				var rvScore = val.attr('href');
 				console.log("rvScore : " + rvScore);
@@ -264,7 +273,7 @@
 					success: function(result) {
 						console.log("전달 성공");
 						alert(result);
-						location.href="AdminReviewList";
+						location.href="AdminReviewDetailList?rvNo=" + rvNo;
 					}
 				});
 			} else {

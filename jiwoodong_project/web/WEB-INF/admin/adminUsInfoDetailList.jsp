@@ -63,7 +63,7 @@
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">전화번호</th>
 							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
-								name="umTel" maxlength="300" id="umTel"
+								name="umTel" maxlength="300" id="umTel" placeholder="010-0000-0000"
 								required="required" value="${usMemberDetail.umTel}" style="width: 500px;display: inline-block;" />
 								<span id="s_check_tel" style="display: none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span>
 								</td>
@@ -71,7 +71,7 @@
 						<tr>
 							<th class="table-primary s_ac_th" style="--bs-table-accent-bg: none;">이메일</th>
 							<td class="table-light tb_bg_color" id="s_url_no"><input type="text" class="form-control"
-								name="umEmail" maxlength="300" id="umEmail"
+								name="umEmail" maxlength="300" id="umEmail" placeholder="email@example.com"
 								required="required" value="${usMemberDetail.umEmail}" style="width: 500px;display: inline-block;" />
 								<span id="s_check_email" style="display:none; font-size: .8em; padding-left: 10px; color: red;">유효성 검사 뜰 자리</span>
 								</td>
@@ -187,6 +187,31 @@
 		// 수정하기 버튼 눌렀을 때
 		$("#s_update_btn").click(function() {
 			if (confirm("정말 수정하시겠습니까?") == true) {
+				
+				if($.trim($("#umTel").val()) == '') {
+					console.log("비어이따");
+					alert("전화번호를 입력해주세요.");
+					$("#umTel").val('');
+					$("#umTel").focus();
+					return;
+				}
+				
+				if($.trim($("#umEmail").val()) == '') {
+					console.log("비어이따2222");
+					alert("이메일을 입력해주세요.");
+					$("#umEmail").val('');
+					$("#umEmail").focus();
+					return;
+				}
+				
+				if($.trim($("#jibunAddress").val()) == '') {
+					console.log("비어이따3333");
+					alert("상세 주소를 입력해주세요.");
+					$("#jibunAddress").val('');
+					$("#jibunAddress").focus();
+					return;
+				}
+				
 				var frmEl = $("#frm");
 				frmEl.attr("action", "AdminUmInfoUpdateDo");
 				frmEl.attr("method", "post");

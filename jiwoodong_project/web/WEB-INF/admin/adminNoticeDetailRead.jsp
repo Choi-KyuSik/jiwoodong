@@ -46,13 +46,13 @@
 						</tr>
 						<tr>
 							<td style="width: 100%;"><input type="text" class="form-control"
-								placeholder="글 제목" name="ntTitle" maxlength="300"
+								placeholder="글 제목" name="ntTitle" maxlength="300" id="ntTitle"
 								required="required" value="${adnvoList.ntTitle}" /></td>
 						</tr>
 							<c:if test="${empty adnvoList.flGno}">
 						<tr>
 							<td><textarea class="form-control" placeholder="글 내용"
-									name="ntContent" maxlength="4000"
+									name="ntContent" maxlength="4000" id="ntContent"
 									style="height: 350px; resize: none;" required="required">${adnvoList.ntContent}</textarea></td>
 						</tr>
 							</c:if>
@@ -60,7 +60,7 @@
 						<tr>
 							<td>
 							<img style="border-radius: 5px; float: right; width: 350px; height: 350px; border: 1px solid #ced4da;" src="${adnvoList.flGno }">
-							<textarea class="form-control" placeholder="글 내용"
+							<textarea class="form-control ntContent" placeholder="글 내용"
 									name="ntContent" maxlength="4000"
 									style="height: 350px; resize: none; float: left; width: 800px;" required="required">${adnvoList.ntContent}</textarea></td>
 						</tr>
@@ -101,6 +101,22 @@
 
 		$("#s_update_btn").click(function() {
 			if (confirm("정말 수정하시겠습니까?") == true) {
+				if($.trim($("#ntTitle").val()) == '') {
+					console.log("비어이따");
+					alert("제목을 입력해주세요.");
+					$("#ntTitle").val('');
+					$("#ntTitle").focus();
+					return;
+				}
+				
+				if($.trim($("#ntContent").val()) == '') {
+					console.log("비어이따222");
+					alert("내용을 입력해주세요.");
+					$('.ntContent').val('');
+					$('.ntContent').focus();
+					return;
+				}
+				
 				var frmEl = $("#frm");
 				frmEl.attr("action", "AdminNoticeUpdateDo");
 				frmEl.attr("method", "post");
