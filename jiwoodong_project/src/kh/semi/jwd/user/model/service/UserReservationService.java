@@ -81,7 +81,7 @@ public class UserReservationService {
 		return result;
 	}
 	
-	// »ç¿ëÀÚ ¿¹¾à Ãë¼Ò : ÃÖ±Ô½Ä
+	// ì‚¬ìš©ì ì˜ˆì•½ ì·¨ì†Œ : ìµœê·œì‹
 	public ArrayList<Map<String, Object>> userBKC(int bkNo) {
 		Connection conn = getConnection();
 		ArrayList<Map<String, Object>> result = new UserReservationDao().userBKC(conn, bkNo);

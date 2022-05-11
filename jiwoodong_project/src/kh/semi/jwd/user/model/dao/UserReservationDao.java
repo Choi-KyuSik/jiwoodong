@@ -269,7 +269,7 @@ public class UserReservationDao {
 		return result;
 	}
 
-	// »ç¿ëÀÚ ¿¹¾à Ãë¼Ò : ÃÖ±Ô½Ä
+	// ì‚¬ìš©ì ì˜ˆì•½ ì·¨ì†Œ : ìµœê·œì‹
 	public ArrayList<Map<String, Object>> userBKC(Connection conn, int bkNo) {
 		
 		ArrayList<Map<String, Object>> result = null;
