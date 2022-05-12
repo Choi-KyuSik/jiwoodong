@@ -48,7 +48,7 @@
 
 <div class="container">
     <div class="input-form-backgroud row">
-        <div class="input-form col-md-12 mx-auto" style="margin-top: 0;">
+        <div class="input-form col-md-12 mx-auto" style="margin-top: 0; width: 60%;">
             <h4 class="mb-3" id="s_tt"><strong>사용자 회원가입</strong></h4>
             <form id="frm" class="validation-form" name="bu_enroll" novalidate >
             
@@ -64,7 +64,7 @@
                         <input type="date" class="form-control" id="birth" name="birth" placeholder="YYYY/MM/DD" required="required">
                         <div class="invalid-feedback"> 생년월일을 입력해주세요. </div>
                     </div>
-                    <div class="col-md-8 mb-3" style="margin-bottom: 20px;"> 
+                    <div class="col-md-8 mb-3" style="margin-bottom: 20px;width: 100%;"> 
                         <label for="gender">성별</label> 
                         <select class="custom-select d-block w-100" style="font-size: 1em;" id="gender" name="gender" required="required">
                             <option value="F">여자</option>
@@ -73,15 +73,15 @@
                     </select>
                     <div class="invalid-feedback"> 성별을 선택해주세요. </div>
                 </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-3" style="width: 100%;">
                         <label for="phone">핸드폰 번호</label> 
                         <input type="text" class="form-control" id="phone" placeholder="010-0000-0000" name="phone" required="required">
                         <div class="invalid-feedback"> 핸드폰번호를 입력해주세요. </div>
                     </div>
                 </div>
-                <div class="mb-3" style=" margin-bottom: 4px!important;  width: 80%;"> 
+                <div class="mb-3" style=" margin-bottom: 4px!important; width: 100%;"> 
                     <label for="email" style="display: block;">이메일</label> 
-                    <input type="email" class="form-control" id="email" name="email" placeholder="email1@example.com"  required="required"  maxlength="30" style="width:400px; margin-right: 5px;">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="email1@example.com"  required="required"  maxlength="30" style=" width: 100%; margin-right: 5px;">
                     <div class="invalid-feedback"> 이메일을 입력해주세요. </div>
                    <!--  <input type="button" id="email_btn" class="btn btn-primary" value="인증번호 발송" onsubmit="return email_btn()" onclick="return email_btn()" > -->
                 </div>
@@ -97,7 +97,7 @@
                 <div class="mb-3" style="clear: both; margin-bottom: 20px;">
                     <label for="bu_id" style="display: block;">아이디</label>
                     <input type="text" class="form-control" id="user_id" name="user_id" required="required" style="margin-right: 5px; float: left; width: 80%; margin-bottom: 20px;">
-                    <input type="button" class="btn btn-primary" name="user_id_btn" id="user_id_btn" value="중복확인" >
+                    <input type="button" class="btn btn-primary" name="user_id_btn" id="user_id_btn" value="중복확인" style="position: relative;left: 20px;width: 90px;height: 30px;top: 1px;">
                     <br><font id="checkId" size ="1"></font>
                     <div class="invalid-feedback"> 아이디를 입력해주세요.</div>
                     <!-- <input type="button" class="btn btn-primary" name="bu_id_check" id="bu_id_check" value="중복확인" onclick="winopen()" > -->
