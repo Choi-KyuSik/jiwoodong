@@ -37,6 +37,7 @@ public class LogoutController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		out.println("<script>alert('로그아웃 되었습니다.'); location.href='/jwd';</script>");
+		out.flush();
 		//out.println("<script>alert('로그아웃 되었습니다! 움마쪽~!!! ');</script>");
 		//request.getRequestDispatcher("WEB-INF/mainpage.jsp").forward(request, response);
 		

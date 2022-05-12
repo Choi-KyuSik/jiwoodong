@@ -57,38 +57,80 @@ public class BumLoginDoController extends HttpServlet {
 		vo.setBuId(bu_id);
 		vo.setBuPwd(password);
 		vo.setBuName(vo.getBuName());
+		vo.setBuUseYn(vo.getBuUseYn());
 		
 		BumLoginVo result = new BumService().loginBuMember(vo);
 		System.out.println("controller BumLoginVo : " + result);
 		int buNo = new BumService().getBuno(bu_id);
+		
 		// 사업자번호 뽑아서 세션에넣기
 		int cpno = new BusinessReservationService().getCpno(result.getBuId());
-		if(result != null && result.getBuId() !=null) {
-			HttpSession session = request.getSession();
+		
+		String bumUseYn =result.getBuUseYn();
+//		if(result != null && result.getBuId() !=null) {
+//			HttpSession session = request.getSession();
+//			
+//			session.setAttribute("bu_id", result.getBuId());
+//			session.setAttribute("password", result.getBuPwd());
+//			session.setAttribute("buName", result.getBuName());
+//			session.setAttribute("cpNo", cpno);
+//			session.setAttribute("buNo", buNo);
+//			System.out.println("bu_id:"+bu_id);
+//			System.out.println("password:"+password);
+//			System.out.println("name:"+result.getBuName());
+//			System.out.println("로그인 cpNo"+cpno);
+//			
+//			System.out.println(request.getSession().getAttribute("cpNo"));
+//			System.out.println("로그인 성공한거지 여기가?네네 - 오늘의 명언... 언니 최고...");
+//			response.sendRedirect("/jwd");
+//		}else {
+//			 // 로그인 실패
+//			System.out.println("로그인 해주세요");
+//			//response.sendRedirect("bumLogin");
+//			
+//			PrintWriter out = response.getWriter();
+//			out.println("<script>alert('아이디/비밀번호를 확인해주세요.'); location.href='bumLogin';</script>");
+//		   // request.setAttribute("LoginErrMsg", "로그인 오류입니다."); 
+//		   // request.getRequestDispatcher("bumLogin").forward(request, response);
+//			out.flush();
+//		}
+		 if(result != null &&  result.getBuId() !=null){
+				if(bumUseYn.equals("Y")) {
+					
+					HttpSession session = request.getSession();
+					
+					session.setAttribute("bu_id", result.getBuId());
+					session.setAttribute("password", result.getBuPwd());
+					session.setAttribute("buName", result.getBuName());
+					session.setAttribute("cpNo", cpno);
+					session.setAttribute("buNo", buNo);
+					System.out.println("bu_id:"+bu_id);
+					System.out.println("password:"+password);
+					System.out.println("name:"+result.getBuName());
+					System.out.println("로그인 cpNo"+cpno);
+					
+					System.out.println(request.getSession().getAttribute("cpNo"));
+					System.out.println("로그인 성공한거지 여기가?네네 - 오늘의 명언... 언니 최고...");
+					response.sendRedirect("/jwd");
+				}else if(bumUseYn.equals("N")){
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('탈퇴한 회원입니다. 다시 지우동과 함께해주세요ㅎㅎ'); location.href='enrollMain';</script>");
+				out.flush();
+				System.out.println("탈퇴 umUseYn:"+bumUseYn);
+				System.out.println("탈퇴 result.getUmId():"+result.getBuId());
+				System.out.println("탈퇴 result:"+result);
+				}
 			
-			session.setAttribute("bu_id", result.getBuId());
-			session.setAttribute("password", result.getBuPwd());
-			session.setAttribute("buName", result.getBuName());
-			session.setAttribute("cpNo", cpno);
-			session.setAttribute("buNo", buNo);
-			System.out.println("bu_id:"+bu_id);
-			System.out.println("password:"+password);
-			System.out.println("name:"+result.getBuName());
-			System.out.println("로그인 cpNo"+cpno);
-			
-			System.out.println(request.getSession().getAttribute("cpNo"));
-			System.out.println("로그인 성공한거지 여기가?네네 - 오늘의 명언... 언니 최고...");
-			response.sendRedirect("/jwd");
-		}else {
-			 // 로그인 실패
-			System.out.println("로그인 해주세요");
-			//response.sendRedirect("bumLogin");
-			
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('아이디/비밀번호를 확인해주세요.'); location.href='bumLogin';</script>");
-		   // request.setAttribute("LoginErrMsg", "로그인 오류입니다."); 
-		   // request.getRequestDispatcher("bumLogin").forward(request, response);
-			out.flush();
-		}
+			}else {
+				// 로그인 실패
+				System.out.println("로그인 해주세요");
+				//response.sendRedirect("userLogin");
+				System.out.println("else umUseYn:"+bumUseYn);
+				System.out.println("else result.getUmId():"+result.getBuId());
+				System.out.println("else result:"+result);
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('아이디/비밀번호를 확인해주세요.'); location.href='userLogin';</script>");
+				out.flush();
+			}
 	}
 }

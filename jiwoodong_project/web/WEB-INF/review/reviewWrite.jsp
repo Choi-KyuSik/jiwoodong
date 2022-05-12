@@ -167,10 +167,10 @@
 			var rvScore = val.attr('href');
 			var rvContent = $('#rvContent').val();
 			
-			console.log(rvScore);
+			console.log("rvScore:"+rvScore);
 			console.log("rvContent:"+rvContent);
 			 /* location.href = ”url?name=값+"&"+name2=값”; */
-			location.href="userRvWrite.lo?rvScore=" + rvScore+"&rvContent="+rvContent;
+			location.href="userRvWrite.lo?rvScore="+rvScore+"&rvContent="+rvContent;
 		});
 	</script>
 	

@@ -8,8 +8,16 @@ public class BumLoginVo {
 	private String buPwd;
 	private String buName;
 	private int buNo;
+	private String buUseYn;
 	
 	
+	
+	public String getBuUseYn() {
+		return buUseYn;
+	}
+	public void setBuUseYn(String buUseYn) {
+		this.buUseYn = buUseYn;
+	}
 	public String getBuId() {
 		return buId;
 	}
@@ -54,6 +62,14 @@ public class BumLoginVo {
 		this.buId = buId;
 		this.buPwd = buPwd;
 		this.buName = buName;
+	}
+	public BumLoginVo(String buId, String buPwd, String buName, int buNo, String buUseYn) {
+		super();
+		this.buId = buId;
+		this.buPwd = buPwd;
+		this.buName = buName;
+		this.buNo = buNo;
+		this.buUseYn = buUseYn;
 	}
 	
 	
