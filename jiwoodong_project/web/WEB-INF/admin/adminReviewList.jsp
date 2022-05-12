@@ -294,7 +294,7 @@
     	  yAxis: {
     	    min: 0,
     	    title: {
-    	      text: '리뷰개수',
+    	      text: '별점개수',
     	      align: 'high'
     	    },
     	    labels: {

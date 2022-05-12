@@ -108,12 +108,12 @@
 					$("#ntTitle").focus();
 					return;
 				}
-				
-				if($.trim($("#ntContent").val()) == '') {
+				// if($.trim($("#ntContent").val()) == '') {
+				if($("#ntContent").val().trim() == '') {
 					console.log("비어이따222");
 					alert("내용을 입력해주세요.");
-					$('.ntContent').val('');
-					$('.ntContent').focus();
+					$('#ntContent').val('');
+					$('#ntContent').focus();
 					return;
 				}
 				

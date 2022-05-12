@@ -90,7 +90,7 @@
                             	<c:forEach items="${adnolist }" var="i">
                                 <tr class="s_tr_readList">
                                     <th scope="row">${i.ntNo}</th>
-                                    <td class="s_td_short">${i.ntTitle}</td>
+                                    <td>${i.ntTitle}</td>
                                     <td>관리자</td>
                                     <td>${i.ntDate}</td>
                                 </tr>
