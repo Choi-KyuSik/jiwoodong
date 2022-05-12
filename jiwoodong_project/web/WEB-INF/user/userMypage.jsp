@@ -270,7 +270,7 @@
 		<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 		<!-- 네비 예약현황 : 예약 완료 -->
 		<c:forEach items="${bklist_r }" var="i">
-    		<div class="card" style="width: 300px; height: 540px; display: inline-block; float: left; margin: 10px;">
+    		<div class="card" style="width: 300px; height: 540px; display: inline-block; float: left; margin: 10px; border-radius: 15px;">
     		<c:if test="${empty i.flGno }">
     		<!-- https://hk-clean.co.kr/images/no_image.jpg 대체이미지 -->
                       <img src="https://media.discordapp.net/attachments/958682757230366780/969685089632018574/e3362c1706dbf481.png?width=1358&height=1358"
@@ -287,21 +287,21 @@
 	              <p class="card-text">${i.cpAddress}</p>
 	            </div>
 	            <ul class="list-group list-group-flush">
-	              <li class="list-group-item">${i.bkDate}</li>
-	              <li class="list-group-item">${i.bkStatus}</li>
+	              <li class="list-group-item">예약날짜 : ${i.bkDate}</li>
+	              <li class="list-group-item">예약시간 : ${i.bkTime}</li>
+	              <li class="list-group-item" style="color: blue;">${i.bkStatus}</li>
 	            </ul>
 	            <div class="card-body">
+	            <form id="frm">
 	              <!-- <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
 	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a> -->
-	              <!-- <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="rv_btn">리뷰작성</button></a> -->
-	             <button type="button" class="btn btn-outline-secondary"  data-bs-target="#staticBackdrop_u" id="rv_btn">리뷰작성</button> 
-	            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_u" id="rvwrite_btn">변경</button>
+	            <span><button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_u" id="bkupdata_btn_btn">변경</button></span>
 	            <!-- 예약 변경 모달창 -->
 		    	 <div class="modal fade" id="staticBackdrop_u" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+				        <h5 class="modal-title" id="staticBackdropLabel">예약변경</h5>
 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				      </div>
 				      <div class="modal-body">
@@ -315,25 +315,27 @@
 				  </div>
 				</div>
 				
-	            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop_c" id="bkcancle_btn">취소</button>
+	            <span><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="bkcancle_btn">취소</button></span>
 	            <!-- 예약 취소 모달창 -->
-		    	 <div class="modal fade" id="#staticBackdrop_c" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		    	 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+				        <h5 class="modal-title" id="staticBackdropLabel">예약취소</h5>
 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				      </div>
 				      <div class="modal-body">
 				        예약을 취소하시겠습니까?
+				        
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-				        <button type="button" class="btn btn-primary">확인</button>
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="c_cancle_btn">취소</button>
+				        <button type="button" class="btn btn-primary"  id="c_check_btn">확인</button>
 				      </div>
 				    </div>
 				  </div>
 				</div>
+				</form>
 	            </div>
          	</div>
          	</c:forEach>
@@ -359,11 +361,13 @@
 		            <div class="card-body">
 		            	<input type="hidden" id="umId" name="umId" value="${umId }"/>
 		              <h5 class="card-title" style="font-weight: bold;font-size: 1.5em;"> ${i.cpName} </h5>
+		              
 		              <p class="card-text">${i.cpAddress}</p>
 		            </div>
 		            <ul class="list-group list-group-flush">
-		              <li class="list-group-item">${i.bkDate}</li>
-		              <li class="list-group-item">${i.bkStatus}</li>
+		              <li class="list-group-item">예약날짜 : ${i.bkDate}</li>
+		              <li class="list-group-item">예약시간 : ${i.bkTime}</li>
+		              <li class="list-group-item" style="color: #dc3545;" >${i.bkStatus}</li>
 		            </ul>
 		            <div class="card-body">
 		              <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
@@ -496,6 +500,7 @@
 			var umId = $("#umId").val();
 			console.log("umId : " + umId);
 		});
+		
 	</script>
 	
 <!--  	<script>
@@ -555,15 +560,15 @@
   	});
   	
   	/* 예약변경 버튼 클릭시 */
-  	$("#bkupdata_btn").click(function() {
+  	/* $("#bkupdata_btn").click(function() {
   		location.href="";
-  	});
+  	}); */
   	
   	/* 예약취소 버튼 클릭시 */
-  	$("#bkcancle_btn").click(function() {
+  	/* $("#bkcancle_btn").click(function() {
   		location.href="";
   	});
-  	
+  	 */
   	
   </script>
   
@@ -583,6 +588,21 @@
 			console.log("찍히냐? mypage");
 			location.reload();
 		});
+	</script>
+	
+	<script>
+	$("#c_cancle_btn").click(function(){
+		history.back();
+	})
+	
+	/* $("#c_check_btn").click(function(){
+		console.log("삭제버튼");
+		var frm = $("#frm");
+		frm.attr("action","UserBookingCancle");
+		frm.attr("method","post");
+		frm.submit();
+	}) */
+	
 	</script>
 	
 <!-- 	<script>

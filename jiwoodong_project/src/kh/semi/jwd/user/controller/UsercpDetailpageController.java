@@ -42,9 +42,13 @@ public class UsercpDetailpageController extends HttpServlet {
 		UserVo uscpRvscoreAVG = new UsercpDetailpageService().uscpRvscoreAVG(cpNo);
 		System.out.println("별점 평균은 ? : "+ uscpRvscoreAVG);
 		
+		ArrayList<Map<String, Object>> uscpRvList = new UsercpDetailpageService().uscpRvList(cpNo);
+		request.setAttribute("uscpRvList", uscpRvList);
+//		System.out.println("리뷰 리스트 어디갔니 " + uscpRvList);
+		
 //		double rvScoreAvg = Double.parseDouble("rvScore");
 		
-		System.out.println("uscpdetail : " + uscpdetail);
+//		System.out.println("uscpdetail : " + uscpdetail);
 		
 		request.setAttribute("uscpdetail", uscpdetail);
 		request.setAttribute("uscpRvscoreAVG", uscpRvscoreAVG);

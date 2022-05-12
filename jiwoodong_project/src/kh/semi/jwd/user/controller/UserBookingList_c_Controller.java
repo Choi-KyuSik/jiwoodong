@@ -32,20 +32,19 @@ public class UserBookingList_c_Controller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String umId = (String) request.getSession().getAttribute("um_id");
-		
-		ArrayList<Map<String, Object>> bklist_c = new UserService().usBkList_c(umId);
-		
-		request.setAttribute("bklist_c", bklist_c);
-		System.out.println("bklist_c : " + bklist_c);
-	}
+    String umId = (String) request.getSession().getAttribute("um_id");
+	ArrayList<Map<String, Object>> bklist_c = new UserService().usBkList_c(umId);
+	
+	request.setAttribute("bklist_c", bklist_c);
+	System.out.println("bklist_c : " + bklist_c);
+	
+}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		doGet(request, response);
-//	}
-
+		
 }
+

@@ -107,7 +107,7 @@ public class UsercpDetailpageDao {
 	
 	public ArrayList<Map<String, Object>> uscpRvList(Connection conn, int cpNo) {
 		System.out.println(cpNo+"들어있는지 확인");
-		ArrayList<Map<String, Object>> rvlist = null;
+		ArrayList<Map<String, Object>> rvlist = new ArrayList<Map<String, Object>>();
 
 		String sql = "select * from(select rownum rnum, A.*"
 				+ " from (select r.rv_content 리뷰내용, to_char(rv_write_date, 'yyyy/mm/dd') 작성일, b.um_id 작성자,  case r.rv_score "
@@ -120,9 +120,7 @@ public class UsercpDetailpageDao {
 				+ " end 평점 "
 				+ " from booking b join review r using(bk_no) "
 				+ " where b.cp_no = ? order by b.bk_write_date desc) A)"
-				+ " where rnum between 1 and 10;";
-		
-		rvlist = new ArrayList<Map<String, Object>>();
+				+ " where rnum between 1 and 10";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -139,8 +137,8 @@ public class UsercpDetailpageDao {
 
 				rvlist.add(map);
 				
-				System.out.println("리뷰들아 어디갔어?ㅠ :" + sql);
 			}
+			System.out.println("리뷰들아 어디갔어?ㅠ :" + sql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

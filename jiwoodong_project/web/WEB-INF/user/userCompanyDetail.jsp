@@ -199,13 +199,13 @@
 									aria-labelledby="c_riview-tab">
 
 									<div style="height: 700px; margin-top: 30px;">
-										<table class="table" style="width: 900px;">
+										<table class="table" style="width: 900px; table-layout: fixed;">
 											<thead>
-												<tr>
-													<th scope="col">No</th>
-													<th scope="col">제목</th>
-													<th scope="col">작성일자</th>
-													<th scope="col">아이디</th>
+												<tr style="text-align: center;">
+													<th scope="col" style="width: 50px;">No</th>
+													<th scope="col" style="width: 500px;">제목</th>
+													<th scope="col" style="width: 100px;">작성일자</th>
+													<th scope="col" style="width: 100px;">아이디</th>
 													<th scope="col">별점</th>
 												</tr>
 											</thead>
@@ -214,13 +214,13 @@
 												<c:forEach items="${uscpRvList }" var="i">
 												<tr>
 													<th scope="row">${i.rownum}</th>
-													<td>${i.rvContent }</td>
-													<td>${i.rvWriteDate }</td>
-													<td>${i.umId }</td>
-													<td>${i.rvScore }</td>
+													<td style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${i.rvContent }</td>
+													<td style="text-align: center;">${i.rvWriteDate }</td>
+													<td style="text-align: center;">${i.umId }</td>
+													<td style="text-align: center;">${i.rvScore }</td>
 												</tr>
 												</c:forEach>
-												<c:if test="${empty test}">
+													<c:if test="${empty uscpRvList}">
 													<tr><td colspan="5" style="text-align: center">등록된 리뷰가 없습니다.</td></tr>
 													</c:if>
 												<!-- <tr>

@@ -15,7 +15,7 @@ import kh.semi.jwd.user.model.service.UserReservationService;
 /**
  * Servlet implementation class UserBookingCancleController
  */
-@WebServlet("/UserBookingCancleController")
+@WebServlet("/UserBookingCancle")
 public class UserBookingCancleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,11 +41,11 @@ public class UserBookingCancleController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bkNo = (int) request.getSession().getAttribute("bkNo");
-		ArrayList<Map<String, Object>> userBKC = new UserReservationService().userBKC(bkNo);
+		//int bkNo = (int) request.getSession().getAttribute("bkNo");
+		//ArrayList<Map<String, Object>> userBKC = new UserReservationService().userBKC(bkNo);
 		
-		request.setAttribute("userBKC", userBKC);
-		System.out.println("userBKC : " + userBKC);
+		//request.setAttribute("userBKC", userBKC);
+		//System.out.println("userBKC : " + userBKC);
 	}
 
 }

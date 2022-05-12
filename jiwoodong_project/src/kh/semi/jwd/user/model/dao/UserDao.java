@@ -388,7 +388,7 @@ public class UserDao {
 		public ArrayList<Map<String, Object>> usBkList_c(Connection conn, String umId) {
 			System.out.println("umId : " + umId);
 			ArrayList<Map<String, Object>> volist = null;
-			String sql = "select bk_no, um_id, cp_name, cp_address, bk_date, substr(bk_time,1,5), REPLACE(REPLACE(BK_STATUS,'R','예약완료'),'C','예약취소') as bk_statusC, fl_gno, CP_SIGNYN "
+			String sql = "select bk_no, um_id, cp_name, cp_address, bk_date, substr(bk_time,1,5), REPLACE(REPLACE(BK_STATUS,'R','예약완료'),'C','예약취소') as bk_statusC, fl_gno, CP_SIGNYN ,BK_TIME"
 					+ " from booking b "
 					+ " join company c using (cp_no) "
 					+ " where bk_status in ('c','C') and um_id = ? "
@@ -412,7 +412,10 @@ public class UserDao {
 					map.put("bkStatus", rs.getString(7));
 					map.put("flGno", rs.getString(8));
 					map.put("cpSignyn", rs.getString(9));
+					map.put("bkTime", rs.getString(10));
 					volist.add(map);
+					
+					System.out.println("volist 는 " + volist);
 				}
 				
 			} catch (SQLException e) {
@@ -431,7 +434,7 @@ public class UserDao {
 			System.out.println(" ============= ");
 			System.out.println("umId : " + umId);
 			ArrayList<Map<String, Object>> volist = null;
-			String sql = "select bk_no, um_id, cp_name, cp_address, bk_date, substr(bk_time,1,5), REPLACE(REPLACE(BK_STATUS,'R','예약완료'),'C','예약취소') as bk_statusC, fl_gno, CP_SIGNYN "
+			String sql = "select bk_no, um_id, cp_name, cp_address, bk_date, substr(bk_time,1,5), REPLACE(REPLACE(BK_STATUS,'R','예약완료'),'C','예약취소') as bk_statusC, fl_gno, CP_SIGNYN, BK_TIME"
 					+ " from booking b "
 					+ " join company c using (cp_no) "
 					+ " where bk_status in ('r','R') and um_id = ? "
@@ -455,6 +458,7 @@ public class UserDao {
 					map.put("bkStatus", rs.getString(7));
 					map.put("flGno", rs.getString(8));
 					map.put("cpSignyn", rs.getString(9));
+					map.put("bkTime", rs.getString(10));
 					volist.add(map);
 				}
 				
