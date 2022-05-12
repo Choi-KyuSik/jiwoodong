@@ -410,6 +410,54 @@ article>div>p {
 
 
 	<script>
+	
+	//[수정하기] 버튼 클릭시 비밀번호/이메일/휴대폰 번호 유효성검사
+    $("#s_bu_check_btn").click(function() {
+    	
+   	
+		var password = $("#buPwd_1").val().trim();
+		var email = $("#k_email").val().trim();
+		var phone = $("#k_tel").val().trim();
+    	
+    	/* var regExpPassword =/^(?=.*[A-Za-z])(?=.*[0-9]).{8,16}$/; */  
+    	var regExpPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/; // 영문자, 숫자가 적어도 1개이상, 8~16글자
+    	var regEmail = /^[a-z0-9.-_]+@([a-z0-9-]+.)+[a-z]{2,6}.[a-zA-Z]{3}$/i; // 이메일 양식
+    	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //휴대폰 번호
+    	
+		if(!password || password != $("#buPwd_2").val().trim()){
+			alert("패스워드 입력란과 확인란이 같지 않습니다.");
+			$("#buPwd_1").val("");
+			$("#buPwd_2").val("");
+			$("#buPwd_1").focus();
+			return false;
+			
+		}else if(!regExpPassword.test(password)){
+			alert("패스워드는 영문자, 숫자가 적어도 1개이상, 8~16글자여야 합니다.");
+			$("#buPwd_1").focus();
+			return false;
+			console.log(buPwd_1);
+		}else if(!regEmail.test(email)){
+			alert("Email@example.com 형식으로 작성 해주시길 바랍니다.");
+			$("#k_email").focus();
+			return false;
+			
+		}else if(!regPhone.test(phone)){
+			alert("휴대폰 번호 양식(01#-####-####)에 맞게 입력해주시기 바랍니다.");
+			$("#k_tel").focus();
+			return false;	
+			
+		}else{
+			if (confirm("입력하신 정보로 수정하시겠습니까?") == true) {
+				var frmEl = $("#frm");
+				frmEl.attr("action", "bucpupdate");
+				frmEl.attr("method", "post");
+				frmEl.submit();
+			} else {
+				return;
+			}			
+		}
+	   	
+    });
        
 	$("#buPwd_2").keyup(function() {
 
@@ -439,6 +487,8 @@ article>div>p {
 				$("#s_bu_pwd_check_2").css('color', 'green');
 			}			
 	});
+	
+	
 	 	//취소하기
   	$("#back_btn").click(function() {
   		var result = confirm('메인페이지로 이동하시겠습니까?'); 
@@ -449,48 +499,9 @@ article>div>p {
     		//no 
     		}            
     });
-    	//[수정하기] 버튼 클릭시 비밀번호/이메일/휴대폰 번호 유효성검사
-    $("#s_bu_check_btn").click(function() {
-    	
-		var password = $("#buPwd_1").val().trim();
-		var email = $("#k_email").val().trim();
-		var phone = $("#k_tel").val().trim();
-    	
-    	var regExpPassword =/^(?=.*[A-Za-z])(?=.*[0-9]).{8,16}$/;  // 영문자, 숫자가 적어도 1개이상, 8~16글자
-    	/* var regExpPassword = /^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,16}$/; */
-    	var regExpPassword = /^[a-z0-9.-_]+@([a-z0-9-]+.)+[a-z]{2,6}.[a-zA-Z]{3}$/i; // 이메일 양식
-    	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; //휴대폰 번호
-		if(!regExpPassword.test(password)){
-			alert("패스워드는 영문자, 숫자가 적어도 1개이상, 8~16글자여야 합니다.");
-			$("#buPwd_1").focus();
-			return false;
-		}else if(!password || password != $("#buPwd_2").val().trim()){
-			alert("패스워드 입력란과 확인란이 같지 않습니다.");
-			$("#buPwd_1").val("");
-			$("#buPwd_2").val("");
-			$("#buPwd_1").focus();
-			return false;
-		}else if(!reg.test(email)){
-			alert("Email@example.com 형태로 작성 해주시길 바랍니다.");
-			$("#k_email").focus();
-			return false;
-		}else if(!regPhone.test(phone)){
-			alert("휴대폰 번호 양식(01#-####-####)에 맞게 입력해주시기 바랍니다.");
-			$("#k_tel").focus();
-			return false;			
-		}else{
-			if (confirm("입력하신 정보로 수정하시겠습니까?") == true) {
-				var frmEl = $("#frm");
-				frmEl.attr("action", "bucpupdate");
-				frmEl.attr("method", "post");
-				frmEl.submit();
-			} else {
-				return;
-			}			
-		}
-	   	
-    });
-    
+	 	
+	 	
+      
     	/* 탈퇴하기 */
     $("#s_bu_delete_btn").click(function() {  	
 			location.href="bucpdelete";
