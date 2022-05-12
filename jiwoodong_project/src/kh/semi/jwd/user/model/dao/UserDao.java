@@ -267,8 +267,8 @@ public class UserDao {
 			 		+ "    (select rownum rnum, a.*"
 			 		+ "     from (select cp_name,bk_date, substr(bk_time, 1, 5), REPLACE(REPLACE(REPLACE (BK_STATUS,'R','예약완료'),'H','예약대기'),'C','예약취소') as bk_statusC"
 			 		+ "            from booking b"
-			 		+ "            join company c on b.cp_no = c.cp_no where um_id = ?) a)"
-			 		+ "where rnum between 1 and 3";
+			 		+ "            join company c on b.cp_no = c.cp_no where um_id = ? order by bk_date desc) a)"
+			 		+ " where rnum between 1 and 10 ";
 					 
 					/* "select * from "
 			 		+ " (select rownum rnum, a.*"
@@ -319,8 +319,8 @@ public class UserDao {
 					+ "      end 평점 "
 					+ "    , to_char(rv_write_date, 'yyyy/mm/dd') 작성일 "
 					+ "      from booking b join review r using(bk_no) join company c using (cp_no) "
-					+ "      where b.um_id = ? order by b.bk_write_date desc) A)"
-					+ " where rnum between 1 and 5";
+					+ "      where b.um_id = ? order by r.rv_write_date desc) A)"
+					+ " where rnum between 1 and 10";
 			
 			// 노란색하트
 //			String sql = "select * from(select rownum rnum, A.*"

@@ -132,7 +132,7 @@
             </div>
             <div id="c_inner_info">
               <p class="c_info_title">예약현황</p>
-              <table class="table" style="width: 100%; margin-top: 40px;">
+              <table class="table" style="width: 100%; margin-top: 30px;">
                 <thead>
                   <tr>
                     <th scope="col" class="c_info_center">No</th>
@@ -176,7 +176,7 @@
 						<!-- 리뷰내역  -->
 						<div id="c_inner_info">
 							<p class="c_info_title">리뷰내역</p>
-							<table class="table" style="width: 100%; margin-top: 40px; table-layout: fixed;">
+							<table class="table" style="width: 100%; margin-top: 30px; table-layout: fixed;">
 								<thead>
 									<tr>
 										<th style="width: 50px;" scope="col" class="c_info_center">No</th>
