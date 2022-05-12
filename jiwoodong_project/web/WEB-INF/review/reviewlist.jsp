@@ -109,7 +109,7 @@
 	
 	  
 	<!-- 네비바 클릭시 페이지 이동 -->
-<!-- 	<script>
+ 	<script>
 		//$("#k_review_menu").click(function() {
 			//var rvNo = $("#umId").val();
 			//console.log("umId ? : " + umId);
@@ -124,7 +124,7 @@
 			console.log("찍히냐? mypage");
 			location.reload();
 		});
-	</script>  -->
+	</script>  
 	
 <!-- 	<script>
 	$("#c_reviewlist").click(function() {

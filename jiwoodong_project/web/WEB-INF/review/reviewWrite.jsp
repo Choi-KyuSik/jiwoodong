@@ -95,8 +95,13 @@
 </style>
 </head>
 <body>
-	<div class="container">
-		<div class="row" style="width: 1200px; margin: 0 auto; padding-top: 30px;">
+<header>
+ 	<div>
+		<%@ include file="../view/user/user_header.jsp"%>
+	</div>  
+</header> 
+	<div class="container" style="background-color: rgb(241, 241, 241); border-radius: 15px; height: auto;margin: 0 auto;position: relative;top: 30px;">
+		<div class="row" style="width: 1200px; margin: 0 auto; padding-top: 30px; padding-bottom: 30px;">
 			<form method="post" action="userRvWrite.lo">
 				<table class="table">
 					<thead>

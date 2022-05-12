@@ -293,7 +293,9 @@
 	            <div class="card-body">
 	              <!-- <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="bkupdata_btn">변경</button></a>
 	              <a href="#" class="card-link"><button type="button" class="btn btn-outline-danger"  id="bkcancle_btn">취소</button></a> -->
-	            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_u" id="bkupdata_btn_btn">변경</button>
+	              <!-- <a href="#" class="card-link"><button type="button" class="btn btn-outline-secondary" id="rv_btn">리뷰작성</button></a> -->
+	             <button type="button" class="btn btn-outline-secondary"  data-bs-target="#staticBackdrop_u" id="rv_btn">리뷰작성</button> 
+	            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_u" id="rvwrite_btn">변경</button>
 	            <!-- 예약 변경 모달창 -->
 		    	 <div class="modal fade" id="staticBackdrop_u" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				  <div class="modal-dialog">
