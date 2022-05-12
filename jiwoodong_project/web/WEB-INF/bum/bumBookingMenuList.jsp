@@ -246,7 +246,7 @@ article>div>p {
 	<script>
 	//정규표현식
 		$("#menuName").keyup(function(){
-			var regname = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{1,10}$/;
+			var regname = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{0,10}$/;
 			var $str = $(this).val();
 			 if(!regname.test($str)){
 		            alert("10자 이내로 작성해주세요");
@@ -264,7 +264,7 @@ article>div>p {
 			 }
 		});
 		$("#menuExplain").keyup(function(){
-			var regtest = /^[0-9]+$/ ;
+			var regtest = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{0,50}$/ ;
 			var $str = $(this).val();
 			 if(!regtest.test($str)){
 		            alert("50자 이내로 작성해주세요.");
