@@ -57,11 +57,11 @@ public class UserReviewUpdateController extends HttpServlet {
 		int result = new UserService().updateUserReview(rvContent, fileUrl, rvScore, rvNo);
 		System.out.println("result: "+result);
 		if(result <1) {
-			m="리뷰 수정 실패ㅎㅎ";
+			m="리뷰 등록에 실패했습니다. 다시 작성해주세요.";
 			System.out.println("리뷰 수정 실패! ");
 			
 		}else {
-			m="리뷰 수정 성공!";
+			m="리뷰가 정상적으로 등록되었습니다.";
 			System.out.println("리뷰 수정 성공");
 		}
 		out.print(m);
