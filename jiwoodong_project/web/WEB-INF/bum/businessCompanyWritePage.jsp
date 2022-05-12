@@ -548,7 +548,7 @@ article>div>p {
 	 			}else{ 
 	 				if(confirm("업체 등록은 수정이 불가능합니다 등록하시겠습니까?") == true){
 		 				var frmEl = $("#frm");
-		 				frmEl.attr("action", "bucompany");
+		 				frmEl.attr("action", "bucompanydo");
 		 				frmEl.attr("method", "post");
 		 				frmEl.submit();
 		 				return;

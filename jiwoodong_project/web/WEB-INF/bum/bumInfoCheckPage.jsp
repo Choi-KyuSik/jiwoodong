@@ -182,10 +182,13 @@ article>div>p {
 #s_us_notice {
 	vertical-align: middle;
 	color: red;
+	text-align: left;
+	background-color: #e9ecef;
 }
 
 #s_us_pwd {
 	width: 500px;
+	background-color: #e9ecef;
 }
 
 #s_id_style {
@@ -202,6 +205,10 @@ article>div>p {
 
 .s_row {
 	border-radius: 15px;
+}
+
+#k_idTitle{
+background-color: #cfe2ff !important;
 }
 </style>
 </head>
@@ -290,7 +297,7 @@ article>div>p {
 							</thead>
 							<tbody>
 								<tr>
-									<th class="table-primary s_us_th"
+									<th class="table-primary s_us_th" id="k_idTitle"
 										style="-bs-table-accent-bg: none;">아이디</th>
 									<td colspan="2" class="table-light" id="s_us_no"><input
 										type="text" class="form-control border_none" name="buId"
@@ -303,7 +310,7 @@ article>div>p {
 										type="password" class="form-control" name="buPwd"
 										maxlength="300" id="buPwd" value="" placeholder="비밀번호를 입력해주세요." /></td>
 									<td class="table-light" id="s_us_notice"><span
-										id="s_us_pwd_check" style="display: none;">현재 비밀번호가 일치하지
+										id="s_us_pwd_check" style="display: none; ">현재 비밀번호가 일치하지
 											않습니다.</span></td>
 								</tr>
 							</tbody>
