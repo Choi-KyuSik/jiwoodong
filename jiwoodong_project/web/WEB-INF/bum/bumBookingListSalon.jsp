@@ -141,11 +141,7 @@ td, th {
 										<li><a class="dropdown-item" id="k_re_cu_menu" href="<%=request.getContextPath()%>/burscheck">예약
 												조회/수정</a></li>
 									</ul></li>
-							</ul>
-							<ul class="navbar-nav">
-								<li class="nav-item dropdown"><a class="nav-link dropdown"
-									id="k_us_info_menu" href="#" role="button"> 회원정보조회 </a></li>
-							</ul>
+							</ul>							
 						</div>
 					</div>
 				</nav>

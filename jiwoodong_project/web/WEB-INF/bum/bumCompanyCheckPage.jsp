@@ -307,10 +307,6 @@ article>div>p {
 											조회/수정</a></li>
 								</ul></li>
 						</ul>
-						<ul class="navbar-nav">
-							<li class="nav-item dropdown"><a class="nav-link dropdown"
-								id="k_us_info_menu" href="#" role="button"> 회원정보조회 </a></li>
-						</ul>
 					</div>
 				</div>
 			</nav>
@@ -588,51 +584,49 @@ article>div>p {
        });
        
        $("#s_bu_check_btn").click(function() {
-          if($("#buPwd_1").val() == "") {
-             alert("변경할 비밀번호를 입력해주세요.");
-             $("#buPwd_1").focus();
-          } else {
-             if (confirm("정말 수정하시겠습니까?") == true) {
-                
-	                if($.trim($("#buPwd_1").val()) == '') {
-	                  alert("변경할 비밀번호를 입력해주세요.");
-	                  $("#buPwd_1").val('');
-	                  $("#buPwd_1").focus();
-	                  return;
-	               }
-	                
-	                if($.trim($("#buPwd_2").val()) == '') {
-	                  console.log("비어이따");
-	                  alert("비밀번호를 한번 더 입력해주세요.");
-	                  $("#buPwd_2").val('');
-	                  $("#buPwd_2").focus();
-	                  return;
-	               }
-	                
-	                if($.trim($("#k_tel").val()) == '') {
-	                  console.log("비어이따");
-	                  alert("휴대폰 번호를 입력해주세요.");
-	                  $("#k_tel").val('');
-	                  $("#k_tel").focus();
-	                  return;
-	               }
-	                
-	                if($.trim($("#k_email").val()) == '') {
-	                  console.log("비어이따");
-	                  alert("이메일을 입력해주세요.");
-	                  $("#k_email").val('');
-	                  $("#k_email").focus();
-	                  return;
-	               }                
-	               var frmEl = $("#frm");
-	               frmEl.attr("action", "bucpupdate");
-	               frmEl.attr("method", "post");
-	               frmEl.submit();
-            } else {
-               location.href="BumMainPage";
-            }
-          }
-       });
+           if($("#buPwd_1").val() == "") {
+              alert("변경할 비밀번호를 입력해주세요.");
+              $("#buPwd_1").focus();
+           } else {
+              if (confirm("정말 수정하시겠습니까?") == true) {
+                 
+ 	                if($.trim($("#buPwd_1").val()) == '') {
+ 	                  alert("비밀번호에 공란이 들어갈 수 없습니다.");
+ 	                  $("#buPwd_1").val('');
+ 	                  $("#buPwd_1").focus();
+ 	                  return;
+ 	               }else if($.trim($("#buPwd_2").val()) == '') {
+ 	                  console.log("비어이따");
+ 	                  alert("비밀번호에 공란이 들어갈 수 없습니다.");
+ 	                  $("#buPwd_2").val('');
+ 	                  $("#buPwd_2").focus();
+ 	                  return;
+ 	               }
+ 	                
+ 	               else if($.trim($("#k_tel").val()) == '') {
+ 	                  console.log("비어이따");
+ 	                  alert("휴대폰 번호를 입력해주세요.");
+ 	                  $("#k_tel").val('');
+ 	                  $("#k_tel").focus();
+ 	                  return;
+ 	               }else if($.trim($("#k_email").val()) == '') {
+ 	                  console.log("비어이따");
+ 	                  alert("이메일에 공란이 들어갈 수 없습니다");
+ 	                  $("#k_email").val('');
+ 	                  $("#k_email").focus();
+ 	                  return;
+ 	               } else{
+ 	            	   var frmEl = $("#frm");
+ 	               frmEl.attr("action", "bucpupdate");
+ 	               frmEl.attr("method", "post");
+ 	               frmEl.submit();
+ 	               }               
+ 	               
+             } else {
+                location.href="BumMainPage";
+             }
+           }
+        });
    
        /* 탈퇴하기 */
     $("#s_bu_delete_btn").click(function() {     
