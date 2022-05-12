@@ -167,7 +167,7 @@ article>div>p {
 <body>
 	<c:if test="${list[0].cpSignyn eq 'N'}">
 			<script>
-			alert('현재 신청하신 업체등록 심사중입니다.'); 
+			alert('현재 신청하신 업체등록 심사중입니다. 업체심사는 영업일로부터 5일까지 소요됩니다.'); 
 			history.back();
 			</script>
 	</c:if>
@@ -267,7 +267,7 @@ article>div>p {
 						</thead>
 						<tbody>
 							<tr>
-								<th class="table-primary s_ac_th"
+								<th class="table-primary s_ac_th" style="vertical-align: middle; text-align:center;"
 									style="-bs-table-accent-bg: none; text-align: center;">업체명<span
 									class="k_essential_info">*필수</span>
 								</th>
@@ -275,8 +275,8 @@ article>div>p {
 									class="form-control" id="k_cpName" name="cpName"
 									maxlength="300" style="width: 500px; display: inline-block;"
 									required="required" value="" placeholder="대표업체명을 입력해주세요." />
-								<td colspan="2" class="table-light"><span id="s_check_name"
-									style="display: none; font-size: .8em; padding-left: 10px; color: red;">업체명을
+								<td colspan="2" class="table-light" style="vertical-align: middle;"><span id="s_check_name"
+									style="display: none;  font-size: .8em; padding-left: 10px; color: red;">업체명을
 										올바르게 입력해주세요.</span></td>
 
 								</td>
