@@ -101,7 +101,7 @@
 	</div>  
 </header> 
 	<div class="container" style="background-color: rgb(241, 241, 241); border-radius: 15px; height: auto;margin: 0 auto;position: relative;top: 30px;">
-		<div class="row" style="width: 1200px; margin: 0 auto; padding-top: 30px; padding-bottom: 30px;">
+		<div class="row" style="width: 100%; margin: 0 auto; padding-top: 30px; padding-bottom: 30px;">
 			<form method="post" action="userRvWrite.lo">
 				<table class="table">
 					<thead>
@@ -168,9 +168,9 @@
 			var rvContent = $('#rvContent').val();
 			
 			console.log(rvScore);
-			console.log("rvContent:s"+rvContent);
+			console.log("rvContent:"+rvContent);
 			 /* location.href = ”url?name=값+"&"+name2=값”; */
-			location.href="userRvWrite.lo?rvScore=" + rvScore+"&rvContent="+rvContent ;
+			location.href="userRvWrite.lo?rvScore=" + rvScore+"&rvContent="+rvContent;
 		});
 	</script>
 	

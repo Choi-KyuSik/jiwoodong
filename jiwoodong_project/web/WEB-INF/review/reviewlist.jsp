@@ -47,13 +47,13 @@
 	        </div>
 	
         <table class="table table table-hover"
-					style="clear: both; table-layout: fixed; width: 70%; margin: 0 auto; margin-top: 30px;">
+					style="clear: both; table-layout: fixed; width: 100%; margin: 0 auto; margin-top: 30px;">
 					<thead>
 						<tr>
 							<th style="display: none;" scope="col" class="s_center">No</th>
 							<th scope="col" class="s_center" style="display: none;">No</th>
 							<th scope="col" class="s_center">업체명</th>
-							<th scope="col" class="s_center">내용</th>
+							<th scope="col" class="s_center" style="width: 400px">내용</th>
 							<th scope="col" class="s_center">평점</th>
 							<th scope="col" class="s_center">작성자</th>
 							<th scope="col" class="s_center">작성일</th>
@@ -62,10 +62,11 @@
 
 					<tbody id="tbody" style="cursor: pointer;">
 				                <c:forEach items="${userrvlist}" var="i">
-								<tr id="k_review_menu" class="s_tr_readList s_tr_modal">
+								<tr id="k_review_menu" class="s_tr_readList s_tr_modal" style="text-align: center;">
 									<th style="display: none;" class="s_td_short" scope="row" class="s_ntNo">${i.rvNo}</th>
 									<th class="s_td_short" scope="row" class="s_ntNo">${i.cpName }</th>
-									<td class="s_center">${i.rvContent}</td>
+									<td class="s_center" 
+									style="overflow: hidden; text-overflow: ellipsis;  white-space: nowrap; word-break: break-all; -webkit-line-clamp: 1;">${i.rvContent}</td>
 									<td class="s_center">${i.rvScore}</td>
 									<td class="s_td_short">${i.umId }</td>
 									<td class="s_td_short">${i.rvWriteDate }</td>
