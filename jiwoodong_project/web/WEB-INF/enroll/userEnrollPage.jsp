@@ -48,7 +48,7 @@
 
 <div class="container">
     <div class="input-form-backgroud row">
-        <div class="input-form col-md-12 mx-auto" style="margin-top: 0; width: 60%;">
+        <div class="input-form col-md-12 mx-auto" style="margin-top: 0; width: 50%; padding: 20px;">
             <h4 class="mb-3" id="s_tt"><strong>사용자 회원가입</strong></h4>
             <form id="frm" class="validation-form" name="bu_enroll" novalidate >
             
@@ -97,7 +97,7 @@
                 <div class="mb-3" style="clear: both; margin-bottom: 20px;">
                     <label for="bu_id" style="display: block;">아이디</label>
                     <input type="text" class="form-control" id="user_id" name="user_id" required="required" style="margin-right: 5px; float: left; width: 80%; margin-bottom: 20px;">
-                    <input type="button" class="btn btn-primary" name="user_id_btn" id="user_id_btn" value="중복확인" style="position: relative;left: 20px;width: 90px;height: 30px;top: 1px;">
+                    <input type="button" class="btn btn-primary" name="user_id_btn" id="user_id_btn" value="중복확인" style="position: relative;left: 20px;width: 60px;height: 30px;top: 1px;">
                     <br><font id="checkId" size ="1"></font>
                     <div class="invalid-feedback"> 아이디를 입력해주세요.</div>
                     <!-- <input type="button" class="btn btn-primary" name="bu_id_check" id="bu_id_check" value="중복확인" onclick="winopen()" > -->
@@ -118,18 +118,18 @@
 					<div style="margin-bottom: 5px;">
 						<!-- 우편번호 -->
 						<input type="text" class="form-control"
-						 style="width: 100px; display: inline-block;" name="postcode" id="postcode"
+						 style="width: 70%; display: inline-block;" name="postcode" id="postcode"
 						 value="${usMemberListInfo.umPostode }" /> 
 						<!-- 주소찾기 -->
-						<input type="button" class="btn btn-primary s_ad_nt_btn" id="postcode_btn" style="position: absolute; margin-left: 10px;" value="주소 찾기">
+						<input type="button" class="btn btn-primary s_ad_nt_btn" id="postcode_btn" style="position: absolute; margin-left: 15px;width: 20%;height: 30px;" value="주소 찾기">
 					</div>
 					<!-- 주소 -->
 					<input type="text" class="form-control" id="roadAddress"
-					 style="width: 300px; display: inline-block; margin-right: 5px;"
+					style="width: 100%; display: inline-block; margin-right: 5px;"
 					 name="address" value="${usMemberListInfo.umAddress }" />
 					<!-- 상세주소 --> 
 					<input type="text" class="form-control" id="jibunAddress"
-					 style="width: 340px; display: inline-block;" placeholder="상세 주소를 입력해주세요."
+					 style="width: 100%; display: inline-block;margin-top: 5px;" placeholder="상세 주소를 입력해주세요."
 					 name="detailAddress" value="${usMemberListInfo.umDetailAddress }" />
 					</div>
 
