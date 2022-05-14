@@ -42,10 +42,12 @@ public class AdminUmInfoDeleteDoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String umId = request.getParameter("umId");
 		
+		System.out.println("사용자 탈퇴페이지(umId) : " + umId);
 		AdminUserVo uvo = new AdminUserVo();
 		uvo.setUmId(umId);
 		
 		int result = new AdminService().deleteUmInfo(uvo);
+		// System.out.println("탈퇴페이지(result) : " + result);
 		
 		if(result < 1) {
 			System.out.println("사용자 회원 탈퇴 실패!");

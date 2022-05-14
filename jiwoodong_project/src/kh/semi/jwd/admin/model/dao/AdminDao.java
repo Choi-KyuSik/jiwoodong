@@ -673,7 +673,8 @@ public class AdminDao {
 	public int deleteUmInfo(Connection conn, AdminUserVo uvo) {
 
 		int result = 0;
-		String umId = '%' + uvo.getUmId() + '%'; 
+		String umId = uvo.getUmId(); 
+		System.out.println("사용자 회원탈퇴(dao) umId : " + umId);
 		String sql = "UPDATE U_MEMBER SET UM_USEYN = 'N', UM_OUT_DATE = SYSTIMESTAMP WHERE UM_ID = ?";
 
 		try {
@@ -687,6 +688,7 @@ public class AdminDao {
 			close(pstmt);
 		}
 
+		System.out.println("사용자 탈퇴페이지(result) : " + result);
 		return result;
 
 	}
@@ -1406,6 +1408,29 @@ public class AdminDao {
 		}
 		return result;
 
+	}
+	
+	// 리뷰 삭제
+	public int deleteReview(Connection conn, int rvNo) {
+		
+		int result = 0;
+		
+		String sql = "DELETE FROM REVIEW WHERE RV_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rvNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 
 

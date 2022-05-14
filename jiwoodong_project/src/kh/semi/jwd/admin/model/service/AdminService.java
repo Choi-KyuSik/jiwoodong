@@ -408,4 +408,13 @@ public class AdminService {
 		return result;
 	}
 	
+	// 리뷰 삭제
+	public int deleteReview(int rvNo) {
+		Connection conn = getConnection();
+		int result = dao.deleteReview(conn, rvNo);
+		close(conn);
+		return result;
+		
+	}
+	
 }

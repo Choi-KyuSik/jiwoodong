@@ -466,7 +466,7 @@
 							<tbody>
 								<tr>
 									<th class="table-primary s_us_th"
-										style="-bs-table-accent-bg: none;">아이디</th>
+										style="--bs-table-accent-bg: none;">아이디</th>
 									<td colspan="2" class="table-light" id="s_us_no"><input
 										type="text" class="form-control border_none" name="umId"
 										readonly="readonly" value="${um_id }" /></td>

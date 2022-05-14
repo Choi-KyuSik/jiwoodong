@@ -62,10 +62,10 @@ public class AdminReviewUpdateDoController extends HttpServlet {
 		String rvNoStr = request.getParameter("rvNo");
 		int rvNo = Integer.parseInt(rvNoStr);
 		int rvScore = Integer.parseInt(rvScoreStr);
-		System.out.println("rvContent : " + rvContent);
-		System.out.println("fileUrl : " + fileUrl);
-		System.out.println("rvScore : " + rvScore);
-		System.out.println("rvNo : " + rvNo);
+//		System.out.println("rvContent : " + rvContent);
+//		System.out.println("fileUrl : " + fileUrl);
+//		System.out.println("rvScore : " + rvScore);
+//		System.out.println("rvNo : " + rvNo);
 		
 		int result = 0;
 		
@@ -88,8 +88,6 @@ public class AdminReviewUpdateDoController extends HttpServlet {
 		out.flush();
 		out.close();
 		
-		
-		// request.getRequestDispatcher("WEB-INF/admin/AdminMainPage.jsp").forward(request, response);
 	}
 
 }

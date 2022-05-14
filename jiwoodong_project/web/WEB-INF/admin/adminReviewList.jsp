@@ -117,7 +117,7 @@
 					style="float: right; margin-bottom: 20px;">
 					<div class="container-fluid">
 						<form action="AdminReviewList" method="get" id="frm" class="d-flex">
-							<select name="f" style="width: 100px; float: right; margin-right: 10px;"
+							<select name="f" style="width: 200px; float: right; margin-right: 10px;"
 								class="form-select" aria-label="Default select example">
 								<option value="cp_category" selected="selected" ${field eq 'cp_category' ? 'selected' : ''}>업종</option>
 								<option value="cp_name" ${field eq 'cp_name' ? 'selected' : ''}>업체명</option>
@@ -166,7 +166,7 @@
 								<td class="s_td_short">${i.cpCategory }</td>
 								<td class="s_td_short">${i.cpName }</td>
 								<td class="s_center">${i.umId }</td>
-								<td class="s_center">${i.rvContent }</td>
+								<td class="s_center s_td_short">${i.rvContent }</td>
 								<td class="s_center">${i.rvScore }</td>
 								<td class="s_center">${i.rvWriteDate }</td>
 							</tr>
@@ -302,7 +302,7 @@
     	    }
     	  },
     	  tooltip: {
-    	    valueSuffix: ' millions'
+    	    valueSuffix: ' 개'
     	  },
     	  plotOptions: {
     	    bar: {

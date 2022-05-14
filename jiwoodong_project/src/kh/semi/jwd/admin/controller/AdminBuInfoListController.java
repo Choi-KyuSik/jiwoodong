@@ -43,12 +43,12 @@ public class AdminBuInfoListController extends HttpServlet {
 		String field_ = "bu_id";
 		if(field != null) {
 			// 기본이 아이디가 선택되도록
-			field_ = field;
+			field = field_;
 		}
 
 		String query_ = "";
 		if(query != null) {
-			query_ = query;
+			query = query_;
 		}
 		
 		
@@ -121,7 +121,7 @@ public class AdminBuInfoListController extends HttpServlet {
 		return result;
 	}
 	
-	// 사업자 정보 리스트 글 개수
+	// 사업자 정보 리스트 검색 글 개수
 	public int countBuMemberInfoSearchList(String field, String query) {
 		int result = new AdminService().countBuMemberInfoSearchList(field, query);
 		return result;

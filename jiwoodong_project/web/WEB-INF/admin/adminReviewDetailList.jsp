@@ -190,7 +190,8 @@
 	
 	<script>
 		$("#back_btn").click(function() {
-			location.replace('AdminReviewList');
+			// location.replace('AdminReviewList');
+			history.back();
 		});
 		
 		$(".star_rating a").click(function() {
@@ -283,10 +284,23 @@
 
 		$("#s_delete_btn").click(function() {
 			if (confirm("정말 삭제하시겠습니까?") == true) {
-				var frmEl = $("#frm");
-				frmEl.attr("action", "#");
-				frmEl.attr("method", "post");
-				frmEl.submit();
+				
+				var rvNo = $("#rvNo").val();
+				console.log("rvNo : " + rvNo);
+				
+				$.ajax({
+					url: "AdminReviewDeleteDo",
+					type: "post",
+					data: {"rvNo": rvNo},
+					dataType : "text",
+					success: function(result) {
+						console.log("전달 성공");
+						alert(result);
+						location.href="AdminReviewList";
+					}
+				});
+				
+				
 			} else {
 				history.back();
 			}
