@@ -9,7 +9,7 @@
 6. Document
 
 ## 1️⃣ 팀 소개
-<img width="1162" alt="image" src="https://user-images.githubusercontent.com/83773369/168447317-defa1f4b-faef-4347-81e5-ab7c73c96445.png">
+<img width="1160" alt="image" src="https://user-images.githubusercontent.com/83773369/168465198-9cb4ab8e-7f36-4ef9-8ffb-abd02d727292.png">
 
 ## 2️⃣ 프로젝트 개요
 
@@ -41,6 +41,50 @@
  - 장소와 업체 검색(kakao Map API 사용)
  
 ## 2. 회원 가입 / 로그인
+
+<details>
+<summary><h3>📌회원가입</h3></summary>
+<div markdown="1">   
+
+**사업자**
+
+![사업자_회원가입](https://user-images.githubusercontent.com/83773369/168465463-7aeeb28d-71f3-47ee-a83e-80a969ed706a.gif)
+
+---
+
+**사용자**
+
+![사용자_회원가입](https://user-images.githubusercontent.com/83773369/168465436-5684ddb1-c4a0-44a7-a66a-53aa6944c82f.gif)
+
+</div>
+</details>
+
+---
+
+<details>
+<summary><h3>📌로그인</h3></summary>
+<div markdown="1">   
+
+**관리자**
+
+![관리자_로그인](https://user-images.githubusercontent.com/83773369/168465466-5e0845a1-6944-4826-920f-7aab603df4bc.gif)
+
+---
+
+**사업자**
+
+![사업자_로그인](https://user-images.githubusercontent.com/83773369/168465460-0ae61c30-4bbb-4e56-9b23-0f88caaab092.gif)
+
+---
+
+**사용자**
+
+![사용자_로그인](https://user-images.githubusercontent.com/83773369/168465439-64a94b7c-0ccc-40ad-8a84-7e142ee6df7f.gif)
+
+</div>
+</details>
+
+---
 
 ## 3. 관리자
 
@@ -254,16 +298,263 @@
 **리뷰 삭제**
 
 ![18 관리자-리뷰 삭제](https://user-images.githubusercontent.com/83773369/168461214-6e6910c8-c4b0-4d5f-af43-aae8d8e71bae.gif)
-	
----
 
 
 </div>
 </details>
 
+---
+
 ## 4. 사업자
 
-## 5. 사용자
+**마이페이지**
+
+![사업자_마이페이지_통계](https://user-images.githubusercontent.com/83773369/168464136-1211afec-5d8a-4e15-a01d-787b81bcaa9a.gif)
+
+---
+
+<details>
+<summary><h3>📌내 정보 관리 자세히 보기</h3></summary>
+<div markdown="1">   
+
+**내 정보 조회**
+
+
+![사업자_내정보 조회](https://user-images.githubusercontent.com/83773369/168464228-35304dce-f4aa-486a-a88a-ab992cf58129.gif)
+
+- 사업자 로그인 후 우측 토글버튼 클릭 - 비밀번호 재설정으로도 진입 가능
+![image](https://user-images.githubusercontent.com/83773369/168464235-aa02bebc-91f4-4bbd-b372-9549ac660dd5.png)
+
+
+---
+
+**내 정보 수정**
+
+![사업자_내정보 수정](https://user-images.githubusercontent.com/83773369/168464289-669fc5aa-c5bc-4d68-b439-d8cff4eabdb1.gif)
+
+
+---
+
+**내 정보 삭제**
+
+![사업자_내정보 삭제](https://user-images.githubusercontent.com/83773369/168464291-83aa9d71-ee90-4c01-a3f1-eeab23fe68a4.gif)
+
+
+</div>
+</details>
+
+---
+
+<details>
+<summary><h3>📌리뷰 관리 자세히 보기</h3></summary>
+<div markdown="1">   
+
+**리뷰 조회**
+
+![사업자_리뷰관리](https://user-images.githubusercontent.com/83773369/168464601-cbfa9c39-7930-4598-8706-d8d81a082ff6.gif)
+
+</div>
+</details>
+
+---
+
+<details>
+<summary><h3>📌 업체 등록 자세히 보기</h3></summary>
+<div markdown="1">  
+
+
+**업체 등록**
+
+![사업자_업체등록](https://user-images.githubusercontent.com/83773369/168464341-10904fa7-27c0-48fa-961c-297739e6d319.gif)
+
+
+---
+
+**업체 재등록**
+
+![사업자_업체재등록](https://user-images.githubusercontent.com/83773369/168464365-74db4064-e015-4f46-af42-01cb57552805.gif)
+
+
+</div>
+</details>
+
+---
+
+<details>
+<summary><h3>📌예약 관리 자세히 보기</h3></summary>
+<div markdown="1">   
+
+**예약 메뉴 등록**
+
+![사업자_예약메뉴등록](https://user-images.githubusercontent.com/83773369/168464387-b42275b6-3fae-48a7-a881-35dd2233e619.gif)
+
+
+---
+
+**예약 메뉴 삭제**
+
+![사업자_예약메뉴삭제](https://user-images.githubusercontent.com/83773369/168464415-edcba1ee-9eb8-4957-9627-6f0a1d435cdc.gif)
+
+---
+
+**예약 조회**
+
+![사업자_ 예약조회](https://user-images.githubusercontent.com/83773369/168464456-4489c602-c57a-4952-a491-81cf6caf5f83.gif)
+
+
+---
+
+**예약 수정**
+
+![사업자_예약수정](https://user-images.githubusercontent.com/83773369/168464474-399129ad-ce85-4e62-8609-fee51e7ae721.gif)
+
+
+---
+
+**예약 추가(미용실)**
+
+![사업자_예약추가_미용실](https://user-images.githubusercontent.com/83773369/168464498-d7c0e2ac-264d-4c3e-afc1-d52641b76590.gif)
+
+
+---
+
+**예약 추가(카페)**
+
+![사업자_예약추가_카페](https://user-images.githubusercontent.com/83773369/168464501-955c5892-2be1-4c06-8798-e42fe7eef5db.gif)
+
+---
+
+**예약 추가(호텔)**
+
+![사업자_예약추가_호텔](https://user-images.githubusercontent.com/83773369/168464502-8d37bbff-1218-4aa0-812f-ebee699e6ccf.gif)
+
+---
+
+**예약 취소**
+
+![사업자_예약취소](https://user-images.githubusercontent.com/83773369/168464550-6700e4b3-b277-42f1-aca1-a58944d92bdf.gif)
+
+
+
+</div>
+</details>
+
+---
+
+
+
+## 5) 사용자
+
+**마이페이지**
+
+![사용자_마이페이지](https://user-images.githubusercontent.com/83773369/168464688-abc7c3cf-2ce7-4627-a1dd-cbcb26a09f95.gif)
+
+---
+
+<details>
+<summary><h3>📌업체 조회 자세히 보기</h3></summary>
+<div markdown="1">   
+
+**업체 조회**
+
+![사용자_업체조회](https://user-images.githubusercontent.com/83773369/168464784-8ed24af3-97b9-4a65-bc0d-5d47c5fbfa5f.gif)
+
+
+---
+
+**업체 상세 조회**
+
+![사용자_업체상세페이지](https://user-images.githubusercontent.com/83773369/168464786-49f59c6c-0aa0-467a-8b8f-fcbd3a781ae6.gif)
+
+
+---
+
+**예약 추가(미용실)**
+
+![사용자_예약추가_미용실](https://user-images.githubusercontent.com/83773369/168464856-bffc17d1-2ba2-4848-9d7d-bb6b99d8c852.gif)
+
+
+---
+
+**예약 추가(카페)**
+
+![사용자_예약추가_카페](https://user-images.githubusercontent.com/83773369/168464858-2c04a390-7f3e-4c71-9266-4b9f43e1f247.gif)
+
+
+---
+
+**예약 추가(호텔)**
+
+![사용자_예약추가_호텔](https://user-images.githubusercontent.com/83773369/168464859-1935d3c2-2901-473e-85c3-554e32c7c93e.gif)
+
+</div>
+</details>
+
+---
+
+
+<details>
+<summary><h3>📌주변 검색 자세히 보기</h3></summary>
+<div markdown="1">   
+
+![사용자_주변검색](https://user-images.githubusercontent.com/83773369/168464949-32f71c73-7302-4f61-b11b-5a60127fe5aa.gif)
+
+</div>
+</details>
+
+---
+
+<details>
+<summary><h3>📌리뷰 자세히 보기</h3></summary>
+<div markdown="1">   
+
+**리뷰 조회**
+
+![사용자_리뷰조회](https://user-images.githubusercontent.com/83773369/168465265-9fba5e2f-6659-4331-9973-d444d435488a.gif)
+
+---
+
+**리뷰 작성**
+
+![사용자_리뷰작성](https://user-images.githubusercontent.com/83773369/168464972-9d5d49ed-4dad-47b5-9ada-526bac5e5cc2.gif)
+
+---
+
+**리뷰 수정**
+
+![사용자_리뷰수정](https://user-images.githubusercontent.com/83773369/168464974-04364074-5138-4778-8bba-2c4e4c03d096.gif)
+
+---
+
+**리뷰 삭제** 
+
+![사용자_리뷰삭제](https://user-images.githubusercontent.com/83773369/168464976-864adf41-e58e-4c13-bf85-c1a661f1fac1.gif)
+
+</div>
+</details>
+
+---
+
+<details>
+<summary><h3>📌내 정보 관리 자세히 보기</h3></summary>
+<div markdown="1">   
+
+**내 정보 수정**
+
+![사용자_내정보관리](https://user-images.githubusercontent.com/83773369/168465024-e3ac6ea3-d086-47fe-9291-8478cdff4231.gif)
+
+---
+
+**회원 탈퇴**
+
+![사용자_회원탈퇴](https://user-images.githubusercontent.com/83773369/168465018-6e5311d7-e405-4b5c-a49f-3630e2cd7a00.gif)
+
+
+
+</div>
+</details>
+
+---
 
 ## 6. 에러페이지
 <img width="829" alt="image" src="https://user-images.githubusercontent.com/83773369/168447876-3d3c0244-925f-4827-bb36-cce3f12efdbd.png">
@@ -289,7 +580,9 @@
 
 ## 5. 화면설계서
 [화면설계서 - 관리자](https://github.com/dms873/jiwoodong/files/8693821/_.pdf)
+
 [화면설계서 - 사업자](https://github.com/dms873/jiwoodong/files/8693822/_.pdf)
+
 [화면설계서 - 사용자](https://github.com/dms873/jiwoodong/files/8693823/_.pdf)
 
 ## 6. 시퀀스 다이어그램
@@ -304,3 +597,13 @@
 **관리자**
 ![관리자MVC1](https://user-images.githubusercontent.com/83773369/168447180-1021cf0c-06ba-466c-bdb3-c4338f0cf69d.png)
 ![관리자MVC2](https://user-images.githubusercontent.com/83773369/168447181-f5cd6248-3d0c-4892-8749-eb6810590faf.png)
+
+**사업자**
+![사업자MVC1](https://user-images.githubusercontent.com/83773369/168463946-cabb2970-e680-4ff3-a9b3-85596a02b23f.png)
+![사업자MVC2](https://user-images.githubusercontent.com/83773369/168463949-bf8c5da9-8d14-4b86-8e8b-6e0977497593.png)
+![사업자MVC3](https://user-images.githubusercontent.com/83773369/168463951-736a8f4d-49f2-4081-b841-05496b2e9afa.png)
+
+**사용자**
+![사용자MVC1](https://user-images.githubusercontent.com/83773369/168463954-c3dc0ea1-5058-4d35-aa96-a34141838bc6.png)
+![사용자MVC2](https://user-images.githubusercontent.com/83773369/168463955-ccf00a10-53aa-44fd-9e54-56bc4c73076f.png)
+![사용자MVC3](https://user-images.githubusercontent.com/83773369/168465094-baf66234-cb18-45ca-b513-aa665be11765.png)
