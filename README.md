@@ -320,8 +320,8 @@
 **내 정보 조회**
 
 
-![사업자_내정보 조회](https://user-images.githubusercontent.com/83773369/168464228-35304dce-f4aa-486a-a88a-ab992cf58129.gif)
-
+![사업자_내정보 조회2](https://user-images.githubusercontent.com/83773369/168465638-651a68fd-cc4e-4c15-a962-1845ee9e85e1.gif)
+	
 - 사업자 로그인 후 우측 토글버튼 클릭 - 비밀번호 재설정으로도 진입 가능
 ![image](https://user-images.githubusercontent.com/83773369/168464235-aa02bebc-91f4-4bbd-b372-9549ac660dd5.png)
 
