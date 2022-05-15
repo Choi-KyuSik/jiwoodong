@@ -44,6 +44,223 @@
 
 ## 3. 관리자
 
+**마이페이지**
+
+![2  관리자-마이페이지](https://user-images.githubusercontent.com/83773369/168458741-5436a11f-af3e-4496-a729-e7cc36f718db.gif)
+
+- 업체 등록 요청 현황
+- 업체별 예약 현황 (highcharts API 사용)
+- 공지사항
+
+
+---
+
+
+<details>
+<summary><h3>📌공지사항 관리 자세히 보기</h3></summary>
+<div markdown="1">   
+	
+
+**공지사항 조회**
+	
+	
+![3 관리자-공지사항 조회](https://user-images.githubusercontent.com/83773369/168458882-b2e13f69-1163-4335-ace9-3a80c75c6c6b.gif)
+
+
+- 한 페이지에 15개씩 글이 조회되도록 페이징 처리
+- 제목, 내용으로 검색 가능
+- 검색된 내용이 없으면 '검색결과가 없습니다.' 안내 메세지 표시
+- '목록으로' 누르면 공지사항 리스트로 이동
+
+<img width="1094" alt="image" src="https://user-images.githubusercontent.com/83773369/168458921-1cb74ea1-47fc-4e6d-b3af-9ccb00b83e78.png">
+
+---
+
+	
+**공지사항 작성**
+	
+	
+	
+![4 관리자-공지사항 작성](https://user-images.githubusercontent.com/83773369/168459019-189e250e-9b56-485f-ba2f-574289ddbabf.gif)
+
+
+- 제목, 내용 입력 필수 - 띄어쓰기만 입력 또는 입력안했을 때 경고창 띄우고 focus사용
+<img width="539" alt="image" src="https://user-images.githubusercontent.com/83773369/168459148-18c3f4bd-1a00-4f8d-8ab5-dbe0c2edad40.png">
+
+
+---
+	
+
+**공지사항 수정**
+	
+	
+	
+![5 관리자-공지사항 수정](https://user-images.githubusercontent.com/83773369/168459084-46c7f0bc-deca-4a8c-81be-bd94b6f31910.gif)
+
+- 파일 수정하지 않을 경우 기존파일 유지
+- 파일 수정 시 새로 등록한 파일로 수정
+- uploadcare API 사용
+
+---
+	
+
+**공지사항 삭제**
+	
+	
+	
+![6 관리자-공지사항 삭제](https://user-images.githubusercontent.com/83773369/168459231-9f858927-b1e2-44cf-bbc9-d1812da20055.gif)
+
+</div>
+</details>
+
+
+---
+
+
+<details>
+<summary><h3>📌사업자 관리 자세히 보기</h3></summary>
+<div markdown="1">   
+
+**업체 신청 조회**
+
+![7 관리자-업체 신청 조회](https://user-images.githubusercontent.com/83773369/168459600-547b238e-19d7-4781-becb-4d83c1f01fb3.gif)
+
+- 한 페이지에 15개씩 글이 조회되도록 페이징 처리
+- 업종, 업체명으로 검색 가능
+- 검색된 내용이 없으면 '검색결과가 없습니다.' 안내 메세지 표시
+- '목록으로' 누르면 업체 신청 내역 리스트로 이동
+
+---
+
+**업체 승인**
+
+
+![8 관리자-업체 승인](https://user-images.githubusercontent.com/83773369/168459755-27dedcd7-8bb5-455d-a452-3e1ed6703a07.gif)
+
+
+- 입력한 양식에 맞으면 업체 승인
+- 승인된 업체 리스트 수락 리스트에서 확인
+
+
+---
+
+**업체 승인 거절**
+
+![9 관리자-업체 거절](https://user-images.githubusercontent.com/83773369/168459855-9f62283f-4274-45ac-8ca7-079cc661a31d.gif)
+
+- 거절 시 거절 사유를 입력하고 사업자가 거절 사유를 확인
+- 거절된 업체 리스트 거절 리스트에서 확인
+
+---
+
+**사업자 정보 조회**
+
+![10 관리자-사업자 정보 조회](https://user-images.githubusercontent.com/83773369/168460025-51ad3913-1277-4397-8846-18abec52b50b.gif)
+
+- 한 페이지에 10명씩 조회되도록 페이징 처리
+- 아이디, 이름으로 검색 가능
+- 검색된 내용이 없으면 '검색결과가 없습니다.' 안내 메세지 표시
+- '목록으로' 누르면 사업자 회원 정보 조회 리스트로 이동
+
+---
+
+**사업자 정보 수정**
+
+
+![11 관리자-사업자 정보 수정](https://user-images.githubusercontent.com/83773369/168460148-3cb24668-477e-46e9-ab85-53e6204019d3.gif)
+
+- 전화번호, 이메일만 수정 가능
+- 값 입력 시 유효성 검사(keyup 이벤트)
+
+---
+
+**사업자 회원 탈퇴**
+
+![12 관리자-사업자 회원 탈퇴](https://user-images.githubusercontent.com/83773369/168460226-582cd7ff-ee5e-4e83-9222-6b6a6e189cfa.gif)
+
+
+</div>
+</details>
+
+
+
+---
+
+
+<details>
+<summary><h3>📌사용자 관리 자세히 보기</h3></summary>
+<div markdown="1">   
+
+**사용자 정보 조회**
+
+![13 관리자-사용자 정보 조회](https://user-images.githubusercontent.com/83773369/168460410-9c06b7a7-4b52-4ec4-b974-8df492d17ae5.gif)
+
+- 한 페이지에 10명씩 조회되도록 페이징 처리
+- 아이디, 이름으로 검색 가능
+- 검색된 내용이 없으면 '검색결과가 없습니다.' 안내 메세지 표시
+- '목록으로' 누르면 사업자 회원 정보 조회 리스트로 이동
+
+---
+
+**사용자 정보 수정**
+
+![14 관리자-사용자 정보 수정](https://user-images.githubusercontent.com/83773369/168460618-39514399-ef49-4284-a542-319543a1ffc4.gif)
+
+
+- 전화번호, 이메일, 주소 수정 가능
+- 값 입력 시 유효성 검사
+- kakao 주소 API 사용
+![image](https://user-images.githubusercontent.com/83773369/168460654-64efa65d-b06a-45bf-b3c6-c642de413ab9.png)
+
+
+---
+
+**사용자 회원 탈퇴**
+
+![15 관리자-사용자 회원 탈퇴](https://user-images.githubusercontent.com/83773369/168460731-38953131-b05c-45ff-963c-8fb6635ac823.gif)
+
+</div>
+</details>
+
+
+---
+
+
+<details>
+<summary><h3>📌리뷰 관리 자세히 보기</h3></summary>
+<div markdown="1">   
+
+**리뷰 조회**
+
+![16 관리자-리뷰 조회](https://user-images.githubusercontent.com/83773369/168460874-cb4876ff-a952-4336-9889-a81e3cdd39c4.gif)
+
+- 업체 별 리뷰 별점 통계(highcharts API 사용)
+- 한 페이지에 10개씩 조회되도록 페이징 처리
+- 업종, 업체명, 리뷰작성자, 내용으로 검색 가능
+- 검색된 내용이 없으면 '검색결과가 없습니다.' 안내 메세지 표시
+- '목록으로' 누르면 사업자 리뷰 조회 리스트로 이동
+
+---
+
+**리뷰 수정**
+
+![17 관리자-리뷰 수정](https://user-images.githubusercontent.com/83773369/168460979-9436da04-8138-4b2b-929e-5480743cf4f5.gif)
+
+- 수정 시 별점 선택, 내용 입력, 파일 선택(uploadcare API 사용) 
+
+
+---
+
+**리뷰 삭제**
+
+![18 관리자-리뷰 삭제](https://user-images.githubusercontent.com/83773369/168461214-6e6910c8-c4b0-4d5f-af43-aae8d8e71bae.gif)
+	
+---
+
+
+</div>
+</details>
+
 ## 4. 사업자
 
 ## 5. 사용자
@@ -87,5 +304,3 @@
 **관리자**
 ![관리자MVC1](https://user-images.githubusercontent.com/83773369/168447180-1021cf0c-06ba-466c-bdb3-c4338f0cf69d.png)
 ![관리자MVC2](https://user-images.githubusercontent.com/83773369/168447181-f5cd6248-3d0c-4892-8749-eb6810590faf.png)
-
-
