@@ -27,7 +27,7 @@
 	- 많은 테스트를 통해 여러가지 오류들을 수정해 사용자의 불편함을 최소화함
 
 ## 4️⃣ 개발환경
-<img width="961" alt="image" src="https://user-images.githubusercontent.com/83773369/168447270-dd617924-a856-447a-8054-22d641082a44.png">
+<img width="962" alt="image" src="https://user-images.githubusercontent.com/83773369/168548075-bc57973e-9340-4be0-a4ab-adebbf3b6889.png">
 
 ## 5️⃣ 주요기능
 ## 1. 메인페이지
@@ -575,19 +575,16 @@
 
 ![image](https://user-images.githubusercontent.com/83773369/168447017-92f146b1-2229-4192-9149-50be3d7bbae5.png)
 
+[테이블 기술서 전체보기](https://drive.google.com/drive/u/1/folders/1eM3NsuFrjW4dcDZALMLHLnXWtFjFahah)
+
 ## 4. 요구사항 정의서
-[요구사항 정의서 전체보기](https://github.com/dms873/jiwoodong/files/8693820/1._.xlsx)
+[요구사항 정의서 전체보기](https://drive.google.com/drive/u/1/folders/11UWxrTCOo_3BtBdWLLmnAtcoD0JS5bzm)
 
 ## 5. 화면설계서
-[화면설계서 - 관리자](https://github.com/dms873/jiwoodong/files/8693821/_.pdf)
-
-[화면설계서 - 사업자](https://github.com/dms873/jiwoodong/files/8693822/_.pdf)
-
-[화면설계서 - 사용자](https://github.com/dms873/jiwoodong/files/8693823/_.pdf)
+[화면설계서 전체 보기](https://drive.google.com/drive/u/1/folders/1oXHcvlAFx-wfronghJ1xExvmH9Dtbb7m)
 
 ## 6. 시퀀스 다이어그램
-
-[시퀀스 다이어그램 전체 보기](https://github.com/dms873/jiwoodong/files/8693843/default.pdf)
+[시퀀스 다이어그램 전체 보기](https://drive.google.com/drive/u/1/folders/1JcGGySiAHIRwYiEuvuGW8hHk5w21RaOL)
 
 ## 7. 클래스 다이어그램
 
