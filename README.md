@@ -555,8 +555,11 @@
 </details>
 
 ---
+## 6) Q&A
+<img width="1122" alt="image" src="https://user-images.githubusercontent.com/83773369/168458303-69314d35-be0c-4318-938b-6488751c8a62.png">
 
-## 6. 에러페이지
+
+## 7) 에러페이지
 <img width="829" alt="image" src="https://user-images.githubusercontent.com/83773369/168447876-3d3c0244-925f-4827-bb36-cce3f12efdbd.png">
 
 
