@@ -576,7 +576,7 @@
 
 ## 3. ERD
 
-![image](https://user-images.githubusercontent.com/83773369/168447017-92f146b1-2229-4192-9149-50be3d7bbae5.png)
+<img width="1001" alt="image" src="https://user-images.githubusercontent.com/83773369/169019667-3918c4fa-27ad-4ce8-b871-f3e7b02b8128.png">
 
 [테이블 기술서 전체보기](https://drive.google.com/drive/u/1/folders/1eM3NsuFrjW4dcDZALMLHLnXWtFjFahah)
 
