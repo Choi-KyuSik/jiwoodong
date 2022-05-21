@@ -247,14 +247,15 @@
 ---
 
 **사용자 정보 수정**
-
-![14 관리자-사용자 정보 수정](https://user-images.githubusercontent.com/83773369/168460618-39514399-ef49-4284-a542-319543a1ffc4.gif)
+	
+![14 관리자-사용자 정보 수정](https://user-images.githubusercontent.com/83773369/169652532-01654255-dc3f-4b2a-b8e7-3095c328de3f.gif)
 
 
 - 전화번호, 이메일, 주소 수정 가능
 - 값 입력 시 유효성 검사
 - kakao 주소 API 사용
 ![image](https://user-images.githubusercontent.com/83773369/168460654-64efa65d-b06a-45bf-b3c6-c642de413ab9.png)
+
 
 
 ---
@@ -275,8 +276,8 @@
 <div markdown="1">   
 
 **리뷰 조회**
-
-![16 관리자-리뷰 조회](https://user-images.githubusercontent.com/83773369/168460874-cb4876ff-a952-4336-9889-a81e3cdd39c4.gif)
+	
+![16 관리자-리뷰 조회](https://user-images.githubusercontent.com/83773369/169652548-8a6cd2c7-a620-40c0-b137-1368c4597b11.gif)
 
 - 업체 별 리뷰 별점 통계(highcharts API 사용)
 - 한 페이지에 10개씩 조회되도록 페이징 처리
